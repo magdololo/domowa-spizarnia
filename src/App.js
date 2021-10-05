@@ -4,8 +4,8 @@ import {Route, Switch, useLocation} from 'react-router-dom';
 import CategoryList from "./pages/CategoryList";
 import CategoryDetail from "./pages/CategoryDetail";
 import ProductDetail from "./pages/ProductDetail";
-import {Slide} from "@mui/material";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
+//import {Slide} from "@mui/material";
+//import {CSSTransition, TransitionGroup} from "react-transition-group";
 import "./App.css";
 
 export default function App() {
