@@ -26,3 +26,7 @@
 .slide-exit-active {
   transform: translateX(-100%);
 }
+
+.MuiImageListItemBar-titleWrap {
+  color: aqua;
+}

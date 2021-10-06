@@ -13,7 +13,7 @@ export default function App() {
 
     return (
         <>
-            <h2 sx={{justifyContent: 'center',}}>Domowa spiżarnia</h2>
+            <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
             {/*<TransitionGroup>*/}
             {/*    <CSSTransition*/}
             {/*        key={location.key}*/}
