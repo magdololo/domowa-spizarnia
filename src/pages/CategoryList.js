@@ -15,8 +15,9 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import {FormControlLabel, FormGroup, Switch} from "@mui/material";
-
+import {Modal, Switch, TextField, MenuItem, Accordion, AccordionSummary, AccordionDetails} from "@mui/material";
+import ImagePicker from "react-image-picker";
+import "react-image-picker/dist/index.css";
 
 
 
@@ -87,6 +88,10 @@ const ImageMarked = styled('span')(({ theme }) => ({
     transition: theme.transitions.create('opacity'),
 }));
 
+function ExpandMoreIcon() {
+    return null;
+}
+
 const CategoryList = ()=> {
 
     const categoryList = useStore(state => state.categories);
@@ -95,172 +100,178 @@ const CategoryList = ()=> {
     const addCategory = useStore(state => state.addCategory);
     const deleteCategory  = useStore(state => state.deleteCategory);
     const [editMode, setEditMode] = useState(false);
-
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const fetchImages = useStore(state => state.fetchImages)
+    const imagesList = useStore(state => state.images);
+    console.log(imagesList);
+    const [pickedImage, setPickedImage] = useState("");
     useEffect(() => {
         fetchCategories();
+
     }, [])
+    useEffect(() => {
+        fetchImages();
+    },[])
 
+    console.log(fetchImages);
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        // bgColor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+    const onPick = (image) => {
+       setPickedImage(image);
+    }
     return (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+        <>
 
-        <ImageList>
-            <ImageListItem key="Subheader" cols={2}>
-                <ListSubheader component="div" sx={{float: 'left', fontSize: '1.3rem'}}>Lista Kategorii
-                    <FormGroup component="div" sx={{float: 'right'}}>
-                        <FormControlLabel control={<Switch onChange={() => setEditMode(!editMode)}/>} label="Edytuj kategorie" style={{color:'rgba(0, 0, 0, 0.6'}}/>
-                    </FormGroup>
-                </ListSubheader>
 
-            </ImageListItem>
+          <div style={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
+              <div style={{flex: '1 1 auto', width: '50%', textAlign: 'left', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Lista Kategorii</div>
+              <div style={{flex: '1 1 auto', width: '50%', textAlign: 'right', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Edytuj kategorie<Switch color="primary" size="medium" onChange={() => setEditMode(!editMode)}/></div>
 
-            {categoryList.map((item) => (
-
-                    editMode ?
-                        <ImageListItem key={item.url}>
-                            <Typography>
-                                <HighlightOffRoundedIcon  sx={{
-                                    textAlign: 'center',
-                                    position: 'absolute',
-                                    right: '10px',
-                                    top: '10px',
-                                    color: 'red',
-                                    zIndex: '999',
-
-                                }} fontSize="large" onClick={()=> deleteCategory(item.path)}/>
-                            </Typography>
-
-                            <img style={{
-                                filter: 'brightness(30%)'
-                            }}
-                                src={item.url}
-                                srcSet={item.url}
-                                loading="lazy"
-                            />
-
-                            <ImageListItemBar style={{color: 'rgba(255, 255, 255, 0.53)'}}
-                                title={item.title}
-
-                            />
-
-                        </ImageListItem>
-                        : <ImageListItem key={item.url}>
+          </div>
+            {editMode ?
+                <ImageList cols={3}>
+                    {categoryList.map((item) => (
+                        <ImageListItem key={item.url} >
                             <img
                                 src={item.url}
                                 srcSet={item.url}
+                                alt={item.url}
                                 loading="lazy"
+                                style={{filter: 'brightness(50%)'}}
                             />
-                            <ImageListItemBar sx={{color: '#ffffffff'}}
+                            <IconButton
+                                sx={{
+                                    color: "rgba(255, 255, 255, 0.54)",
+                                    zIndex: 999,
+                                    top: "10px",
+                                    position: "absolute",
+                                    right: "10px",
+                                    width: "40px",
+                                    height: "40px"
+                                }}
+                                aria-label={`info about ${item.title}`}
+                            >
+                                <HighlightOffRoundedIcon style={{ width: "40px", height: "40px", color: 'red' }} onClick={()=>deleteCategory(item.path)}/>
+                            </IconButton>
+                            <ImageListItemBar
+                                sx={{ width: "100%", height: "100%", textAlign: "center" ,color: '#fff' }}
                                 title={item.title}
+                                subtitle={item.author}
                             />
-
                         </ImageListItem>
+                    ))}
+                </ImageList>
+                : <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
+                    {categoryList.map((image) => (
 
-            ))}
-        </ImageList>
-        </Box>
-    );
+                    <ImageButton
+                        focusRipple
+                        key={image.title}
+                        style={{
+                            width: image.width}}
+                         >
+                        <ImageSrc style={{backgroundImage: `url(${image.url})`}}/>
+                        {/*<ImageBackdrop className="MuiImageBackdrop-root"/>*/}
+                        <Image>
+                            <Typography
+                                component="span"
+
+                                color="inherit"
+                                sx={{
+
+                                    letterSpacing: '0.019em',
+                                    fontSize: '1rem',
+                                    textAlign: 'center',
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right:0,
+                                    left: 0,
+                                     pt: 2,
+                                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                                    backgroundColor: 'rgba(0, 0, 0, 0.53)',
+                                }}>
+                                {image.title}
+                                {/*<ImageMarked className="MuiImageMarked-root" />*/}
+                            </Typography>
+
+                        </Image>
+                    </ImageButton>
+
+                    ))}
+                    <ImageButton sx={{backgroundColor: 'lightgray', display: 'inline-flex'}} >
+                        <Fab sx={{border: '0'}} size="medium" color="secondary" aria-label="add">
+                            <AddIcon onClick={handleOpen}/>
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        Dodaj nową kategorię
+                                    </Typography>
+                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                        <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" />
+                                    </Typography>
+                                        <ImagePicker
+                                            images={imagesList.map((image, i) => ({src: image.url, value: i}))}
+                                            onPick={onPick}
+                                        />
+                                        {/*<Accordion sx={{marginTop:"10px"}}>*/}
+                                        {/*    <AccordionSummary*/}
+                                        {/*        expandIcon={<ExpandMoreIcon />}*/}
+                                        {/*        aria-controls="panel1a-content"*/}
+                                        {/*        id="panel1a-header"*/}
+                                        {/*    >*/}
+                                        {/*        <Typography >Wybierz zdjęcie</Typography>*/}
+                                        {/*    </AccordionSummary>*/}
+                                        {/*    <AccordionDetails>*/}
+                                        {/*        <Typography>*/}
+                                        {/*            <ImageList cols={1}>*/}
+                                        {/*                {imagesList.map((item) => (*/}
+                                        {/*                    <ImageListItem key={item.img}>*/}
+                                        {/*                        <img*/}
+                                        {/*                            src={item.img}*/}
+                                        {/*                            srcSet={item.img}*/}
+                                        {/*                            alt={item.title}*/}
+                                        {/*                            loading="lazy"*/}
+                                        {/*                        />*/}
+                                        {/*                    </ImageListItem>*/}
+                                        {/*                ))}*/}
+                                        {/*            </ImageList>*/}
+                                        {/*            );*/}
+                                        {/*        </Typography>*/}
+                                        {/*    </AccordionDetails>*/}
+                                        {/*</Accordion>*/}
+
+                                </Box>
+                            </Modal>
+
+                        </Fab>
+                    </ImageButton>
+
+                </Box>
+            }
+        </>
+    )
 }
-            export default CategoryList;
+export default CategoryList;
 
-//
-//     return (
-//
-//           <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
-//                 {categoryList.map((image) => (
-//                     editMode === true ?
-//                     <ImageButton
-//                         component={(props)=> <Link {...props} to={'/'+image.path} />}
-//                         focusRipple
-//                         key={image.title}
-//                         style={{
-//                             width: image.width,
-//
-//                         }}>
-//                         <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-//                         <ImageBackdrop className="MuiImageBackdrop-root" />
-//                         <Image>
-//                             <Typography
-//                                 component="span"
-//                                 variant="subtitle1"
-//                                 color="inherit"
-//                                 sx={{
-//                                     letterSpacing: '0.019em',
-//                                     fontSize: '0.92rem',
-//                                     textAlign: 'center',
-//                                     position: 'relative',
-//                                     pt: 2,
-//                                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-//                                 }}>
-//                                 {image.title}
-//                                 <ImageMarked className="MuiImageMarked-root" />
-//                             </Typography>
-//                             <Typography>
-//                                <HighlightOffRoundedIcon  sx={{
-//                                    textAlign: 'center',
-//                                    position: 'absolute',
-//                                    right: '10px',
-//                                    top: '10px',
-//                                    color: 'red',
-//
-//                                }} fontSize="large"/>
-//                             </Typography>
-//                         </Image>
-//                     </ImageButton> :
-//                         <ImageButton
-//                             component={(props)=> <Link {...props} to={'/'+image.path} />}
-//                             focusRipple
-//                             key={image.title}
-//                             style={{
-//                                 width: image.width,
-//                             }}>
-//                             <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-//                             <ImageBackdrop className="MuiImageBackdrop-root" />
-//                             <Image>
-//                                 <Typography
-//                                     component="span"
-//                                     variant="subtitle1"
-//                                     color="inherit"
-//                                     sx={{
-//                                         letterSpacing: '0.019em',
-//                                         fontSize: '0.92rem',
-//                                         textAlign: 'center',
-//                                         position: 'relative',
-//                                         pt: 2,
-//                                         pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-//                                     }}>
-//                                     {image.title}
-//                                     <ImageMarked className="MuiImageMarked-root" />
-//                                 </Typography>
-//                                 <Typography>
-//                                     <HighlightOffRoundedIcon  sx={{
-//                                         textAlign: 'center',
-//                                         position: 'absolute',
-//                                         right: '10px',
-//                                         top: '10px',
-//                                         color: 'red',
-//
-//                                     }}size="small"/>
-//                                 </Typography>
-//                             </Image>
-//                         </ImageButton>
-//
-//
-//                 ))}
-//                 <ImageButton sx={{ backgroundColor: 'lightgray', display: 'inline-flex', }} >
-//                         <Fab sx={{border: '0'}} size="medium" color="secondary" aria-label="add" >
-//                             <AddIcon onClick={()=> {
-//                                 addCategory({
-//                                     "url": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-//                                     "title": "new category",
-//                                     "width": "33,3%",
-//                                     "path": "dupa-dupa",
-//                                     })
-//                             }} />
-//                         </Fab>
-//
-//                 </ImageButton>
-//             </Box>
-//
-//     )
-// }
-// export default CategoryList;
+// addCategory({
+//     "url": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+//     "title": "new category",
+//     "width": "33,3%",
+//     "path": "dupa-dupa",
+// })

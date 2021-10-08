@@ -24,14 +24,15 @@ const CategoryDetail = ()=> {
     let { categoryName } = useParams();
       console.log(categoryName);
 const categories = useStore(state => state.categories);
-const category = categories.filter(category => category.path === categoryName );
+const products = productsList.filter(product => product.categoryPath === categoryName );
+const category = categories.filter(category=>category.path === categoryName);
 
     return (
 <>
-    <h2>{category.title}</h2>
+    <h2>{category[0].title}</h2>
    <div>
        <List>
-           {productsList.map((product) => (
+           {products.map((product) => (
                <ListItem
                    key={product.id}
                    component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}
