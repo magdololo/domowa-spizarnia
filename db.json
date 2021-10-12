@@ -1,31 +1,47 @@
 {
   "categories": [
-
     {
       "url": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
       "title": "Przetwory Owocowe i Miód",
       "width": "33,3%",
-      "path": "przetwory_owocowe_miod"
+      "path": "przetwory_owocowe_miod",
+      "id": 1
     },
     {
       "url": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
       "title": "Mąka  Makarony  Ryże",
       "width": "33,3%",
-      "path": "maka_makarony_ryze"
+      "path": "maka_makarony_ryze",
+      "id": 2
     },
     {
       "url": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
       "title": "Desery i Pomoce Cukiernicze",
       "width": "33,3%",
-      "path": "desery_pomoce_cukiernicze"
+      "path": "desery_pomoce_cukiernicze",
+      "id": 3
     },
     {
       "url": "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
       "title": "Cukier i słodziki",
       "width": "33,3%",
-      "path": "cukier_słodziki"
+      "path": "cukier_słodziki",
+      "id": 4
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "cfrreeww",
+      "width": "33,3%",
+      "path": "cfrreeww",
+      "id": 5
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "hhgg",
+      "width": "33,3%",
+      "path": "hhgg",
+      "id": 6
     }
-
   ],
   "products": [
     {
@@ -57,11 +73,11 @@
       "expireDate": "30.12.2022"
     },
     {
-     "name" : "dżem truskawkowy",
-     "path" : "dżem_truskawkowy",
-     "categoryPath" : "przetwory_owocowe_miod",
-     "quantity" : 6,
-     "expireDate" : "29.09.2028"
+      "name": "dżem truskawkowy",
+      "path": "dżem_truskawkowy",
+      "categoryPath": "przetwory_owocowe_miod",
+      "quantity": 6,
+      "expireDate": "29.09.2028"
     },
     {
       "name": "miód lipowy",
@@ -84,19 +100,25 @@
       "quantity": 8,
       "expireDate": "19.08.2026"
     }
-
   ],
   "images": [
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
     },
     {
-"url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
     },
     {
-    "url":  "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
     }
-
-
   ]
 }

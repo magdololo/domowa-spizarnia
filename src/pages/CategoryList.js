@@ -25,81 +25,13 @@ import CategoryImageList from "../components/CategoryImageList";
 
 
 
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
-    position: 'relative',
-    height: 180,
-    width: "33.3%",
-    [theme.breakpoints.down('sm')]: {
-        width: '50% !important', // Overrides inline-style
-        height: 130,
-    },
-    '&:hover, &.Mui-focusVisible': {
-        zIndex: 1,
-        '& .MuiImageBackdrop-root': {
-            opacity: 0.15,
-        },
-        '& .MuiImageMarked-root': {
-            opacity: 0,
-        },
-        '& .MuiTypography-root': {
-            border: '2px solid currentColor',
-        },
-    },
-}));
-
-const ImageSrc = styled('span')({
-    position: 'absolute',
-    left: 2,
-    right: 2,
-    top: 2,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
-});
-
-const Image = styled('span')(({ theme }) => ({
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
-}));
-
-const ImageBackdrop = styled('span')(({ theme }) => ({
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 2,
-    bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.6,
-    transition: theme.transitions.create('opacity'),
-}));
-
-const ImageMarked = styled('span')(({ theme }) => ({
-    height: 2,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity'),
-}));
-
-function ExpandMoreIcon() {
-    return null;
-}
 
 const CategoryList = ()=> {
 
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
     const fetchCategories = useStore(state => state.fetch);
-    const addCategory = useStore(state => state.addCategory);
+
     const deleteCategory  = useStore(state => state.deleteCategory);
     const [editMode, setEditMode] = useState(false);
     const [open, setOpen] = React.useState(false);
@@ -118,9 +50,6 @@ const CategoryList = ()=> {
 
     console.log(fetchImages);
 
-    // const onPick = (image) => {
-    //    setPickedImage(image);
-    // }
 
     return (
         <>

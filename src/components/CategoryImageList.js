@@ -1,13 +1,17 @@
 import Typography from "@mui/material/Typography";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import {Modal, TextField} from "@mui/material";
+import {Button, capitalize, ImageListItem, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import ImagePickerModal from "./ImagePickerModal";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 import useStore from "../store/useStore";
+import {useState} from "react";
+import slugify from "slugify";
+import {Link} from "react-router-dom";
+
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 180,
@@ -74,11 +78,16 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 
-const CategoryImageList =(props)=> {
+   const CategoryImageList =()=>{
+
+    const [newCategoryName,setNewCategoryName] = useState('');
     const categoryList = useStore(state => state.categories);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const pickedImage = useStore(state=>state.pickedImage);
+    const addCategory = useStore(state => state.addCategory);
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -89,8 +98,13 @@ const CategoryImageList =(props)=> {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-        zIndex: 99999,
-    };
+        zIndex: 1200,
+    }
+
+
+
+
+
     return(
     <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
         {categoryList.map((image) => (
@@ -98,12 +112,10 @@ const CategoryImageList =(props)=> {
             <ImageButton
                 focusRipple
                 key={image.title}
-                style={{
-                    width: image.width
-                }}
+                component={Link}
+                to={"/"+image.path}
             >
                 <ImageSrc style={{backgroundImage: `url(${image.url})`}}/>
-                {/*<ImageBackdrop className="MuiImageBackdrop-root"/>*/}
                 <Image>
                     <Typography
                         component="span"
@@ -121,6 +133,7 @@ const CategoryImageList =(props)=> {
                             pt: 2,
                             pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
                             backgroundColor: 'rgba(0, 0, 0, 0.53)',
+                            textTransform: "capitalize",
                         }}>
                         {image.title}
                         {/*<ImageMarked className="MuiImageMarked-root" />*/}
@@ -133,7 +146,7 @@ const CategoryImageList =(props)=> {
         <ImageButton sx={{backgroundColor: 'lightgray', display: 'inline-flex'}}>
             <Fab sx={{border: '0'}} size="medium" color="secondary" aria-label="add">
                 <AddIcon onClick={handleOpen}/>
-                <Modal sx={{zIndex: '99999'}}
+                <Modal sx={{zIndex: '1200'}}
                        open={open}
                        onClose={handleClose}
                        aria-labelledby="modal-modal-title"
@@ -144,16 +157,36 @@ const CategoryImageList =(props)=> {
                             Dodaj nową kategorię
                         </Typography>
                         <Typography id="modal-modal-description" sx={{mt: 2}}>
-                            <TextField id="standard-basic" label="Nazwa kategorii" variant="standard"/>
+                            <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)} />
                         </Typography>
-                        <ImagePickerModal/>
+                        <ImageListItem key={pickedImage.img} cols={1} rowHeight={120} rowWidth={200}>
+                            <img
+                                src={pickedImage}
+                                srcSet={pickedImage.url}
+                                loading="lazy"
+                            />
+                        </ImageListItem>
+
+                    <ImagePickerModal/>
+                        <Button onClick={()=> {
+                            addCategory({
+                                "url": pickedImage,
+                                "title": newCategoryName,
+                                "width": "33,3%",
+                                "path": slugify(newCategoryName, "_"),
+                            });
+
+                            handleClose();
+                        }}>Dodaj kategorię</Button>
                     </Box>
+
                 </Modal>
 
             </Fab>
         </ImageButton>
 
-    </Box>
+        </Box>
+
     );
 }
 export default CategoryImageList;
