@@ -10,6 +10,7 @@ const createImagesSlice = (set, get) => ({
         console.log(url)
         set({pickedImage: url})
     },
+
 })
 
 export default createImagesSlice;

@@ -17,9 +17,10 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     height: 180,
     width: "33.3%",
     [theme.breakpoints.down('sm')]: {
-        width: '50% !important', // Overrides inline-style
-        height: 130,
+        width: '100% !important', // Overrides inline-style
+        height: 150,
     },
+
     '&:hover, &.Mui-focusVisible': {
         zIndex: 1,
         '& .MuiImageBackdrop-root': {
@@ -159,16 +160,21 @@ const ImageMarked = styled('span')(({ theme }) => ({
                         <Typography id="modal-modal-description" sx={{mt: 2}}>
                             <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)} />
                         </Typography>
-                        <ImageListItem key={pickedImage.img} cols={1} rowHeight={120} rowWidth={200}>
-                            <img
-                                src={pickedImage}
-                                srcSet={pickedImage.url}
-                                loading="lazy"
-                            />
+                        <ImageListItem key={pickedImage.id} cols={1} rowHeight={120} rowWidth={200}>
+                            {pickedImage ?
+                                <img
+                                    src= {pickedImage}
+                                    srcSet= {pickedImage.url}
+                                    loading="lazy"
+                                /> :
+                               null
+                            }
+
                         </ImageListItem>
 
                     <ImagePickerModal/>
                         <Button onClick={()=> {
+
                             addCategory({
                                 "url": pickedImage,
                                 "title": newCategoryName,
@@ -177,6 +183,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
                             });
 
                             handleClose();
+
                         }}>Dodaj kategorię</Button>
                     </Box>
 

@@ -12,19 +12,14 @@ const createCategorySlice = (set, get) => ({
         console.log(newCategory)
 
         //const axios = require('axios');
-        console.log("new category")
-        console.log(newCategory)
-        let response = await fetch ('http://localhost:4000/categories', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newCategory),
+        axios.post('http://localhost:4000/categories', newCategory).then(resp => {
+            console.log(resp.data);//zwraca obiekt newCategory
+           let id = resp.data.id;
+            newCategory.id = id;
+        }).catch(error => {
+            console.log(error);
         });
-        let responseJson = await response.json();
-        console.log('Success:', responseJson);
-        let id = responseJson.id;
-        newCategory.id = id;
+
         set((state) => ({
             categories: [
                 newCategory,
@@ -32,10 +27,19 @@ const createCategorySlice = (set, get) => ({
             ]
         }));
     },
-    deleteCategory: (path) =>
+    deleteCategory: async (id) => {
+        console.log(id);
+        axios.delete('http://localhost:4000/categories/'+id).then(resp => {
+             console.log(resp.data);
+
+            }).catch(error => {
+            console.log(error);
+        });
+
         set((state) => ({
-            categories: state.categories.filter((category) => category.path !== path),
-        }))
-})
+
+             categories: state.categories.filter((category) => category.id !== id),
+        }));
+    }});
 
 export default createCategorySlice;
