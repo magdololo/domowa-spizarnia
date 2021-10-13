@@ -1,13 +1,6 @@
 {
   "categories": [
     {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "djuyuyy",
-      "width": "33,3%",
-      "path": "djuyuyy",
-      "id": 1
-    },
-    {
       "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "title": "sdfsfsfgfgdfgfgd",
       "width": "33,3%",
@@ -20,6 +13,13 @@
       "width": "33,3%",
       "path": "sdfsfsfgfgdfgfgd",
       "id": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "iuyiyyiy",
+      "width": "33,3%",
+      "path": "iuyiyyiy",
+      "id": 4
     }
   ],
   "products": [

@@ -41,12 +41,11 @@ const CategoryList = ()=> {
         <>
 
 
-          <div style={{display: 'flex', flexWrap: 'nowrap', minWidth: 300, width: '100%'}}>
-              <div style={{flex: '0 1 auto', width: '50', textAlign: 'left', fontSize: '1rem', color: 'rgba(0, 0, 0, 0.6', paddingLeft: 15, alignSelf: "center"}}>Lista Kategorii</div>
-              <div style={{flex: '0 1 auto', width: '50%', textAlign: 'right', fontSize: '1rem', color: 'rgba(0, 0, 0, 0.6',paddingRight: 15}}>Edytuj kategorie <Switch color="secondary" onChange={() => setEditMode(!editMode)}/></div>
+            <div style={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
+                <div style={{flex: '1 1 auto', width: '50%', textAlign: 'left', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Lista Kategorii</div>
+                <div style={{flex: '1 1 auto', width: '50%', textAlign: 'right', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Edytuj kategorie<Switch color="primary" size="medium" onChange={() => setEditMode(!editMode)}/></div>
 
-
-          </div>
+            </div>
             {editMode ?
                   <EditCategoryImageList/>
                 : <CategoryImageList/>
