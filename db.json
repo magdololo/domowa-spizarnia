@@ -1,39 +1,42 @@
 {
   "categories": [
     {
-      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "title": "sdfsfsfgfgdfgfgd",
-      "width": "33,3%",
-      "path": "sdfsfsfgfgdfgfgd",
-      "id": 2
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "Tupot",
+      "path": "tupot",
+      "id": 13
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "sdfsfsfgfgdfgfgd",
-      "width": "33,3%",
-      "path": "sdfsfsfgfgdfgfgd",
-      "id": 3
+      "title": "Ahytr",
+      "path": "ahytr",
+      "id": 14
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "iuyiyyiy",
-      "width": "33,3%",
-      "path": "iuyiyyiy",
-      "id": 4
+      "title": "Desery i pomoce cukiernicze",
+      "path": "desery_i_pomoce_cukiernicze",
+      "id": 16
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "Nhyydydhd",
+      "path": "nhyydydhd",
+      "id": 17
     }
   ],
   "products": [
     {
       "name": "budyn waniliowy",
       "path": "budyn_waniliowy",
-      "categoryPath": "desery_pomoce_cukiernicze",
+      "categoryPath": "desery_i_pomoce_cukiernicze",
       "quantity": 2,
       "expireDate": "09.06.2023"
     },
     {
       "name": "budyn czekoladowy",
       "path": "budyn_czekoladowy",
-      "categoryPath": "desery_pomoce_cukiernicze",
+      "categoryPath": "desery_i_pomoce_cukiernicze",
       "quantity": 2,
       "expireDate": "09.06.2023"
     },

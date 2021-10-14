@@ -11,7 +11,7 @@ const createCategorySlice = (set, get) => ({
         console.log("new category")
         console.log(newCategory)
 
-        //const axios = require('axios');
+
         axios.post('http://localhost:4000/categories', newCategory).then(resp => {
             console.log(resp.data);//zwraca obiekt newCategory
            let id = resp.data.id;
@@ -26,6 +26,31 @@ const createCategorySlice = (set, get) => ({
                 ...state.categories,
             ]
         }));
+    },
+    editCategory: async (id, url, title, path) =>{
+        let editCategory = {};
+       axios.put('http://localhost:4000/categories/'+id,
+           {
+               url: url,
+               title: title,
+               path: path,
+           }).then(resp => {
+
+           editCategory = resp.data;
+           console.log(editCategory);
+           set((state)=> {
+                   let categories = state.categories.filter(editCategory => editCategory.id !== id);
+                   categories.push(editCategory)
+                   return {
+                       categories: categories
+                   }
+               }
+           )
+        }).catch(error => {
+            console.log(error);
+        });
+
+
     },
     deleteCategory: async (id) => {
         console.log(id);

@@ -20,9 +20,8 @@ const CategoryList = ()=> {
     console.log(categoryList);
     const fetchCategories = useStore(state => state.fetch);
 
-    const deleteCategory  = useStore(state => state.deleteCategory);
     const [editMode, setEditMode] = useState(false);
-    const [open, setOpen] = React.useState(false);
+
     const fetchImages = useStore(state => state.fetchImages)
     const imagesList = useStore(state => state.images);
     console.log(imagesList);
@@ -41,9 +40,10 @@ const CategoryList = ()=> {
         <>
 
 
-            <div style={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%'}}>
-                <div style={{flex: '1 1 auto', width: '50%', textAlign: 'left', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Lista Kategorii</div>
-                <div style={{flex: '1 1 auto', width: '50%', textAlign: 'right', fontSize: '1.1rem', color: 'rgba(0, 0, 0, 0.6'}}>Edytuj kategorie<Switch color="primary" size="medium" onChange={() => setEditMode(!editMode)}/></div>
+            <div style={{display: 'flex', flexWrap: 'nowrap', minWidth: 300, width: '100%', minHeight: '80px', alignItems: "center"}}>
+                <div style={{flex: '1 1 auto', width: '40%', textAlign: 'left', fontSize: '1rem', color: 'rgba(0, 0, 0, 0.6', paddingLeft: "20px"}}>Lista Kategorii</div>
+                <div style={{flex: '1 1 auto', width: '40%', textAlign: 'right', fontSize: '1rem', color: 'rgba(0, 0, 0, 0.6'}}>Edytuj kategorie</div>
+                <div style={{flex: '1 1 auto', width: '20%', textAlign: 'left', fontSize: '1rem', color: 'rgba(0, 0, 0, 0.6'}}><Switch color="primary" size="medium" onChange={() => setEditMode(!editMode)}/></div>
 
             </div>
             {editMode ?
