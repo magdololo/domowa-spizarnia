@@ -18,7 +18,7 @@ const CategoryDetail = ()=> {
 
     useEffect(()=>{
         fetchProducts();
-    },[fetchProducts])
+    },[])
     console.log(productsList);
     let { categoryName } = useParams();
       console.log(categoryName);

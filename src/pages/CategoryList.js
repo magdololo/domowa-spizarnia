@@ -3,7 +3,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import useStore from "../store/useStore";
 
-import  {Switch} from "@mui/material";
+import {Switch} from "@mui/material";
 
 import "react-image-picker/dist/index.css";
 import CategoryImageList from "../components/CategoryImageList";
@@ -12,9 +12,7 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 
 
-
-
-const CategoryList = ()=> {
+const CategoryList = (props)=> {
 
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);

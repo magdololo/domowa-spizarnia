@@ -88,7 +88,7 @@ import slugify from "slugify";
             }
             // setPickedImage(pickedImage);
             let path= slugify(newCategoryName, "_");
-            updateCategory(editCategory.id, path, pickedImage, newCategoryName.capitalize());
+            updateCategory(editCategory.id, path, localImage, newCategoryName.capitalize());
             handleClose();
 
            }}>Edytuj kategorię</Button>

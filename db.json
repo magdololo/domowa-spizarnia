@@ -1,104 +1,76 @@
 {
   "categories": [
     {
-      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "path": "magda12",
-      "title": "magda12",
-      "id": 13
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "path": "mm",
-      "title": "mm",
-      "id": 14
-    },
-    {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "paula",
-      "title": "Paula",
-      "id": 16
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "nhyydydhd",
-      "title": "gtr",
-      "id": 17
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "daniel",
-      "title": "daniel",
-      "id": 18
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "Słodycze",
-      "path": "slodycze",
-      "id": 19
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "Danie2",
-      "path": "danie2",
-      "id": 20
+      "path": "Nifkfmjfflllllll",
+      "title": "Nifkfmjfflllllll",
+      "id": 3
     }
   ],
   "products": [
     {
       "name": "budyn waniliowy",
       "path": "budyn_waniliowy",
-      "categoryPath": "desery_i_pomoce_cukiernicze",
+      "categoryPath": "desery_pomoce_cukiernicze",
       "quantity": 2,
-      "expireDate": "09.06.2023"
+      "expireDate": "09.06.2023",
+      "id": 1
     },
     {
       "name": "budyn czekoladowy",
       "path": "budyn_czekoladowy",
-      "categoryPath": "desery_i_pomoce_cukiernicze",
+      "categoryPath": "desery_pomoce_cukiernicze",
       "quantity": 2,
-      "expireDate": "09.06.2023"
+      "expireDate": "09.06.2023",
+      "id": 2
     },
     {
       "name": "ksylitol",
       "path": "ksylitol",
-      "categoryPath": "cukier_słodziki",
+      "categoryPath": "cukier_i_słodziki",
       "quantity": 5,
-      "expireDate": "30.12.2022"
+      "expireDate": "30.12.2022",
+      "id": 3
     },
     {
       "name": "cukier trzcinowy",
       "path": "cukier_trzcinowy",
-      "categoryPath": "cukier_słodziki",
+      "categoryPath": "cukier_i_słodziki",
       "quantity": 5,
-      "expireDate": "30.12.2022"
+      "expireDate": "30.12.2022",
+      "id": 4
     },
     {
       "name": "dżem truskawkowy",
       "path": "dżem_truskawkowy",
-      "categoryPath": "przetwory_owocowe_miod",
+      "categoryPath": "przetwory_owocowe_i_miod",
       "quantity": 6,
-      "expireDate": "29.09.2028"
+      "expireDate": "29.09.2028",
+      "id": 5
     },
     {
       "name": "miód lipowy",
       "path": "miód_lipowy",
-      "categoryPath": "przetwory_owocowe_miod",
+      "categoryPath": "przetwory_owocowe_i_miod",
       "quantity": 8,
-      "expireDate": "19.08.2026"
+      "expireDate": "19.08.2026",
+      "id": 6
     },
     {
       "name": "ryż basmati",
       "path": "ryż_basmati",
       "categoryPath": "maka_makarony_ryze",
       "quantity": 8,
-      "expireDate": "19.08.2026"
+      "expireDate": "19.08.2026",
+      "id": 7
     },
     {
       "name": "mąka żytnia pełnoziarnista",
       "path": "mąka_żytnia_pełnoziarnista",
       "categoryPath": "maka_makarony_ryze",
       "quantity": 8,
-      "expireDate": "19.08.2026"
+      "expireDate": "19.08.2026",
+      "id": 8
     }
   ],
   "images": [

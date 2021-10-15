@@ -39,7 +39,7 @@ const AddModal=({open, close})=>{
                    <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)} />
                </Typography>
 
-               <ImageListItem key={pickedImage.id} cols={1} rowHeight={120} rowWidth={200}>
+               <ImageListItem key={pickedImage.id} cols={1} sx={{rowHeight: 120, rowWidth: 200}}>
                    {pickedImage !== ''?
                    <img
                        src= {pickedImage}

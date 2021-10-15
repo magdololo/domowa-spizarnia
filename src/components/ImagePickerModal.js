@@ -99,7 +99,7 @@ function ImagePickerModal() {
                     {imagesList.map((image) => (
                         <ImageButton
                             focusRipple
-                            key={image.url}
+                            key={image.id}
                             style={{
                                 width: image.width,
                             }}
