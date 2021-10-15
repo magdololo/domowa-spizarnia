@@ -2,9 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import {useEffect, useState} from "react";
 import useStore from "../store/useStore";
 import * as PropTypes from "prop-types";
 import {styled} from "@mui/material/styles";
@@ -98,7 +95,7 @@ function ImagePickerModal() {
 
     console.log(imagesList);
     const fetchImages = useStore(state => state.fetchImages);
-const  setPickedImage = useStore(state=>state.setPickedImage);
+    const  setPickedImage = useStore(state=>state.setPickedImage);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -106,7 +103,7 @@ const  setPickedImage = useStore(state=>state.setPickedImage);
     const handleClose = () => {
         setOpen(false);
     };
-
+  console.log(setPickedImage);
     return (
         <React.Fragment>
             <Button onClick={handleOpen}>Wybierz zdjęcie</Button>

@@ -87,7 +87,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const pickedImage = useStore(state=>state.pickedImage);
-    const setPickedImage = useStore(state=>state.setPickedImage)
+    const setPickedImage = useStore(state=>state.setPickedImage);
     const addCategory = useStore(state => state.addCategory);
     const minWidth600 = useMediaQuery('(min-width:600px)');
 

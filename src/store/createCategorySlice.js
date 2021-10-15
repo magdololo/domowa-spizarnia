@@ -1,5 +1,5 @@
 import axios from "axios";
-import slugify from "slugify";
+
 
 const createCategorySlice = (set, get) => ({
     categories: [],
@@ -14,7 +14,7 @@ const createCategorySlice = (set, get) => ({
 
         axios.post('http://localhost:4000/categories', newCategory).then(resp => {
             console.log(resp.data);//zwraca obiekt newCategory
-           let id = resp.data.id;
+            let id = resp.data.id;
             newCategory.id = id;
         }).catch(error => {
             console.log(error);
@@ -27,25 +27,36 @@ const createCategorySlice = (set, get) => ({
             ]
         }));
     },
-    editCategory: async (id, url, title, path) =>{
-        let editCategory = {};
-       axios.put('http://localhost:4000/categories/'+id,
-           {
-               url: url,
-               title: title,
-               path: path,
-           }).then(resp => {
+    editModalOpen: false,
+    setEditModalOpen: (open) => {
+        set({editModalOpen: open})
+    },
+    editCategory: {},
+    setEditCategory: (id, url, title, path) => {
+        set({editCategory: {url, title, path, id}})
+        console.log("editCategory")
 
-           editCategory = resp.data;
-           console.log(editCategory);
-           set((state)=> {
-                   let categories = state.categories.filter(editCategory => editCategory.id !== id);
-                   categories.push(editCategory)
-                   return {
-                       categories: categories
-                   }
-               }
-           )
+
+
+    },
+    updateCategory: async (id, path, url, title)=>{
+        axios.put('http://localhost:4000/categories/'+id,
+            {
+                url: url,
+                path: path,
+                title: title
+            }).then(resp => {
+
+            let editCategory = resp.data;
+            console.log(editCategory);
+            set((state)=> {
+                    let categories = state.categories.filter(editCategory => editCategory.id !== id);
+                    categories.push(editCategory)
+                    return {
+                        categories: categories
+                    }
+                }
+            )
         }).catch(error => {
             console.log(error);
         });
