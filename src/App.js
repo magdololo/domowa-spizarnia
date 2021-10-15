@@ -1,25 +1,19 @@
 import * as React from 'react';
-import {Route, Switch, useLocation} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import CategoryList from "./pages/CategoryList";
 import CategoryDetail from "./pages/CategoryDetail";
 import ProductDetail from "./pages/ProductDetail";
-//import {Slide} from "@mui/material";
-//import {CSSTransition, TransitionGroup} from "react-transition-group";
+
 import "./App.css";
 
 export default function App() {
-    const location = useLocation();
+
 
     return (
         <>
             <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
-            {/*<TransitionGroup>*/}
-            {/*    <CSSTransition*/}
-            {/*        key={location.key}*/}
-            {/*        classNames="slide"*/}
-            {/*        timeout={1000}*/}
-            {/*    >*/}
+
                     <Switch>
                         <Route path="/:categoryName/:productName">
 

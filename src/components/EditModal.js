@@ -74,6 +74,7 @@ import slugify from "slugify";
             <img
                 src= {localImage}
                 srcSet= {localImage}
+                alt="zdjecie kategorii"
                 loading="lazy"
             />
 
@@ -81,12 +82,13 @@ import slugify from "slugify";
 
         <ImagePickerModal/>
         <Button onClick={()=> {
+            // eslint-disable-next-line no-extend-native
             String.prototype.capitalize = function() {
                 return this.charAt(0).toUpperCase() + this.slice(1);
             }
             // setPickedImage(pickedImage);
             let path= slugify(newCategoryName, "_");
-            updateCategory(editCategory.id, path, pickedImage, newCategoryName);
+            updateCategory(editCategory.id, path, pickedImage, newCategoryName.capitalize());
             handleClose();
 
            }}>Edytuj kategorię</Button>

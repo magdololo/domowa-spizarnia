@@ -15,11 +15,10 @@ const CategoryDetail = ()=> {
 
     const productsList = useStore(state => state.products);
     const fetchProducts = useStore(state => state.fetchProducts);
-    const addProduct= useStore(state => state.addProduct);
-    const unsub1 = useStore.subscribe(console.log)
+
     useEffect(()=>{
         fetchProducts();
-    },[])
+    },[fetchProducts])
     console.log(productsList);
     let { categoryName } = useParams();
       console.log(categoryName);

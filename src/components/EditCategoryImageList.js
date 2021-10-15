@@ -9,18 +9,12 @@ import useStore from "../store/useStore";
 import {useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import EditModal from "./EditModal";
-import {useState} from "react";
 const EditCategoryImageList =()=> {
     const categoryList = useStore(state => state.categories);
     const deleteCategory  = useStore(state => state.deleteCategory);
     const minWidth600 = useMediaQuery('(min-width:600px)');
-    const [open, setOpen] = React.useState(false);
 
-    const handleClose = () => setOpen(false);
-    const [newCategoryName,setNewCategoryName] = useState('');
-    const pickedImage = useStore(state=>state.pickedImage);
-    const setPickedImage = useStore(state=>state.setPickedImage);
-    const editCategory = useStore(state=>state.editCategory);
+
     const setEditCategory = useStore(state=>state.setEditCategory);
 
     const setEditModalOpen = useStore(state=>state.setEditModalOpen)

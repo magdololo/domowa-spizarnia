@@ -30,7 +30,7 @@ const CategoryList = ()=> {
         fetchCategories();
         fetchImages();
 
-    }, [])
+    },[fetchImages,fetchCategories]);
 
 
     console.log(fetchImages);

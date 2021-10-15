@@ -51,17 +51,6 @@ const ImageSrc = styled('span')({
     backgroundPosition: 'center 40%',
 });
 
-const Image = styled('span')(({ theme }) => ({
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
-}));
 
 const ImageBackdrop = styled('span')(({ theme }) => ({
     position: 'absolute',
@@ -74,15 +63,6 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
     transition: theme.transitions.create('opacity'),
 }));
 
-const ImageMarked = styled('span')(({ theme }) => ({
-    height: 2,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity'),
-}));
 
 ImageButton.propTypes = {
     style: PropTypes.shape({width: PropTypes.any}),
@@ -94,7 +74,6 @@ function ImagePickerModal() {
     const imagesList = useStore(state => state.images);
 
     console.log(imagesList);
-    const fetchImages = useStore(state => state.fetchImages);
     const  setPickedImage = useStore(state=>state.setPickedImage);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {

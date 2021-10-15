@@ -13,9 +13,9 @@
       "id": 14
     },
     {
-      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "zosia",
-      "title": "zosia",
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "paula",
+      "title": "Paula",
       "id": 16
     },
     {
@@ -35,6 +35,12 @@
       "title": "Słodycze",
       "path": "slodycze",
       "id": 19
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "Danie2",
+      "path": "danie2",
+      "id": 20
     }
   ],
   "products": [

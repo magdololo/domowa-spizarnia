@@ -1,8 +1,7 @@
 import {useParams} from "react-router-dom";
-import {useState} from "react";
 import useStore from "../store/useStore";
 
-const ProductDetail = (primary)=> {
+const ProductDetail = ()=> {
 
 
     const productsList = useStore(state=>state.products);
