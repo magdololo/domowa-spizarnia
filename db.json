@@ -2,8 +2,32 @@
   "categories": [
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "Nifkfmjfflllllll",
-      "title": "Nifkfmjfflllllll",
+      "path": "desery_i_pomoce_cukiernicze",
+      "title": "desery i pomoce cukiernicze",
+      "id": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "słodycze",
+      "title": "słodycze",
+      "id": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "cukier_i_słodziki",
+      "title": "cukier i słodziki",
       "id": 3
     }
   ],
@@ -11,7 +35,7 @@
     {
       "name": "budyn waniliowy",
       "path": "budyn_waniliowy",
-      "categoryPath": "desery_pomoce_cukiernicze",
+      "categoryPath": "desery_i_pomoce_cukiernicze",
       "quantity": 2,
       "expireDate": "09.06.2023",
       "id": 1
@@ -59,7 +83,7 @@
     {
       "name": "ryż basmati",
       "path": "ryż_basmati",
-      "categoryPath": "maka_makarony_ryze",
+      "categoryPath": "maka_ryże_kasze",
       "quantity": 8,
       "expireDate": "19.08.2026",
       "id": 7
@@ -67,7 +91,7 @@
     {
       "name": "mąka żytnia pełnoziarnista",
       "path": "mąka_żytnia_pełnoziarnista",
-      "categoryPath": "maka_makarony_ryze",
+      "categoryPath": "maka_ryże_kasze",
       "quantity": 8,
       "expireDate": "19.08.2026",
       "id": 8

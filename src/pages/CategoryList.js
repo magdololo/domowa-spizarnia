@@ -52,10 +52,3 @@ const CategoryList = (props)=> {
     )
 }
 export default CategoryList;
-
-// addCategory({
-//     "url": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-//     "title": "new category",
-//     "width": "33,3%",
-//     "path": "dupa-dupa",
-// })
