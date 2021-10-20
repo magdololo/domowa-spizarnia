@@ -33,18 +33,11 @@
   ],
   "products": [
     {
-      "name": "budyn waniliowy",
-      "path": "budyn_waniliowy",
-      "categoryPath": "desery_i_pomoce_cukiernicze",
-      "quantity": 2,
-      "expireDate": "09.06.2023",
-      "id": 1
-    },
-    {
       "name": "budyn czekoladowy",
       "path": "budyn_czekoladowy",
       "categoryPath": "desery_pomoce_cukiernicze",
       "quantity": 2,
+      "capacity": "40g",
       "expireDate": "09.06.2023",
       "id": 2
     },
@@ -57,25 +50,9 @@
       "id": 3
     },
     {
-      "name": "cukier trzcinowy",
-      "path": "cukier_trzcinowy",
-      "categoryPath": "cukier_i_słodziki",
-      "quantity": 5,
-      "expireDate": "30.12.2022",
-      "id": 4
-    },
-    {
-      "name": "dżem truskawkowy",
-      "path": "dżem_truskawkowy",
-      "categoryPath": "przetwory_owocowe_i_miod",
-      "quantity": 6,
-      "expireDate": "29.09.2028",
-      "id": 5
-    },
-    {
       "name": "miód lipowy",
       "path": "miód_lipowy",
-      "categoryPath": "przetwory_owocowe_i_miod",
+      "categoryPath": "przetwory_owocowe_i_miód",
       "quantity": 8,
       "expireDate": "19.08.2026",
       "id": 6
@@ -95,6 +72,51 @@
       "quantity": 8,
       "expireDate": "19.08.2026",
       "id": 8
+    },
+    {
+      "name": "cukierki czekoladowe",
+      "categoryPath": "słodycze",
+      "path": "cukierki_czekoladowe",
+      "capacity": 500,
+      "quantity": 2,
+      "expireDate": "2021-10-31T11:41:41.000Z",
+      "id": 9
+    },
+    {
+      "name": "batoniki",
+      "categoryPath": "słodycze",
+      "path": "batoniki",
+      "capacity": "400 + ml",
+      "quantity": 1,
+      "expireDate": "2021-10-26T10:44:50.000Z",
+      "id": 10
+    },
+    {
+      "name": "wafelki",
+      "categoryPath": "słodycze",
+      "path": "wafelki",
+      "capacity": "500 ml",
+      "quantity": 4,
+      "expireDate": "2021-10-20T10:45:57.211Z",
+      "id": 11
+    },
+    {
+      "name": "czekoladki",
+      "categoryPath": "cukier_i_słodziki",
+      "path": "czekoladki",
+      "capacity": "500gram",
+      "quantity": 1,
+      "expireDate": "2021-10-31T13:55:26.000Z",
+      "id": 12
+    },
+    {
+      "name": "guma",
+      "categoryPath": "cukier_i_słodziki",
+      "path": "guma",
+      "capacity": "0gram",
+      "quantity": 6,
+      "expireDate": "2021-10-31T13:56:02.000Z",
+      "id": 13
     }
   ],
   "images": [

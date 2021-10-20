@@ -3,6 +3,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -10,31 +11,44 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {Link, useParams} from "react-router-dom";
 import useStore from "../store/useStore";
 import {useEffect} from "react";
-import {AppBar, InputBase, Tooltip, useMediaQuery} from "@mui/material";
+import {AppBar, Button, ButtonGroup, Divider, InputBase, Tooltip, Typography, useMediaQuery} from "@mui/material";
 import Toolbar from '@mui/material/Toolbar';
-import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import { makeStyles } from "@material-ui/core/styles";
 import {styled} from "@mui/material/styles";
 import Fab from '@mui/material/Fab';
-import Box from '@mui/material/Box';
-import AddModal from "../components/AddModal";
-import {alpha} from "@material-ui/core";
 
+import {alpha} from "@material-ui/core";
+import AddProductModal from "../components/AddProductModal";
+
+
+const useStyles = makeStyles((theme) => ({
+    myClassName: {
+
+        "&:hover": {
+            transition: "all 0.1s ease",
+            transform: "scale(1.4)",
+            backgroundColor: "transparent",
+        }
+    }
+}));
 const CategoryDetail = ()=> {
 
     const productsList = useStore(state => state.products);
     const fetchProducts = useStore(state => state.fetchProducts);
+    const deleteProduct= useStore(state => state.deleteProduct);
     const categories = useStore(state => state.categories);
     const [open, setOpen] = React.useState(false);
+    const [count, setCount] = React. useState(1);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const minWidth900 = useMediaQuery('(min-width:900px)');
-
+    const classes = useStyles();
     useEffect(()=>{
         fetchProducts();
-    },[]);
+
+    },[categories, count]);
     console.log(productsList);
     let { categoryName } = useParams();
 
@@ -44,7 +58,7 @@ const CategoryDetail = ()=> {
 
 const products = productsList.filter(product => product.categoryPath === categoryName );
 
-console.log(products.categoryPath);//undefined
+console.log(products);//undefined
 console.log(categoryName);
     if (products.length >= 2) {
         products.sort((a, b) => {
@@ -104,34 +118,82 @@ console.log(categoryName);
         },
     }));
 
+    const handleIncrement = (e) => {
+        e.preventDefault();
+        setCount(prevCount => prevCount + 1);
+    };
 
+    //Create handleDecrement event handler
+    const handleDecrement = (e) => {
+        e.preventDefault();
+        setCount(prevCount => prevCount - 1);
+    };
     return (
 <>
    <div>
-       <List>
+       <List sx={{ width: '90%', backgroundColor: 'background.paper', margin: '0 auto' }}>
            {products.map((product) => (
-               <ListItem
-                   key={product.id}
-                   component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}
-                   secondaryAction={
-                       <Tooltip title="Delete">
-                           <IconButton>
-                               <DeleteIcon/>
-                           </IconButton>
-                       </Tooltip>
-                   }>
-                   <ListItemAvatar>
-                       <Avatar>
-                           <FolderIcon />
-                       </Avatar>
-                   </ListItemAvatar>
+<>
+               <ListItem key={product.id} alignItems="flex-start" component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}
+                         secondaryAction={
+
+                             <ButtonGroup variant="text" aria-label="text button group"  color="secondary" >
+                                 <Button>
+                                     <Button onClick={handleDecrement} size="large"  color="secondary">-</Button>
+                                     <h5 style={{fontSize: "1.2em"}}>{count}</h5>
+                                     <Button onClick={handleIncrement}  color="secondary">+</Button>
+                                </Button>
+
+                                 <IconButton edge="end" aria-label="comments" className={classes.myClassName}>
+                                     <DeleteIcon color="secondary" onClick={(e) =>
+                                     {
+                                         e.preventDefault();
+                                         deleteProduct(product.id);
+                                     }
+                                     }/>
+                                 </IconButton>
+
+
+
+                             </ButtonGroup>
+                         }
+
+               >
+
+                       <ListItemAvatar>
+                           <Avatar
+                               alt={product.name}
+                               src={`/static/images/avatar/${product.name}.jpg`}
+                           />
+                       </ListItemAvatar>
+
                    <ListItemText
-                       primary={product.name}
-                   />
+                           primary={product.name}
+                           secondary={
+                               <React.Fragment>
+                                   <Typography
+                                       sx={{ display: 'inline' }}
+                                       component="span"
+                                       variant="body2"
+                                       color="text.primary"
+                                   >
+                                       Data ważności: {product.expireDate}
+                                   </Typography>
+                               </React.Fragment>
+                           }
+                           />
+                   {/*</ListItemButton>*/}
+
+
+
+
                </ListItem>
-           ))}
+               <Divider variant="inset" component="li" />
+               </>
+               ))}
+
        </List>
-       <AppBar position="fixed" color="primary"  sx={{ top: 'auto', bottom: 0 }}>
+       <AppBar position="fixed" color="transparent"  sx={{ top: 'auto', bottom: 0 }}>
            <Toolbar sx={{width: minWidth900 ? '800px' : '100%', margin: '0 auto'}}>
                <Search>
                    <SearchIconWrapper>
@@ -144,7 +206,7 @@ console.log(categoryName);
                </Search>
                <StyledFab color="secondary" aria-label="add">
                    <AddIcon onClick={handleOpen}/>
-                   <AddModal open={open} close={handleClose}/>
+                   <AddProductModal open={open} close={handleClose}/>
                </StyledFab>
            </Toolbar>
        </AppBar>

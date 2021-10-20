@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const createProductsSlice = (set, get) => ({
     products: [],
     fetchProducts: async productsFetch => {
@@ -7,16 +9,29 @@ const createProductsSlice = (set, get) => ({
     addProduct: (newProduct)=> {
         console.log("new product")
         console.log(newProduct)
+        axios.post('http://localhost:4000/products', newProduct).then(resp => {
+            console.log(resp.data);//zwraca obiekt newProduct
+            let id = resp.data.id;
+            newProduct.id = id;
+        }).catch(error => {
+            console.log(error);
+        });
         set((state) => ({
             products: [
                 newProduct,
                 ...state.products,
             ]}))
     },
-    deleteProduct: (path) =>
+    deleteProduct: async (id) =>{
+        axios.delete('http://localhost:4000/products/'+id).then(resp => {
+            console.log(resp.data);
+
+        }).catch(error => {
+            console.log(error);
+        });
         set((state) => ({
-            products: state.products.filter((product) => product.path !== path),
-        }))
-})
+            products: state.products.filter((product) => product.id !== id),
+        }));
+}});
 
 export default createProductsSlice;
