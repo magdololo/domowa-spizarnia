@@ -36,87 +36,71 @@
       "name": "budyn czekoladowy",
       "path": "budyn_czekoladowy",
       "categoryPath": "desery_pomoce_cukiernicze",
+      "capacity": 40,
+      "unit": "gram",
       "quantity": 2,
-      "capacity": "40g",
-      "expireDate": "09.06.2023",
+      "expireDate": "2021-10-31T13:55:26.000Z",
       "id": 2
     },
     {
       "name": "ksylitol",
       "path": "ksylitol",
       "categoryPath": "cukier_i_słodziki",
+      "capacity": 500,
+      "unit": "gram",
       "quantity": 5,
-      "expireDate": "30.12.2022",
+      "expireDate": "2021-10-31T13:55:26.000Z",
       "id": 3
     },
     {
       "name": "miód lipowy",
       "path": "miód_lipowy",
       "categoryPath": "przetwory_owocowe_i_miód",
+      "capacity": 400,
+      "unit": "gram",
       "quantity": 8,
-      "expireDate": "19.08.2026",
+      "expireDate": "2021-10-31T13:55:26.000Z",
       "id": 6
-    },
-    {
-      "name": "ryż basmati",
-      "path": "ryż_basmati",
-      "categoryPath": "maka_ryże_kasze",
-      "quantity": 8,
-      "expireDate": "19.08.2026",
-      "id": 7
     },
     {
       "name": "mąka żytnia pełnoziarnista",
       "path": "mąka_żytnia_pełnoziarnista",
-      "categoryPath": "maka_ryże_kasze",
-      "quantity": 8,
-      "expireDate": "19.08.2026",
+      "categoryPath": "mąka_ryże_kasze",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 9,
+      "expireDate": "2021-10-31T13:55:26.000Z",
       "id": 8
     },
     {
-      "name": "cukierki czekoladowe",
-      "categoryPath": "słodycze",
-      "path": "cukierki_czekoladowe",
-      "capacity": 500,
-      "quantity": 2,
-      "expireDate": "2021-10-31T11:41:41.000Z",
-      "id": 9
-    },
-    {
-      "name": "batoniki",
-      "categoryPath": "słodycze",
-      "path": "batoniki",
-      "capacity": "400 + ml",
-      "quantity": 1,
-      "expireDate": "2021-10-26T10:44:50.000Z",
-      "id": 10
-    },
-    {
-      "name": "wafelki",
-      "categoryPath": "słodycze",
-      "path": "wafelki",
-      "capacity": "500 ml",
-      "quantity": 4,
-      "expireDate": "2021-10-20T10:45:57.211Z",
-      "id": 11
-    },
-    {
       "name": "czekoladki",
-      "categoryPath": "cukier_i_słodziki",
       "path": "czekoladki",
-      "capacity": "500gram",
+      "categoryPath": "cukier_i_słodziki",
+      "capacity": 500,
+      "unit": "gram",
       "quantity": 1,
       "expireDate": "2021-10-31T13:55:26.000Z",
       "id": 12
     },
     {
       "name": "guma",
-      "categoryPath": "cukier_i_słodziki",
       "path": "guma",
-      "capacity": "0gram",
+      "categoryPath": "cukier_i_słodziki",
+      "capacity": 0,
+      "unit": "gram",
       "quantity": 6,
       "expireDate": "2021-10-31T13:56:02.000Z",
       "id": 13
+    },
+    {
+      "name": "mąka pszenna pełnoziarnista",
+      "path": "maka_pszenna_pelnoziarnista",
+      "categoryPath": "mąka_ryże_kasze",
+      "capacity": "1",
+      "unit": "kg",
+      "quantity": 4,
+      "expireDate": "2021-10-25T13:29:35.164Z",
+      "id": 14
     }
   ],
   "images": [

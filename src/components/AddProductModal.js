@@ -11,15 +11,16 @@ import {useState} from "react";
 import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
 import {MenuItem} from "@mui/material";
-import NativeSelect from '@mui/material/NativeSelect';
+
 
 const AddProductModal=({open, close})=>{
     const [newProductName,setNewProductName] = useState('');
+    const [brandName, setBrandName] = useState('');
     const addProduct= useStore(state => state.addProduct);
     const [quantity, setQuantity] = useState(1);
     const [value, setValue] = React.useState(new Date());
-    const [capacityValue, setCapacityValue] = React.useState(500);
-    const [unit, setUnit] = React.useState('gram');
+    const [capacityValue, setCapacityValue] = React.useState(0);
+    const [unit, setUnit] = React.useState('gr');
     const style = {
         position: 'absolute',
         top: '50%',
@@ -35,14 +36,18 @@ const AddProductModal=({open, close})=>{
 
   const units = [
       {
-          value: 'gram',
-          label: 'g'
+          value: 'gr',
+
       },
       {
           value: 'ml',
-          label: 'ml'
+
+      },
+      {
+          value: 'kg',
       }
-  ]
+
+  ];
         let { categoryName } = useParams();
         console.log(categoryName);
         console.log(units);
@@ -59,10 +64,13 @@ const AddProductModal=({open, close})=>{
                     Dodaj nowy produkt
                 </Typography>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                    <TextField id="standard-basic" label="Marka" variant="standard" onChange={ e => setBrandName(e.target.value)} />
+                </Typography>
+                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                     <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setNewProductName(e.target.value)} />
                 </Typography>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "50%"}}>
-                    <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={500} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}}/>
+                    <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={capacityValue} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}}/>
                         <TextField sx={{ width: "40%"}}
                             id="standard-select-currency"
                                    select
@@ -102,10 +110,12 @@ const AddProductModal=({open, close})=>{
                 </Typography>
                 <Button onClick={()=> {
                     addProduct({
+                        // "brandName" : brandName,
                         "name": newProductName,
-                        "categoryPath": categoryName,
                         "path": slugify(newProductName, "_"),
-                        "capacity": `${capacityValue}${unit}`,
+                        "categoryPath": categoryName,
+                        "capacity": capacityValue,
+                         "unit": unit,
                         "quantity": parseInt(quantity),
                         "expireDate" : value,
 

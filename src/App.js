@@ -12,6 +12,7 @@ export default function App() {
 
     return (
         <>
+
             <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
 
                     <Switch>
@@ -30,6 +31,7 @@ export default function App() {
                     </Switch>
             {/*    </CSSTransition>*/}
             {/*</TransitionGroup>*/}
+
         </>
     );
 }

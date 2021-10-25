@@ -4,7 +4,7 @@ import axios from "axios";
 const createCategorySlice = (set, get) => ({
     categories: [],
     fetch: async categoriesFetch => {
-        const response = await fetch('http://localhost:4000/categories');
+        const response = await fetch('http://192.168.1.134:4000/categories');
         set({categories: await response.json()})
     },
     addCategory: async (newCategory) => {
@@ -12,7 +12,7 @@ const createCategorySlice = (set, get) => ({
         console.log(newCategory)
 
 
-        axios.post('http://localhost:4000/categories', newCategory).then(resp => {
+        axios.post('http://192.168.1.134:4000/categories', newCategory).then(resp => {
             console.log(resp.data);//zwraca obiekt newCategory
             let id = resp.data.id;
             newCategory.id = id;
@@ -40,7 +40,7 @@ const createCategorySlice = (set, get) => ({
 
     },
     updateCategory: async (id, path, url, title)=>{
-        axios.put('http://localhost:4000/categories/'+id,
+        axios.put('http://192.168.1.134:4000/categories/'+id,
             {
                 url: url,
                 path: path,
