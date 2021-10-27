@@ -1,4 +1,4 @@
-import {Button, Divider, IconButton, InputBase, InputLabel, Modal, Paper, Select, TextField} from "@mui/material";
+import {Button, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -87,6 +87,7 @@ const AddProductModal=({open, close})=>{
                         </TextField>
 
                 </Typography>
+
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
                     <MobileDatePicker
                         mask={'__.__.____'}

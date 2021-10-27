@@ -4,37 +4,48 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import { ThemeProvider } from '@material-ui/core/styles';
-import { createTheme } from '@material-ui/core/styles';
+import {createTheme, ThemeProvider} from "@mui/material";
 
+
+
+const breakpoints = {
+    values: {
+        xs: 0,
+        sm: 400,
+        md: 700,
+        lg: 1000,
+        xl: 1536,
+
+    }
+}
 
 const theme = createTheme({
+    breakpoints: breakpoints,
     typography: {
         fontFamily: [
             '"Sora"',
             'sans serif',
-            '"Archivo"' ,
-            ].join(','),
-        },
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 400,
-            md: 700,
-            lg: 1000,
-            xl: 1536,
-        }
-    }
-    });
+            '"Archivo"',
+        ].join(','),
+    },
+    button: {
+        "&:hover": {
+    backgroundColor: "transparent",
+}},
+});
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
     <React.StrictMode>
+
+
         <BrowserRouter>
-            <App/>
+            <ThemeProvider theme={theme}>
+                <App/>
+            </ThemeProvider>
         </BrowserRouter>
-    </React.StrictMode>
-    </ThemeProvider>,
+
+
+    </React.StrictMode>,
     document.getElementById('root')
 );
 
