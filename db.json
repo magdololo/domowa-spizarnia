@@ -4,13 +4,13 @@
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "desery_i_pomoce_cukiernicze",
       "title": "desery i pomoce cukiernicze",
-      "id": 3
+      "id": 1
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "słodycze",
       "title": "słodycze",
-      "id": 3
+      "id": 1
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
@@ -22,13 +22,19 @@
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "przetwory_owocowe_i_miód",
       "title": "przetwory owocowe i miód",
-      "id": 3
+      "id": 4
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "cukier_i_słodziki",
       "title": "cukier i słodziki",
-      "id": 3
+      "id": 5
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "Htrgggfg",
+      "path": "htrgggfg",
+      "id": 6
     }
   ],
   "products": [
@@ -40,7 +46,7 @@
       "unit": "gram",
       "quantity": 2,
       "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 2
+      "id": 7
     },
     {
       "name": "ksylitol",
@@ -48,19 +54,39 @@
       "categoryPath": "cukier_i_słodziki",
       "capacity": 500,
       "unit": "gram",
-      "quantity": 5,
+      "quantity": 4,
       "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 3
+      "id": 8
     },
     {
-      "name": "miód lipowy",
-      "path": "miód_lipowy",
-      "categoryPath": "przetwory_owocowe_i_miód",
-      "capacity": 400,
-      "unit": "gram",
-      "quantity": 8,
-      "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 6
+      "name": "krówki",
+      "path": "krowki",
+      "categoryPath": "słodycze",
+      "capacity": "400",
+      "unit": "ml",
+      "quantity": 2,
+      "expireDate": "2022-02-01T13:55:26.000Z",
+      "id": 9
+    },
+    {
+      "name": "drop",
+      "path": "drop",
+      "categoryPath": "słodycze",
+      "capacity": "90",
+      "unit": "kg",
+      "quantity": "5",
+      "expireDate": "2022-02-01T13:55:26.000Z",
+      "id": 14
+    },
+    {
+      "name": "czekolada ziołowa zdrowa",
+      "path": "czekolada_ziolowa_zdrowa",
+      "categoryPath": "słodycze",
+      "capacity": "60",
+      "unit": "szt",
+      "quantity": "6",
+      "expireDate": "2022-02-01T13:55:26.000Z",
+      "id": 15
     },
     {
       "name": "mąka żytnia pełnoziarnista",
@@ -70,17 +96,7 @@
       "unit": "kg",
       "quantity": 8,
       "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 8
-    },
-    {
-      "name": "czekoladki",
-      "path": "czekoladki",
-      "categoryPath": "cukier_i_słodziki",
-      "capacity": 500,
-      "unit": "gram",
-      "quantity": 1,
-      "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 12
+      "id": 16
     },
     {
       "name": "guma",
@@ -90,7 +106,7 @@
       "unit": "gram",
       "quantity": 6,
       "expireDate": "2021-10-31T13:56:02.000Z",
-      "id": 13
+      "id": 17
     },
     {
       "name": "mąka pszenna pełnoziarnista",
@@ -100,7 +116,7 @@
       "unit": "kg",
       "quantity": 4,
       "expireDate": "2021-10-25T13:29:35.164Z",
-      "id": 14
+      "id": 18
     },
     {
       "name": "gtrre",
@@ -110,7 +126,77 @@
       "unit": "gr",
       "quantity": 2,
       "expireDate": "2021-10-25T14:42:04.969Z",
-      "id": 15
+      "id": 19
+    },
+    {
+      "name": "miód wielokwiatowy",
+      "path": "miód_wielokwiatowy",
+      "categoryPath": "przetwory_owocowe_i_miód",
+      "capacity": "500",
+      "unit": "ml",
+      "quantity": 5,
+      "expireDate": "2022-01-31T13:49:16.000Z",
+      "id": 10
+    },
+    {
+      "name": "Makaron nitki",
+      "path": "Makaron_nitki",
+      "categoryPath": "cukier_i_słodziki",
+      "capacity": "500",
+      "unit": "gr",
+      "quantity": 3,
+      "expireDate": "2022-07-31T07:29:38.000Z",
+      "id": 11
+    },
+    {
+      "name": "mleczko",
+      "path": "mleczko",
+      "categoryPath": "przetwory_owocowe_i_miód",
+      "capacity": 0,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-10-31T09:25:33.000Z",
+      "id": 12
+    },
+    {
+      "name": "mmmmm",
+      "path": "mmmmm",
+      "categoryPath": "przetwory_owocowe_i_miód",
+      "capacity": 0,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-10-31T09:50:34.000Z",
+      "id": 13
+    },
+    {
+      "name": "ggggg",
+      "path": "ggggg",
+      "categoryPath": "przetwory_owocowe_i_miód",
+      "capacity": 0,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-10-26T08:50:52.000Z",
+      "id": 28
+    },
+    {
+      "name": "batonik",
+      "path": "batonik",
+      "categoryPath": "słodycze",
+      "capacity": 5,
+      "unit": "szt",
+      "quantity": 7,
+      "expireDate": "2021-10-31T09:50:52.000Z",
+      "id": 29
+    },
+    {
+      "name": "trunek",
+      "path": "trunek",
+      "categoryPath": "słodycze",
+      "capacity": "90",
+      "unit": "kg",
+      "quantity": 3,
+      "expireDate": "2021-10-30T12:15:37.000Z",
+      "id": 30
     }
   ],
   "images": [

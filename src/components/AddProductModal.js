@@ -1,4 +1,4 @@
-import {Button, Modal, TextField} from "@mui/material";
+import {Button, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -14,23 +14,26 @@ import {MenuItem} from "@mui/material";
 
 
 const AddProductModal=({open, close})=>{
-    const [newProductName,setNewProductName] = useState('');
-    const [brandName, setBrandName] = useState('');
+    const [productName,setProductName] = useState('');
     const addProduct= useStore(state => state.addProduct);
     const [quantity, setQuantity] = useState(1);
     const [value, setValue] = React.useState(new Date());
-    const [capacityValue, setCapacityValue] = React.useState(0);
+    const [capacityValue, setCapacityValue] = React.useState(1);
     const [unit, setUnit] = React.useState('gr');
+    const maxWidth400 = useMediaQuery('(max-width:400px)');
+
+
+
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: maxWidth400 ? 340 : 400,
         backgroundColor: '#fff',
-        border: '2px solid #000',
+        border: '1px solid #000',
         boxShadow: 24,
-        p: 4,
+        p: '10px 4px',
         zIndex: 1200,
     };
 
@@ -64,10 +67,7 @@ const AddProductModal=({open, close})=>{
                     Dodaj nowy produkt
                 </Typography>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Marka" variant="standard" onChange={ e => setBrandName(e.target.value)} />
-                </Typography>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setNewProductName(e.target.value)} />
+                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setProductName(e.target.value)} />
                 </Typography>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "50%"}}>
                     <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={capacityValue} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}}/>
@@ -110,15 +110,16 @@ const AddProductModal=({open, close})=>{
                 />
                 </Typography>
                 <Button onClick={()=> {
+
                     addProduct({
-                        // "brandName" : brandName,
-                        "name": newProductName,
-                        "path": slugify(newProductName, "_"),
+                        "name": productName,
+                        "path": slugify(productName, "_"),
                         "categoryPath": categoryName,
                         "capacity": capacityValue,
                          "unit": unit,
                         "quantity": parseInt(quantity),
                         "expireDate" : value,
+
 
                     });
 

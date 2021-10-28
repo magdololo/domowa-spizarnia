@@ -11,7 +11,7 @@ import slugify from "slugify";
 
 
 
-  const EditModal =()=>{
+  const EditCategoryModal =()=>{
       const setEditModalOpen = useStore(state=>state.setEditModalOpen);
       const updateCategory = useStore(state=>state.updateCategory);
       const [newCategoryName,setNewCategoryName] = useState('');
@@ -98,4 +98,4 @@ import slugify from "slugify";
       )
   }
 
-  export default EditModal;
+  export default EditCategoryModal;

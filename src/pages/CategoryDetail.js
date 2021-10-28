@@ -5,6 +5,7 @@ import useStore from "../store/useStore";
 import {useEffect} from "react";
 import ProductListItem from "../components/ProductListItem";
 import AppBarBottom from "../components/AppBarBottom";
+import EditProductModal from "../components/EditProductModal";
 
 
 
@@ -47,6 +48,7 @@ const CategoryDetail = ()=> {
                        ))}
 
                    </List>
+                   <EditProductModal/>
                    <AppBarBottom/>
                </div>
 

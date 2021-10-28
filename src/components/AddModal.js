@@ -1,4 +1,4 @@
-import {Button, ImageListItem, Modal, TextField} from "@mui/material";
+import {Button, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImagePickerModal from "./ImagePickerModal";
@@ -12,12 +12,13 @@ const AddModal=({open, close})=>{
     const pickedImage = useStore(state=>state.pickedImage);
     const setPickedImage = useStore(state=>state.setPickedImage);
     const addCategory = useStore(state => state.addCategory);
+    const maxWidth400 = useMediaQuery('(max-width:400px)');
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: maxWidth400 ? 340 : 400,
         backgroundColor: '#fff',
         border: '2px solid #000',
         boxShadow: 24,
@@ -25,7 +26,7 @@ const AddModal=({open, close})=>{
         zIndex: 1200,
     }
    return (
-       <Modal sx={{zIndex: '1200'}}
+       <Modal sx={{zIndex: '200'}}
               open={open}
               onClose={close}
               aria-labelledby="modal-modal-title"

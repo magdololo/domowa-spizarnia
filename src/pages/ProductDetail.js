@@ -1,7 +1,5 @@
 import {useParams} from "react-router-dom";
 import useStore from "../store/useStore";
-import EditCategoryImageList from "../components/EditCategoryImageList";
-import CategoryImageList from "../components/CategoryImageList";
 import * as React from "react";
 
 const ProductDetail = () => {

@@ -28,7 +28,7 @@ const createCategorySlice = (set, get) => ({
         }));
     },
     editModalOpen: false,
-    setEditModalOpen: (open) => {
+    setEditCategoryModalOpen: (open) => {
         set({editModalOpen: open})
     },
     editCategory: {},
@@ -65,7 +65,7 @@ const createCategorySlice = (set, get) => ({
     },
     deleteCategory: async (id) => {
         console.log(id);
-        axios.delete('http://localhost:4000/categories/'+id).then(resp => {
+        axios.delete('http://192.168.1.134:4000/categories/'+id).then(resp => {
              console.log(resp.data);
 
             }).catch(error => {

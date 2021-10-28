@@ -8,16 +8,15 @@ import * as React from "react";
 import useStore from "../store/useStore";
 import {useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
-import EditModal from "./EditModal";
+import EditCategoryModal from "./EditCategoryModal";
+
 const EditCategoryImageList =()=> {
     const categoryList = useStore(state => state.categories);
     const deleteCategory  = useStore(state => state.deleteCategory);
     const minWidth600 = useMediaQuery('(min-width:600px)');
-
-
     const setEditCategory = useStore(state=>state.setEditCategory);
+    const setEditCategoryModalOpen = useStore(state=>state.setEditCategoryModalOpen);
 
-    const setEditModalOpen = useStore(state=>state.setEditModalOpen)
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
     <ImageList cols={minWidth600 ? 3 : 2} >
@@ -49,7 +48,7 @@ const EditCategoryImageList =()=> {
                     }} onClick={() => {
 
                         setEditCategory(item.id, item.url, item.title, item.path);
-                        setEditModalOpen(true);
+                        setEditCategoryModalOpen(true);
                     }}/>
 
 
@@ -82,7 +81,7 @@ const EditCategoryImageList =()=> {
             </ImageListItem>
         ))}
     </ImageList>
-            <EditModal />
+            <EditCategoryModal />
         </Box>
     )};
 export default EditCategoryImageList;

@@ -30,8 +30,8 @@ const theme = createTheme({
     },
     button: {
         "&:hover": {
-    backgroundColor: "transparent",
-}},
+            backgroundColor: "transparent",
+        }},
 });
 
 ReactDOM.render(
