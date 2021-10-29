@@ -42,7 +42,7 @@ const CategoryDetail = ()=> {
     return (
             <>
                <div>
-                   <List>
+                   <List sx ={{paddingBottom: '90px'}}>
                        {products.map((product) => (
                         <ProductListItem key={product.id} product={product} component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}/>
                        ))}

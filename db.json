@@ -2,39 +2,45 @@
   "categories": [
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "produkty_bez_kategorii",
+      "title": "produkty bez kategorii",
+      "id": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "desery_i_pomoce_cukiernicze",
       "title": "desery i pomoce cukiernicze",
-      "id": 1
+      "id": 2
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "słodycze",
       "title": "słodycze",
-      "id": 1
+      "id": 3
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "mąka_ryże_kasze",
       "title": "mąka, ryże, kasze",
-      "id": 3
+      "id": 4
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "przetwory_owocowe_i_miód",
       "title": "przetwory owocowe i miód",
-      "id": 4
+      "id": 5
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "cukier_i_słodziki",
       "title": "cukier i słodziki",
-      "id": 5
+      "id": 6
     },
     {
       "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "title": "Htrgggfg",
       "path": "htrgggfg",
-      "id": 6
+      "id": 7
     }
   ],
   "products": [
@@ -67,6 +73,26 @@
       "quantity": 2,
       "expireDate": "2022-02-01T13:55:26.000Z",
       "id": 9
+    },
+    {
+      "name": "michalki",
+      "path": "michalki",
+      "categoryPath": "słodycze",
+      "capacity": "400",
+      "unit": "ml",
+      "quantity": 2,
+      "expireDate": "2022-02-01T13:55:26.000Z",
+      "id": 32
+    },
+    {
+      "name": "mmmmm",
+      "path": "mmmmm",
+      "categoryPath": "słodycze",
+      "capacity": "400",
+      "unit": "ml",
+      "quantity": 2,
+      "expireDate": "2022-02-01T13:55:26.000Z",
+      "id": 33
     },
     {
       "name": "drop",
@@ -197,6 +223,43 @@
       "quantity": 3,
       "expireDate": "2021-10-30T12:15:37.000Z",
       "id": 30
+    },
+    {
+      "name": "Ciastka Oreo",
+      "path": "Ciastka_Oreo",
+      "categoryPath": "słodycze",
+      "capacity": 2,
+      "unit": "szt",
+      "quantity": 5,
+      "expireDate": "2021-12-31T11:06:23.000Z",
+      "id": 31
+    },
+    {
+      "name": "oranzada",
+      "path": "oranzada",
+      "capacity": 1,
+      "unit": "ml",
+      "quantity": 1,
+      "expireDate": "2021-10-29T11:34:26.117Z",
+      "id": 34
+    },
+    {
+      "name": "kolie",
+      "path": "kolie",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-10-29T11:36:47.459Z",
+      "id": 35
+    },
+    {
+      "name": "wszystko",
+      "path": "wszystko",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-10-29T11:37:09.200Z",
+      "id": 36
     }
   ],
   "images": [

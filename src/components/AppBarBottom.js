@@ -73,14 +73,14 @@ const AppBarBottom = () =>{
 
     return(
         <>
-            <AppBar position="fixed" color="transparent"  sx={{ top: 'auto', bottom: 0 }}>
-                <Toolbar sx={{width: minWidth900 ? '800px' : '90%', margin: '0 auto'}}>
+            <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 , backgroundColor: 'white'}}>
+                <Toolbar sx={{width: minWidth900 ? '800px' : '90%', margin: '0 auto', color: 'gray'}}>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
-                            placeholder="Wyszukaj…"
+                            placeholder="Wyszukaj produkt"
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>

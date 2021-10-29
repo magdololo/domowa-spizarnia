@@ -8,6 +8,7 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import useStore from "../store/useStore";
 import AddModal from "./AddModal";
+import AppBarBottom from "./AppBarBottom";
 
 
 
@@ -23,8 +24,8 @@ import AddModal from "./AddModal";
 
 
            return (
-
-               <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
+<>
+               <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto', paddingBottom: 40}}>
                    <ImageList cols={ minWidth600 ? 3: 2 } >
                        {categoryList.map((item) => (
                            <ImageListItem key={item.id} component={Link} to={"/" + item.path}>
@@ -33,15 +34,18 @@ import AddModal from "./AddModal";
                                    <Typography component="span" key={'typography_'+item.id}
                                        sx={{
                                            color: "white",
-                                           letterSpacing: '0.019em',
-                                           fontSize: '1rem',
+                                           letterSpacing: minWidth600 ? '0.08' : '0.12em',
+                                           fontSize: minWidth600 ? '1rem' : '.9rem',
                                            textAlign: 'center',
                                            position: 'absolute',
                                            bottom: 0,
                                            right: 0,
                                            left: 0,
-                                           pt: 2,
-                                           pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                                           minHeight: '40%',
+                                           display: 'inline-flex',
+                                           alignItems: 'center',
+                                           justifyContent: 'center',
+                                           p: '2px 0',
                                            backgroundColor: 'rgba(0, 0, 0, 0.6)',
                                            textTransform: "capitalize",
                                            }}>
@@ -53,15 +57,26 @@ import AddModal from "./AddModal";
                        ))}
                 <ImageListItem sx={{backgroundColor: 'lightgray', display: 'flex', position: 'relative', minHeight: '100px'}} key={0}>
                     <img src='/images/placeholder.png' alt="placeholder"/>
-                <Fab sx={{border: '0', position: 'absolute', top: '50%', left: '50%',transform: 'translate(-50%, -50%)',}} size="medium" color="secondary" aria-label="add" >
-                    <AddIcon onClick={handleOpen}/>
+                <Typography sx={{border: '0', position: 'absolute', top: '50%', left: '50%',transform: 'translate(-50%, -50%)',textAlign: 'center'}} size="medium" color="secondary" aria-label="add" >
+
+                    <AddIcon  onClick={handleOpen}/>
                    <AddModal open={open} close={handleClose}/>
-                </Fab>
+                    <Typography variant="span" sx={{
+                        color: "gray",
+                        letterSpacing: '0.09em',
+                        fontSize: minWidth600 ? '1rem' : '.8rem',
+                        textAlign: 'center',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textTransform: "capitalize",}}>Dodaj kategorię</Typography>
+                </Typography>
             </ImageListItem>
 
                    </ImageList>
                </Box>
-
+             <AppBarBottom/>
+       </>
            );
 }
 export default CategoryImageList;
