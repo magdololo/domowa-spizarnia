@@ -17,7 +17,7 @@ const ProductListItem = ({product}) => {
     const minWidth900 = useMediaQuery('(min-width:900px)');
     let   [todayDate] = useState(new Date());
     const expireDate = product.expireDate;
-    console.log(`dzis ${todayDate.toISOString()} data waznosci ${expireDate}`);
+   // console.log(`dzis ${todayDate.toISOString()} data waznosci ${expireDate}`);
     const setEditProduct = useStore(state=>state.setEditProduct);
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
 

@@ -33,7 +33,7 @@ const createCategorySlice = (set, get) => ({
     },
     editCategory: {},
     setEditCategory: (id, url, title, path) => {
-        set({editCategory: {url, title, path, id}})
+        set({editCategory: { url, title, path, id}})
         console.log("editCategory")
 
 

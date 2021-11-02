@@ -6,7 +6,7 @@ import {useEffect} from "react";
 import ProductListItem from "../components/ProductListItem";
 import AppBarBottom from "../components/AppBarBottom";
 import EditProductModal from "../components/EditProductModal";
-
+import AddProductModal from "../components/AddProductModal";
 
 
 
@@ -14,15 +14,27 @@ const CategoryDetail = ()=> {
 
     const productsList = useStore(state => state.products);
     const fetchProducts = useStore(state => state.fetchProducts);
-    const categories = useStore(state => state.categories);
+    const categoryList = useStore(state => state.categories);
+    let { categoryName } = useParams();
+    const fetchCategories = useStore(state => state.fetch);
+
+    useEffect(() => {
+        fetchCategories();
 
 
+    },[]);
     useEffect(()=>{
         fetchProducts();
 
-    },[categories]);
+    },[categoryName]);
+
     console.log(productsList);
-    let { categoryName } = useParams();
+
+    console.log(categoryList)
+    let category =  categoryList.filter(categoryItem => categoryItem.path === categoryName );
+    console.log(category);
+    category = category[0];
+    console.log(categoryName);
 
 
     const products = productsList.filter(product => product.categoryPath === categoryName );
@@ -48,7 +60,8 @@ const CategoryDetail = ()=> {
                        ))}
 
                    </List>
-                   <EditProductModal/>
+                   <EditProductModal categories={categoryList}/>
+                   <AddProductModal />
                    <AppBarBottom/>
                </div>
 

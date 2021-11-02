@@ -59,7 +59,7 @@ const AddModal=({open, close})=>{
                    }
                    addCategory({
                        "url": pickedImage,
-                       "title": newCategoryName.capitalize(),
+                       "title": newCategoryName,
                        "path": slugify(newCategoryName, "_"),
                    });
 

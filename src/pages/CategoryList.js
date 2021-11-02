@@ -12,7 +12,7 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 
 
-const CategoryList = (props)=> {
+const CategoryList = ()=> {
 
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
@@ -28,11 +28,11 @@ const CategoryList = (props)=> {
         fetchCategories();
         fetchImages();
 
-    },[fetchImages,fetchCategories]);
+    },[fetchImages,fetchCategories]); 
 
 
     console.log(fetchImages);
-
+    console.log(categoryList);
 
     return (
         <>

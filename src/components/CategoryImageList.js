@@ -1,5 +1,4 @@
 import Typography from "@mui/material/Typography";
-import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {ImageList, ImageListItem, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";

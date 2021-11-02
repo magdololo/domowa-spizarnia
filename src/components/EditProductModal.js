@@ -10,16 +10,22 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
+import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
+import {useParams} from "react-router-dom";
 
 const EditProductModal =()=>{
+
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
     const [newProductName,setNewProductName] = useState('');
     const [newCapacity, setNewCapacity] = useState(0);
-    const [newCategoryPath, setNewCategoryPath] = useState('');
+    const [categoryPath, setCategoryPath] = useState('');
     const [newQuantity, setNewQuantity] = useState(1);
     const [newExpireDate, setNewExpireDate] = useState(new Date());
     const [unit, setUnit] = useState('gr');
+    const [selectedNewCategory, setSelectedNewCategory] = useState('');
+    console.log(categoryPath);
+console.log(selectedNewCategory);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
     const handleClose = () => {
@@ -29,7 +35,7 @@ const EditProductModal =()=>{
         console.log(editProduct.name)//po wybraniu categorii tytul
         setNewProductName(editProduct.name);
         setNewCapacity(editProduct.capacity);
-        setNewCategoryPath(editProduct.categoryPath);
+        setCategoryPath(editProduct.categoryPath);
         setNewQuantity(editProduct.quantity);
         setNewExpireDate(editProduct.expireDate);
 
@@ -69,7 +75,8 @@ const EditProductModal =()=>{
         p: 4,
         zIndex: 1200,
     }
-
+    let { categoryName } = useParams();
+    console.log(categoryName);
     return(
         <Modal sx={{zIndex: '1200'}}
                open={editModalOpen}
@@ -82,6 +89,7 @@ const EditProductModal =()=>{
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Edytuj produkt
                 </Typography>
+                <AutocompleteCategoriesTitle canChangeCategory="" setSelectedNewCategory={setSelectedNewCategory} />
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                     <TextField id="standard-basic" label="Nazwa produktu" variant="standard" value={newProductName} onChange={ e => setNewProductName(e.target.value)} />
                 </Typography>
@@ -125,9 +133,9 @@ const EditProductModal =()=>{
                     />
                 </Typography>
                 <Button onClick={()=> {
-
+                    let categoryPath = categoryName===selectedNewCategory.path ? categoryName : selectedNewCategory.path
                     let path= slugify(newProductName, "_")
-                    updateProduct(editProduct.id ,newProductName, path, newCategoryPath, newCapacity, unit, newQuantity, newExpireDate);
+                    updateProduct(editProduct.id ,newProductName, path, categoryPath, newCapacity, unit, newQuantity, newExpireDate);
                     handleClose();
 
                 }}>Edytuj produkt</Button>
