@@ -1,29 +1,40 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import Autocomplete, {createFilterOptions} from '@mui/material/Autocomplete';
 import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
+
 const filter = createFilterOptions();
 
-export default function AutocompleteCategoriesTitle({canChangeCategory, labelForAddModal, setSelectedNewCategory}) {
+export default function AutocompleteCategoriesTitle({
+                                                        canChangeCategory,
+                                                        labelForAddModal,
+                                                        setSelectedNewCategory,
+                                                        isAddProductFromListCategory
+                                                    }) {
 
     const [value, setValue] = React.useState(null);
 
-    const categoryList = useStore(state=>state.categories);
+    const categoryList = useStore(state => state.categories);
     console.log(categoryList);
-    let { categoryName } = useParams();
+    let {categoryName} = useParams();
     console.log(categoryName);
-    let category =  categoryList.filter(categoryItem => categoryItem.path === categoryName );
-    console.log(category);
-    category = category[0];
-    console.log(categoryName);
-    let categoryTitle = category.title;
-    console.log(categoryTitle);
+    let categoryTitle ="";
+    if (categoryName !== undefined) {
+
+        let category = categoryList.filter(categoryItem => categoryItem.path === categoryName);
+        console.log(category);
+        category = category[0];
+        console.log(categoryName);
+        categoryTitle = category.title;
+        console.log(categoryTitle);
+    }
+
     return (
         <Autocomplete
             disabled={canChangeCategory}
 
-            value={categoryTitle}
+            value={isAddProductFromListCategory ? value : categoryTitle}//categoryTitle
             onChange={(event, newValue) => {
                 if (typeof newValue === 'string') {
                     setValue({
@@ -37,12 +48,13 @@ export default function AutocompleteCategoriesTitle({canChangeCategory, labelFor
                 } else {
                     setValue(newValue);
                 }
+
                 setSelectedNewCategory(newValue)
             }}
             filterOptions={(options, params) => {
                 const filtered = filter(options, params);
 
-                const { inputValue } = params;
+                const {inputValue} = params;
                 // Suggest the creation of a new value
                 const isExisting = options.some((option) => inputValue === option.title);
                 if (inputValue !== '' && !isExisting) {
@@ -72,7 +84,7 @@ export default function AutocompleteCategoriesTitle({canChangeCategory, labelFor
                 return option.title;
             }}
             renderOption={(props, option) => <li {...props}>{option.title}</li>}
-            sx={{ width: 300 }}
+            sx={{width: 300}}
             freeSolo
             renderInput={(params) => (
                 <TextField {...params} label={labelForAddModal ? 'nazwa kategorii' : 'zmień kategorię'}/>

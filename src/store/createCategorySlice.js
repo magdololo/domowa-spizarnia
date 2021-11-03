@@ -7,6 +7,11 @@ const createCategorySlice = (set, get) => ({
         const response = await fetch('http://192.168.1.134:4000/categories');
         set({categories: await response.json()})
     },
+    getCategoryByPath: (path)=>{
+        const categories = get().categories;//pobiera kategorie ze stanu
+        let category = categories.filter(categoryItem => categoryItem.path === path);
+        category = category[0];
+    },
     addCategory: async (newCategory) => {
         console.log("new category")
         console.log(newCategory)

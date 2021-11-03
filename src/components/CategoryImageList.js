@@ -54,21 +54,28 @@ import AppBarBottom from "./AppBarBottom";
                            </ImageListItem>
 
                        ))}
-                <ImageListItem sx={{backgroundColor: 'lightgray', display: 'flex', position: 'relative', minHeight: '100px'}} key={0}>
-                    <img src='/images/placeholder.png' alt="placeholder"/>
+                <ImageListItem sx={{backgroundColor: 'lightgray', display: 'flex', position: 'relative', minHeight: '100px'}} key={0} >
+                    <img src='/images/placeholder.png' alt="placeholder" />
                 <Typography sx={{border: '0', position: 'absolute', top: '50%', left: '50%',transform: 'translate(-50%, -50%)',textAlign: 'center'}} size="medium" color="secondary" aria-label="add" >
 
-                    <AddIcon  onClick={handleOpen}/>
-                   <AddModal open={open} close={handleClose}/>
-                    <Typography variant="span" sx={{
-                        color: "gray",
-                        letterSpacing: '0.09em',
-                        fontSize: minWidth600 ? '1rem' : '.8rem',
-                        textAlign: 'center',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textTransform: "capitalize",}}>Dodaj kategorię</Typography>
+                    <Typography>
+                    <AddModal open={open} close={handleClose}/>
+                    <AddIcon  color="secondary" cursor="pointer" sx={{ textAlign: 'center'}} onClick={handleOpen}/>
+                    <Typography
+                                sx={{
+                                    color: "gray",
+                                    letterSpacing: '0.09em',
+                                    fontSize: minWidth600 ? '1rem' : '.8rem',
+                                    textAlign: 'center',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    textTransform: 'capitalize',
+                                    cursor: 'pointer'}}
+                                >
+                        Dodaj kategorię
+                    </Typography>
+                    </Typography>
                 </Typography>
             </ImageListItem>
 

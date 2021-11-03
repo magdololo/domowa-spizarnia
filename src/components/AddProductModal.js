@@ -12,10 +12,12 @@ import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
 import {MenuItem} from "@mui/material";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
+import AddModal from "./AddModal";
+import AddIcon from "@mui/icons-material/Add";
 
 
 
-const AddProductModal=({open, close})=>{
+const AddProductModal=({open, close, isAddProductFromListCategory})=>{
 
     const [productName,setProductName] = useState('');
     const addProduct= useStore(state => state.addProduct);
@@ -24,9 +26,8 @@ const AddProductModal=({open, close})=>{
     const [capacityValue, setCapacityValue] = React.useState(1);
     const [unit, setUnit] = React.useState('gr');
     const maxWidth400 = useMediaQuery('(max-width:400px)');
-
-
-
+    const [selectedNewCategory, setSelectedNewCategory] = useState('');
+    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
 
     const style = {
         position: 'absolute',
@@ -63,7 +64,8 @@ const AddProductModal=({open, close})=>{
 
   ];
         let { categoryName } = useParams();
-
+        let category = getCategoryByPath(categoryName);
+        console.log( category);
     return (
         <>
         <Modal sx={{zIndex: '1200'}}
@@ -76,7 +78,10 @@ const AddProductModal=({open, close})=>{
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Dodaj nowy produkt
                 </Typography>
-                <AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true"/>
+                {isAddProductFromListCategory ?
+                <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true" isAddProductFromListCategory="true" setSelectedNewCategory={setSelectedNewCategory}/>
+               :
+                <AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true" />}
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                     <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setProductName(e.target.value)} />
                 </Typography>
@@ -125,11 +130,12 @@ const AddProductModal=({open, close})=>{
                     addProduct({
                         "name": productName,
                         "path": slugify(productName, "_"),
-                        "categoryPath": categoryName,
+                        "categoryPath": categoryName ? categoryName : selectedNewCategory.path,
                         "capacity": capacityValue,
                          "unit": unit,
                         "quantity": parseInt(quantity),
                         "expireDate" : value,
+                        "categoryId":  categoryName ? category.id : selectedNewCategory.id
 
 
                     });

@@ -7,6 +7,8 @@ import * as React from "react";
 import {styled} from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import {alpha} from "@material-ui/core";
+import useStore from "../store/useStore";
+import {useParams} from "react-router-dom";
 
 const AppBarBottom = () =>{
 
@@ -14,6 +16,9 @@ const AppBarBottom = () =>{
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const minWidth900 = useMediaQuery('(min-width:900px)');
+
+
+
 
     const StyledFab = styled(Fab)(({ theme }) => ({
         position: 'relative',
@@ -71,6 +76,8 @@ const AppBarBottom = () =>{
         },
     }));
 
+
+
     return(
         <>
             <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 , backgroundColor: 'white'}}>
@@ -86,7 +93,7 @@ const AppBarBottom = () =>{
                     </Search>
                     <StyledFab color="secondary" aria-label="add">
                         <AddIcon onClick={handleOpen}/>
-                        <AddProductModal open={open} close={handleClose}/>
+                        <AddProductModal open={open} close={handleClose} isAddProductFromListCategory="true" canChangeCategory=""/>
                     </StyledFab>
                 </Toolbar>
             </AppBar>
