@@ -3,14 +3,25 @@ import axios from "axios";
 
 const createCategorySlice = (set, get) => ({
     categories: [],
+    categoriesFetched: false,
     fetch: async categoriesFetch => {
         const response = await fetch('http://192.168.1.134:4000/categories');
         set({categories: await response.json()})
     },
-    getCategoryByPath: (path)=>{
-        const categories = get().categories;//pobiera kategorie ze stanu
+    getCategoryByPath: async (path) => {
+        let categories = get().categories;//pobiera kategorie ze stanu
+        console.log(categories);
+        console.log(path)
+        if (categories.length === 0) {
+
+            const fetch = get().fetch;
+            await fetch();
+            categories = get().categories;
+        }
         let category = categories.filter(categoryItem => categoryItem.path === path);
-        category = category[0];
+        console.log(category);
+        return category[0];
+
     },
     addCategory: async (newCategory) => {
         console.log("new category")
@@ -38,14 +49,13 @@ const createCategorySlice = (set, get) => ({
     },
     editCategory: {},
     setEditCategory: (id, url, title, path) => {
-        set({editCategory: { url, title, path, id}})
+        set({editCategory: {url, title, path, id}})
         console.log("editCategory")
 
 
-
     },
-    updateCategory: async (id, path, url, title)=>{
-        axios.put('http://192.168.1.134:4000/categories/'+id,
+    updateCategory: async (id, path, url, title) => {
+        axios.put('http://192.168.1.134:4000/categories/' + id,
             {
                 url: url,
                 path: path,
@@ -54,7 +64,7 @@ const createCategorySlice = (set, get) => ({
 
             let editCategory = resp.data;
             console.log(editCategory);
-            set((state)=> {
+            set((state) => {
                     let categories = state.categories.filter(editCategory => editCategory.id !== id);
                     categories.push(editCategory)
                     return {
@@ -70,17 +80,18 @@ const createCategorySlice = (set, get) => ({
     },
     deleteCategory: async (id) => {
         console.log(id);
-        axios.delete('http://192.168.1.134:4000/categories/'+id).then(resp => {
-             console.log(resp.data);
+        axios.delete('http://192.168.1.134:4000/categories/' + id).then(resp => {
+            console.log(resp.data);
 
-            }).catch(error => {
+        }).catch(error => {
             console.log(error);
         });
 
         set((state) => ({
 
-             categories: state.categories.filter((category) => category.id !== id),
+            categories: state.categories.filter((category) => category.id !== id),
         }));
-    }});
+    }
+});
 
 export default createCategorySlice;

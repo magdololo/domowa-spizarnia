@@ -6,7 +6,10 @@ import {useEffect} from "react";
 import ProductListItem from "../components/ProductListItem";
 import AppBarBottom from "../components/AppBarBottom";
 import EditProductModal from "../components/EditProductModal";
-import AddProductModal from "../components/AddProductModal";
+import Typography from "@mui/material/Typography";
+import {useMediaQuery} from "@mui/material";
+import ReturnToCategoryList from "../components/ReturnToCategoryList";
+
 
 
 
@@ -14,27 +17,31 @@ const CategoryDetail = ()=> {
 
     const productsList = useStore(state => state.products);
     const fetchProducts = useStore(state => state.fetchProducts);
-    const categoryList = useStore(state => state.categories);
     let { categoryName } = useParams();
     const fetchCategories = useStore(state => state.fetch);
+    const minWidth900 = useMediaQuery('(min-width:900px)');
+    const getCategoryByPath= useStore(state=> state.getCategoryByPath);
 
+    let category = null;
+let categoryTitle = '';
     useEffect(() => {
-        fetchCategories();
+        console.log(productsList);
+        console.log(categoryName);
 
+        getCategoryByPath(categoryName).then(cat => {
+            category = cat;
+            categoryTitle = category.title;
+            console.log(categoryTitle);
+            console.log('categoryTitle');
+        });
 
-    },[]);
+    },[category]);
     useEffect(()=>{
         fetchProducts();
 
     },[categoryName]);
 
-    console.log(productsList);
 
-    console.log(categoryList)
-    let category =  categoryList.filter(categoryItem => categoryItem.path === categoryName );
-    console.log(category);
-    category = category[0];
-    console.log(categoryName);
 
 
     const products = productsList.filter(product => product.categoryPath === categoryName );
@@ -53,16 +60,21 @@ const CategoryDetail = ()=> {
 
     return (
             <>
-               <div>
+
+               <div style={{ margin: "0 auto", width: minWidth900 ? '800px' : '90%'}}>
+                   <ReturnToCategoryList/>
+                   <Typography variant="h6" component="h6" sx={{textTransform: "capitalize", color: "#646670"}}>
+                       {categoryTitle}
+                   </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
                        {products.map((product) => (
                         <ProductListItem key={product.id} product={product} component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}/>
                        ))}
 
                    </List>
-                   <EditProductModal categories={categoryList}/>
-                   <AddProductModal />
-                   <AppBarBottom/>
+                   <EditProductModal/>
+
+                   <AppBarBottom isAddProductFromListCategory={false}/>
                </div>
 
             </>

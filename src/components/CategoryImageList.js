@@ -81,7 +81,7 @@ import AppBarBottom from "./AppBarBottom";
 
                    </ImageList>
                </Box>
-             <AppBarBottom/>
+             <AppBarBottom isAddProductFromListCategory={true} />
        </>
            );
 }

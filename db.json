@@ -91,16 +91,6 @@
       "id": 32
     },
     {
-      "name": "mmmmm",
-      "path": "mmmmm",
-      "categoryPath": "słodycze",
-      "capacity": "400",
-      "unit": "ml",
-      "quantity": 2,
-      "expireDate": "2022-02-01T13:55:26.000Z",
-      "id": 33
-    },
-    {
       "name": "drop",
       "path": "drop",
       "categoryPath": "słodycze",
@@ -149,16 +139,6 @@
       "quantity": 4,
       "expireDate": "2021-10-25T13:29:35.164Z",
       "id": 18
-    },
-    {
-      "name": "gtrre",
-      "path": "gtrre",
-      "categoryPath": "słodycze",
-      "capacity": 0,
-      "unit": "gr",
-      "quantity": 2,
-      "expireDate": "2021-10-25T14:42:04.969Z",
-      "id": 19
     },
     {
       "name": "miód wielokwiatowy",
@@ -221,22 +201,12 @@
       "id": 29
     },
     {
-      "name": "trunek",
-      "path": "trunek",
-      "categoryPath": "słodycze",
-      "capacity": "90",
-      "unit": "kg",
-      "quantity": 3,
-      "expireDate": "2021-10-30T12:15:37.000Z",
-      "id": 30
-    },
-    {
       "name": "Ciastka Oreo",
       "path": "Ciastka_Oreo",
       "categoryPath": "słodycze",
       "capacity": 2,
       "unit": "szt",
-      "quantity": 5,
+      "quantity": 4,
       "expireDate": "2021-12-31T11:06:23.000Z",
       "id": 31
     },
@@ -334,16 +304,6 @@
       "quantity": 1,
       "expireDate": "2021-11-03T18:55:39.746Z",
       "id": 43
-    },
-    {
-      "name": "tytlek",
-      "path": "tytlek",
-      "categoryPath": "słodycze",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-03T18:58:31.947Z",
-      "id": 44
     },
     {
       "name": "dupeczka",

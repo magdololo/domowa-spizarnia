@@ -10,31 +10,26 @@ export default function AutocompleteCategoriesTitle({
                                                         canChangeCategory,
                                                         labelForAddModal,
                                                         setSelectedNewCategory,
-                                                        isAddProductFromListCategory
+
                                                     }) {
 
     const [value, setValue] = React.useState(null);
+    const getCategoryByPath= useStore(state=>state.getCategoryByPath);
 
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
     let {categoryName} = useParams();
     console.log(categoryName);
-    let categoryTitle ="";
-    if (categoryName !== undefined) {
-
-        let category = categoryList.filter(categoryItem => categoryItem.path === categoryName);
-        console.log(category);
-        category = category[0];
-        console.log(categoryName);
-        categoryTitle = category.title;
-        console.log(categoryTitle);
-    }
-
+    console.log("categoryname")
+    const category = getCategoryByPath(categoryName);
+    console.log(category);
+    console.log("canChangeCategory")
+    console.log(canChangeCategory)
     return (
         <Autocomplete
             disabled={canChangeCategory}
 
-            value={isAddProductFromListCategory ? value : categoryTitle}//categoryTitle
+            value={categoryName ? category.title : value}//categoryTitle
             onChange={(event, newValue) => {
                 if (typeof newValue === 'string') {
                     setValue({

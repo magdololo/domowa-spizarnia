@@ -13,7 +13,7 @@ import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 import {useParams} from "react-router-dom";
 
-const EditProductModal =()=>{
+const EditProductModal =({canChangeCategory})=>{
 
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);

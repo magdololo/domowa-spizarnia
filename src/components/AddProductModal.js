@@ -12,8 +12,7 @@ import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
 import {MenuItem} from "@mui/material";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
-import AddModal from "./AddModal";
-import AddIcon from "@mui/icons-material/Add";
+
 
 
 
@@ -28,6 +27,7 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
+
 
     const style = {
         position: 'absolute',
@@ -63,9 +63,11 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
       }
 
   ];
+
         let { categoryName } = useParams();
         let category = getCategoryByPath(categoryName);
-        console.log( category);
+    console.log("isAddProductFromListCategory")
+    console.log(isAddProductFromListCategory)
     return (
         <>
         <Modal sx={{zIndex: '1200'}}
@@ -79,7 +81,7 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
                     Dodaj nowy produkt
                 </Typography>
                 {isAddProductFromListCategory ?
-                <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true" isAddProductFromListCategory="true" setSelectedNewCategory={setSelectedNewCategory}/>
+                <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true"  setSelectedNewCategory={setSelectedNewCategory}/>
                :
                 <AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true" />}
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>

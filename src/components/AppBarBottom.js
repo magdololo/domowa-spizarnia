@@ -7,16 +7,20 @@ import * as React from "react";
 import {styled} from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import {alpha} from "@material-ui/core";
-import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
+import useStore from "../store/useStore";
 
-const AppBarBottom = () =>{
+const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const minWidth900 = useMediaQuery('(min-width:900px)');
+    const minWidth900 = useMediaQuery('(min-width:900px)')
 
+    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
+    let { categoryName } = useParams();
+    let category = getCategoryByPath(categoryName);
+    console.log( category);
 
 
 
@@ -78,6 +82,7 @@ const AppBarBottom = () =>{
 
 
 
+
     return(
         <>
             <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 , backgroundColor: 'white'}}>
@@ -93,7 +98,7 @@ const AppBarBottom = () =>{
                     </Search>
                     <StyledFab color="secondary" aria-label="add">
                         <AddIcon onClick={handleOpen}/>
-                        <AddProductModal open={open} close={handleClose} isAddProductFromListCategory="true" canChangeCategory=""/>
+                        <AddProductModal open={open} close={handleClose} isAddProductFromListCategory={isAddProductFromListCategory}/>
                     </StyledFab>
                 </Toolbar>
             </AppBar>
