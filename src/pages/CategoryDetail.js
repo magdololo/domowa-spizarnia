@@ -18,24 +18,23 @@ const CategoryDetail = ()=> {
     const productsList = useStore(state => state.products);
     const fetchProducts = useStore(state => state.fetchProducts);
     let { categoryName } = useParams();
-    const fetchCategories = useStore(state => state.fetch);
     const minWidth900 = useMediaQuery('(min-width:900px)');
     const getCategoryByPath= useStore(state=> state.getCategoryByPath);
+    const [categoryTitle, setCategoryTitle]= React.useState('')
 
-    let category = null;
-let categoryTitle = '';
+
     useEffect(() => {
-        console.log(productsList);
         console.log(categoryName);
+        getCategoryByPath(categoryName).then(category => {
 
-        getCategoryByPath(categoryName).then(cat => {
-            category = cat;
-            categoryTitle = category.title;
+            setCategoryTitle(category.title)
             console.log(categoryTitle);
             console.log('categoryTitle');
         });
 
-    },[category]);
+    },[categoryName]);
+
+
     useEffect(()=>{
         fetchProducts();
 
