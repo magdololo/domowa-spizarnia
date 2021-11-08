@@ -5,14 +5,13 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import plLocale from 'date-fns/locale/pl';
-import slugify from "slugify";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
 import {MenuItem} from "@mui/material";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
-
+//import slugify from "slugify";
 
 
 
@@ -27,7 +26,7 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
-
+    const [category, setCategory] = React.useState("");
 
     const style = {
         position: 'absolute',
@@ -65,9 +64,13 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
   ];
 
         let { categoryName } = useParams();
-        let category = getCategoryByPath(categoryName);
-    console.log("isAddProductFromListCategory")
-    console.log(isAddProductFromListCategory)
+
+    useEffect(() => {
+        console.log(categoryName);
+        getCategoryByPath(categoryName).then(category => {
+            setCategory(category)
+        });
+    },[categoryName]);
     return (
         <>
         <Modal sx={{zIndex: '1200'}}
@@ -77,19 +80,31 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
                aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
                     Dodaj nowy produkt
                 </Typography>
                 {isAddProductFromListCategory ?
-                <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true"  setSelectedNewCategory={setSelectedNewCategory}/>
-               :
-                <AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true" />}
+                    <Typography sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                   <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true"  setSelectedNewCategory={setSelectedNewCategory} editCategory={false} />
+                    </Typography>
+                :  <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                   <TextField
+                        sx={{width: "80%", marginLeft: "10%"}}
+                        id="outlined-read-only-input"
+                        label="Nazwa kategorii"
+                        value={category.title}
+                        InputProps={{
+                        readOnly: true,
+                    }}
+                   />
+                </Typography> }
+                {/*//<AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true" editCategory={category}/>}*/}
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setProductName(e.target.value)} />
+                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setProductName(e.target.value)} sx={{width: "80%", marginLeft: "10%"}}/>
                 </Typography>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "50%"}}>
-                    <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={capacityValue} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}}/>
-                        <TextField sx={{ width: "40%"}}
+                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
+                    <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={capacityValue} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}} sx={{width: "35%", marginLeft: "10%"}}/>
+                        <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                             id="standard-select-currency"
                                    select
                             label="Jednostka"
@@ -106,19 +121,21 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
 
                 </Typography>
 
-                <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
+                <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale} >
                     <MobileDatePicker
+
                         mask={'__.__.____'}
                         label="Data ważności"
                         value={value}
                         onChange={(newValue) => {
                             setValue(newValue);
                         }}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField {...params} sx={{width: "80%", marginLeft: "10%"}}/>}
                     />
                 </LocalizationProvider>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                 <TextField
+                    sx={{width: "80%", marginLeft: "10%"}}
                     id="outlined-number"
                     label="Ilość"
                     defaultValue={1}
@@ -127,12 +144,12 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
                     renderInput={(params) => <TextField {...params} />}
                 />
                 </Typography>
-                <Button onClick={()=> {
+                <Button sx={{ marginLeft: "10%"}} onClick={()=> {
 
                     addProduct({
                         "name": productName,
-                        "path": slugify(productName, "_"),
-                        "categoryPath": categoryName ? categoryName : selectedNewCategory.path,
+                        // "path": slugify(productName, "_"),
+                        // "categoryPath": categoryName ? categoryName : selectedNewCategory.path,
                         "capacity": capacityValue,
                          "unit": unit,
                         "quantity": parseInt(quantity),

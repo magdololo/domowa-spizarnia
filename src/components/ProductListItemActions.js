@@ -16,7 +16,7 @@ const ProductListItemActions = ({product}) => {
 
     return (
         <>
-         <Grid container xs={10} sm={12}>
+         <Grid container item xs={10} sm={12}>
 
         <Grid item xs={2} sx={{color: "#01579b", textAlign: "center", cursor: "pointer"}}>
             <RemoveIcon sx={{color: "#42a5f5"}} onClick={(e) =>{
@@ -45,7 +45,7 @@ const ProductListItemActions = ({product}) => {
     <Grid item xs={3} sx={{color: "#01579b", textAlign: "center", cursor: "pointer"}}>
         <EditIcon sx={{color: "#01579b"}} onClick={(e) => {
             e.preventDefault();
-            setEditProduct(product.id, product.name, product.categoryPath, product.capacity, product.unit, product.quantity, product.expireDate);
+            setEditProduct(product.id, product.name, product.capacity, product.unit, product.unit, product.quantity, product.expireDate, product.categoryId);
             setEditProductModalOpen(true);
         }}
         />

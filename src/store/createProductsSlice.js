@@ -30,17 +30,17 @@ const createProductsSlice = (set, get) => ({
         set({editModalOpen: open})
     },
     editProduct: {},
-    setEditProduct: (id, name, categoryPath, capacity, unit,quantity, expireDate) => {
-        set({editProduct: {id, name, categoryPath, capacity, unit, quantity, expireDate}});
+    setEditProduct: (id, name, capacity, unit,quantity, expireDate, categoryId) => {
+        set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId}});
         console.log("editProduct")
 
     },
-    updateProduct: async (id, name, path, categoryPath, capacity, unit, quantity, expireDate, selectedNewCategory)=>{
+    updateProduct: async (id, name, capacity, unit, quantity, expireDate, selectedNewCategory)=>{
         axios.put('http://192.168.1.134:4000/products/'+id,
             {
                 name: name,
-                path: path,
-                categoryPath: categoryPath,
+                // path: path,
+                // categoryPath: categoryPath,
                 capacity: parseInt(capacity),
                 unit: unit,
                 quantity: parseInt(quantity),

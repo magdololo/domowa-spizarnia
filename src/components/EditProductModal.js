@@ -3,8 +3,6 @@ import {useEffect, useState} from "react";
 import {Button, MenuItem, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-import slugify from "slugify";
 import * as React from "react";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -13,21 +11,23 @@ import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 import {useParams} from "react-router-dom";
 
-const EditProductModal =({canChangeCategory})=>{
+const EditProductModal =()=>{
 
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
     const [newProductName,setNewProductName] = useState('');
     const [newCapacity, setNewCapacity] = useState(0);
-    const [categoryPath, setCategoryPath] = useState('');
     const [newQuantity, setNewQuantity] = useState(1);
     const [newExpireDate, setNewExpireDate] = useState(new Date());
     const [unit, setUnit] = useState('gr');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
-    console.log(categoryPath);
-console.log(selectedNewCategory);
+    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
+    const [category, setCategory] = React.useState("");
+    console.log(selectedNewCategory);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
+    console.log('editProduct')
+    console.log(editProduct)
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
@@ -35,7 +35,7 @@ console.log(selectedNewCategory);
         console.log(editProduct.name)//po wybraniu categorii tytul
         setNewProductName(editProduct.name);
         setNewCapacity(editProduct.capacity);
-        setCategoryPath(editProduct.categoryPath);
+        //setCategoryPath(editProduct.categoryPath);
         setNewQuantity(editProduct.quantity);
         setNewExpireDate(editProduct.expireDate);
 
@@ -77,6 +77,14 @@ console.log(selectedNewCategory);
     }
     let { categoryName } = useParams();
     console.log(categoryName);
+
+    useEffect(() => {
+        console.log(categoryName);
+        getCategoryByPath(categoryName).then(category => {
+            setCategory(category)
+        });
+    },[categoryName]);
+
     return(
         <Modal sx={{zIndex: '1200'}}
                open={editModalOpen}
@@ -89,7 +97,7 @@ console.log(selectedNewCategory);
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Edytuj produkt
                 </Typography>
-                <AutocompleteCategoriesTitle canChangeCategory="" setSelectedNewCategory={setSelectedNewCategory} />
+                <AutocompleteCategoriesTitle canChangeCategory="" setSelectedNewCategory={setSelectedNewCategory} editCategory={category}/>
                 <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                     <TextField id="standard-basic" label="Nazwa produktu" variant="standard" value={newProductName} onChange={ e => setNewProductName(e.target.value)} />
                 </Typography>
@@ -133,9 +141,10 @@ console.log(selectedNewCategory);
                     />
                 </Typography>
                 <Button onClick={()=> {
-                    let categoryPath = categoryName===selectedNewCategory.path ? categoryName : selectedNewCategory.path
-                    let path= slugify(newProductName, "_")
-                    updateProduct(editProduct.id ,newProductName, path, categoryPath, newCapacity, unit, newQuantity, newExpireDate);
+                    //let categoryPath = categoryName===selectedNewCategory.path ? categoryName : selectedNewCategory.path
+                    //let path= slugify(newProductName, "_")
+                    let idNewCategory =  categoryName===selectedNewCategory.path ? category.id : selectedNewCategory.id
+                    updateProduct(editProduct.id ,newProductName, newCapacity, unit, newQuantity, newExpireDate, idNewCategory);
                     handleClose();
 
                 }}>Edytuj produkt</Button>

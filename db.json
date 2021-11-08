@@ -335,6 +335,42 @@
       "expireDate": "2021-11-19T19:49:14.000Z",
       "categoryId": 4,
       "id": 47
+    },
+    {
+      "name": "miod fantastyczny",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T14:14:54.000Z",
+      "categoryId": 5,
+      "id": 48
+    },
+    {
+      "name": "cukiereczek",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-08T14:22:18.274Z",
+      "categoryId": 6,
+      "id": 49
+    },
+    {
+      "name": "cukiereczek",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-08T14:22:50.564Z",
+      "categoryId": 6,
+      "id": 50
+    },
+    {
+      "name": "lizaczek",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-08T14:23:08.389Z",
+      "categoryId": 6,
+      "id": 51
     }
   ],
   "images": [

@@ -10,28 +10,30 @@ export default function AutocompleteCategoriesTitle({
                                                         canChangeCategory,
                                                         labelForAddModal,
                                                         setSelectedNewCategory,
-
+                                                        editCategory
                                                     }) {
 
     const [value, setValue] = React.useState(null);
-    const getCategoryByPath= useStore(state=>state.getCategoryByPath);
+
 
     const categoryList = useStore(state => state.categories);
+    let categoryListWithoutEditCategory = categoryList.filter(category=>category.title !== editCategory.title);
     console.log(categoryList);
+    console.log(categoryListWithoutEditCategory);
     let {categoryName} = useParams();
     console.log(categoryName);
     console.log("categoryname")
-    const category = getCategoryByPath(categoryName);
-    console.log(category);
+
+    console.log(editCategory)
     console.log("canChangeCategory")
     console.log(canChangeCategory)
     return (
         <Autocomplete
             disabled={canChangeCategory}
 
-            value={categoryName ? category.title : value}//categoryTitle
+            value={categoryName ? editCategory.title : value}
             onChange={(event, newValue) => {
-                if (typeof newValue === 'string') {
+                if (typeof newValue === 'string' && newValue === 'disabled') {
                     setValue({
                         title: newValue,
                     });
@@ -65,7 +67,7 @@ export default function AutocompleteCategoriesTitle({
             clearOnBlur
             handleHomeEndKeys
             id="free-solo-with-text-demo"
-            options={categoryList}
+            options={editCategory ? categoryListWithoutEditCategory : categoryList}
             getOptionLabel={(option) => {
                 // Value selected with enter, right from the input
                 if (typeof option === 'string') {
