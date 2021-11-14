@@ -4,8 +4,8 @@ import {Button, MenuItem, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
@@ -16,9 +16,9 @@ const EditProductModal =()=>{
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
     const [newProductName,setNewProductName] = useState('');
-    const [newCapacity, setNewCapacity] = useState(0);
+    const [newCapacity, setNewCapacity] = useState(1);
     const [newQuantity, setNewQuantity] = useState(1);
-    const [newExpireDate, setNewExpireDate] = useState(new Date());
+    const [newExpireDate, setNewExpireDate] = useState( "");
     const [unit, setUnit] = useState('gr');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
@@ -35,11 +35,11 @@ const EditProductModal =()=>{
         console.log(editProduct.name)//po wybraniu categorii tytul
         setNewProductName(editProduct.name);
         setNewCapacity(editProduct.capacity);
-        //setCategoryPath(editProduct.categoryPath);
         setNewQuantity(editProduct.quantity);
         setNewExpireDate(editProduct.expireDate);
 
     }, [editProduct]);
+    console.log(editProduct);
 
     const units = [
         {
@@ -83,9 +83,15 @@ const EditProductModal =()=>{
         getCategoryByPath(categoryName).then(category => {
             setCategory(category)
         });
-    },[categoryName]);
+    },[categoryName, getCategoryByPath]);
+    console.log("name_path_id_newId")
+    console.log(categoryName);
+    console.log(category.path);
+    console.log(category.id);
+    console.log(selectedNewCategory.id);
 
     return(
+        <>
         <Modal sx={{zIndex: '1200'}}
                open={editModalOpen}
                onClose={handleClose}
@@ -94,16 +100,18 @@ const EditProductModal =()=>{
 
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
                     Edytuj produkt
                 </Typography>
-                <AutocompleteCategoriesTitle canChangeCategory="" setSelectedNewCategory={setSelectedNewCategory} editCategory={category}/>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" value={newProductName} onChange={ e => setNewProductName(e.target.value)} />
-                </Typography>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "50%"}}>
-                    <TextField id="standard-basic" label="Pojemność" variant="standard" value={newCapacity} onChange={ e => setNewCapacity(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}}/>
-                    <TextField sx={{ width: "40%"}}
+                <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                <AutocompleteCategoriesTitle setSelectedNewCategory={setSelectedNewCategory} editCategory={category}/> {/*canChangeCategory={false}*/}
+                </Box>
+                <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" value={newProductName} onChange={ e => setNewProductName(e.target.value)} sx={{width: "80%", marginLeft: "10%"}}/>
+                </Box>
+                <Box id="modal-modal-description"  sx={{mt: 2, mb: 3, width: "100%"}}>
+                    <TextField id="standard-basic" label="Pojemność" variant="standard" value={newCapacity} onChange={ e => setNewCapacity(e.target.value)} sx={{width: "35%", marginLeft: "10%"}}/>
+                    <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                id="standard-select-currency"
                                select
                                label="Jednostka"
@@ -118,7 +126,8 @@ const EditProductModal =()=>{
                         ))}
                     </TextField>
 
-                </Typography>
+                </Box>
+                <Box>
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
                     <MobileDatePicker
                         mask={'__.__.____'}
@@ -127,23 +136,25 @@ const EditProductModal =()=>{
                         onChange={(newExpireDate) => {
                             setNewExpireDate(newExpireDate);
                         }}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField {...params}  sx={{width: "80%", marginLeft: "10%"}}/>}
                     />
+
                 </LocalizationProvider>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                </Box>
+                <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                     <TextField
+                        sx={{width: "80%", marginLeft: "10%"}}
                         id="outlined-number"
                         label="Ilość"
                         value={newQuantity}
                         type="number"
                         onChange={ e => setNewQuantity(e.target.value)}
-                        renderInput={(params) => <TextField {...params} />}
+
                     />
-                </Typography>
-                <Button onClick={()=> {
-                    //let categoryPath = categoryName===selectedNewCategory.path ? categoryName : selectedNewCategory.path
-                    //let path= slugify(newProductName, "_")
-                    let idNewCategory =  categoryName===selectedNewCategory.path ? category.id : selectedNewCategory.id
+                </Box>
+                <Button sx={{ marginLeft: "10%"}} onClick={(e)=> {
+                    e.preventDefault();
+                    let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : category.id;
                     updateProduct(editProduct.id ,newProductName, newCapacity, unit, newQuantity, newExpireDate, idNewCategory);
                     handleClose();
 
@@ -151,6 +162,7 @@ const EditProductModal =()=>{
             </Box>
 
         </Modal>
+        </>
     )
 }
 

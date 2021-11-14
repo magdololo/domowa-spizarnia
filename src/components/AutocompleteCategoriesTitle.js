@@ -7,7 +7,6 @@ import {useParams} from "react-router-dom";
 const filter = createFilterOptions();
 
 export default function AutocompleteCategoriesTitle({
-                                                        canChangeCategory,
                                                         labelForAddModal,
                                                         setSelectedNewCategory,
                                                         editCategory
@@ -17,19 +16,20 @@ export default function AutocompleteCategoriesTitle({
 
 
     const categoryList = useStore(state => state.categories);
-    let categoryListWithoutEditCategory = categoryList.filter(category=>category.title !== editCategory.title);
+    let categoryListWithoutEditCategory = categoryList.filter(category => category.title !== editCategory.title);
     console.log(categoryList);
     console.log(categoryListWithoutEditCategory);
     let {categoryName} = useParams();
     console.log(categoryName);
     console.log("categoryname")
 
-    console.log(editCategory)
-    console.log("canChangeCategory")
-    console.log(canChangeCategory)
+    console.log(editCategory);
+
+    // console.log("canChangeCategory")
+    // console.log(canChangeCategory)
     return (
         <Autocomplete
-            disabled={canChangeCategory}
+            // disabled={canChangeCategory}
 
             value={categoryName ? editCategory.title : value}
             onChange={(event, newValue) => {

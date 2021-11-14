@@ -51,326 +51,100 @@
   ],
   "products": [
     {
-      "name": "budyn czekoladowy",
-      "path": "budyn_czekoladowy",
-      "categoryPath": "desery_pomoce_cukiernicze",
-      "capacity": 40,
-      "unit": "gram",
+      "name": "czekoladki",
+      "capacity": "100",
+      "unit": "gr",
       "quantity": 2,
-      "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 7
-    },
-    {
-      "name": "ksylitol",
-      "path": "ksylitol",
-      "categoryPath": "cukier_i_słodziki",
-      "capacity": 500,
-      "unit": "gram",
-      "quantity": 4,
-      "expireDate": "2021-10-31T13:55:26.000Z",
+      "expireDate": "2022-01-30T10:43:39.000Z",
       "id": 8
     },
     {
-      "name": "krówki",
-      "path": "krowki",
-      "categoryPath": "słodycze",
-      "capacity": "400",
-      "unit": "ml",
-      "quantity": 2,
-      "expireDate": "2022-02-01T13:55:26.000Z",
-      "id": 9
+      "id": 9,
+      "name": "bezkategorui2098",
+      "capacity": 10,
+      "unit": "gr",
+      "quantity": 10,
+      "expireDate": "2021-11-26T10:52:28.000Z"
     },
     {
-      "name": "michalki",
-      "path": "michalki",
-      "categoryPath": "słodycze",
-      "capacity": "400",
-      "unit": "ml",
-      "quantity": 2,
-      "expireDate": "2022-02-01T13:55:26.000Z",
-      "id": 32
-    },
-    {
-      "name": "drop",
-      "path": "drop",
-      "categoryPath": "słodycze",
-      "capacity": "90",
-      "unit": "kg",
-      "quantity": "5",
-      "expireDate": "2022-02-01T13:55:26.000Z",
-      "id": 14
-    },
-    {
-      "name": "czekolada ziołowa zdrowa",
-      "path": "czekolada_ziolowa_zdrowa",
-      "categoryPath": "słodycze",
-      "capacity": "60",
-      "unit": "szt",
-      "quantity": "6",
-      "expireDate": "2022-02-01T13:55:26.000Z",
-      "id": 15
-    },
-    {
-      "name": "mąka żytnia pełnoziarnista",
-      "path": "mąka_żytnia_pełnoziarnista",
-      "categoryPath": "mąka_ryże_kasze",
-      "capacity": 1,
-      "unit": "kg",
-      "quantity": 8,
-      "expireDate": "2021-10-31T13:55:26.000Z",
-      "id": 16
-    },
-    {
-      "name": "guma",
-      "path": "guma",
-      "categoryPath": "cukier_i_słodziki",
-      "capacity": 0,
-      "unit": "gram",
-      "quantity": 6,
-      "expireDate": "2021-10-31T13:56:02.000Z",
-      "id": 17
-    },
-    {
-      "name": "mąka pszenna pełnoziarnista",
-      "path": "maka_pszenna_pelnoziarnista",
-      "categoryPath": "mąka_ryże_kasze",
+      "name": "lizaki",
       "capacity": "1",
-      "unit": "kg",
-      "quantity": 4,
-      "expireDate": "2021-10-25T13:29:35.164Z",
-      "id": 18
-    },
-    {
-      "name": "miód wielokwiatowy",
-      "path": "miód_wielokwiatowy",
-      "categoryPath": "przetwory_owocowe_i_miód",
-      "capacity": "500",
-      "unit": "ml",
-      "quantity": 5,
-      "expireDate": "2022-01-31T13:49:16.000Z",
+      "unit": "gr",
+      "quantity": "4",
+      "expireDate": "2021-11-28T11:25:19.000Z",
+      "categoryId": 3,
       "id": 10
     },
     {
-      "name": "Makaron nitki",
-      "path": "Makaron_nitki",
-      "categoryPath": "cukier_i_słodziki",
-      "capacity": "500",
+      "id": 11,
+      "name": "czekoladki",
+      "capacity": 19,
       "unit": "gr",
       "quantity": 3,
-      "expireDate": "2022-07-31T07:29:38.000Z",
-      "id": 11
+      "expireDate": "2021-11-27T11:26:17.000Z",
+      "categoryId": 3
     },
     {
-      "name": "mleczko",
-      "path": "mleczko",
-      "categoryPath": "przetwory_owocowe_i_miód",
-      "capacity": 0,
+      "id": 12,
+      "name": "kopia",
+      "capacity": 60,
       "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-10-31T09:25:33.000Z",
-      "id": 12
+      "quantity": 15,
+      "expireDate": "2021-11-10T11:29:01.913Z",
+      "categoryId": 3
     },
     {
-      "name": "mmmmm",
-      "path": "mmmmm",
-      "categoryPath": "przetwory_owocowe_i_miód",
-      "capacity": 0,
+      "id": 13,
+      "name": "moliu",
+      "capacity": 56,
       "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-10-31T09:50:34.000Z",
-      "id": 13
+      "quantity": 19,
+      "expireDate": "2021-11-10T11:33:36.868Z",
+      "categoryId": 3
     },
     {
-      "name": "ggggg",
-      "path": "ggggg",
-      "categoryPath": "przetwory_owocowe_i_miód",
-      "capacity": 0,
+      "id": 14,
+      "name": "mjuletyn",
+      "capacity": 78,
       "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-10-26T08:50:52.000Z",
-      "id": 28
+      "quantity": 19,
+      "expireDate": "2021-11-10T11:38:21.566Z"
     },
     {
-      "name": "batonik",
-      "path": "batonik",
-      "categoryPath": "mąka_ryże_kasze",
-      "capacity": 5,
+      "name": "paczki",
+      "capacity": "10",
+      "unit": "gr",
+      "quantity": "100",
+      "expireDate": "2021-11-10T11:52:14.630Z",
+      "categoryId": 3,
+      "id": 15
+    },
+    {
+      "name": "ciastka",
+      "capacity": "100",
+      "unit": "szt",
+      "quantity": "19",
+      "expireDate": "2021-11-10T11:53:05.764Z",
+      "categoryId": 3,
+      "id": 16
+    },
+    {
+      "id": 17,
+      "name": "gumy",
+      "capacity": 100,
+      "unit": "szt",
+      "quantity": 1,
+      "expireDate": "2021-11-10T11:54:15.695Z",
+      "categoryId": 3
+    },
+    {
+      "id": 18,
+      "name": "cos2",
+      "capacity": 1,
       "unit": "gr",
       "quantity": 7,
-      "expireDate": "2021-10-31T09:50:52.000Z",
-      "id": 29
-    },
-    {
-      "name": "Ciastka Oreo",
-      "path": "Ciastka_Oreo",
-      "categoryPath": "słodycze",
-      "capacity": 2,
-      "unit": "szt",
-      "quantity": 4,
-      "expireDate": "2021-12-31T11:06:23.000Z",
-      "id": 31
-    },
-    {
-      "name": "oranzada",
-      "path": "oranzada",
-      "capacity": 1,
-      "unit": "ml",
-      "quantity": 1,
-      "expireDate": "2021-10-29T11:34:26.117Z",
-      "id": 34
-    },
-    {
-      "name": "kolie",
-      "path": "kolie",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-10-29T11:36:47.459Z",
-      "id": 35
-    },
-    {
-      "name": "wszystko",
-      "path": "wszystko",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-10-29T11:37:09.200Z",
-      "id": 36
-    },
-    {
-      "name": "truskawki",
-      "path": "truskawki",
-      "capacity": "500",
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-30T09:08:12.000Z",
-      "id": 37
-    },
-    {
-      "name": "gruszki",
-      "path": "gruszki",
-      "categoryPath": "paula",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-04T21:28:56.000Z",
-      "id": 38
-    },
-    {
-      "name": "proszek do pieczenia",
-      "path": "proszek_do_pieczenia",
-      "categoryPath": "desery_i_pomoce_cukiernicze",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T21:32:36.000Z",
-      "id": 39
-    },
-    {
-      "name": "jabka",
-      "path": "jabka",
-      "categoryPath": "paula",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-30T21:46:11.000Z",
-      "id": 40
-    },
-    {
-      "name": "miod rzepakowy",
-      "path": "miod_rzepakowy",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T18:52:34.000Z",
-      "id": 41
-    },
-    {
-      "name": "dupa",
-      "path": "dupa",
-      "categoryPath": "slodycze",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-03T18:53:19.028Z",
-      "id": 42
-    },
-    {
-      "name": "dupa",
-      "path": "dupa",
-      "categoryPath": "slodycze",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-03T18:55:39.746Z",
-      "id": 43
-    },
-    {
-      "name": "dupeczka",
-      "path": "dupeczka",
-      "categoryPath": "paula",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T18:59:45.000Z",
-      "id": 45
-    },
-    {
-      "name": "makaron nitki",
-      "path": "makaron_nitki",
-      "categoryPath": "mąka_ryże_kasze",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T19:02:47.000Z",
-      "id": 46
-    },
-    {
-      "name": "kasza jaglana",
-      "path": "kasza_jaglana",
-      "categoryPath": "mąka_ryże_kasze",
-      "capacity": 1,
-      "unit": "kg",
-      "quantity": 1,
-      "expireDate": "2021-11-19T19:49:14.000Z",
-      "categoryId": 4,
-      "id": 47
-    },
-    {
-      "name": "miod fantastyczny",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T14:14:54.000Z",
-      "categoryId": 5,
-      "id": 48
-    },
-    {
-      "name": "cukiereczek",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-08T14:22:18.274Z",
-      "categoryId": 6,
-      "id": 49
-    },
-    {
-      "name": "cukiereczek",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-08T14:22:50.564Z",
-      "categoryId": 6,
-      "id": 50
-    },
-    {
-      "name": "lizaczek",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-08T14:23:08.389Z",
-      "categoryId": 6,
-      "id": 51
+      "expireDate": "2021-11-14T11:07:07.648Z",
+      "categoryId": 3
     }
   ],
   "images": [

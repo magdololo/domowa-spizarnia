@@ -35,17 +35,16 @@ const createProductsSlice = (set, get) => ({
         console.log("editProduct")
 
     },
-    updateProduct: async (id, name, capacity, unit, quantity, expireDate, selectedNewCategory)=>{
+    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId)=>{
         axios.put('http://192.168.1.134:4000/products/'+id,
             {
+                id: id,
                 name: name,
-                // path: path,
-                // categoryPath: categoryPath,
                 capacity: parseInt(capacity),
                 unit: unit,
                 quantity: parseInt(quantity),
                 expireDate: expireDate,
-                selectedNewCategory: selectedNewCategory
+                categoryId: categoryId
             }).then(resp => {
 
             let editProduct = resp.data;

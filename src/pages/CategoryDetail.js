@@ -20,30 +20,23 @@ const CategoryDetail = ()=> {
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
     const getCategoryByPath= useStore(state=> state.getCategoryByPath);
-    const [categoryTitle, setCategoryTitle]= React.useState('')
+    const [category, setCategory] = React.useState("");
+
 
 
     useEffect(() => {
         console.log(categoryName);
         getCategoryByPath(categoryName).then(category => {
-
-            setCategoryTitle(category.title)
-            console.log(categoryTitle);
-            console.log('categoryTitle');
+            setCategory(category)
         });
-
-    },[categoryName]);
-
-
-    useEffect(()=>{
         fetchProducts();
-
-    },[categoryName]);
-
+    },[categoryName, category.id, getCategoryByPath, fetchProducts]);
 
 
 
-    const products = productsList.filter(product => product.categoryPath === categoryName );
+
+
+    const products = productsList.filter(product => product.categoryId === category.id );
 
     if (products.length >= 2) {
         products.sort((a, b) => {
@@ -63,7 +56,7 @@ const CategoryDetail = ()=> {
                <div style={{ margin: "0 auto", width: minWidth900 ? '800px' : '90%'}}>
                    <ReturnToCategoryList/>
                    <Typography variant="h6" component="h6" sx={{textTransform: "capitalize", color: "#646670"}}>
-                       {categoryTitle}
+                       {category.title}
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
                        {products.map((product) => (

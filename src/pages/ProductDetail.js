@@ -15,13 +15,13 @@ const ProductDetail = () => {
     return (
         <>
             {product !== '' &&
-                <>
+            <>
                 <h4>{product.name}</h4>
                 <p>Ilość: {product.quantity}</p>
-                </>
-                    }
             </>
-        );
-    }
+            }
+        </>
+    );
+}
 
 export default ProductDetail;

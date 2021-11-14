@@ -19,7 +19,7 @@ const ProductListItem = ({product}) => {
             <Grid container spacing={0} >
 
                 <Grid item xs={12}
-                      style={(expireDate > todayDate.toISOString()) ? {color: "#646670"} : {color: "red"}}
+                      style={(expireDate > todayDate.toISOString())  ? {color: "#646670"} : {color: "red"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",
@@ -31,7 +31,7 @@ const ProductListItem = ({product}) => {
                       {product.name}
                 </Grid>
                 <Grid item xs={12}
-                      style={(expireDate > todayDate.toISOString()) ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
+                      style={(expireDate  > todayDate.toISOString())  ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",

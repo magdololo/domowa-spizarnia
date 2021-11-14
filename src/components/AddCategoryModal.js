@@ -7,7 +7,7 @@ import * as React from "react";
 import {useState} from "react";
 import useStore from "../store/useStore";
 
-const AddModal=({open, close})=>{
+const AddCategoryModal=({open, close})=>{
     const [newCategoryName,setNewCategoryName] = useState('');
     const pickedImage = useStore(state=>state.pickedImage);
     const setPickedImage = useStore(state=>state.setPickedImage);
@@ -73,4 +73,4 @@ const AddModal=({open, close})=>{
    )
 }
 
-export default AddModal;
+export default AddCategoryModal;

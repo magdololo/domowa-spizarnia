@@ -14,18 +14,19 @@ import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 //import slugify from "slugify";
 
 
+const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
-const AddProductModal=({open, close, isAddProductFromListCategory})=>{
-
-    const [productName,setProductName] = useState('');
-    const addProduct= useStore(state => state.addProduct);
-    const [quantity, setQuantity] = useState(1);
+    const [productName, setProductName] = useState('');
+    const addProduct = useStore(state => state.addProduct);
+    const [quantity, setQuantity] = useState("1");
     const [value, setValue] = React.useState(new Date());
-    const [capacityValue, setCapacityValue] = React.useState(1);
+
+
+    const [capacityValue, setCapacityValue] = React.useState("1");
     const [unit, setUnit] = React.useState('gr');
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
-    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
+    const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
 
     const style = {
@@ -41,76 +42,93 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
         zIndex: 1200,
     };
 
-  const units = [
-      {
-          value: 'gr',
+    const units = [
+        {
+            value: 'gr',
 
-      },
-      {
-          value: 'ml',
+        },
+        {
+            value: 'ml',
 
-      },
-      {
-          value: 'kg',
-      },
-      {
-          value: 'szt',
-      },
-      {
-          value: 'l',
+        },
+        {
+            value: 'kg',
+        },
+        {
+            value: 'szt',
+        },
+        {
+            value: 'l',
 
-      }
+        }
 
-  ];
+    ];
 
-        let { categoryName } = useParams();
+    let {categoryName} = useParams();
 
     useEffect(() => {
         console.log(categoryName);
-        getCategoryByPath(categoryName).then(category => {
-            setCategory(category)
-        });
-    },[categoryName]);
+        let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
+        const initialState = {loading: false, categoryName: "", category: null};
+        if (categoryName) {
+            getCategoryByPath(categoryName).then(category => {
+                if (mounted) {
+                    setCategory(category);
+                }
+            });
+        } else {
+            return initialState;
+        }
+        return () => mounted = false;
+    }, [categoryName, selectedNewCategory, getCategoryByPath]);
     return (
         <>
-        <Modal sx={{zIndex: '1200'}}
-               open={open}
-               onClose={close}
-               aria-labelledby="modal-modal-title"
-               aria-describedby="modal-modal-description"
-        >
-            <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
-                    Dodaj nowy produkt
-                </Typography>
-                {isAddProductFromListCategory ?
-                    <Typography sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
-                   <AutocompleteCategoriesTitle canChangeCategory="" labelForAddModal="true"  setSelectedNewCategory={setSelectedNewCategory} editCategory={false} />
+            <Modal sx={{zIndex: '1200'}}
+                   open={open}
+                   onClose={close}
+                   aria-labelledby="modal-modal-title"
+                   aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h6"
+                                sx={{width: "80%", marginLeft: "10%"}}>
+                        Dodaj nowy produkt
                     </Typography>
-                :  <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                   <TextField
-                        sx={{width: "80%", marginLeft: "10%"}}
-                        id="outlined-read-only-input"
-                        label="Nazwa kategorii"
-                        value={category.title}
-                        InputProps={{
-                        readOnly: true,
-                    }}
-                   />
-                </Typography> }
-                {/*//<AutocompleteCategoriesTitle canChangeCategory="disabled" labelForAddModal="true" editCategory={category}/>}*/}
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" onChange={ e => setProductName(e.target.value)} sx={{width: "80%", marginLeft: "10%"}}/>
-                </Typography>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
-                    <TextField id="standard-basic" label="Pojemność" variant="standard" defaultValue={capacityValue} onChange={ e => setCapacityValue(e.target.value)} sx={{ width: "59%", paddingRight:"1%"}} sx={{width: "35%", marginLeft: "10%"}}/>
+                    {isAddProductFromListCategory ?
+                        <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                            <AutocompleteCategoriesTitle labelForAddModal="true"
+                                                         setSelectedNewCategory={setSelectedNewCategory}
+                                                         editCategory={false}/>
+                        </Box>
+                        :
+                        <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                            <TextField
+                                sx={{width: "80%", marginLeft: "10%"}}
+                                id="outlined-read-only-input"
+                                label="Nazwa kategorii"
+                                value={category.title}
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />
+                        </Box>}
+
+                    <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                        <TextField id="standard-basic" label="Nazwa produktu" variant="standard"
+                                   onChange={e => setProductName(e.target.value)}
+                                   sx={{width: "80%", marginLeft: "10%"}}/>
+                    </Box>
+                    <Box id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
+                        <TextField id="standard-basic" label="Pojemność" variant="standard"
+                                   onChange={e => setCapacityValue(e.target.value)}
+                                   sx={{width: "35%", marginLeft: "10%"}}/>
                         <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
-                            id="standard-select-currency"
+                                   id="standard-select-currency"
                                    select
-                            label="Jednostka"
-                            value={unit}
-                            onChange={ e => setUnit(e.target.value)}
-                            variant="standard"
+                                   label="Jednostka"
+                                   value={unit}
+                                   onChange={e => setUnit(e.target.value)}
+                                   variant="standard"
                         >
                             {units.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -119,53 +137,57 @@ const AddProductModal=({open, close, isAddProductFromListCategory})=>{
                             ))}
                         </TextField>
 
-                </Typography>
+                    </Box>
 
-                <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale} >
-                    <MobileDatePicker
+                    <Box>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
+                            <MobileDatePicker
 
-                        mask={'__.__.____'}
-                        label="Data ważności"
-                        value={value}
-                        onChange={(newValue) => {
-                            setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} sx={{width: "80%", marginLeft: "10%"}}/>}
-                    />
-                </LocalizationProvider>
-                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                <TextField
-                    sx={{width: "80%", marginLeft: "10%"}}
-                    id="outlined-number"
-                    label="Ilość"
-                    defaultValue={1}
-                    type="number"
-                    onChange={ e => setQuantity(e.target.value)}
-                    renderInput={(params) => <TextField {...params} />}
-                />
-                </Typography>
-                <Button sx={{ marginLeft: "10%"}} onClick={()=> {
+                                mask={'__.__.____'}
+                                label="Data ważności"
+                                value={value}
+                                onChange={(newValue) => {
+                                    setValue(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params}
+                                                                    sx={{width: "80%", marginLeft: "10%"}}/>}
+                            />
 
-                    addProduct({
-                        "name": productName,
-                        // "path": slugify(productName, "_"),
-                        // "categoryPath": categoryName ? categoryName : selectedNewCategory.path,
-                        "capacity": capacityValue,
-                         "unit": unit,
-                        "quantity": parseInt(quantity),
-                        "expireDate" : value,
-                        "categoryId":  categoryName ? category.id : selectedNewCategory.id
+                        </LocalizationProvider>
+                    </Box>
+                    <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                        <TextField
+                            sx={{width: "80%", marginLeft: "10%"}}
+                            id="outlined-number"
+                            label="Ilość"
+                            defaultValue={1}
+                            type="number"
+                            onChange={e => setQuantity(e.target.value)}
+
+                        />
+                    </Box>
+                    <Button sx={{marginLeft: "10%"}} onClick={() => {
+
+                        addProduct({
+                            "name": productName,
+                            // "path": slugify(productName, "_"),
+                            // "categoryPath": categoryName ? categoryName : selectedNewCategory.path,
+                            "capacity": parseInt(capacityValue),
+                            "unit": unit,
+                            "quantity": parseInt(quantity),
+                            "expireDate": value,
+                            "categoryId": categoryName ? category.id : selectedNewCategory.id
 
 
-                    });
+                        });
 
-                    close();
+                        close();
 
-                }}>Dodaj produkt</Button>
-            </Box>
+                    }}>Dodaj produkt</Button>
+                </Box>
 
-        </Modal>
-     </>
+            </Modal>
+        </>
     )
 }
 
