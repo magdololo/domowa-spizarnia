@@ -37,16 +37,16 @@
       "id": 6
     },
     {
-      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "title": "paula",
-      "path": "paula",
-      "id": 8
-    },
-    {
       "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "title": "jaja mleko sery",
       "path": "jaja_mleko_sery",
       "id": 9
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "makarony",
+      "path": "makarony",
+      "id": 10
     }
   ],
   "products": [
@@ -145,6 +145,24 @@
       "quantity": 7,
       "expireDate": "2021-11-14T11:07:07.648Z",
       "categoryId": 3
+    },
+    {
+      "id": 19,
+      "name": "proszek do pieczenia",
+      "capacity": 10,
+      "unit": "gr",
+      "quantity": 3,
+      "expireDate": "2021-11-30T15:17:58.000Z",
+      "categoryId": 2
+    },
+    {
+      "name": "Kasztanki",
+      "capacity": 50,
+      "unit": "gr",
+      "quantity": 10,
+      "expireDate": "2021-11-16T15:26:31.166Z",
+      "categoryId": 3,
+      "id": 20
     }
   ],
   "images": [

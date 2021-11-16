@@ -5,6 +5,8 @@ import CategoryList from "./pages/CategoryList";
 import CategoryDetail from "./pages/CategoryDetail";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import SignUp from "./pages/SignUp";
 import "./App.css";
 
 
@@ -21,10 +23,10 @@ export default function App() {
                             <ProductDetail />
                         </Route>
                         <Route path="/forgotPassword">
-                            <Login/>
+                            <ForgotPassword/>
                         </Route>
                         <Route path="/signUp">
-                            <Login/>
+                            <SignUp/>
                         </Route>
                         <Route path="/login">
                             <Login/>

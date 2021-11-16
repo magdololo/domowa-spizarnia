@@ -37,7 +37,9 @@ const Login = () => {
 
               <CssBaseline />
               <Box>
-                  <Box sx={{ width:'90vw', height: '30vh' ,backgroundImage: 'url("/images/domowa_spizarnia.jpg")'}} />
+                  <Box sx={{ width:'100vw', height: '40vh' }}>
+                      <img src= "/images/domowa_spizarnia.jpg" style={{width: "100%", height: "100%", objectFit: 'contain'}}/>
+                  </Box>
 
                   <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto'}}>
                     <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center"}}>
