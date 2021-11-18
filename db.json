@@ -47,6 +47,18 @@
       "title": "makarony",
       "path": "makarony",
       "id": 10
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "Warzywka 🥕",
+      "path": "Warzywka",
+      "id": 11
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "🍫🤪",
+      "path": "",
+      "id": 12
     }
   ],
   "products": [
@@ -156,13 +168,73 @@
       "categoryId": 2
     },
     {
+      "id": 20,
       "name": "Kasztanki",
       "capacity": 50,
       "unit": "gr",
       "quantity": 10,
-      "expireDate": "2021-11-16T15:26:31.166Z",
+      "expireDate": "2022-12-31T15:26:31.000Z",
+      "categoryId": 3
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 14,
+      "expireDate": "2021-11-23T15:28:10.000Z",
+      "id": 21
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 13,
+      "expireDate": "2021-11-28T15:29:46.000Z",
       "categoryId": 3,
-      "id": 20
+      "id": 22
+    },
+    {
+      "id": 23,
+      "name": "Ciasto czekoladowe 🍫",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 13,
+      "expireDate": "2021-11-16T15:30:44.176Z",
+      "categoryId": 2
+    },
+    {
+      "name": "Mąka biała",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 15,
+      "expireDate": "2021-11-22T15:32:03.000Z",
+      "categoryId": 4,
+      "id": 24
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-16T15:34:21.896Z",
+      "id": 25
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 12345,
+      "expireDate": "2021-11-25T15:35:44.000Z",
+      "id": 26
+    },
+    {
+      "name": "Jabłko czerwone",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1456,
+      "expireDate": "2021-11-16T15:36:21.658Z",
+      "categoryId": 11,
+      "id": 27
     }
   ],
   "images": [

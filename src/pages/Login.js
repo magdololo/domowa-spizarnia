@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useForm, Controller } from "react-hook-form";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from "@mui/material/Box";
 import {Button, Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput,} from "@mui/material";
@@ -6,10 +7,14 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
+import useStore from "../store/useStore";
 
 
 
 const Login = () => {
+
+    const logIn= useStore(state=>state.logIn);
+
     const [values, setValues] = React.useState({
 
         password: '',
@@ -31,6 +36,35 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    const { control, handleSubmit,errors: fieldsErrors, reset  } = useForm({
+        defaultValues: {
+            password: '',
+            repeatPassword:'',
+            email: '',
+            showPassword: false,
+        }
+    });
+    const onSubmit = data => console.log(data);
+    const onSubmitLogin = async data => {
+        console.log(data);
+         await logIn(data.email, data.password);
+        // const response = await UserService.signIn(data);
+        // const responseData = await response.json();
+        // if (response.ok) setTokenAndConfigureProfile(responseData.token);
+        // else {
+        //     if (responseData.non_field_errors) setGeneralLoginError(responseData.non_field_errors[0]);
+        //     reset(
+        //         {
+        //             email: '',
+        //             password: ''
+        //         },
+        //         {
+        //             errors: true,
+        //             dirtyFields: true
+        //         }
+        //     );
+        // }
+    };
 
   return (
       <>
@@ -42,8 +76,8 @@ const Login = () => {
                   </Box>
 
                   <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto'}}>
-                    <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center"}}>
-
+                    {/*<div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center"}}>*/}
+                        <form onSubmit={handleSubmit(onSubmitLogin)} style={{display: "flex",flexWrap: 'wrap', justifyContent: "center"}}>
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
                             <OutlinedInput
@@ -80,7 +114,8 @@ const Login = () => {
                         </FormControl>
                         <Button sx={{ m: 1, width: '14ch' }} variant="contained" onClick={()=>alert("logowanie")}>Zaloguj się</Button>
 
-                    </div>
+                    </form>
+                  {/*</div>*/}
                   </Box>
                   <Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>
                   <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>

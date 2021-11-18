@@ -20,7 +20,7 @@ const ForgotPassword = () => {
             <CssBaseline />
             <Box>
                 <Box sx={{ width:'100vw', height: '40vh' }}>
-                    <img src= "/images/domowa_spizarnia.jpg" style={{width: "100%", height: "100%", objectFit: 'contain'}}/>
+                    <img src= "/images/domowa_spizarnia.jpg" style={{width: "100%", height: "100%", objectFit: 'contain'}} alt="zdjęcie spiżarni"/>
                 </Box>
                 <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'.8em auto'}}>
                     <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center", marginTop: "2em", color: "gray"}}>
