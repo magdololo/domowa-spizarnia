@@ -36,13 +36,18 @@ const useStyles = makeStyles(theme => ({
 
 const FormSignUp = () => {
     const classes = useStyles();
-    const {handleSubmit, control, watch} = useForm();
+    const {handleSubmit, control, watch, reset} = useForm();
     const password = useRef({});
     password.current = watch("password", "");
 
 
     const onSubmit = data => {
         console.log(data);//zwraca object z wlasciwoscia email i password
+        reset({
+            email: "",
+            password: "",
+            confirmPassword: ""
+        });
     };
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -170,7 +175,7 @@ const FormSignUp = () => {
             />
 
             <div>
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" >
                     Załóż konto
                 </Button>
             </div>
