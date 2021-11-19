@@ -235,6 +235,69 @@
       "expireDate": "2021-11-16T15:36:21.658Z",
       "categoryId": 11,
       "id": 27
+    },
+    {
+      "name": "mleko",
+      "capacity": 1,
+      "unit": "l",
+      "quantity": 1,
+      "expireDate": "2021-11-28T13:28:22.000Z",
+      "categoryId": 5,
+      "id": 28
+    },
+    {
+      "name": " vvc cvcbc",
+      "capacity": 9,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T13:29:40.000Z",
+      "categoryId": 5,
+      "id": 29
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-18T13:54:39.902Z",
+      "categoryId": 4,
+      "id": 30
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-18T13:59:12.982Z",
+      "categoryId": 4,
+      "id": 31
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-18T14:40:42.908Z",
+      "categoryId": 4,
+      "id": 32
+    },
+    {
+      "name": "",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-18T14:44:22.356Z",
+      "categoryId": 4,
+      "id": 33
+    },
+    {
+      "name": "kolor",
+      "capacity": 12,
+      "unit": "gr",
+      "quantity": 3,
+      "expireDate": "2021-11-26T09:57:58.000Z",
+      "categoryId": 4,
+      "id": 34
     }
   ],
   "images": [

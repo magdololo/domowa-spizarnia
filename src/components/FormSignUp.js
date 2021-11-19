@@ -64,7 +64,7 @@ const FormSignUp = () => {
     };
 
     return (
-        <form className={classes.root} onSubmit={handleSubmit(onSubmit)} noValidate id="form" name="form" method="post">
+        <form className={classes.root} onSubmit={handleSubmit(onSubmit)} noValidate>
             <Controller
                 name="email"
                 control={control}
