@@ -17,6 +17,17 @@ const EditCategoryImageList =()=> {
     const setEditCategory = useStore(state=>state.setEditCategory);
     const setEditCategoryModalOpen = useStore(state=>state.setEditCategoryModalOpen);
 
+    if (categoryList.length >= 2) {
+        categoryList.sort((a, b) => {
+            a = a.title.toLowerCase();
+            b = b.title.toLowerCase();
+
+            if (a < b) return -1;//keep a b
+            if (a > b) return 1;//switch places b a
+            return 0
+        })
+
+    }
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
     <ImageList cols={minWidth600 ? 3 : 2} >

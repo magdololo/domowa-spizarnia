@@ -1,4 +1,4 @@
-import {Button, Modal, TextField} from "@mui/material";
+import {Button, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -12,13 +12,14 @@ import slugify from "slugify";
 
 
   const EditCategoryModal =()=>{
-      const setEditModalOpen = useStore(state=>state.setEditModalOpen);
+      const setEditModalOpen = useStore(state=>state.setEditCategoryModalOpen);
       const updateCategory = useStore(state=>state.updateCategory);
       const [newCategoryName,setNewCategoryName] = useState('');
       const pickedImage = useStore(state=>state.pickedImage);//empty string
-     const  editModalOpen = useStore(state=>state.editModalOpen);
+      const  editModalOpen = useStore(state=>state.editModalOpen);
       const editCategory = useStore(state=>state.editCategory);// undefined
       const [localImage, setLocalImage] = useState('');
+      const maxWidth400 = useMediaQuery('(max-width:400px)');
       const handleClose = () => {
           setEditModalOpen(false);
       }
@@ -45,7 +46,7 @@ import slugify from "slugify";
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: "75%",
+          width: maxWidth400 ? 340 : 400,
           backgroundColor: '#fff',
           border: '2px solid #000',
           boxShadow: 24,
@@ -54,7 +55,7 @@ import slugify from "slugify";
       }
 
       return(
-        <Modal sx={{zIndex: '1200'}}
+        <Modal sx={{zIndex: '200'}}
              open={editModalOpen}
              onClose={handleClose}
              aria-labelledby="modal-modal-title"
@@ -99,3 +100,4 @@ import slugify from "slugify";
   }
 
   export default EditCategoryModal;
+//TODO: sort categories after edit

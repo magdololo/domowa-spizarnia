@@ -18,10 +18,12 @@ const createUsersSlice = (set, get) => ({
     addUser: async (newUser)=>{
         try{
             let createdUser = await UserService.createNewUser(newUser.email,newUser.password);
+            console.log('createdUser')
+            console.log(createdUser)
             set(() => ({
                 loggedInUser: createdUser
             }))
-            return "User Added"
+            return ""
 
         } catch (error){
             console.log(error)

@@ -20,6 +20,18 @@ import AppBarBottom from "./AppBarBottom";
     const handleClose = () => setOpen(false);
     const minWidth600 = useMediaQuery('(min-width:600px)');
 
+           if (categoryList.length >= 2) {
+               categoryList.sort((a, b) => {
+                   a = a.title.toLowerCase();
+                   b = b.title.toLowerCase();
+
+                   if (a < b) return -1;//keep a b
+                   if (a > b) return 1;//switch places b a
+                   return 0
+               })
+
+           }
+
 
 
            return (

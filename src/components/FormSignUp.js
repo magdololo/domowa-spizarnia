@@ -7,6 +7,7 @@ import {Alert, InputAdornment} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import useStore from "../store/useStore";
+import {useHistory} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -42,8 +43,7 @@ const FormSignUp = () => {
     const password = useRef({});
     password.current = watch("password", "");
     const addUser = useStore(state => state.addUser);
-    const users = useStore(state => state.users);
-
+    let history = useHistory();
     const [errorMessage,setErrorMessage] = useState('');
 
     const onSubmit = async data => {
@@ -52,7 +52,10 @@ const FormSignUp = () => {
             "email": data.email,
             "password": data.password
         });
-        if (message !== '') setErrorMessage(message);
+        if (message !== '') setErrorMessage(message)
+        else {
+            history.push("/");
+        }
         reset({
             email: "",
             password: "",

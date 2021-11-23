@@ -12,6 +12,7 @@ const AddCategoryModal=({open, close})=>{
     const pickedImage = useStore(state=>state.pickedImage);
     const setPickedImage = useStore(state=>state.setPickedImage);
     const addCategory = useStore(state => state.addCategory);
+    const categories = useStore(state => state.categories);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const style = {
         position: 'absolute',
@@ -25,6 +26,22 @@ const AddCategoryModal=({open, close})=>{
         p: 4,
         zIndex: 1200,
     }
+
+
+        console.log(categories)
+        if (categories.length >= 2) {
+            categories.sort((a, b) => {
+                a = a.title.toLowerCase();
+                b = b.title.toLowerCase();
+
+                if (a < b) return -1;//keep a b
+                if (a > b) return 1;//switch places b a
+                return 0
+            })
+
+        }
+
+
    return (
        <Modal sx={{zIndex: '200'}}
               open={open}
@@ -60,7 +77,6 @@ const AddCategoryModal=({open, close})=>{
                        "title": newCategoryName,
                        "path": slugify(newCategoryName, "_"),
                    });
-
                    close();
                    setPickedImage('');
                }}>Dodaj kategorię</Button>

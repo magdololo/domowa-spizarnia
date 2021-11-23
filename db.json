@@ -7,15 +7,15 @@
       "id": 1
     },
     {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "desery_i_pomoce_cukiernicze",
-      "title": "desery i pomoce cukiernicze",
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "path": "ahtrew",
+      "title": "Ahtrew",
       "id": 2
     },
     {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "słodycze",
-      "title": "słodycze",
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "path": "slodycze123",
+      "title": "Słodycze123",
       "id": 3
     },
     {
@@ -38,14 +38,14 @@
     },
     {
       "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "jaja mleko sery",
-      "path": "jaja_mleko_sery",
+      "path": "njuytr",
+      "title": "Njuytr",
       "id": 9
     },
     {
       "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "makarony",
-      "path": "makarony",
+      "path": "wisnie",
+      "title": "Wisnie",
       "id": 10
     },
     {
@@ -59,6 +59,18 @@
       "title": "🍫🤪",
       "path": "",
       "id": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "path": "mleko_i_jaja",
+      "title": "Mleko i jaja",
+      "id": 13
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "mrożonki",
+      "path": "mrozonki",
+      "id": 14
     }
   ],
   "products": [
@@ -355,7 +367,7 @@
       "id": 1
     },
     {
-      "email": "dupa1@gmail.com",
+      "email": "",
       "password": "magda12345",
       "id": 2
     },
@@ -363,6 +375,46 @@
       "email": "dupek@gmail.com",
       "password": "mag12345",
       "id": 3
+    },
+    {
+      "email": "dupka1@gmail.com",
+      "password": "dupa12345",
+      "id": 4
+    },
+    {
+      "email": "koteczek@gmail.com",
+      "password": "kot12345",
+      "id": 5
+    },
+    {
+      "email": "a@a.pl",
+      "password": "mag12345",
+      "id": 6
+    },
+    {
+      "email": "b@b.pl",
+      "password": "mag12345",
+      "id": 7
+    },
+    {
+      "email": "piesek@gmail.com",
+      "password": "pies12345",
+      "id": 8
+    },
+    {
+      "email": "punio@gmail.com",
+      "password": "punio1234",
+      "id": 9
+    },
+    {
+      "email": "c@c.pl",
+      "password": "mag12345",
+      "id": 10
+    },
+    {
+      "email": "d@d.pl",
+      "password": "mag12345",
+      "id": 11
     }
   ]
 }

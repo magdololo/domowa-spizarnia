@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import CategoriesService from "../services/CategoriesService";
+import UserService from "../services/UserService";
 
 const createCategorySlice = (set, get) => ({
     categories: [],
@@ -26,15 +27,9 @@ const createCategorySlice = (set, get) => ({
     addCategory: async (newCategory) => {
         console.log("new category")
         console.log(newCategory)
+        let addedCategory = await CategoriesService.addNewCategory(newCategory);
+        console.log(addedCategory)
 
-
-        axios.post('http://192.168.1.134:4000/categories', newCategory).then(resp => {
-            console.log(resp.data);//zwraca obiekt newCategory
-            let id = resp.data.id;
-            newCategory.id = id;
-        }).catch(error => {
-            console.log(error);
-        });
 
         set((state) => ({
             categories: [
@@ -55,28 +50,16 @@ const createCategorySlice = (set, get) => ({
 
     },
     updateCategory: async (id, path, url, title) => {
-        axios.put('http://192.168.1.134:4000/categories/' + id,
-            {
-                url: url,
-                path: path,
-                title: title
-            }).then(resp => {
-
-            let editCategory = resp.data;
-            console.log(editCategory);
-            set((state) => {
-                    let categories = state.categories.filter(editCategory => editCategory.id !== id);
-                    categories.push(editCategory)
-                    return {
-                        categories: categories
-                    }
+        let updateCategory = await CategoriesService.updateCategory(id, path, url, title)
+        set((state) => {
+                let categories = state.categories.filter(editCategory => editCategory.id !== id);
+                categories.push(updateCategory)
+                return {
+                    categories: categories,
+                    editCategory: {}
                 }
-            )
-        }).catch(error => {
-            console.log(error);
-        });
-
-
+            }
+        )
     },
     deleteCategory: async (id) => {
         console.log(id);
