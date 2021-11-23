@@ -10,19 +10,16 @@ import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 import {useParams} from "react-router-dom";
+import {useForm, Controller} from "react-hook-form";
 
 const EditProductModal =()=>{
 
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
-    const [newProductName,setNewProductName] = useState('');
-    const [newCapacity, setNewCapacity] = useState(1);
-    const [newQuantity, setNewQuantity] = useState(1);
-    const [newExpireDate, setNewExpireDate] = useState( "");
-    const [unit, setUnit] = useState('gr');
+    const [newEditProduct, setNewEditProduct] = useState({});
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
-    const [category, setCategory] = React.useState("");
+    const [editCategory, setEditCategory] = React.useState("");
     console.log(selectedNewCategory);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
@@ -31,15 +28,11 @@ const EditProductModal =()=>{
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
-    useEffect(()=>{
-        console.log(editProduct.name)//po wybraniu categorii tytul
-        setNewProductName(editProduct.name);
-        setNewCapacity(editProduct.capacity);
-        setNewQuantity(editProduct.quantity);
-        setNewExpireDate(editProduct.expireDate);
 
-    }, [editProduct]);
-    console.log(editProduct);
+
+
+console.log(newEditProduct);
+
 
     const units = [
         {
@@ -81,14 +74,34 @@ const EditProductModal =()=>{
     useEffect(() => {
         console.log(categoryName);
         getCategoryByPath(categoryName).then(category => {
-            setCategory(category)
+            setEditCategory(category)
         });
-    },[categoryName, getCategoryByPath]);
-    console.log("name_path_id_newId")
-    console.log(categoryName);
-    console.log(category.path);
-    console.log(category.id);
-    console.log(selectedNewCategory.id);
+    },[categoryName, getCategoryByPath,]);
+
+    const { handleSubmit, control , setValue} = useForm( {mode: 'onBlur'});
+    useEffect(()=>{
+            //setNewEditProduct(editProduct);
+            setValue('newProductName', editProduct.name);
+            setValue('newCapacity', editProduct.capacity);
+            setValue('newExpireDate', editProduct.expireDate);
+            setValue('newQuantity', editProduct.quantity);
+            setValue('newUnit', editProduct.unit);
+            setValue('newCategoryName', editCategory.title);
+        console.log("use effect setValue")
+    }, [editProduct]);
+
+    const onSubmit = async (data) => {
+        console.log('dane edit product');
+        console.log(data);
+        let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : editCategory.id;
+        await updateProduct(editProduct.id,data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory);
+        handleClose();
+    };
+
+    const categoryList = useStore(state => state.categories);
+    let categoryListWithoutEditCategory = categoryList.filter(category => category.title !== editCategory.title);
+    console.log(categoryList);
+    console.log(categoryListWithoutEditCategory);
 
     return(
         <>
@@ -99,24 +112,66 @@ const EditProductModal =()=>{
                aria-describedby="modal-modal-description"
 
         >
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
                     Edytuj produkt
                 </Typography>
                 <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
-                <AutocompleteCategoriesTitle setSelectedNewCategory={setSelectedNewCategory} editCategory={category}/> {/*canChangeCategory={false}*/}
+                    <Controller
+                        name="newCategoryName"
+                        control={control}
+                        defaultValue={newEditProduct ? editCategory.title: ""}
+                        render={({field: {onChange, value}, fieldState: {error}}) => (
+                        <AutocompleteCategoriesTitle
+                            setSelectedNewCategory={setSelectedNewCategory}
+                            editCategory={editCategory}
+                            onChange= {onChange}
+                            value={value}
+
+                            />
+                            )}
+                    />
                 </Box>
                 <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField id="standard-basic" label="Nazwa produktu" variant="standard" value={newProductName} onChange={ e => setNewProductName(e.target.value)} sx={{width: "80%", marginLeft: "10%"}}/>
+                    <Controller
+                        name="newProductName"
+                        control={control}
+                        defaultValue={newEditProduct ? newEditProduct.name : ''}
+                        render={({field: {onChange, value}, fieldState: {error}}) => (
+                        <TextField sx={{width: "80%", marginLeft: "10%"}}
+                            id="standard-basic"
+                            label="Nazwa produktu"
+                            variant="outlined"
+                            value={value}
+                            onChange={onChange} />
+                        )}/>
                 </Box>
                 <Box id="modal-modal-description"  sx={{mt: 2, mb: 3, width: "100%"}}>
-                    <TextField id="standard-basic" label="Pojemność" variant="standard" value={newCapacity} onChange={ e => setNewCapacity(e.target.value)} sx={{width: "35%", marginLeft: "10%"}}/>
+                    <Controller
+                        name="newCapacity"
+                        control={control}
+                        defaultValue={newEditProduct ? newEditProduct.capacity : ""}
+                        render={({field: {onChange, value}, fieldState: {error}}) => (
+                    <TextField sx={{width: "35%", marginLeft: "10%"}}
+                        id="standard-basic"
+                        label="Pojemność"
+                        variant="standard"
+                        value={value}
+                        onChange={onChange} />
+                        )}/>
+                    <Controller
+                    name="newUnit"
+                    control={control}
+                    defaultValue={newEditProduct ? newEditProduct.unit: ""}
+                    render={({field: {onChange, value}, fieldState: {error}}) => (
                     <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                id="standard-select-currency"
                                select
                                label="Jednostka"
-                               value={unit}
-                               onChange={ e => setUnit(e.target.value)}
+                               value={value}
+                               onChange={onChange}
                                variant="standard"
                     >
                         {units.map((option) => (
@@ -125,42 +180,45 @@ const EditProductModal =()=>{
                             </MenuItem>
                         ))}
                     </TextField>
-
+                    )}/>
                 </Box>
                 <Box>
-                <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
+                    <Controller
+                        name="newExpireDate"
+                        control={control}
+                        defaultValue={newEditProduct ? newEditProduct.expireDate : ""}
+                        render={({field: {onChange, value}, fieldState: {error}}) => (
+                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
                     <MobileDatePicker
                         mask={'__.__.____'}
                         label="Data ważności"
-                        value={newExpireDate}
-                        onChange={(newExpireDate) => {
-                            setNewExpireDate(newExpireDate);
-                        }}
+                        value={value}
+                        onChange={onChange}
                         renderInput={(params) => <TextField {...params}  sx={{width: "80%", marginLeft: "10%"}}/>}
                     />
-
-                </LocalizationProvider>
-                </Box>
-                <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                    <TextField
-                        sx={{width: "80%", marginLeft: "10%"}}
-                        id="outlined-number"
-                        label="Ilość"
-                        value={newQuantity}
-                        type="number"
-                        onChange={ e => setNewQuantity(e.target.value)}
-
+                    </LocalizationProvider>
+                        )}
                     />
                 </Box>
-                <Button sx={{ marginLeft: "10%"}} onClick={(e)=> {
-                    e.preventDefault();
-                    let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : category.id;
-                    updateProduct(editProduct.id ,newProductName, newCapacity, unit, newQuantity, newExpireDate, idNewCategory);
-                    handleClose();
-
-                }}>Edytuj produkt</Button>
+                <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                    <Controller
+                        name="newQuantity"
+                        control={control}
+                        defaultValue={newEditProduct ? newEditProduct.quantity : ""}
+                        render={({field: {onChange, value}, fieldState: {error}}) => (
+                    <TextField sx={{width: "80%", marginLeft: "10%"}}
+                        id="outlined-number"
+                        label="Ilość"
+                        value={value}
+                        type="number"
+                        onChange={onChange}
+                    />
+                        )}
+                    />
+                </Box>
+                <Button sx={{ marginLeft: "10%"}} type="submit" variant="contained" color="primary" >Edytuj produkt</Button>
             </Box>
-
+            </form>
         </Modal>
         </>
     )

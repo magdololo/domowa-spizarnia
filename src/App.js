@@ -8,16 +8,19 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import SignUp from "./pages/SignUp";
 import "./App.css";
+import useStore from "./store/useStore";
 
 
 export default function App() {
+
+    const loggedInUser = useStore(state=> state.loggedInUser);
 
 
     return (
         <>
 
             <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
-
+            {loggedInUser !== null?
                     <Switch>
                         <Route path="/:categoryName/:productName">
                             <ProductDetail />
@@ -38,10 +41,10 @@ export default function App() {
                         <Route path="/">
                             <CategoryList />
                         </Route>
-
-
-
                     </Switch>
+            :
+                <Login />
+            }
             {/*    </CSSTransition>*/}
             {/*</TransitionGroup>*/}
 

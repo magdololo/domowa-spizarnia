@@ -17,24 +17,13 @@ import {useForm, Controller} from "react-hook-form";
 
 const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
-
-
-
-    const [productName, setProductName] = useState('');
     const addProduct = useStore(state => state.addProduct);
-    const [quantity, setQuantity] = useState("1");
-
-
-
-    const [capacityValue, setCapacityValue] = React.useState("1");
-    const [unit, setUnit] = React.useState('gr');
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
 
     const [date, setDate] = React.useState(new Date());;
-    const { setValue } = useForm();
     const style = {
         position: 'absolute',
         top: '50%',
@@ -90,16 +79,17 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     const { handleSubmit, control } = useForm( {defaultValues: {
             productName: "",
-            capacity: "",
-            unit: "",
-            quantity: "",
-            expireDate: "",
+            capacity: "100",
+            unit: "gr",
+            quantity: "1",
+            expireDate: date,
+            categoryName: categoryName ? categoryName : "",
             categoryId: categoryName ? category.id : selectedNewCategory.id
         }
     });
 
     const onSubmit = data => {
-        console.log(data + "dane dodaj product");
+        console.log(`dane dodaj product = ${data}`);
         console.log(data)
         addProduct({
             "name": data.productName,
@@ -126,50 +116,50 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                         Dodaj nowy produkt
                     </Typography>
 
-                    {/*{isAddProductFromListCategory ?*/}
-                    {/*    <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>*/}
-                    {/*        <Controller*/}
-                    {/*            name="categoryName"*/}
-                    {/*            control={control}*/}
-                    {/*            defaultValue=""*/}
-                    {/*            render={({field: {onChange, value}, fieldState: {error}}) => (*/}
+                    {isAddProductFromListCategory ?
+                        <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                            <Controller
+                                name="categoryName"
+                                control={control}
+                                defaultValue=""
+                                render={({field: {onChange, value}, fieldState: {error}}) => (
 
-                    {/*                <AutocompleteCategoriesTitle*/}
-                    {/*                    labelForAddModal="true"*/}
-                    {/*                    label="categoryName"*/}
-                    {/*                    value={value}*/}
-                    {/*                    onChange={onChange}*/}
-                    {/*                    error={!!error}*/}
-                    {/*                    helperText={error ? error.message : null}*/}
-                    {/*                    type= "text"*/}
-                    {/*                    setSelectedNewCategory={setSelectedNewCategory}*/}
-                    {/*                    editCategory={false}/>*/}
+                                    <AutocompleteCategoriesTitle
+                                        labelForAddModal="true"
+                                        label="Nazwa kategorii"
+                                        value={value}
+                                        onChange={onChange}
+                                        error={!!error}
+                                        helperText={error ? error.message : null}
+                                        type= "text"
+                                        setSelectedNewCategory={setSelectedNewCategory}
+                                        editCategory={false}/>
 
 
-                    {/*            )} />*/}
-                    {/*    </Box>*/}
-                    {/*    :*/}
-                    {/*    <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>*/}
-                    {/*    <Controller*/}
-                    {/*        name="categoryName"*/}
-                    {/*        control={control}*/}
-                    {/*        defaultValue={category.title}*/}
-                    {/*        render={({field: {onChange, value}, fieldState: {error}}) => (*/}
-                    {/*            <TextField*/}
-                    {/*                sx={{width: "80%", marginLeft: "10%"}}*/}
-                    {/*                //id="outlined-read-only-input"*/}
-                    {/*                label="categoryName"*/}
-                    {/*                value={category.title}*/}
-                    {/*                InputProps={{*/}
-                    {/*                    readOnly: true,*/}
-                    {/*                }}*/}
-                    {/*                onChange={onChange}*/}
-                    {/*                error={!!error}*/}
-                    {/*                helperText={error ? error.message : null}*/}
-                    {/*                type= "text"*/}
-                    {/*            />*/}
-                    {/*         )} />*/}
-                    {/*    </Box>}*/}
+                                )} />
+                        </Box>
+                        :
+                        <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
+                        <Controller
+                            name="categoryName"
+                            control={control}
+                            defaultValue={category.title}
+                            render={({field: {onChange, value}, fieldState: {error}}) => (
+                                <TextField
+                                    sx={{width: "80%", marginLeft: "10%"}}
+                                    //id="outlined-read-only-input"
+                                    label="Nazwa kategorii"
+                                    value={value}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                    error={!!error}
+                                    helperText={error ? error.message : null}
+                                    type= "text"
+                                    disabled={true}
+                                />
+                             )} />
+                        </Box>}
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
                         <Controller
                             name="productName"
@@ -179,7 +169,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                //
                             <TextField sx={{width: "80%", marginLeft: "10%"}}
                                // id="standard-basic"
-                                label="productName"
+                                label="Nazwa produktu"
                                 variant="standard"
                                        value={value}
                                 onChange={onChange}
@@ -196,7 +186,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
                                             // id="standard-basic"
-                                             label="capacity"
+                                             label="Pojemność"
                                              variant="standard"
                                              value={value}
                                              onChange={onChange}
@@ -214,7 +204,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                    //id="standard-select-currency"
                                    select
-                                   label="unit"
+                                   label="Jednostka"
                                            onChange={onChange}
                                            value={value}
                                            error={!!error}
@@ -245,8 +235,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 <MobileDatePicker
 
                                 mask={'__.__.____'}
-                                label="expireDate"
-                                value={date}
+                                label="Data ważności"
+                                value={value}
                                 onChange={onChange}
                                 error={!!error}
                                 helperText={error ? error.message : null}

@@ -4,7 +4,7 @@ import axios from "axios";
 const createCategorySlice = (set, get) => ({
     categories: [],
     categoriesFetched: false,
-    fetch: async categoriesFetch => {
+    fetch: async () => {
         const response = await fetch('http://192.168.1.134:4000/categories');
         set({categories: await response.json()})
     },

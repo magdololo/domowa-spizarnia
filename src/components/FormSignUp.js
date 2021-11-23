@@ -1,11 +1,13 @@
-import React, { useRef }  from 'react';
+import React, {useRef, useState} from 'react';
 import {makeStyles} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {useForm, Controller} from 'react-hook-form';
-import { InputAdornment} from "@mui/material";
+import {Alert, InputAdornment} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import useStore from "../store/useStore";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,16 +41,25 @@ const FormSignUp = () => {
     const {handleSubmit, control, watch, reset} = useForm();
     const password = useRef({});
     password.current = watch("password", "");
+    const addUser = useStore(state => state.addUser);
+    const users = useStore(state => state.users);
 
+    const [errorMessage,setErrorMessage] = useState('');
 
-    const onSubmit = data => {
-        console.log(data);//zwraca object z wlasciwoscia email i password
+    const onSubmit = async data => {
+
+        let message = await addUser ({
+            "email": data.email,
+            "password": data.password
+        });
+        if (message !== '') setErrorMessage(message);
         reset({
             email: "",
             password: "",
             confirmPassword: ""
         });
     };
+
     const [values, setValues] = React.useState({
         showPassword: false,
     });
@@ -62,6 +73,8 @@ const FormSignUp = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+
 
     return (
         <form className={classes.root} onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -88,6 +101,7 @@ const FormSignUp = () => {
                             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                         message: 'Nieprawidłowy email',
                     },
+
                 }}
             />
             <Controller
@@ -178,6 +192,7 @@ const FormSignUp = () => {
                 <Button type="submit" variant="contained" color="primary" >
                     Załóż konto
                 </Button>
+                {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
             </div>
         </form>
     );

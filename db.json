@@ -199,17 +199,16 @@
       "capacity": 1,
       "unit": "gr",
       "quantity": 13,
-      "expireDate": "2021-11-16T15:30:44.176Z",
-      "categoryId": 2
+      "expireDate": "2021-11-16T15:30:44.176Z"
     },
     {
+      "id": 24,
       "name": "Mąka biała",
       "capacity": 1,
       "unit": "kg",
       "quantity": 15,
       "expireDate": "2021-11-22T15:32:03.000Z",
-      "categoryId": 4,
-      "id": 24
+      "categoryId": 1
     },
     {
       "name": "",
@@ -228,13 +227,12 @@
       "id": 26
     },
     {
+      "id": 27,
       "name": "Jabłko czerwone",
       "capacity": 1,
       "unit": "gr",
       "quantity": 1456,
-      "expireDate": "2021-11-16T15:36:21.658Z",
-      "categoryId": 11,
-      "id": 27
+      "expireDate": "2021-11-16T15:36:21.658Z"
     },
     {
       "name": "mleko",
@@ -255,13 +253,12 @@
       "id": 29
     },
     {
-      "name": "",
+      "id": 30,
+      "name": "Mąka biała",
       "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-18T13:54:39.902Z",
-      "categoryId": 4,
-      "id": 30
+      "unit": "kg",
+      "quantity": 15,
+      "expireDate": "2021-11-26T15:32:03.000Z"
     },
     {
       "name": "",
@@ -273,31 +270,56 @@
       "id": 31
     },
     {
-      "name": "",
+      "id": 32,
+      "name": "dupat",
       "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-18T14:40:42.908Z",
-      "categoryId": 4,
-      "id": 32
-    },
-    {
-      "name": "",
-      "capacity": 1,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-18T14:44:22.356Z",
-      "categoryId": 4,
-      "id": 33
-    },
-    {
-      "name": "kolor",
-      "capacity": 12,
       "unit": "gr",
       "quantity": 3,
-      "expireDate": "2021-11-26T09:57:58.000Z",
-      "categoryId": 4,
-      "id": 34
+      "expireDate": "2021-11-26T12:13:33.000Z",
+      "categoryId": 1
+    },
+    {
+      "id": 33,
+      "name": "jajko123",
+      "capacity": 100,
+      "unit": "ml",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:44:22.000Z",
+      "categoryId": 2
+    },
+    {
+      "id": 34,
+      "name": "kolor123",
+      "capacity": 120,
+      "unit": "ml",
+      "quantity": 5,
+      "expireDate": "2021-11-27T09:57:58.000Z"
+    },
+    {
+      "id": 35,
+      "name": "nmnmn",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-19T10:53:36.393Z",
+      "categoryId": 10
+    },
+    {
+      "id": 36,
+      "name": "lubella nitki",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 6,
+      "expireDate": "2021-11-30T10:57:00.000Z",
+      "categoryId": 10
+    },
+    {
+      "id": 37,
+      "name": "boiuuu",
+      "capacity": 102888,
+      "unit": "ml",
+      "quantity": 3,
+      "expireDate": "2021-11-19T12:13:33.504Z"
     }
   ],
   "images": [
@@ -324,6 +346,23 @@
     {
       "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "id": 6
+    }
+  ],
+  "users": [
+    {
+      "email": "dupa@gmail.com",
+      "password": "mag1234567",
+      "id": 1
+    },
+    {
+      "email": "dupa1@gmail.com",
+      "password": "magda12345",
+      "id": 2
+    },
+    {
+      "email": "dupek@gmail.com",
+      "password": "mag12345",
+      "id": 3
     }
   ]
 }

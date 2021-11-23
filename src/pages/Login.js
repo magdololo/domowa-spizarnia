@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from "@mui/material/Box";
 import {Button, Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput,} from "@mui/material";
@@ -36,7 +36,7 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const { control, handleSubmit,errors: fieldsErrors, reset  } = useForm({
+    const { handleSubmit,errors: fieldsErrors, reset  } = useForm({
         defaultValues: {
             password: '',
             repeatPassword:'',
@@ -44,10 +44,13 @@ const Login = () => {
             showPassword: false,
         }
     });
-    const onSubmit = data => console.log(data);
+
     const onSubmitLogin = async data => {
         console.log(data);
-         await logIn(data.email, data.password);
+        let message = await logIn(data.email, data.password);
+        console.log(message)
+         alert(message);
+
         // const response = await UserService.signIn(data);
         // const responseData = await response.json();
         // if (response.ok) setTokenAndConfigureProfile(responseData.token);
@@ -112,7 +115,7 @@ const Login = () => {
                             />
                             <Link to={'/forgotPassword'} style={{color: "gray", marginTop: 4, fontSize: "small",}}>Nie pamiętasz hasła?</Link>
                         </FormControl>
-                        <Button sx={{ m: 1, width: '14ch' }} variant="contained" onClick={()=>alert("logowanie")}>Zaloguj się</Button>
+                        <Button sx={{ m: 1, width: '14ch' }} variant="contained" onClick={()=> logIn(values.email, values.password)}>Zaloguj się</Button>
 
                     </form>
                   {/*</div>*/}

@@ -3,16 +3,16 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, {createFilterOptions} from '@mui/material/Autocomplete';
 import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
-
 const filter = createFilterOptions();
 
 export default function AutocompleteCategoriesTitle({
                                                         labelForAddModal,
                                                         setSelectedNewCategory,
-                                                        editCategory
+                                                        editCategory,
+
                                                     }) {
 
-    const [value, setValue] = React.useState(null);
+     const [value, setValue] = React.useState(null);
 
 
     const categoryList = useStore(state => state.categories);
@@ -23,15 +23,14 @@ export default function AutocompleteCategoriesTitle({
     console.log(categoryName);
     console.log("categoryname")
 
-    console.log(editCategory);
+    console.log(value);
+    console.log(editCategory.title)
 
-    // console.log("canChangeCategory")
-    // console.log(canChangeCategory)
     return (
         <Autocomplete
             // disabled={canChangeCategory}
 
-            value={categoryName ? editCategory.title : value}
+           value={categoryName ? editCategory.title : value}
             onChange={(event, newValue) => {
                 if (typeof newValue === 'string' && newValue === 'disabled') {
                     setValue({
@@ -64,7 +63,7 @@ export default function AutocompleteCategoriesTitle({
                 return filtered;
             }}
             selectOnFocus
-            clearOnBlur
+            //clearOnBlur
             handleHomeEndKeys
             id="free-solo-with-text-demo"
             options={editCategory ? categoryListWithoutEditCategory : categoryList}
@@ -86,6 +85,7 @@ export default function AutocompleteCategoriesTitle({
             renderInput={(params) => (
                 <TextField {...params} label={labelForAddModal ? 'nazwa kategorii' : 'zmień kategorię'}/>
             )}
+
         />
     );
 }
