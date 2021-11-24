@@ -11,11 +11,11 @@ const CategoryList = () => {
 
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
-    const fetchCategories = useStore(state => state.fetch);
+    const fetchCategories = useStore(state => state.getCategories);
 
     const [editMode, setEditMode] = useState(false);
 
-    const fetchImages = useStore(state => state.fetchImages)
+    const fetchImages = useStore(state => state.getImages)
     const imagesList = useStore(state => state.images);
     console.log(imagesList);
 

@@ -1,13 +1,16 @@
-import axios from "axios";
 import CategoriesService from "../services/CategoriesService";
-import UserService from "../services/UserService";
+
 
 const createCategorySlice = (set, get) => ({
+//set ustawianie stanu get pobieranie ze stanu
     categories: [],
-    categoriesFetched: false,
-    fetch: async () => {
-        const response = await fetch('http://192.168.1.134:4000/categories');
-        set({categories: await response.json()})
+   //categoriesFetched: false,
+   getCategories: async () => {
+        let categories = await CategoriesService.fetch();
+        console.log(categories)
+        set((state) => ({
+            categories: categories,
+        }));
     },
     getCategoryByPath: async (path) => {
         let categories = get().categories;//pobiera kategorie ze stanu
@@ -15,7 +18,7 @@ const createCategorySlice = (set, get) => ({
         console.log(path)
         if (categories.length === 0) {
 
-            const fetch = get().fetch;
+            const fetch = get().getCategories;
             await fetch();
             categories = get().categories;
         }
@@ -62,19 +65,27 @@ const createCategorySlice = (set, get) => ({
         )
     },
     deleteCategory: async (id) => {
-        console.log(id);
-        axios.delete('http://192.168.1.134:4000/categories/' + id).then(resp => {
-            console.log(resp.data);
 
-        }).catch(error => {
-            console.log(error);
-        });
-
+        let deleteCategory = await CategoriesService.deleteCategory(id);
         set((state) => ({
-
-            categories: state.categories.filter((category) => category.id !== id),
+            categories: state.categories.filter(deleteCategory => deleteCategory.id !== id),
         }));
-    }
+    },
+    images: [],
+    getImages: async () => {
+        const response = await CategoriesService.fetchImages();
+        console.log(response);
+        set((state) => ({
+            images: response,
+        }));
+        },
+    pickedImage: '',
+    setPickedImage: (url)=> {
+        console.log("pickedImage")
+        console.log(url)
+        set({pickedImage: url})
+        },
+
 });
 
 export default createCategorySlice;

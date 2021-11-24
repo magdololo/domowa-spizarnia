@@ -41,7 +41,7 @@ import AppBarBottom from "./AppBarBottom";
                        {categoryList.map((item) => (
                            <ImageListItem key={item.id} component={Link} to={"/" + item.path}>
 
-                               <img src={item.url} srcSet={item.url} alt={item.title} loading="lazy"/>
+                               <img src={item.url} srcSet={item.url} alt={item.title} loading="lazy" key={'img'+item.id}/>
                                    <Typography component="span" key={'typography_'+item.id}
                                        sx={{
                                            color: "white",
