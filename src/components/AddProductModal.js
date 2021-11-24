@@ -258,7 +258,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 <TextField
                                      sx={{width: "80%", marginLeft: "10%"}}
                                     //id="outlined-number"
-                                    label="quantity"
+                                    label="ilość"
                                     type="number"
                                      value={value}
                                      onChange={onChange}

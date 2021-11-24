@@ -14,6 +14,7 @@ const AddCategoryModal=({open, close})=>{
     const addCategory = useStore(state => state.addCategory);
     const categories = useStore(state => state.categories);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
+    const user = useStore(state=>state.loggedInUser);
     const style = {
         position: 'absolute',
         top: '50%',
@@ -76,6 +77,7 @@ const AddCategoryModal=({open, close})=>{
                        "url": pickedImage,
                        "title": newCategoryName,
                        "path": slugify(newCategoryName, "_"),
+                       "userId": user.id
                    });
                    close();
                    setPickedImage('');

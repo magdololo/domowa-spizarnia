@@ -4,9 +4,8 @@ import CategoriesService from "../services/CategoriesService";
 const createCategorySlice = (set, get) => ({
 //set ustawianie stanu get pobieranie ze stanu
     categories: [],
-   //categoriesFetched: false,
-   getCategories: async () => {
-        let categories = await CategoriesService.fetch();
+   getUserCategories: async (userId) => {
+        let categories = await CategoriesService.getUserCategories(userId);
         console.log(categories)
         set((state) => ({
             categories: categories,
@@ -18,8 +17,8 @@ const createCategorySlice = (set, get) => ({
         console.log(path)
         if (categories.length === 0) {
 
-            const fetch = get().getCategories;
-            await fetch();
+            const fetch = get().getUserCategories;
+            await fetch(get().loggedInUser.id);
             categories = get().categories;
         }
         let category = categories.filter(categoryItem => categoryItem.path === path);
@@ -31,13 +30,14 @@ const createCategorySlice = (set, get) => ({
         console.log("new category")
         console.log(newCategory)
         let addedCategory = await CategoriesService.addNewCategory(newCategory);
+
         console.log(addedCategory)
 
 
         set((state) => ({
             categories: [
                 newCategory,
-                ...state.categories,
+                ...state.categories
             ]
         }));
     },

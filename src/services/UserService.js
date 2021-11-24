@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import CategoriesService from "./CategoriesService";
 
 const UserService =  {
     createNewUser: async (email, password) => {
@@ -7,6 +7,15 @@ const UserService =  {
             let response = await axios.get(`http://192.168.1.134:4000/users?email=${email}`);
             if(response.data.length === 0){
                 let responsePost = await axios.post('http://192.168.1.134:4000/users', {email: email, password: password});
+                let defaultCategories =  await CategoriesService.getDefaultCategories();
+                console.log(defaultCategories)
+                defaultCategories.forEach(category=>{
+                    category.id = null;
+                    category.userId = responsePost.data.id;
+                    console.log(category)
+                    CategoriesService.addNewCategory(category)
+                    }
+                )
                 return responsePost.data;
             }
         } catch (error){

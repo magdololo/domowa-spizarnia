@@ -1,5 +1,6 @@
 import axios from "axios";
 import UserService  from "../services/UserService";
+import CategoriesService from "../services/CategoriesService";
 
 const createUsersSlice = (set, get) => ({
     users: [],
@@ -11,7 +12,8 @@ const createUsersSlice = (set, get) => ({
             return loggingAction.message;
         }
         set(() => ({
-            loggedInUser: loggingAction.user
+            loggedInUser: loggingAction.user,
+
         }))
         return '';
     },
@@ -20,8 +22,10 @@ const createUsersSlice = (set, get) => ({
             let createdUser = await UserService.createNewUser(newUser.email,newUser.password);
             //console.log('createdUser')
             //console.log(createdUser)
+            //let defaultCategories = await CategoriesService.getUserCategories(createdUser.id);
             set(() => ({
-                loggedInUser: createdUser
+                loggedInUser: createdUser,
+                //categories: defaultCategories
             }))
             return ""
 

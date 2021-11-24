@@ -1,9 +1,20 @@
 import axios from "axios";
 
 const CategoriesService= {
-    fetch: async ()=>{
+    getDefaultCategories: async ()=>{
         try {
-            let response = await axios.get('http://192.168.1.134:4000/categories');
+            let response = await axios.get(`http://192.168.1.134:4000/categories-default`);
+            console.log(response.data)
+            return response.data;
+
+        }
+        catch (error) {
+            console.error(error)
+        }
+    },
+    getUserCategories: async (userId)=>{
+        try {
+            let response = await axios.get(`http://192.168.1.134:4000/categories-user?userId=${userId}`);
             console.log(response.data)
             return response.data;
 
@@ -13,9 +24,8 @@ const CategoriesService= {
         }
     },
     addNewCategory: async (newCategory) => {
-
         try {
-            let response = await axios.post('http://192.168.1.134:4000/categories', newCategory);
+            let response = await axios.post('http://192.168.1.134:4000/categories-user', newCategory);
             return response.data
 
         } catch (error) {
@@ -23,9 +33,8 @@ const CategoriesService= {
         }
     },
     updateCategory: async (id, path, url, title) => {
-
         try {
-            let editCategory = await axios.put('http://192.168.1.134:4000/categories/' + id, {
+            let editCategory = await axios.put('http://192.168.1.134:4000/categories-user/' + id, {
                 url: url,
                 path: path,
                 title: title
@@ -38,7 +47,7 @@ const CategoriesService= {
     },
     deleteCategory: async (id) => {
          try {
-             let deletedCategory = await axios.delete('http://192.168.1.134:4000/categories/' + id);
+             let deletedCategory = await axios.delete('http://192.168.1.134:4000/categories-user/' + id);
              console.log(deletedCategory);
              return deletedCategory.data
             } catch (error) {

@@ -1,5 +1,5 @@
 {
-  "categories": [
+  "categories-default": [
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "mąka_ryże_kasze",
@@ -25,6 +25,63 @@
       "id": 7
     }
   ],
+  "categories-user": [
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 1,
+      "userId": 5
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 2,
+      "userId": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "cukier_i_słodziki",
+      "title": "cukier i słodziki",
+      "id": 3,
+      "userId": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 4,
+      "userId": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 5,
+      "userId": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 6,
+      "userId": 12
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "nowa kategoria",
+      "path": "nowa_kategoria",
+      "id": 7
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "nowa kategoria2",
+      "path": "nowa_kategoria2",
+      "userId": 12,
+      "id": 8
+    }
+  ],
   "products": [
     {
       "name": "czekoladki",
@@ -41,6 +98,33 @@
       "unit": "kg",
       "quantity": 15,
       "expireDate": "2021-11-26T15:32:03.000Z"
+    },
+    {
+      "name": "miód lipowy",
+      "capacity": 1,
+      "unit": "l",
+      "quantity": 1,
+      "expireDate": "2022-01-21T12:14:36.000Z",
+      "categoryId": 5,
+      "id": 31
+    },
+    {
+      "name": "dżem truskawkowy",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-06-23T11:15:30.000Z",
+      "categoryId": 5,
+      "id": 32
+    },
+    {
+      "name": "miód wielokwiatowy",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-04-07T11:16:32.000Z",
+      "categoryId": 5,
+      "id": 33
     }
   ],
   "images": [
@@ -124,6 +208,11 @@
       "email": "d@d.pl",
       "password": "mag12345",
       "id": 11
+    },
+    {
+      "email": "z@z.pl",
+      "password": "mag12345",
+      "id": 12
     }
   ]
 }

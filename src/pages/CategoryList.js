@@ -8,10 +8,10 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 
 const CategoryList = () => {
-
+    const user = useStore(state=>state.loggedInUser)
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
-    const fetchCategories = useStore(state => state.getCategories);
+    const fetchCategories = useStore(state => state.getUserCategories);
 
     const [editMode, setEditMode] = useState(false);
 
@@ -20,7 +20,7 @@ const CategoryList = () => {
     console.log(imagesList);
 
     useEffect(() => {
-        fetchCategories();
+        fetchCategories(user.id);
         fetchImages();
 
     }, [fetchImages, fetchCategories]);
