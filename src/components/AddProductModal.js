@@ -22,7 +22,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.id;
     const [date, setDate] = React.useState(new Date());;
     const style = {
         position: 'absolute',
@@ -90,7 +91,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     const onSubmit = data => {
         console.log(`dane dodaj product = ${data}`);
-        console.log(data)
+        console.log(data);
         addProduct({
             "name": data.productName,
             "capacity": parseInt(data.capacity),
@@ -98,7 +99,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
             "categoryId": categoryName ? category.id : selectedNewCategory.id
-        });
+        },userId);
         close();
     };
     return (

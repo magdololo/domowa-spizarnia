@@ -68,8 +68,8 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: '',
-            password: '',
+            email: 'myszka@gmail.com',
+            password: 'myszka12345',
             showPassword: false,
         }
     });

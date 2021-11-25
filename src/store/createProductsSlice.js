@@ -1,30 +1,30 @@
-import axios from "axios";
+
+import ProductsService from "../services/ProductsService";
 
 const createProductsSlice = (set, get) => ({
     products: [],
-    fetchProducts: async productsFetch => {
-        const response = await fetch('http://192.168.1.134:4000/products');
-        set({products: await response.json()})
+    fetchProducts: async () => {
+        const response = await ProductsService.getAllProducts();
+        console.log(response);
+        set((state) => ({
+            products: response,
+        }));
     },
-    addProduct: (newProduct) => {
+    addProduct: async (newProduct, userId) => {
         console.log("new product")
         console.log(newProduct)
-        axios.post('http://192.168.1.134:4000/products', newProduct).then(resp => {
-            console.log(resp.data);//zwraca obiekt newProduct
-            let id = resp.data.id;
-            newProduct.id = id;
-            newProduct.expireDate = resp.data.expireDate; //ustawiamy expireDate na expireDate z json server bo on zapisuje inny format daty
+        let addedProduct= await ProductsService.addProduct(newProduct, userId);
+            console.log(addedProduct);//return object newProduct
             set((state) => ({
                 products: [
-                    newProduct,
+                    addedProduct,
                     ...state.products,
                 ]
             }))//dodajemy tu do stanu zeby date waznosci dodal w tym samym formacie co w json server
-        }).catch(error => {
-            console.log(error);
-        });
+
 
     },
+
     editModalOpen: false,
     setEditProductModalOpen: (open) => {
         set({editModalOpen: open})
@@ -36,18 +36,8 @@ const createProductsSlice = (set, get) => ({
 
     },
     updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId)=>{
-        axios.put('http://192.168.1.134:4000/products/'+id,
-            {
-                id: id,
-                name: name,
-                capacity: parseInt(capacity),
-                unit: unit,
-                quantity: parseInt(quantity),
-                expireDate: expireDate,
-                categoryId: categoryId
-            }).then(resp => {
-
-            let editProduct = resp.data;
+            let editProduct = await ProductsService.updateProduct(id, name, capacity, unit, quantity, expireDate, categoryId);
+            console.log("updateProduct")
             console.log(editProduct);
             set((state)=> {
                     let products = state.products.filter(editProduct => editProduct.id !== id);
@@ -57,35 +47,18 @@ const createProductsSlice = (set, get) => ({
                     }
                 }
             )
-        }).catch(error => {
-            console.log(error);
-        });
 
 
     },
     deleteProduct: async (id) => {
-        axios.delete('http://192.168.1.134:4000/products/' + id).then(resp => {
-            console.log(resp.data);
-
-        }).catch(error => {
-            console.log(error);
-        });
+        let deletedProduct = await ProductsService.deleteProduct(id);
         set((state) => ({
             products: state.products.filter((product) => product.id !== id),
         }))
     },
 
     incrementProduct: async (id, quantity) => {
-        axios.patch('http://192.168.1.134:4000/products/' + id,
-            {
-                quantity: quantity + 1
-            }).then(resp => {
-
-            console.log(resp.data);
-
-        }).catch(error => {
-            console.log(error);
-        });
+        let incrementProduct = await ProductsService.incrementProduct(id, quantity);
         set((state) => ({
             products: state.products.map((product) => product.id === id? {...product, quantity: product.quantity+1}:product)
             }
@@ -94,16 +67,7 @@ const createProductsSlice = (set, get) => ({
     },
 
    decrementProduct: async (id, quantity) => {
-        axios.patch('http://192.168.1.134:4000/products/' + id,
-            {
-                quantity: quantity - 1
-            }).then(resp => {
-
-            console.log(resp.data);
-
-        }).catch(error => {
-            console.log(error);
-        });
+       let decrementProduct = await ProductsService.decrementProduct(id, quantity);
         set((state) => ({
                 products: state.products.map((product) => product.id === id ? {...product, quantity: product.quantity-1} : product)
             }

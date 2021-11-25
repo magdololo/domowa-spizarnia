@@ -195,6 +195,60 @@
       "expireDate": "2022-04-07T11:16:32.000Z",
       "categoryId": 5,
       "id": 33
+    },
+    {
+      "id": 36,
+      "name": "serekMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T09:35:08.000Z",
+      "categoryId": 25
+    },
+    {
+      "name": "kielbaskaMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T11:00:18.000Z",
+      "categoryId": 25,
+      "id": 37
+    },
+    {
+      "name": "chlebekMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T12:04:31.000Z",
+      "categoryId": 25,
+      "id": 38
+    },
+    {
+      "name": "mleczkoMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T13:21:25.000Z",
+      "categoryId": 25,
+      "id": 39
+    },
+    {
+      "name": "bgtre",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T13:30:40.000Z",
+      "categoryId": 25,
+      "id": 40
+    },
+    {
+      "name": "soczek",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-25T13:33:25.113Z",
+      "categoryId": 25,
+      "id": 41
     }
   ],
   "images": [
@@ -238,6 +292,57 @@
       "email": "myszka@gmail.com",
       "password": "myszka12345",
       "id": 3
+    }
+  ],
+  "storage": [
+    {
+      "id": 1,
+      "productId": 36,
+      "userId": 1,
+      "name": "serekMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T09:35:08.000Z",
+      "categoryId": 25
+    },
+    {
+      "name": "gfffgg",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T12:20:36.000Z",
+      "categoryId": 25,
+      "id": 2
+    },
+    {
+      "name": "mleko",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T12:25:25.000Z",
+      "categoryId": 25,
+      "id": 3
+    },
+    {
+      "name": "smietanka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T12:30:05.000Z",
+      "categoryId": 25,
+      "id": 4
+    },
+    {
+      "name": "soczek",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-25T13:33:25.113Z",
+      "categoryId": 25,
+      "id": 5,
+      "productId": 41,
+      "userId": 3
     }
   ]
 }
