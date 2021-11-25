@@ -6,11 +6,8 @@ import {
     Alert,
     Button,
     Divider,
-    FormControl,
     IconButton,
     InputAdornment,
-    InputLabel,
-    OutlinedInput,
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Link} from "react-router-dom";
@@ -58,9 +55,6 @@ const Login = () => {
         showPassword: false,
     });
     const [errorMessage,setErrorMessage] = useState('');
-    const handleChange = (prop) => (event) => {
-        setValues({...values, [prop]: event.target.value});
-    };
 
     const handleClickShowPassword = () => {
         setValues({
@@ -74,8 +68,8 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: 'koteczek@gmail.com',
-            password: 'kot12345',
+            email: '',
+            password: '',
             showPassword: false,
         }
     });
@@ -89,22 +83,6 @@ const Login = () => {
             email: "",
             password: "",
         });
-        // const response = await UserService.signIn(data);
-        // const responseData = await response.json();
-        // if (response.ok) setTokenAndConfigureProfile(responseData.token);
-        // else {
-        //     if (responseData.non_field_errors) setGeneralLoginError(responseData.non_field_errors[0]);
-        //     reset(
-        //         {
-        //             email: '',
-        //             password: ''
-        //         },
-        //         {
-        //             errors: true,
-        //             dirtyFields: true
-        //         }
-        //     );
-        // }
     };
 
     return (
@@ -113,7 +91,7 @@ const Login = () => {
         <CssBaseline/>
         <Box >
             <Box sx={{width: '100vw', height: '40vh'}}>
-                <img src="/images/domowa_spizarnia.jpg" style={{width: "100%", height: "100%", objectFit: 'contain'}}/>
+                <img src="/images/domowa_spizarnia.jpg" style={{width: "100%", height: "100%", objectFit: 'contain'}} alt="zdjęcie spiżarni"/>
             </Box>
 
             <Box sx={{width: '30ch', height: 'auto', display: 'flex', flexWrap: 'wrap', margin: '30px auto'}}>
@@ -182,42 +160,6 @@ const Login = () => {
                         }}
                     />
 
-
-                    {/*<FormControl sx={{m: 1, width: '25ch'}} variant="outlined">*/}
-                    {/*    <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>*/}
-                    {/*    <OutlinedInput*/}
-                    {/*        id="outlined-adornment-email"*/}
-                    {/*        value={values.email}*/}
-                    {/*        onChange={handleChange('email')}*/}
-                    {/*        type="text"*/}
-                    {/*        label="Email"*/}
-                    {/*    />*/}
-                    {/*</FormControl>*/}
-
-                    {/*<FormControl sx={{m: 1, width: '25ch'}} variant="outlined">*/}
-                    {/*    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>*/}
-                    {/*    <OutlinedInput*/}
-                    {/*        id="outlined-adornment-password"*/}
-                    {/*        type={values.showPassword ? 'text' : 'password'}*/}
-                    {/*        value={values.password}*/}
-                    {/*        onChange={handleChange('password')}*/}
-                    {/*        endAdornment={*/}
-                    {/*            <InputAdornment position="end">*/}
-                    {/*                <IconButton*/}
-                    {/*                    aria-label="toggle password visibility"*/}
-                    {/*                    onClick={handleClickShowPassword}*/}
-                    {/*                    onMouseDown={handleMouseDownPassword}*/}
-                    {/*                    edge="end"*/}
-                    {/*                >*/}
-                    {/*                    {values.showPassword ? <VisibilityOff/> : <Visibility/>}*/}
-                    {/*                </IconButton>*/}
-                    {/*            </InputAdornment>*/}
-                    {/*        }*/}
-                    {/*        label="Password"*/}
-                    {/*    />*/}
-                    {/*    <Link to={'/forgotPassword'} style={{color: "gray", marginTop: 4, fontSize: "small",}}>Nie*/}
-                    {/*        pamiętasz hasła?</Link>*/}
-                    {/*</FormControl>*/}
                     <Button type="submit" variant="contained" color="primary" >Zaloguj się</Button>
                     {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 </form>

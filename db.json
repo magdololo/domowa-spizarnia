@@ -31,42 +31,7 @@
       "path": "mąka_ryże_kasze",
       "title": "mąka, ryże, kasze",
       "id": 1,
-      "userId": 5
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "mąka_ryże_kasze",
-      "title": "mąka, ryże, kasze",
-      "id": 2,
-      "userId": 12
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "cukier_i_słodziki",
-      "title": "cukier i słodziki",
-      "id": 3,
-      "userId": 12
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "przetwory_owocowe_i_miód",
-      "title": "przetwory owocowe i miód",
-      "id": 4,
-      "userId": 12
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "słodycze",
-      "path": "slodycze",
-      "id": 5,
-      "userId": 12
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "przetwory_owocowe_i_miód",
-      "title": "przetwory owocowe i miód",
-      "id": 6,
-      "userId": 12
+      "userId": 1
     },
     {
       "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -76,10 +41,115 @@
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "nowa kategoria2",
-      "path": "nowa_kategoria2",
-      "userId": 12,
-      "id": 8
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 10,
+      "userId": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "cukier_i_słodziki",
+      "title": "cukier i słodziki",
+      "id": 11,
+      "userId": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 12,
+      "userId": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 13,
+      "userId": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 14,
+      "userId": 1
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 15,
+      "userId": 2
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "cukier_i_słodziki",
+      "title": "cukier i słodziki",
+      "id": 16,
+      "userId": 2
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 17,
+      "userId": 2
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 18,
+      "userId": 2
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "kategoria pieska1",
+      "path": "kategoria_pieska1",
+      "userId": 2,
+      "id": 19
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "kategoria pieska2",
+      "path": "kategoria_pieska2",
+      "userId": 2,
+      "id": 20
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 21,
+      "userId": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 22,
+      "userId": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 24,
+      "userId": 3
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "kategoria myszka1",
+      "path": "kategoria_myszka1",
+      "userId": 3,
+      "id": 25
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "kategoria myszka2",
+      "path": "kategoria_myszka2",
+      "userId": 3,
+      "id": 26
     }
   ],
   "products": [
@@ -155,64 +225,19 @@
   ],
   "users": [
     {
-      "email": "dupa@gmail.com",
-      "password": "mag1234567",
+      "email": "kotek@gmail.com",
+      "password": "kotek1234",
       "id": 1
     },
     {
-      "email": "",
-      "password": "magda12345",
+      "email": "piesek@gmail.com",
+      "password": "piesek12345",
       "id": 2
     },
     {
-      "email": "dupek@gmail.com",
-      "password": "mag12345",
+      "email": "myszka@gmail.com",
+      "password": "myszka12345",
       "id": 3
-    },
-    {
-      "email": "dupka1@gmail.com",
-      "password": "dupa12345",
-      "id": 4
-    },
-    {
-      "email": "koteczek@gmail.com",
-      "password": "kot12345",
-      "id": 5
-    },
-    {
-      "email": "a@a.pl",
-      "password": "mag12345",
-      "id": 6
-    },
-    {
-      "email": "b@b.pl",
-      "password": "mag12345",
-      "id": 7
-    },
-    {
-      "email": "piesek@gmail.com",
-      "password": "pies12345",
-      "id": 8
-    },
-    {
-      "email": "punio@gmail.com",
-      "password": "punio1234",
-      "id": 9
-    },
-    {
-      "email": "c@c.pl",
-      "password": "mag12345",
-      "id": 10
-    },
-    {
-      "email": "d@d.pl",
-      "password": "mag12345",
-      "id": 11
-    },
-    {
-      "email": "z@z.pl",
-      "password": "mag12345",
-      "id": 12
     }
   ]
 }
