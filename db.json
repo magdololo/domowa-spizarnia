@@ -27,13 +27,6 @@
   ],
   "categories-user": [
     {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "mąka_ryże_kasze",
-      "title": "mąka, ryże, kasze",
-      "id": 1,
-      "userId": 1
-    },
-    {
       "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "title": "nowa kategoria",
       "path": "nowa_kategoria",
@@ -65,13 +58,6 @@
       "title": "słodycze",
       "path": "slodycze",
       "id": 13,
-      "userId": 1
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "słodycze",
-      "path": "slodycze",
-      "id": 14,
       "userId": 1
     },
     {
@@ -242,13 +228,130 @@
       "id": 40
     },
     {
+      "id": 41,
       "name": "soczek",
       "capacity": 100,
       "unit": "gr",
+      "quantity": 3,
+      "expireDate": "2021-11-30T13:33:25.000Z",
+      "categoryId": 25
+    },
+    {
+      "id": 42,
+      "name": "miodekMyszkikat1",
+      "capacity": 1000,
+      "unit": "szt",
+      "quantity": 9,
+      "expireDate": "2021-11-30T10:14:42.000Z",
+      "categoryId": 25
+    },
+    {
+      "id": 43,
+      "name": "cukierKotka3",
+      "capacity": 5000,
+      "unit": "ml",
+      "quantity": 5,
+      "expireDate": "2021-11-30T10:17:10.000Z",
+      "categoryId": 10
+    },
+    {
+      "name": "maselkoMyszki",
+      "capacity": 100,
+      "unit": "gr",
       "quantity": 1,
-      "expireDate": "2021-11-25T13:33:25.113Z",
-      "categoryId": 25,
-      "id": 41
+      "expireDate": "2021-11-30T11:41:16.000Z",
+      "categoryId": 26,
+      "id": 44
+    },
+    {
+      "name": "mAkaKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T11:47:34.000Z",
+      "categoryId": 10,
+      "id": 45
+    },
+    {
+      "name": "ryżKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-09T11:47:47.000Z",
+      "categoryId": 10,
+      "id": 46
+    },
+    {
+      "name": "miodekKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:48:07.000Z",
+      "categoryId": 12,
+      "id": 47
+    },
+    {
+      "name": "dzemik Kotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-01-28T11:48:19.000Z",
+      "categoryId": 12,
+      "id": 48
+    },
+    {
+      "name": "czekolada Kotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:48:46.000Z",
+      "categoryId": 13,
+      "id": 49
+    },
+    {
+      "name": "czekoladka Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-19T11:49:28.000Z",
+      "categoryId": 17,
+      "id": 50
+    },
+    {
+      "name": "kielbaska Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-17T11:49:47.000Z",
+      "categoryId": 19,
+      "id": 51
+    },
+    {
+      "name": "miesko Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-24T11:50:05.000Z",
+      "categoryId": 19,
+      "id": 52
+    },
+    {
+      "name": "salcesonik pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-17T11:50:28.000Z",
+      "categoryId": 20,
+      "id": 53
+    },
+    {
+      "name": "zrazy pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:50:47.000Z",
+      "categoryId": 20,
+      "id": 54
     }
   ],
   "images": [
@@ -296,53 +399,147 @@
   ],
   "storage": [
     {
-      "id": 1,
-      "productId": 36,
-      "userId": 1,
-      "name": "serekMyszki",
+      "name": "miodekMyszki",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
-      "expireDate": "2021-11-30T09:35:08.000Z",
-      "categoryId": 25
-    },
-    {
-      "name": "gfffgg",
-      "capacity": 100,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-30T12:20:36.000Z",
-      "categoryId": 25,
-      "id": 2
-    },
-    {
-      "name": "mleko",
-      "capacity": 100,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-28T12:25:25.000Z",
-      "categoryId": 25,
-      "id": 3
-    },
-    {
-      "name": "smietanka",
-      "capacity": 100,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-30T12:30:05.000Z",
-      "categoryId": 25,
-      "id": 4
-    },
-    {
-      "name": "soczek",
-      "capacity": 100,
-      "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-11-25T13:33:25.113Z",
-      "categoryId": 25,
-      "id": 5,
-      "productId": 41,
+      "expireDate": "2021-11-30T10:14:42.000Z",
+      "categoryId": 26,
+      "id": 6,
+      "productId": 42,
       "userId": 3
+    },
+    {
+      "name": "cukierKotka",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 4,
+      "expireDate": "2021-11-30T10:17:10.000Z",
+      "categoryId": 11,
+      "id": 7,
+      "productId": 43,
+      "userId": 1
+    },
+    {
+      "name": "maselkoMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T11:41:16.000Z",
+      "categoryId": 26,
+      "id": 8,
+      "productId": 44,
+      "userId": 3
+    },
+    {
+      "name": "mAkaKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T11:47:34.000Z",
+      "categoryId": 10,
+      "id": 9,
+      "productId": 45,
+      "userId": 1
+    },
+    {
+      "name": "ryżKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-09T11:47:47.000Z",
+      "categoryId": 10,
+      "id": 10,
+      "productId": 46,
+      "userId": 1
+    },
+    {
+      "name": "miodekKotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:48:07.000Z",
+      "categoryId": 12,
+      "id": 11,
+      "productId": 47,
+      "userId": 1
+    },
+    {
+      "name": "dzemik Kotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-01-28T11:48:19.000Z",
+      "categoryId": 12,
+      "id": 12,
+      "productId": 48,
+      "userId": 1
+    },
+    {
+      "name": "czekolada Kotka",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:48:46.000Z",
+      "categoryId": 13,
+      "id": 13,
+      "productId": 49,
+      "userId": 1
+    },
+    {
+      "name": "czekoladka Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-19T11:49:28.000Z",
+      "categoryId": 17,
+      "id": 14,
+      "productId": 50,
+      "userId": 2
+    },
+    {
+      "name": "kielbaska Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-17T11:49:47.000Z",
+      "categoryId": 19,
+      "id": 15,
+      "productId": 51,
+      "userId": 2
+    },
+    {
+      "name": "miesko Pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-24T11:50:05.000Z",
+      "categoryId": 19,
+      "id": 16,
+      "productId": 52,
+      "userId": 2
+    },
+    {
+      "name": "salcesonik pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2022-02-17T11:50:28.000Z",
+      "categoryId": 20,
+      "id": 17,
+      "productId": 53,
+      "userId": 2
+    },
+    {
+      "name": "zrazy pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-28T11:50:47.000Z",
+      "categoryId": 20,
+      "id": 18,
+      "productId": 54,
+      "userId": 2
     }
   ]
 }

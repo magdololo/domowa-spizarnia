@@ -7,8 +7,7 @@ import * as React from "react";
 import {styled} from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import {alpha} from "@material-ui/core";
-import {useParams} from "react-router-dom";
-import useStore from "../store/useStore";
+
 
 const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
@@ -17,10 +16,6 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     const handleClose = () => setOpen(false);
     const minWidth900 = useMediaQuery('(min-width:900px)')
 
-    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
-    let { categoryName } = useParams();
-    let category = getCategoryByPath(categoryName);
-    console.log( category);
 
 
 

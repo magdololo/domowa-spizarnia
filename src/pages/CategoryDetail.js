@@ -14,29 +14,28 @@ import ReturnToCategoryList from "../components/ReturnToCategoryList";
 
 
 const CategoryDetail = ()=> {
-
-    const productsList = useStore(state => state.products);
-    const fetchProducts = useStore(state => state.fetchProducts);
+    const user = useStore(state=>state.loggedInUser);
+    const productsList = useStore(state => state.storage);
+    const getProductsOfStorage = useStore(state => state.getProductsOfUser);
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
     const getCategoryByPath= useStore(state=> state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
-
-
+    const userId = user.id
 
     useEffect(() => {
         console.log(categoryName);
         getCategoryByPath(categoryName).then(category => {
             setCategory(category)
         });
-        fetchProducts();
-    },[categoryName, category.id, getCategoryByPath, fetchProducts]);
+        getProductsOfStorage();
+    },[categoryName, category.id, getCategoryByPath, getProductsOfStorage]);
 
 
-
-
-
-    const products = productsList.filter(product => product.categoryId === category.id );
+    console.log(productsList)
+  console.log(user.id)
+    const productsOfUser = productsList.filter(product => product.userId === userId);
+    const products = productsOfUser.filter(product => product.categoryId === category.id );
 
     if (products.length >= 2) {
         products.sort((a, b) => {

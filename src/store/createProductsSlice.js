@@ -10,15 +10,26 @@ const createProductsSlice = (set, get) => ({
             products: response,
         }));
     },
+    storage: [],
+    getProductsOfUser: async () => {
+        const response = await ProductsService.getUserProducts();
+        console.log(response);
+        set((state) => ({
+            storage: response,
+        }));
+    },
     addProduct: async (newProduct, userId) => {
-        console.log("new product")
-        console.log(newProduct)
+
         let addedProduct= await ProductsService.addProduct(newProduct, userId);
             console.log(addedProduct);//return object newProduct
             set((state) => ({
                 products: [
                     addedProduct,
                     ...state.products,
+                ],
+                storage: [
+                    addedProduct,
+                    ...state.storage,
                 ]
             }))//dodajemy tu do stanu zeby date waznosci dodal w tym samym formacie co w json server
 
@@ -40,10 +51,10 @@ const createProductsSlice = (set, get) => ({
             console.log("updateProduct")
             console.log(editProduct);
             set((state)=> {
-                    let products = state.products.filter(editProduct => editProduct.id !== id);
+                    let products = state.storage.filter(editProduct => editProduct.id !== id);
                     products.push(editProduct)
                     return {
-                        products: products
+                        storage: products
                     }
                 }
             )
@@ -53,14 +64,14 @@ const createProductsSlice = (set, get) => ({
     deleteProduct: async (id) => {
         let deletedProduct = await ProductsService.deleteProduct(id);
         set((state) => ({
-            products: state.products.filter((product) => product.id !== id),
+            storage: state.products.filter((product) => product.id !== id),
         }))
     },
 
     incrementProduct: async (id, quantity) => {
         let incrementProduct = await ProductsService.incrementProduct(id, quantity);
         set((state) => ({
-            products: state.products.map((product) => product.id === id? {...product, quantity: product.quantity+1}:product)
+            storage: state.products.map((product) => product.id === id? {...product, quantity: product.quantity+1}:product)
             }
 
         ));
@@ -69,7 +80,7 @@ const createProductsSlice = (set, get) => ({
    decrementProduct: async (id, quantity) => {
        let decrementProduct = await ProductsService.decrementProduct(id, quantity);
         set((state) => ({
-                products: state.products.map((product) => product.id === id ? {...product, quantity: product.quantity-1} : product)
+                storage: state.products.map((product) => product.id === id ? {...product, quantity: product.quantity-1} : product)
             }
 
         ));

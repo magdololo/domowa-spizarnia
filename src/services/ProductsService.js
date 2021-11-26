@@ -8,6 +8,14 @@ const ProductsService= {
             console.error(error)
         }
     },
+    getUserProducts: async () => {
+        try {
+            let userProducts = await axios.get('http://192.168.1.134:4000/storage');
+            return userProducts.data;
+        } catch (error) {
+            console.error(error)
+        }
+    },
     productToStorage:{},
     addProduct: async (newProduct, userId) => {//from AddProductModal
         try {
@@ -48,7 +56,7 @@ const ProductsService= {
     },
     updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId) => {
         try {
-            let updatedProduct = await axios.put('http://192.168.1.134:4000/products/' + id, {
+            let updatedProduct = await axios.put('http://192.168.1.134:4000/storage/' + id, {
                 id: id,
                 name: name,
                 capacity: parseInt(capacity),
@@ -64,7 +72,7 @@ const ProductsService= {
     },
     deleteProduct: async (id) => {
         try {
-            let deletedProduct = await axios.delete('http://192.168.1.134:4000/products/' + id);
+            let deletedProduct = await axios.delete('http://192.168.1.134:4000/storage/' + id);
             return deletedProduct.data
         } catch (error) {
             console.error(error);
@@ -72,7 +80,7 @@ const ProductsService= {
     },
     incrementProduct: async (id, quantity) => {
         try {
-            let response = await axios.patch('http://192.168.1.134:4000/products/' + id, {
+            let response = await axios.patch('http://192.168.1.134:4000/storage/' + id, {
                 quantity: quantity + 1
             });
             return response.data
@@ -82,7 +90,7 @@ const ProductsService= {
     },
     decrementProduct: async (id, quantity) => {
         try {
-            let response = await axios.patch('http://192.168.1.134:4000/products/' + id, {
+            let response = await axios.patch('http://192.168.1.134:4000/storage/' + id, {
                 quantity: quantity - 1
             });
             return response.data

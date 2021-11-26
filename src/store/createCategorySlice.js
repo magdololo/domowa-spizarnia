@@ -6,15 +6,12 @@ const createCategorySlice = (set, get) => ({
     categories: [],
    getUserCategories: async (userId) => {
         let categories = await CategoriesService.getUserCategories(userId);
-        console.log(categories)
         set((state) => ({
             categories: categories,
         }));
     },
     getCategoryByPath: async (path) => {
         let categories = get().categories;//pobiera kategorie ze stanu
-        console.log(categories);
-        console.log(path)
         if (categories.length === 0) {
 
             const fetch = get().getUserCategories;
@@ -22,18 +19,12 @@ const createCategorySlice = (set, get) => ({
             categories = get().categories;
         }
         let category = categories.filter(categoryItem => categoryItem.path === path);
-        console.log(category);
         return category[0];
 
     },
     addCategory: async (newCategory) => {
-        console.log("new category")
-        console.log(newCategory)
-        let addedCategory = await CategoriesService.addNewCategory(newCategory);
 
-        console.log(addedCategory)
-
-
+        await CategoriesService.addNewCategory(newCategory);
         set((state) => ({
             categories: [
                 newCategory,
@@ -48,7 +39,6 @@ const createCategorySlice = (set, get) => ({
     editCategory: {},
     setEditCategory: (id, url, title, path) => {
         set({editCategory: {url, title, path, id}})
-        console.log("editCategory")
 
 
     },
@@ -74,15 +64,12 @@ const createCategorySlice = (set, get) => ({
     images: [],
     getImages: async () => {
         const response = await CategoriesService.fetchImages();
-        console.log(response);
         set((state) => ({
             images: response,
         }));
         },
     pickedImage: '',
     setPickedImage: (url)=> {
-        console.log("pickedImage")
-        console.log(url)
         set({pickedImage: url})
         },
 

@@ -8,7 +8,7 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 
 const CategoryList = () => {
-    const user = useStore(state=>state.loggedInUser)
+    const user = useStore(state=>state.loggedInUser);
     const categoryList = useStore(state => state.categories);
     console.log(categoryList);
     const fetchCategories = useStore(state => state.getUserCategories);
@@ -23,9 +23,9 @@ const CategoryList = () => {
         fetchCategories(user.id);
         fetchImages();
 
-    }, [fetchImages, fetchCategories]);
+    }, [fetchImages, fetchCategories, user.id]);
 
-
+    console.log(user.id);
     console.log(fetchImages);
     console.log(categoryList);
 

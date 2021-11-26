@@ -63,7 +63,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     let {categoryName} = useParams();
 
     useEffect(() => {
-        console.log(categoryName);
         let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
         const initialState = {loading: false, categoryName: "", category: null};
         if (categoryName) {
@@ -90,8 +89,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     });
 
     const onSubmit = data => {
-        console.log(`dane dodaj product = ${data}`);
-        console.log(data);
         addProduct({
             "name": data.productName,
             "capacity": parseInt(data.capacity),

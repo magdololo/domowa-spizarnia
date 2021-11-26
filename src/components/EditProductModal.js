@@ -93,6 +93,8 @@ console.log(newEditProduct);
     const onSubmit = async (data) => {
         console.log('dane edit product');
         console.log(data);
+        console.log(editCategory)
+        console.log(selectedNewCategory)
         let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : editCategory.id;
         await updateProduct(editProduct.id,data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory);
         handleClose();
