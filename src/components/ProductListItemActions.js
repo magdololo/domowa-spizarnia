@@ -13,7 +13,7 @@ const ProductListItemActions = ({product}) => {
     const deleteProduct = useStore(state => state.deleteProduct);
     const setEditProduct = useStore(state=>state.setEditProduct);
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
-
+console.log(product);
     return (
         <>
          <Grid container item xs={10} sm={12}>
@@ -45,7 +45,7 @@ const ProductListItemActions = ({product}) => {
     <Grid item xs={3} sx={{color: "#01579b", textAlign: "center", cursor: "pointer"}}>
         <EditIcon sx={{color: "#01579b"}} onClick={(e) => {
             e.preventDefault();
-            setEditProduct(product.id, product.name, product.capacity, product.unit, product.quantity, product.expireDate, product.categoryId);
+            setEditProduct(product.id, product.name, product.capacity, product.unit, product.quantity, product.expireDate, product.categoryId, product.productId, product.userId);
             setEditProductModalOpen(true);
         }}
         />

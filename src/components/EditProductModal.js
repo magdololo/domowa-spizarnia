@@ -14,9 +14,10 @@ import {useForm, Controller} from "react-hook-form";
 
 const EditProductModal =()=>{
 
+
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
-    const [newEditProduct, setNewEditProduct] = useState({});
+    const [newEditProduct] = useState({});
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const [editCategory, setEditCategory] = React.useState("");
@@ -28,10 +29,6 @@ const EditProductModal =()=>{
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
-
-
-
-console.log(newEditProduct);
 
 
     const units = [
@@ -88,15 +85,16 @@ console.log(newEditProduct);
             setValue('newUnit', editProduct.unit);
             setValue('newCategoryName', editCategory.title);
         console.log("use effect setValue")
-    }, [editProduct]);
+    }, [editProduct, editCategory.title, setValue]);
+
 
     const onSubmit = async (data) => {
         console.log('dane edit product');
         console.log(data);
-        console.log(editCategory)
+        console.log(editProduct)
         console.log(selectedNewCategory)
         let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : editCategory.id;
-        await updateProduct(editProduct.id,data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory);
+        await updateProduct(editProduct.id, data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory, editProduct.productId, editProduct.userId );
         handleClose();
     };
 

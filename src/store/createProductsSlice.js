@@ -41,13 +41,14 @@ const createProductsSlice = (set, get) => ({
         set({editModalOpen: open})
     },
     editProduct: {},
-    setEditProduct: (id, name, capacity, unit,quantity, expireDate, categoryId) => {
-        set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId}});
+    setEditProduct: (id, name, capacity, unit,quantity, expireDate, categoryId, productId, userId) => {
+        set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId}});
         console.log("editProduct")
 
+
     },
-    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId)=>{
-            let editProduct = await ProductsService.updateProduct(id, name, capacity, unit, quantity, expireDate, categoryId);
+    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId)=>{
+            let editProduct = await ProductsService.updateProduct(id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId);
             console.log("updateProduct")
             console.log(editProduct);
             set((state)=> {

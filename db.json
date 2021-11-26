@@ -352,6 +352,69 @@
       "expireDate": "2021-11-28T11:50:47.000Z",
       "categoryId": 20,
       "id": 54
+    },
+    {
+      "name": "mleczkoMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T12:44:18.000Z",
+      "categoryId": 26,
+      "id": 55
+    },
+    {
+      "name": "czekoladka myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T13:16:25.000Z",
+      "categoryId": 24,
+      "id": 56
+    },
+    {
+      "name": "cukierki myszki",
+      "capacity": 100,
+      "unit": "kg",
+      "quantity": 4,
+      "expireDate": "2021-12-16T14:47:00.000Z",
+      "categoryId": 25,
+      "id": 57
+    },
+    {
+      "name": "mleczko myszki",
+      "capacity": 100,
+      "unit": "ml",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:47:28.000Z",
+      "categoryId": 26,
+      "id": 58
+    },
+    {
+      "name": "serek myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:47:47.000Z",
+      "categoryId": 26,
+      "id": 59
+    },
+    {
+      "name": "pysznosci myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:48:04.000Z",
+      "categoryId": 24,
+      "id": 60
+    },
+    {
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:48:17.000Z",
+      "categoryId": 24,
+      "id": 61
     }
   ],
   "images": [
@@ -399,70 +462,58 @@
   ],
   "storage": [
     {
-      "name": "miodekMyszki",
+      "id": 6,
+      "name": "miodekMyszki123",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-11-30T10:14:42.000Z",
-      "categoryId": 26,
-      "id": 6,
-      "productId": 42,
-      "userId": 3
+      "categoryId": 21
     },
     {
-      "name": "cukierKotka",
+      "id": 7,
+      "name": "cukierKotka123",
       "capacity": 500,
       "unit": "gr",
-      "quantity": 4,
+      "quantity": 6,
       "expireDate": "2021-11-30T10:17:10.000Z",
-      "categoryId": 11,
-      "id": 7,
-      "productId": 43,
-      "userId": 1
+      "categoryId": 11
     },
     {
+      "id": 8,
       "name": "maselkoMyszki",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-11-30T11:41:16.000Z",
-      "categoryId": 26,
-      "id": 8,
-      "productId": 44,
-      "userId": 3
+      "categoryId": 21
     },
     {
-      "name": "mAkaKotka",
+      "id": 9,
+      "name": "mąka kotka",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-11-30T11:47:34.000Z",
-      "categoryId": 10,
-      "id": 9,
-      "productId": 45,
-      "userId": 1
+      "categoryId": 11
     },
     {
-      "name": "ryżKotka",
+      "id": 10,
+      "name": "ryżKotka123",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-12-09T11:47:47.000Z",
-      "categoryId": 10,
-      "id": 10,
-      "productId": 46,
-      "userId": 1
+      "categoryId": 10
     },
     {
+      "id": 11,
       "name": "miodekKotka",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-11-28T11:48:07.000Z",
-      "categoryId": 12,
-      "id": 11,
-      "productId": 47,
-      "userId": 1
+      "categoryId": 11
     },
     {
       "name": "dzemik Kotka",
@@ -540,6 +591,61 @@
       "id": 18,
       "productId": 54,
       "userId": 2
+    },
+    {
+      "id": 19,
+      "name": "mleczkoMyszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 4,
+      "expireDate": "2021-11-30T12:44:18.000Z",
+      "categoryId": 22,
+      "productId": 55,
+      "userId": 3
+    },
+    {
+      "name": "cukierki myszki",
+      "capacity": 100,
+      "unit": "kg",
+      "quantity": 4,
+      "expireDate": "2021-12-16T14:47:00.000Z",
+      "categoryId": 25,
+      "id": 21,
+      "productId": 57,
+      "userId": 3
+    },
+    {
+      "name": "mleczko myszki",
+      "capacity": 100,
+      "unit": "ml",
+      "quantity": 3,
+      "expireDate": "2021-11-30T14:47:28.000Z",
+      "categoryId": 26,
+      "id": 22,
+      "productId": 58,
+      "userId": 3
+    },
+    {
+      "id": 24,
+      "name": "pysznosci myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:48:04.000Z",
+      "categoryId": 25,
+      "productId": 60,
+      "userId": 3
+    },
+    {
+      "id": 25,
+      "name": "slodycze myszki pychotki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-11-30T14:48:17.000Z",
+      "categoryId": 25,
+      "productId": 61,
+      "userId": 3
     }
   ]
 }

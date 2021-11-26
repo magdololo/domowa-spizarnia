@@ -54,7 +54,7 @@ const ProductsService= {
             console.error(error);
         }
     },
-    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId) => {
+    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId) => {
         try {
             let updatedProduct = await axios.put('http://192.168.1.134:4000/storage/' + id, {
                 id: id,
@@ -63,7 +63,9 @@ const ProductsService= {
                 unit: unit,
                 quantity: parseInt(quantity),
                 expireDate: expireDate,
-                categoryId: categoryId
+                categoryId: categoryId,
+                productId: productId,
+                userId: userId
             });
             return updatedProduct.data
         } catch (error) {

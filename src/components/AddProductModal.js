@@ -24,7 +24,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
-    const [date, setDate] = React.useState(new Date());;
+    const [date] = React.useState(new Date());;
     const style = {
         position: 'absolute',
         top: '50%',
