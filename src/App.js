@@ -51,7 +51,7 @@ export default function App() {
                     <Route path="/signUp">
                         <SignUp/>
                     </Route>
-                    <Route path="/">
+                    <Route path="/" >
                         <Login />
                     </Route>
                 </Switch>

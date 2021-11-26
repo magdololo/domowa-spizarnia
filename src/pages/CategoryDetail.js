@@ -15,30 +15,26 @@ import ReturnToCategoryList from "../components/ReturnToCategoryList";
 
 const CategoryDetail = ()=> {
     const user = useStore(state=>state.loggedInUser);
+    const userId = user.id;
+    const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
     const productsList = useStore(state => state.storage);
-    const getProductsOfStorage = useStore(state => state.getProductsOfUser);
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
     const getCategoryByPath= useStore(state=> state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
-    const userId = user.id
+
 
     useEffect(() => {
         console.log(categoryName);
         getCategoryByPath(categoryName).then(category => {
             setCategory(category)
         });
-        getProductsOfStorage();
-    },[categoryName, category.id, getCategoryByPath, getProductsOfStorage]);
+        getUserProducts(userId);
+    },[categoryName, category.id, getCategoryByPath, getUserProducts]);
 
 
-    console.log(productsList)
-  console.log(user.id)
-    const productsOfUser = productsList.filter(product => product.userId === userId);
-    const products = productsOfUser.filter(product => product.categoryId === category.id );
-
-    if (products.length >= 2) {
-        products.sort((a, b) => {
+    if (productsList.length >= 2) {
+        productsList.sort((a, b) => {
             a = a.name.toLowerCase();
             b = b.name.toLowerCase();
 
@@ -58,7 +54,7 @@ const CategoryDetail = ()=> {
                        {category.title}
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
-                       {products.map((product) => (
+                       {productsList.map((product) => (
                         <ProductListItem key={product.id} product={product} component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}/>
                        ))}
 

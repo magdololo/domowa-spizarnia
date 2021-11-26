@@ -8,9 +8,9 @@ const ProductsService= {
             console.error(error)
         }
     },
-    getUserProducts: async () => {
+    getUserProducts: async (userId) => {
         try {
-            let userProducts = await axios.get('http://192.168.1.134:4000/storage');
+            let userProducts = await axios.get('http://192.168.1.134:4000/storage?userId='+userId);
             return userProducts.data;
         } catch (error) {
             console.error(error)
