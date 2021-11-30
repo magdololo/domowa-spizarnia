@@ -12,6 +12,8 @@ import {useParams} from "react-router-dom";
 import {MenuItem} from "@mui/material";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 import {useForm, Controller} from "react-hook-form";
+import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
+
 //import slugify from "slugify";
 
 
@@ -20,6 +22,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
+    const [selectedNewProductName, setSelectedNewProductName] = useState("");
+    const [product, setProduct] = useState({});
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
@@ -89,10 +93,14 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     });
 
     const onSubmit = data => {
+        console.log("onSubmit");
+        console.log(data);
+        console.log(product);
+        console.log(selectedNewProductName)
         addProduct({
-            "name": data.productName,
-            "capacity": parseInt(data.capacity),
-            "unit": data.unit,
+            "name": product !== null ? product.name : selectedNewProductName,
+            "capacity":product !== null  ? product.capacity : parseInt(data.capacity),
+            "unit": product !== null  ? product.unit : data.unit,
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
             "categoryId": categoryName ? category.id : selectedNewCategory.id
@@ -138,43 +146,49 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                         </Box>
                         :
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                        <Controller
-                            name="categoryName"
-                            control={control}
-                            defaultValue={category.title}
-                            render={({field: {onChange, value}, fieldState: {error}}) => (
-                                <TextField
-                                    sx={{width: "80%", marginLeft: "10%"}}
-                                    //id="outlined-read-only-input"
-                                    label="Nazwa kategorii"
-                                    value={value}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                    error={!!error}
-                                    helperText={error ? error.message : null}
-                                    type= "text"
-                                    disabled={true}
-                                />
+                            <Controller
+                                name="categoryName"
+                                control={control}
+                                defaultValue={category.title}
+                                render={({field: {onChange, value}, fieldState: {error}}) => (
+                                    <TextField
+                                        sx={{width: "80%", marginLeft: "10%"}}
+                                        //id="outlined-read-only-input"
+                                        label="Nazwa kategorii"
+                                        value={value}
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
+                                        error={!!error}
+                                        helperText={error ? error.message : null}
+                                        type= "text"
+                                        disabled={true}
+                                     />
                              )} />
                         </Box>}
-                        <Box id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                        <Controller
-                            name="productName"
-                            control={control}
-                            defaultValue=""
-                            render={({field: {onChange, value}, fieldState: {error}}) => (
-                               //
-                            <TextField sx={{width: "80%", marginLeft: "10%"}}
-                               // id="standard-basic"
-                                label="Nazwa produktu"
-                                variant="standard"
-                                       value={value}
-                                onChange={onChange}
-                                error={!!error}
-                                helperText={error ? error.message : null}
-                            />
-                            )} />
+                        <Box id="modal-modal-description" sx={{mt: 2, mb: 3,width: "80%", marginLeft: "10%"}}>
+
+                            {/*<AutocompleteWithProductsList/>*/}
+                            <Controller
+                                name="productName"
+                                control={control}
+                                defaultValue=""
+                                render={({field: {onChange, value}, fieldState: {error}}) => (
+
+                                    <AutocompleteWithProductsList
+                                        labelForAddModal="Nazwa produktu"
+                                        label="Nazwa produktu"
+                                        value={value}
+                                        onChange={onChange}
+                                        error={!!error}
+                                        helperText={error ? error.message : null}
+                                        type= "text"
+                                        setSelectedNewProductName={setSelectedNewProductName}
+                                        setProduct={setProduct}
+                                        />
+
+
+                                )} />
                         </Box>
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
                             <Controller
@@ -183,8 +197,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 defaultValue= {100}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
-                                            // id="standard-basic"
-                                             label="Pojemność"
+                                     // id="standard-basic"
+                                            label="Pojemność"
                                              variant="standard"
                                              value={value}
                                              onChange={onChange}
@@ -201,17 +215,14 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                 <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                    //id="standard-select-currency"
-                                   select
-                                   label="Jednostka"
+                                           select
+                                           label="Jednostka"
                                            onChange={onChange}
                                            value={value}
                                            error={!!error}
                                            helperText={error ? error.message : null}
                                            variant="standard"
                                            type="text"
-
-
-
                                 >
                             {units.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>

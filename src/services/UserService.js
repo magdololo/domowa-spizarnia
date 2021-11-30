@@ -8,11 +8,9 @@ const UserService =  {
             if(response.data.length === 0){
                 let responsePost = await axios.post('http://192.168.1.134:4000/users', {email: email, password: password});
                 let defaultCategories =  await CategoriesService.getDefaultCategories();
-                console.log(defaultCategories)
                 defaultCategories.forEach(category=>{
                     category.id = null;
                     category.userId = responsePost.data.id;
-                    console.log(category)
                     CategoriesService.addNewCategory(category)
                     }
                 )
@@ -21,13 +19,12 @@ const UserService =  {
         } catch (error){
             console.error(error)
         }
-        throw 'User with given email already exists';
+        throw new Error('User with given email already exists');
     },
     logInUser: async (email,password) => {
         let returnObject = {user: null, message:''};
         try {
             let response = await axios.get(`http://192.168.1.134:4000/users?email=${email}&password=${password}`);
-            console.log(response)
             if(response.data.length === 1){
                 returnObject.user = response.data[0];
             }else {

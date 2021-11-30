@@ -29,7 +29,6 @@ const AddCategoryModal=({open, close})=>{
     }
 
 
-        console.log(categories)
         if (categories.length >= 2) {
             categories.sort((a, b) => {
                 a = a.title.toLowerCase();

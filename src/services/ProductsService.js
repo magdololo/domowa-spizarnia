@@ -19,17 +19,17 @@ const ProductsService= {
     productToStorage:{},
     addProduct: async (newProduct, userId) => {//from AddProductModal
         try {
-            let addedProductToProducts = await ProductsService.addProductToProducts(newProduct);
-            console.log(addedProductToProducts)
+            let productToProducts = {};
+            productToProducts.name = newProduct.name;
+            productToProducts.capacity = newProduct.capacity;
+            productToProducts.unit = newProduct.unit;
+            let addedProductToProducts = await ProductsService.addProductToProducts(productToProducts);
             let productToStorage = addedProductToProducts
-            console.log(productToStorage)
             let productId = productToStorage.id;
             productToStorage.id = null;
             productToStorage.productId = productId;
             productToStorage.userId = userId;//from AddProductModal
-            //console.log(productToStorage)//id null
-            let addedProductToStorage = await ProductsService.addProductToStorage(productToStorage)
-            //console.log(addedProductToStorage) //id 5
+            let addedProductToStorage = await ProductsService.addProductToStorage(productToStorage);
             return addedProductToStorage;
         } catch (error) {
             console.error(error);
@@ -38,17 +38,14 @@ const ProductsService= {
     addProductToProducts: async (newProduct) =>{
         try {
             let response = await axios.post('http://192.168.1.134:4000/products', newProduct);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.error(error);
         }
     },
     addProductToStorage: async (productToStorage) => {
-        console.log(productToStorage)
         try {
             let response = await axios.post('http://192.168.1.134:4000/storage', productToStorage);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.error(error);

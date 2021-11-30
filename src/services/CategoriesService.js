@@ -4,7 +4,6 @@ const CategoriesService= {
     getDefaultCategories: async ()=>{
         try {
             let response = await axios.get(`http://192.168.1.134:4000/categories-default`);
-            console.log(response.data)
             return response.data;
 
         }
@@ -15,7 +14,6 @@ const CategoriesService= {
     getUserCategories: async (userId)=>{
         try {
             let response = await axios.get(`http://192.168.1.134:4000/categories-user?userId=${userId}`);
-            console.log(response.data)
             return response.data;
 
         }
@@ -39,7 +37,6 @@ const CategoriesService= {
                 path: path,
                 title: title
             });
-            console.log(editCategory.data);
             return editCategory.data
         } catch (error) {
             console.error(error)
@@ -48,7 +45,6 @@ const CategoriesService= {
     deleteCategory: async (id) => {
          try {
              let deletedCategory = await axios.delete('http://192.168.1.134:4000/categories-user/' + id);
-             console.log(deletedCategory);
              return deletedCategory.data
             } catch (error) {
             console.error(error);

@@ -25,15 +25,16 @@ const CategoryDetail = ()=> {
 
 
     useEffect(() => {
-        console.log(categoryName);
+
         getCategoryByPath(categoryName).then(category => {
             setCategory(category)
         });
         getUserProducts(userId);
-    },[categoryName, category.id, getCategoryByPath, getUserProducts]);
+    },[categoryName, category.id, getCategoryByPath, getUserProducts, userId]);
 
+    const productsOfCategory = productsList.filter((product=>product.categoryId === category.id));
 
-    if (productsList.length >= 2) {
+    if (productsOfCategory.length >= 2) {
         productsList.sort((a, b) => {
             a = a.name.toLowerCase();
             b = b.name.toLowerCase();
@@ -54,7 +55,7 @@ const CategoryDetail = ()=> {
                        {category.title}
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
-                       {productsList.map((product) => (
+                       {productsOfCategory.map((product) => (
                         <ProductListItem key={product.id} product={product} component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}/>
                        ))}
 

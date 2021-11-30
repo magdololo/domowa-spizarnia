@@ -35,11 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ForgotPassword = () => {
-    const [values, setValues] = React.useState({
-
-        email: '',
-
-    });
+    const [values, setValues] = React.useState({email: '',});
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -94,6 +90,7 @@ const ForgotPassword = () => {
                                     required: 'Email wymagany',
                                     pattern: {
                                         value:
+                                        // eslint-disable-next-line
                                             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         message: 'Nieprawidłowy email',
                                     },

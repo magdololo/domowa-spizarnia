@@ -47,9 +47,7 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
     const classes = useStyles();
     const logIn = useStore(state => state.logIn);
-
     const [values, setValues] = React.useState({
-
         password: '',
         email: '',
         showPassword: false,
@@ -75,9 +73,8 @@ const Login = () => {
     });
 
     const onSubmitLogin = async data => {
-        console.log(data);
+
         let message = await logIn(data.email, data.password);
-        console.log(message)
         if (message !== '') setErrorMessage(message);
         reset({
             email: "",
@@ -117,6 +114,7 @@ const Login = () => {
                             required: 'Email wymagany',
                             pattern: {
                                 value:
+                                // eslint-disable-next-line
                                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: 'Nieprawidłowy email',
                             },

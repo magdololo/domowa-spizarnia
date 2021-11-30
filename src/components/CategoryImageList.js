@@ -35,12 +35,11 @@ import AppBarBottom from "./AppBarBottom";
 
 
            return (
-<>
+               <>
                <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto', paddingBottom: 40}}>
                    <ImageList cols={ minWidth600 ? 3: 2 } >
                        {categoryList.map((item) => (
                            <ImageListItem key={item.id} component={Link} to={"/" + item.path}>
-
                                <img src={item.url} srcSet={item.url} alt={item.title} loading="lazy" key={'img'+item.id}/>
                                    <Typography component="span" key={'typography_'+item.id}
                                        sx={{
@@ -62,15 +61,12 @@ import AppBarBottom from "./AppBarBottom";
                                            }}>
                                        {item.title}
                                    </Typography>
-
                            </ImageListItem>
 
                        ))}
                 <ImageListItem sx={{backgroundColor: 'lightgray', display: 'flex', position: 'relative', minHeight: '100px'}} key={0} >
                     <img src='/images/placeholder.png' alt="placeholder" />
                 <Typography sx={{border: '0', position: 'absolute', top: '50%', left: '50%',transform: 'translate(-50%, -50%)',textAlign: 'center'}} size="medium" color="secondary" aria-label="add" >
-
-
                     <AddCategoryModal open={open} close={handleClose}/>
                     <AddIcon  color="secondary" cursor="pointer" sx={{ textAlign: 'center'}} onClick={handleOpen}/>
                     <Typography component="span"
@@ -93,7 +89,7 @@ import AppBarBottom from "./AppBarBottom";
                    </ImageList>
                </Box>
              <AppBarBottom isAddProductFromListCategory={true} />
-       </>
+            </>
            );
 }
 export default CategoryImageList;

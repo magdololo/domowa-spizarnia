@@ -21,16 +21,11 @@ const EditProductModal =()=>{
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const [editCategory, setEditCategory] = React.useState("");
-    console.log(selectedNewCategory);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
-    console.log('editProduct')
-    console.log(editProduct)
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
-
-
     const units = [
         {
             value: 'gr',
@@ -52,7 +47,6 @@ const EditProductModal =()=>{
         }
 
     ];
-
     const style = {
         position: 'absolute',
         top: '50%',
@@ -66,10 +60,9 @@ const EditProductModal =()=>{
         zIndex: 1200,
     }
     let { categoryName } = useParams();
-    console.log(categoryName);
+
 
     useEffect(() => {
-        console.log(categoryName);
         getCategoryByPath(categoryName).then(category => {
             setEditCategory(category)
         });
@@ -84,24 +77,15 @@ const EditProductModal =()=>{
             setValue('newQuantity', editProduct.quantity);
             setValue('newUnit', editProduct.unit);
             setValue('newCategoryName', editCategory.title);
-        console.log("use effect setValue")
+
     }, [editProduct, editCategory.title, setValue]);
 
 
     const onSubmit = async (data) => {
-        console.log('dane edit product');
-        console.log(data);
-        console.log(editProduct)
-        console.log(selectedNewCategory)
         let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : editCategory.id;
         await updateProduct(editProduct.id, data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory, editProduct.productId, editProduct.userId );
         handleClose();
     };
-
-    const categoryList = useStore(state => state.categories);
-    let categoryListWithoutEditCategory = categoryList.filter(category => category.title !== editCategory.title);
-    console.log(categoryList);
-    console.log(categoryListWithoutEditCategory);
 
     return(
         <>
@@ -113,7 +97,6 @@ const EditProductModal =()=>{
 
         >
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
                     Edytuj produkt

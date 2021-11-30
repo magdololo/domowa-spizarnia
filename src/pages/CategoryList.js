@@ -9,15 +9,10 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 const CategoryList = () => {
     const user = useStore(state=>state.loggedInUser);
-    const categoryList = useStore(state => state.categories);
-    console.log(categoryList);
+    //const categoryList = useStore(state => state.categories);
     const fetchCategories = useStore(state => state.getUserCategories);
-
     const [editMode, setEditMode] = useState(false);
-
     const fetchImages = useStore(state => state.getImages)
-    const imagesList = useStore(state => state.images);
-    console.log(imagesList);
     const minWidth450 = useMediaQuery('(min-width:450px)');
     useEffect(() => {
         fetchCategories(user.id);
@@ -25,31 +20,25 @@ const CategoryList = () => {
 
     }, [fetchImages, fetchCategories, user.id]);
 
-    console.log(user.id);
-    console.log(fetchImages);
-    console.log(categoryList);
 
     return (
         <>
-
-
-           <div style={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-
-                width: '100%',
-                minHeight: '80px',
-                alignItems: "space-between"
-            }}>
                 <div style={{
+                    display: 'flex',
+                    flexWrap: 'nowrap',
+                    width: '100%',
+                    minHeight: '80px',
+                    alignItems: "space-between"
+                }}>
+               <div style={{
                     flex: '1 1 auto',
                     width:  '50%' ,
                     textAlign: 'left',
                     fontSize: '1rem',
                     color: 'rgba(0, 0, 0, 0.6',
                     paddingLeft: minWidth450 ?"10%" : '15px'
-                }}>Lista Kategorii
-                </div>
+                    }}>Lista Kategorii
+               </div>
                <div style={{
                    display: 'flex',
                    flexWrap: 'nowrap',
@@ -74,11 +63,11 @@ const CategoryList = () => {
                     color: 'rgba(0, 0, 0, 0.6'
                 }}><Switch color="primary" size="medium" onChange={() => setEditMode(!editMode)}/></div>
                </div>
-            </div>
-            {editMode ?
+                </div>
+                {editMode ?
                 <EditCategoryImageList/>
                 : <CategoryImageList/>
-            }
+                }
         </>
     )
 }

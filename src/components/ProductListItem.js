@@ -11,7 +11,7 @@ const ProductListItem = ({product}) => {
 
     let   [todayDate] = useState(new Date());
     const expireDate = product.expireDate;
-   // console.log(`dzis ${todayDate.toISOString()} data waznosci ${expireDate}`);
+
 
 
     return (

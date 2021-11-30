@@ -17,8 +17,6 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     const minWidth900 = useMediaQuery('(min-width:900px)')
 
 
-
-
     const StyledFab = styled(Fab)(({ theme }) => ({
         position: 'relative',
         zIndex: 1,
@@ -51,7 +49,6 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
             width: '90',
         },
     }));
-
     const SearchIconWrapper = styled('div')(({ theme }) => ({
         padding: theme.spacing(0, 2),
         height: '50%',

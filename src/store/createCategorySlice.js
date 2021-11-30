@@ -13,7 +13,6 @@ const createCategorySlice = (set, get) => ({
     getCategoryByPath: async (path) => {
         let categories = get().categories;//pobiera kategorie ze stanu
         if (categories.length === 0) {
-
             const fetch = get().getUserCategories;
             await fetch(get().loggedInUser.id);
             categories = get().categories;
@@ -56,7 +55,7 @@ const createCategorySlice = (set, get) => ({
     },
     deleteCategory: async (id) => {
 
-        let deleteCategory = await CategoriesService.deleteCategory(id);
+        await CategoriesService.deleteCategory(id);
         set((state) => ({
             categories: state.categories.filter(deleteCategory => deleteCategory.id !== id),
         }));

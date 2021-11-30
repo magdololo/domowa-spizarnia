@@ -72,8 +72,6 @@ ImageButton.propTypes = {
 
 function ImagePickerModal() {
     const imagesList = useStore(state => state.images);
-
-    console.log(imagesList);
     const  setPickedImage = useStore(state=>state.setPickedImage);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -82,7 +80,7 @@ function ImagePickerModal() {
     const handleClose = () => {
         setOpen(false);
     };
-  console.log(setPickedImage);
+
     return (
         <React.Fragment>
             <Button onClick={handleOpen}>Wybierz zdjęcie</Button>

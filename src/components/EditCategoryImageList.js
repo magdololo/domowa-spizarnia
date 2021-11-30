@@ -30,9 +30,9 @@ const EditCategoryImageList =()=> {
     }
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
-    <ImageList cols={minWidth600 ? 3 : 2} >
-        {categoryList.map((item) => (
-            <ImageListItem key={item.id} sx={{displayInline: "flex", alignItems: "center", justifyContent: "center", margin: 0, padding: 0}}>
+            <ImageList cols={minWidth600 ? 3 : 2} >
+                {categoryList.map((item) => (
+                <ImageListItem key={item.id} sx={{displayInline: "flex", alignItems: "center", justifyContent: "center", margin: 0, padding: 0}}>
                 <img
                     src={item.url}
                     srcSet={item.url}
@@ -40,7 +40,6 @@ const EditCategoryImageList =()=> {
                     loading="lazy"
                     style={{filter: 'brightness(50%)'}}
                 />
-
                 <IconButton
                     sx={{
                         color: "rgba(255, 255, 255, 0.54)",
@@ -57,12 +56,9 @@ const EditCategoryImageList =()=> {
                         fontSize: "1.3em",
                         color: 'white'
                     }} onClick={() => {
-
                         setEditCategory(item.id, item.url, item.title, item.path);
                         setEditCategoryModalOpen(true);
                     }}/>
-
-
                 </IconButton>
                 <IconButton
                     sx={{
@@ -77,7 +73,8 @@ const EditCategoryImageList =()=> {
                     }}
                     aria-label={`info about ${item.title}`}
                 >
-                    <HighlightOffRoundedIcon style={{
+                    <HighlightOffRoundedIcon
+                        style={{
                         lineHeight: "24px",
                         textOverflow: "ellipsis",
                         overflow: "hidden",

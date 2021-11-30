@@ -14,8 +14,6 @@ import useStore from "./store/useStore";
 export default function App() {
 
     const loggedInUser = useStore(state=> state.loggedInUser);
-    console.log('loggedIn app.js')
-    console.log(loggedInUser)
 
     return (
         <>

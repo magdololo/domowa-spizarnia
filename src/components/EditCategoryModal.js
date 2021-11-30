@@ -24,20 +24,16 @@ import slugify from "slugify";
           setEditModalOpen(false);
       }
       useEffect(()=>{
-          console.log(editCategory.title)//po wybraniu categorii tytul
           setNewCategoryName(editCategory.title);
       }, [editCategory]);
-      console.log(pickedImage);//po wybraniu kategorii empty string
+
 
       useEffect(()=>{
           if (pickedImage === ''){
               setLocalImage(editCategory.url);
-              console.log(editCategory.url)// url wybranej kategorii
           } else {
               setLocalImage(pickedImage);
-              console.log(pickedImage)
           }
-
       }, [pickedImage, editCategory]);
 
 
@@ -56,11 +52,10 @@ import slugify from "slugify";
 
       return(
         <Modal sx={{zIndex: '200'}}
-             open={editModalOpen}
-             onClose={handleClose}
-             aria-labelledby="modal-modal-title"
+               open={editModalOpen}
+               onClose={handleClose}
+               aria-labelledby="modal-modal-title"
                aria-describedby="modal-modal-description"
-
         >
         <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -69,16 +64,13 @@ import slugify from "slugify";
         <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
             <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" value={newCategoryName} onChange={ e => setNewCategoryName(e.target.value)} />
         </Typography>
-
         <ImageListItem key={editCategory.id} cols={1} rowHeight={120} rowWidth={200}>
-
             <img
                 src= {localImage}
                 srcSet= {localImage}
                 alt="zdjecie kategorii"
                 loading="lazy"
             />
-
         </ImageListItem>
 
         <ImagePickerModal/>
@@ -87,14 +79,11 @@ import slugify from "slugify";
             String.prototype.capitalize = function() {
                 return this.charAt(0).toUpperCase() + this.slice(1);
             }
-            // setPickedImage(pickedImage);
             let path= slugify(newCategoryName, "_");
             updateCategory(editCategory.id, path, localImage, newCategoryName.capitalize());
             handleClose();
-
            }}>Edytuj kategorię</Button>
         </Box>
-
       </Modal>
       )
   }

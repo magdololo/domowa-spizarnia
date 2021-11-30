@@ -5,32 +5,18 @@ import useStore from "../store/useStore";
 import {useParams} from "react-router-dom";
 const filter = createFilterOptions();
 
-export default function AutocompleteCategoriesTitle({
-                                                        labelForAddModal,
-                                                        setSelectedNewCategory,
-                                                        editCategory,
-
-                                                    }) {
+export default function AutocompleteCategoriesTitle({labelForAddModal, setSelectedNewCategory, editCategory}) {
 
      const [value, setValue] = React.useState(null);
+     const categoryList = useStore(state => state.categories);
+     let categoryListWithoutEditCategory = categoryList.filter(category => category.title !== editCategory.title);
+     let {categoryName} = useParams();
 
-
-    const categoryList = useStore(state => state.categories);
-    let categoryListWithoutEditCategory = categoryList.filter(category => category.title !== editCategory.title);
-    console.log(categoryList);
-    console.log(categoryListWithoutEditCategory);
-    let {categoryName} = useParams();
-    console.log(categoryName);
-    console.log("categoryname")
-
-    console.log(value);
-    console.log(editCategory.title)
 
     return (
         <Autocomplete
-            // disabled={canChangeCategory}
 
-           value={categoryName ? editCategory.title : value}
+            value={categoryName ? editCategory.title : value}
             onChange={(event, newValue) => {
                 if (typeof newValue === 'string' && newValue === 'disabled') {
                     setValue({
@@ -44,12 +30,10 @@ export default function AutocompleteCategoriesTitle({
                 } else {
                     setValue(newValue);
                 }
-
                 setSelectedNewCategory(newValue)
             }}
             filterOptions={(options, params) => {
                 const filtered = filter(options, params);
-
                 const {inputValue} = params;
                 // Suggest the creation of a new value
                 const isExisting = options.some((option) => inputValue === option.title);
@@ -59,7 +43,6 @@ export default function AutocompleteCategoriesTitle({
                         title: `Add "${inputValue}"`,
                     });
                 }
-
                 return filtered;
             }}
             selectOnFocus
