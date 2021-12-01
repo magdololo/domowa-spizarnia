@@ -35,7 +35,7 @@ const CategoryDetail = ()=> {
     const productsOfCategory = productsList.filter((product=>product.categoryId === category.id));
 
     if (productsOfCategory.length >= 2) {
-        productsList.sort((a, b) => {
+        productsOfCategory.sort((a, b) => {
             a = a.name.toLowerCase();
             b = b.name.toLowerCase();
 

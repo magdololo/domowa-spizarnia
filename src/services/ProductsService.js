@@ -17,20 +17,37 @@ const ProductsService= {
         }
     },
     productToStorage:{},
-    addProduct: async (newProduct, userId) => {//from AddProductModal
+    addProduct: async (newProduct, userId, productFromProducts) => {//from AddProductModal
+        console.log(productFromProducts)
         try {
-            let productToProducts = {};
-            productToProducts.name = newProduct.name;
-            productToProducts.capacity = newProduct.capacity;
-            productToProducts.unit = newProduct.unit;
-            let addedProductToProducts = await ProductsService.addProductToProducts(productToProducts);
-            let productToStorage = addedProductToProducts
-            let productId = productToStorage.id;
-            productToStorage.id = null;
-            productToStorage.productId = productId;
-            productToStorage.userId = userId;//from AddProductModal
-            let addedProductToStorage = await ProductsService.addProductToStorage(productToStorage);
-            return addedProductToStorage;
+            if(productFromProducts){
+                let productToStorageFromProducts = productFromProducts;
+                let productId = productFromProducts.id;
+                productToStorageFromProducts.id = null;
+                productToStorageFromProducts.productId = productId;
+                productToStorageFromProducts.userId = userId;//from AddProductModal
+                productToStorageFromProducts.quantity = newProduct.quantity;
+                productToStorageFromProducts.expireDate = newProduct.expireDate;
+                productToStorageFromProducts.categoryId = newProduct.categoryId;
+                let addedProductToStorageFromProducts = await ProductsService.addProductToStorage(productToStorageFromProducts);
+                return addedProductToStorageFromProducts;
+            } else {
+                let productToProducts = {};
+                productToProducts.name = newProduct.name;
+                productToProducts.capacity = newProduct.capacity;
+                productToProducts.unit = newProduct.unit;
+                let addedProductToProducts = await ProductsService.addProductToProducts(productToProducts);
+                let productToStorage = addedProductToProducts;
+                let productId = productToStorage.id;
+                productToStorage.id = null;
+                productToStorage.productId = productId;
+                productToStorage.userId = userId;//from AddProductModal
+                productToStorage.quantity = newProduct.quantity;
+                productToStorage.expireDate = newProduct.expireDate;
+                productToStorage.categoryId = newProduct.categoryId;
+                let addedProductToStorage = await ProductsService.addProductToStorage(productToStorage);
+                return addedProductToStorage;
+            }
         } catch (error) {
             console.error(error);
         }
@@ -43,9 +60,9 @@ const ProductsService= {
             console.error(error);
         }
     },
-    addProductToStorage: async (productToStorage) => {
+    addProductToStorage: async (productToStorageFromProducts) => {
         try {
-            let response = await axios.post('http://192.168.1.134:4000/storage', productToStorage);
+            let response = await axios.post('http://192.168.1.134:4000/storage', productToStorageFromProducts);
             return response.data;
         } catch (error) {
             console.error(error);

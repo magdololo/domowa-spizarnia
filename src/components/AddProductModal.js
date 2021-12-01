@@ -22,11 +22,11 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
     const [selectedNewCategory, setSelectedNewCategory] = useState('');
-    const [selectedNewProductName, setSelectedNewProductName] = useState("");
     const [product, setProduct] = useState({});
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
+    const [newProductName, setNewProductName] = useState("");
     const userId = loggedInUser.id;
     const [date] = React.useState(new Date());;
     const style = {
@@ -96,15 +96,15 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         console.log("onSubmit");
         console.log(data);
         console.log(product);
-        console.log(selectedNewProductName)
+        console.log(newProductName);
         addProduct({
-            "name": product !== null ? product.name : selectedNewProductName,
+            "name": product !== null ? product.name : newProductName.name,
             "capacity":product !== null  ? product.capacity : parseInt(data.capacity),
             "unit": product !== null  ? product.unit : data.unit,
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
             "categoryId": categoryName ? category.id : selectedNewCategory.id
-        },userId);
+        },userId, product);
         close();
     };
     return (
@@ -183,8 +183,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         error={!!error}
                                         helperText={error ? error.message : null}
                                         type= "text"
-                                        setSelectedNewProductName={setSelectedNewProductName}
                                         setProduct={setProduct}
+                                        setNewProductName={setNewProductName}
                                         />
 
 
@@ -194,7 +194,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="capacity"
                                 control={control}
-                                defaultValue= {100}
+                                defaultValue= {product !== null ? product.capacity : 100}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
                                      // id="standard-basic"
@@ -211,7 +211,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="unit"
                                 control={control}
-                                defaultValue='gr'
+                                defaultValue={product !== null ? product.unit : 'gr'}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                 <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                    //id="standard-select-currency"

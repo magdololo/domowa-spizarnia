@@ -16,9 +16,9 @@ const createProductsSlice = (set, get) => ({
             storage: response,
         }));
     },
-    addProduct: async (newProduct, userId) => {
+    addProduct: async (newProduct, userId, productFromProducts) => {
 
-        let addedProduct= await ProductsService.addProduct(newProduct, userId);
+        let addedProduct= await ProductsService.addProduct(newProduct, userId, productFromProducts);
         console.log(addedProduct);
             set((state) => ({
                 products: [

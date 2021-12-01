@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import {useEffect} from "react";
 
 const filter = createFilterOptions();
-export default function AutocompleteWithProductsList({labelForAddModal, setSelectedNewProductName, setProduct}) {
+export default function AutocompleteWithProductsList({labelForAddModal, setProduct, setNewProductName}) {
 
     const getProductsFromProducts = useStore(state => state.fetchProducts);
     const products = useStore(state => state.products);
@@ -17,8 +17,13 @@ export default function AutocompleteWithProductsList({labelForAddModal, setSelec
 
     }, [getProductsFromProducts]);
     console.log(value)
-
-
+  useEffect(()=>{
+      console.log(value)
+      if(value)
+        setNewProductName(value)
+  },[value])
+//value to caly obiekt produktu wybranego z products gdy wybieram z listy i wpisuje sie w pole
+    //value jest tylko name gdy schodze z pola
     return (
         <>
             <Autocomplete
@@ -30,23 +35,21 @@ export default function AutocompleteWithProductsList({labelForAddModal, setSelec
                         setValue({
                             name: newValue,
                         });
-                        setProduct({
+                        setProduct({ //potrzebuje pobrac caly produkt bo jego id bede potrzebowac zeby wyciagnac productId productu z products
                             product: newValue
 
                         })
                     } else if (newValue && newValue.inputValue) {
                         // Create a new value from the user input
                         console.log("setvalue")
-                        setValue({
 
+                        setValue(
+                            {
                             name: newValue.inputValue,
                         });
                     } else {
                         setValue(newValue);
                     }
-                    console.log("setSelectedNewProductName")
-                    console.log(newValue)
-                    setSelectedNewProductName(newValue)
                 }}
                 filterOptions={(options, params) => {
                     const filtered = filter(options, params);
@@ -54,14 +57,14 @@ export default function AutocompleteWithProductsList({labelForAddModal, setSelec
                     // Suggest the creation of a new value
                     const isExisting = options.some((option) => inputValue === option.name);
                     if (inputValue !== '' && !isExisting) {
-                        filtered.push({
+                        filtered.unshift({
                             inputValue,
                             name: `Add "${inputValue}"`,
                         });
                     }
                     return filtered;
                 }}
-                autoSelect
+                autoSelect//dołacza wpisany tekst w jedna z opcji select z ktorej popbierze wartość
                 selectOnFocus
                 //clearOnBlur
                 handleHomeEndKeys
@@ -78,9 +81,9 @@ export default function AutocompleteWithProductsList({labelForAddModal, setSelec
                     }
                     // Regular option
                     return option.name;
+
                 }}
-                renderOption={(props, option) => <li {...props}>{option.name}</li>}
-                sx={{width: 300}}
+                renderOption={(props, option) => <li {...props}>{option.name} {option.capacity} {option.unit}</li>}
                 freeSolo
                 renderInput={(params) => (
                     <TextField {...params} label={labelForAddModal}/>
