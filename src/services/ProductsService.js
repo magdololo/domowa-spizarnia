@@ -1,5 +1,6 @@
 import axios from "axios";
-const ProductsService= {
+
+const ProductsService = {
     getAllProducts: async () => {
         try {
             let allProducts = await axios.get('http://192.168.1.134:4000/products');
@@ -10,49 +11,55 @@ const ProductsService= {
     },
     getUserProducts: async (userId) => {
         try {
-            let userProducts = await axios.get('http://192.168.1.134:4000/storage?userId='+userId);
+            let userProducts = await axios.get('http://192.168.1.134:4000/storage?userId=' + userId);
             return userProducts.data;
         } catch (error) {
             console.error(error)
         }
     },
-    productToStorage:{},
+    productToStorage: {},
     addProduct: async (newProduct, userId, productFromProducts) => {//from AddProductModal
-        console.log(productFromProducts)
         try {
-            if(productFromProducts){
-                let productToStorageFromProducts = productFromProducts;
-                let productId = productFromProducts.id;
-                productToStorageFromProducts.id = null;
-                productToStorageFromProducts.productId = productId;
-                productToStorageFromProducts.userId = userId;//from AddProductModal
-                productToStorageFromProducts.quantity = newProduct.quantity;
-                productToStorageFromProducts.expireDate = newProduct.expireDate;
-                productToStorageFromProducts.categoryId = newProduct.categoryId;
-                let addedProductToStorageFromProducts = await ProductsService.addProductToStorage(productToStorageFromProducts);
-                return addedProductToStorageFromProducts;
+            let product = {}
+            if (productFromProducts && newProduct.capacity === productFromProducts.capacity && newProduct.unit === productFromProducts.unit) {
+                product = {
+                    "id": productFromProducts.id,
+                    "name": productFromProducts.name,
+                    "capacity": productFromProducts.capacity,
+                    "unit": productFromProducts.unit,
+                }
             } else {
-                let productToProducts = {};
-                productToProducts.name = newProduct.name;
-                productToProducts.capacity = newProduct.capacity;
-                productToProducts.unit = newProduct.unit;
-                let addedProductToProducts = await ProductsService.addProductToProducts(productToProducts);
-                let productToStorage = addedProductToProducts;
-                let productId = productToStorage.id;
-                productToStorage.id = null;
-                productToStorage.productId = productId;
-                productToStorage.userId = userId;//from AddProductModal
-                productToStorage.quantity = newProduct.quantity;
-                productToStorage.expireDate = newProduct.expireDate;
-                productToStorage.categoryId = newProduct.categoryId;
-                let addedProductToStorage = await ProductsService.addProductToStorage(productToStorage);
-                return addedProductToStorage;
+                let productToBeAdded = {
+                    "name": newProduct.name,
+                    "capacity": newProduct.capacity !== productFromProducts.capacity ? newProduct.capacity : productFromProducts.capacity,
+                    "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit
+                }
+                let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
+                if (productExist.length === 0) {
+                    product = await ProductsService.addProductToProducts(productToBeAdded);
+
+                } else {
+                    product = productExist[0];
+
+                }
             }
+
+            let newStorageItem = {
+                "userId": userId,
+                "productId": product.id,
+                "name": product.name,
+                "capacity": product.capacity,
+                "unit": product.unit,
+                "quantity": newProduct.quantity,
+                "expireDate": newProduct.expireDate,
+                "categoryId": newProduct.categoryId
+            }
+            return await ProductsService.addProductToStorage(newStorageItem);
         } catch (error) {
             console.error(error);
         }
     },
-    addProductToProducts: async (newProduct) =>{
+    addProductToProducts: async (newProduct) => {
         try {
             let response = await axios.post('http://192.168.1.134:4000/products', newProduct);
             return response.data;
@@ -114,5 +121,13 @@ const ProductsService= {
             console.error(error);
         }
     },
+    getProduct: async (name, capacity, unit) => {
+        try {
+            let existProduct = await axios.get(`http://192.168.1.134:4000/products?name=${name}&capacity=${capacity}&unit=${unit}`);
+            return existProduct.data;
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
 export default ProductsService

@@ -104,23 +104,9 @@
     },
     {
       "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "path": "mąka_ryże_kasze",
-      "title": "mąka, ryże, kasze",
-      "id": 21,
-      "userId": 3
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "path": "przetwory_owocowe_i_miód",
       "title": "przetwory owocowe i miód",
       "id": 22,
-      "userId": 3
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
-      "title": "słodycze",
-      "path": "slodycze",
-      "id": 24,
       "userId": 3
     },
     {
@@ -136,6 +122,27 @@
       "path": "kategoria_myszka2",
       "userId": 3,
       "id": 26
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1529060041742-e924283f4889?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "title": "Maka ryże kasze",
+      "path": "Maka_ryze_kasze",
+      "userId": 3,
+      "id": 27
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "platki i muesli",
+      "path": "platki_i_muesli",
+      "userId": 3,
+      "id": 28
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "Makarony ",
+      "path": "Makarony",
+      "userId": 3,
+      "id": 29
     }
   ],
   "products": [
@@ -219,7 +226,7 @@
     },
     {
       "name": "orzechy nerkowca",
-      "capacity": 100,
+      "capacity": 500,
       "unit": "gr",
       "id": 73
     },
@@ -234,6 +241,96 @@
       "capacity": 1,
       "unit": "kg",
       "id": 75
+    },
+    {
+      "name": "pppppppp",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 76
+    },
+    {
+      "name": "uuuuuuuu",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 77
+    },
+    {
+      "name": "franek",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 78
+    },
+    {
+      "name": "zdfreeeeeee",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 79
+    },
+    {
+      "name": "dgdggfgr",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 80
+    },
+    {
+      "name": "bulki",
+      "capacity": 1,
+      "unit": "kg",
+      "id": 81
+    },
+    {
+      "name": "zfrfrf",
+      "capacity": 400,
+      "unit": "gr",
+      "id": 82
+    },
+    {
+      "name": "zprftytttt",
+      "capacity": 200,
+      "unit": "gr",
+      "id": 83
+    },
+    {
+      "name": "kociolek",
+      "capacity": 500,
+      "unit": "gr",
+      "id": 84
+    },
+    {
+      "name": "cukier trzcinowy",
+      "capacity": 1,
+      "unit": "kg",
+      "id": 85
+    },
+    {
+      "name": "orzechy ziemne",
+      "capacity": 103,
+      "unit": "gr",
+      "id": 86
+    },
+    {
+      "name": "miodek myszki",
+      "capacity": 1,
+      "unit": "kg",
+      "id": 87
+    },
+    {
+      "name": "slodycze myszki",
+      "capacity": 1,
+      "unit": "kg",
+      "id": 88
+    },
+    {
+      "name": "placuszki",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 89
+    },
+    {
+      "name": "czekoladki",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 90
     }
   ],
   "images": [
@@ -314,28 +411,6 @@
       "categoryId": 25
     },
     {
-      "name": "orzechy nerkowca",
-      "capacity": 100,
-      "unit": "gr",
-      "id": 31,
-      "productId": 73,
-      "userId": 3,
-      "quantity": 4,
-      "expireDate": "2022-01-21T14:59:20.000Z",
-      "categoryId": 26
-    },
-    {
-      "name": "miodek myszki",
-      "capacity": 100,
-      "unit": "gr",
-      "id": 32,
-      "productId": 74,
-      "userId": 3,
-      "quantity": 1,
-      "expireDate": "2021-12-01T10:35:46.107Z",
-      "categoryId": 26
-    },
-    {
       "name": "makaron nitki",
       "capacity": 100,
       "unit": "gr",
@@ -344,17 +419,6 @@
       "userId": 3,
       "quantity": 4,
       "expireDate": "2021-12-31T10:42:05.000Z",
-      "categoryId": 26
-    },
-    {
-      "name": "cccccccc",
-      "capacity": 100,
-      "unit": "gr",
-      "id": 34,
-      "productId": 76,
-      "userId": 3,
-      "quantity": 1,
-      "expireDate": "2021-12-01T11:01:34.707Z",
       "categoryId": 26
     },
     {
@@ -368,14 +432,14 @@
       "id": 35
     },
     {
+      "id": 36,
       "name": "cukier biały",
       "capacity": 100,
       "unit": "gr",
-      "userId": 3,
       "quantity": 5,
       "expireDate": "2021-12-21T11:29:57.000Z",
-      "categoryId": 26,
-      "id": 36
+      "categoryId": 22,
+      "userId": 3
     },
     {
       "name": "slodycze myszki",
@@ -398,37 +462,15 @@
       "id": 38
     },
     {
+      "id": 39,
       "name": "makaron nitki",
       "capacity": 100,
       "unit": "gr",
-      "id": 39,
-      "productId": 77,
-      "userId": 3,
       "quantity": 1,
       "expireDate": "2021-12-01T11:54:38.538Z",
-      "categoryId": 25
-    },
-    {
-      "name": "serek myszki",
-      "capacity": 100,
-      "unit": "gr",
-      "id": 40,
-      "productId": 78,
-      "userId": 3,
-      "quantity": 1,
-      "expireDate": "2021-12-01T11:56:32.339Z",
-      "categoryId": 25
-    },
-    {
-      "name": "cukier biały",
-      "capacity": 100,
-      "unit": "gr",
-      "id": 41,
-      "productId": 79,
-      "userId": 3,
-      "quantity": 1,
-      "expireDate": "2021-12-01T12:03:26.711Z",
-      "categoryId": 25
+      "categoryId": 25,
+      "productId": 77,
+      "userId": 3
     },
     {
       "name": "miodek myszki",
@@ -495,6 +537,171 @@
       "quantity": 5,
       "expireDate": "2021-12-31T12:23:09.000Z",
       "categoryId": 10
+    },
+    {
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 73,
+      "productId": 61,
+      "userId": 3,
+      "quantity": 1,
+      "expireDate": "2021-12-01T13:07:04.312Z",
+      "categoryId": 21
+    },
+    {
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "id": 74,
+      "productId": 61,
+      "userId": 3,
+      "quantity": 1,
+      "expireDate": "2021-12-01T13:07:57.679Z",
+      "categoryId": 21
+    },
+    {
+      "userId": 3,
+      "productId": 62,
+      "name": "miodek myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T13:34:48.000Z",
+      "categoryId": 22,
+      "id": 75
+    },
+    {
+      "userId": 3,
+      "productId": 64,
+      "name": "makaron wstążki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T10:04:59.000Z",
+      "categoryId": 24,
+      "id": 81
+    },
+    {
+      "userId": 3,
+      "productId": 84,
+      "name": "kociolek",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 1,
+      "expireDate": "2021-12-30T10:06:16.000Z",
+      "categoryId": 24,
+      "id": 82
+    },
+    {
+      "userId": 3,
+      "productId": 85,
+      "name": "cukier trzcinowy",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 1,
+      "expireDate": "2021-12-31T11:49:23.000Z",
+      "categoryId": 24,
+      "id": 87
+    },
+    {
+      "userId": 3,
+      "productId": 87,
+      "name": "miodek myszki",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:41:29.000Z",
+      "categoryId": 24,
+      "id": 90
+    },
+    {
+      "userId": 3,
+      "productId": 61,
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:47:28.000Z",
+      "categoryId": 24,
+      "id": 91
+    },
+    {
+      "userId": 3,
+      "productId": 88,
+      "name": "slodycze myszki",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 1,
+      "expireDate": "2021-12-28T12:47:47.000Z",
+      "categoryId": 24,
+      "id": 92
+    },
+    {
+      "userId": 3,
+      "productId": 89,
+      "name": "placuszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:55:51.000Z",
+      "categoryId": 24,
+      "id": 93
+    },
+    {
+      "userId": 3,
+      "productId": 60,
+      "name": "makaron nitki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-26T12:56:24.000Z",
+      "categoryId": 24,
+      "id": 94
+    },
+    {
+      "userId": 3,
+      "productId": 61,
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-02T13:00:18.977Z",
+      "categoryId": 24,
+      "id": 95
+    },
+    {
+      "userId": 3,
+      "productId": 68,
+      "name": "cukier trzcinowy",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T13:01:26.000Z",
+      "categoryId": 24,
+      "id": 96
+    },
+    {
+      "userId": 3,
+      "productId": 90,
+      "name": "czekoladki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T13:02:55.000Z",
+      "categoryId": 24,
+      "id": 97
+    },
+    {
+      "userId": 3,
+      "productId": 65,
+      "name": "orzechy ziemne",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-02T13:03:23.304Z",
+      "categoryId": 24,
+      "id": 98
     }
   ]
 }

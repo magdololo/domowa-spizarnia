@@ -81,7 +81,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         return () => mounted = false;
     }, [categoryName, selectedNewCategory, getCategoryByPath]);
 
-    const { handleSubmit, control } = useForm( {defaultValues: {
+    const { handleSubmit, control, setValue} = useForm( {defaultValues: {
             productName: "",
             capacity: "100",
             unit: "gr",
@@ -91,16 +91,18 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             categoryId: categoryName ? category.id : selectedNewCategory.id
         }
     });
-
+    useEffect(()=>{
+        if(product && typeof product !== "string") {
+            //setNewEditProduct(editProduct);
+            setValue('capacity', product.capacity);
+            setValue('unit', product.unit);
+        }
+    }, [product]);
     const onSubmit = data => {
-        console.log("onSubmit");
-        console.log(data);
-        console.log(product);
-        console.log(newProductName);
         addProduct({
-            "name": product !== null ? product.name : newProductName.name,
-            "capacity":product !== null  ? product.capacity : parseInt(data.capacity),
-            "unit": product !== null  ? product.unit : data.unit,
+            "name": product && Object.keys(product).length !== 0? product.name : newProductName,
+            "capacity": parseInt(data.capacity),
+            "unit": data.unit,
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
             "categoryId": categoryName ? category.id : selectedNewCategory.id
@@ -150,7 +152,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 name="categoryName"
                                 control={control}
                                 defaultValue={category.title}
-                                render={({field: {onChange, value}, fieldState: {error}}) => (
+                                render={({field: { value}, fieldState: {error}}) => (
                                     <TextField
                                         sx={{width: "80%", marginLeft: "10%"}}
                                         //id="outlined-read-only-input"
@@ -180,6 +182,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         label="Nazwa produktu"
                                         value={value}
                                         onChange={onChange}
+                                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                                         error={!!error}
                                         helperText={error ? error.message : null}
                                         type= "text"
@@ -194,13 +197,13 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="capacity"
                                 control={control}
-                                defaultValue= {product !== null ? product.capacity : 100}
+                                defaultValue={product ? product.capacity : "100"}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
                                      // id="standard-basic"
                                             label="Pojemność"
                                              variant="standard"
-                                             value={value}
+                                             value={ value}
                                              onChange={onChange}
                                              error={!!error}
                                              helperText={error ? error.message : null}
@@ -211,7 +214,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="unit"
                                 control={control}
-                                defaultValue={product !== null ? product.unit : 'gr'}
+                                defaultValue={product ? product.unit : "gr"}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                 <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                    //id="standard-select-currency"
@@ -278,7 +281,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             )}
                         />
                     </Box>
-                    <Button sx={{marginLeft: "10%"}} type="submit" variant="contained" color="primary" >Dodaj produkt</Button>
+                    <Button sx={{marginLeft: "10%"}} type="submit" variant="contained" color="primary"  >Dodaj produkt</Button>
 
                 </Box>
                 </form>

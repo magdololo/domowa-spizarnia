@@ -37,12 +37,12 @@ export default function AutocompleteCategoriesTitle({labelForAddModal, setSelect
                 const {inputValue} = params;
                 // Suggest the creation of a new value
                 const isExisting = options.some((option) => inputValue === option.title);
-                if (inputValue !== '' && !isExisting) {
-                    filtered.push({
-                        inputValue,
-                        title: `Add "${inputValue}"`,
-                    });
-                }
+                // if (inputValue !== '' && !isExisting) {
+                //     filtered.push({
+                //         inputValue,
+                //         title: `Add "${inputValue}"`,
+                //     });
+                //}
                 return filtered;
             }}
             selectOnFocus

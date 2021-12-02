@@ -64,7 +64,7 @@ const EditCategoryImageList =()=> {
                     sx={{
                         color: "rgba(255, 255, 255, 0.54)",
                         textShadow: "1px 1px solid gray",
-                        zIndex: 999,
+                        zIndex: 99,
                         top: "0.6em",
                         position: "absolute",
                         right: ".4em",
