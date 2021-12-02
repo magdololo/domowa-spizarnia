@@ -18,7 +18,6 @@ const EditProductModal =()=>{
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
     const [newEditProduct] = useState({});
-    const [selectedNewCategory, setSelectedNewCategory] = useState('');
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const [editCategory, setEditCategory] = React.useState("");
     const  editModalOpen = useStore(state=>state.editModalOpen);
@@ -76,14 +75,13 @@ const EditProductModal =()=>{
             setValue('newExpireDate', editProduct.expireDate);
             setValue('newQuantity', editProduct.quantity);
             setValue('newUnit', editProduct.unit);
-            setValue('newCategoryName', editCategory.title);
+            setValue('newCategoryName', editCategory);
 
-    }, [editProduct, editCategory.title, setValue]);
+    }, [editProduct, editCategory, setValue]);
 
 
     const onSubmit = async (data) => {
-        let idNewCategory = selectedNewCategory.id ? selectedNewCategory.id : editCategory.id;
-        await updateProduct(editProduct.id, data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, idNewCategory, editProduct.productId, editProduct.userId );
+        await updateProduct(editProduct.id, data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, data.newCategoryName.id, editProduct.productId, editProduct.userId );
         handleClose();
     };
 
@@ -101,18 +99,16 @@ const EditProductModal =()=>{
                 <Typography id="modal-modal-title" variant="h6" component="h6" sx={{width: "80%", marginLeft: "10%"}}>
                     Edytuj produkt
                 </Typography>
-                <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                <Box sx={{mt: 2, mb: 3}}>
                     <Controller
                         name="newCategoryName"
                         control={control}
-                        defaultValue={newEditProduct ? editCategory.title: ""}
+
                         render={({field: {onChange, value}, fieldState: {error}}) => (
                         <AutocompleteCategoriesTitle
-                            setSelectedNewCategory={setSelectedNewCategory}
-                            editCategory={editCategory}
+
                             onChange= {onChange}
                             value={value}
-
                             />
                             )}
                     />

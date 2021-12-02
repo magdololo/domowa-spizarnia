@@ -400,15 +400,15 @@
       "userId": 1
     },
     {
+      "id": 30,
       "name": "mleczko myszki",
       "capacity": 100,
       "unit": "gr",
-      "id": 30,
-      "productId": 72,
-      "userId": 3,
       "quantity": 3,
       "expireDate": "2022-01-01T14:54:06.000Z",
-      "categoryId": 25
+      "categoryId": 28,
+      "productId": 72,
+      "userId": 3
     },
     {
       "name": "makaron nitki",
@@ -438,7 +438,7 @@
       "unit": "gr",
       "quantity": 5,
       "expireDate": "2021-12-21T11:29:57.000Z",
-      "categoryId": 22,
+      "categoryId": 28,
       "userId": 3
     },
     {
@@ -452,23 +452,23 @@
       "id": 37
     },
     {
+      "id": 38,
       "name": "miodek myszki",
-      "capacity": 100,
-      "unit": "gr",
-      "userId": 3,
-      "quantity": 1,
-      "expireDate": "2021-12-28T11:45:00.000Z",
-      "categoryId": 25,
-      "id": 38
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 3,
+      "expireDate": "2021-12-31T11:45:00.000Z",
+      "categoryId": 27,
+      "userId": 3
     },
     {
       "id": 39,
       "name": "makaron nitki",
       "capacity": 100,
       "unit": "gr",
-      "quantity": 1,
-      "expireDate": "2021-12-01T11:54:38.538Z",
-      "categoryId": 25,
+      "quantity": 3,
+      "expireDate": "2021-12-30T11:54:38.000Z",
+      "categoryId": 22,
       "productId": 77,
       "userId": 3
     },
@@ -702,6 +702,17 @@
       "expireDate": "2021-12-02T13:03:23.304Z",
       "categoryId": 24,
       "id": 98
+    },
+    {
+      "id": 99,
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T18:21:43.000Z",
+      "categoryId": 26,
+      "productId": 61,
+      "userId": 3
     }
   ]
 }

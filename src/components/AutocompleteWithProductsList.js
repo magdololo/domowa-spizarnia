@@ -58,9 +58,9 @@ export default function AutocompleteWithProductsList({labelForAddModal, setProdu
                     }
                     return filtered;
                 }}
-                autoSelect//dołacza wpisany tekst w jedna z opcji select z ktorej popbierze wartość
+
+                //autoSelect//dołacza wpisany tekst w jedna z opcji select z ktorej popbierze wartość
                 selectOnFocus
-                disableClearable
                 //clearOnBlur
                 handleHomeEndKeys
                 id="free-solo-with-text-demo"

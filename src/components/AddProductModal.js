@@ -151,7 +151,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="categoryName"
                                 control={control}
-                                defaultValue={category.title}
+                                defaultValue=""
                                 render={({field: { value}, fieldState: {error}}) => (
                                     <TextField
                                         sx={{width: "80%", marginLeft: "10%"}}
