@@ -21,7 +21,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
-    const [selectedNewCategory, setSelectedNewCategory] = useState('');
+    const [selectedNewCategory] = useState('');
     const [product, setProduct] = useState({});
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
@@ -79,7 +79,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             return initialState;
         }
         return () => mounted = false;
-    }, [categoryName, selectedNewCategory, getCategoryByPath]);
+    }, [categoryName, setCategory, getCategoryByPath]);
 
     const { handleSubmit, control, setValue} = useForm( {defaultValues: {
             productName: "",
@@ -93,14 +93,15 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     });
     useEffect(()=>{
         if(product && typeof product !== "string") {
-            //setNewEditProduct(editProduct);
+            setValue('name', product.name);
             setValue('capacity', product.capacity);
             setValue('unit', product.unit);
         }
-    }, [product]);
+    }, [product, setValue]);
     const onSubmit = data => {
+
         addProduct({
-            "name": product && Object.keys(product).length !== 0? product.name : newProductName,
+            "name":  product && Object.keys(product).length !== 0? product.name : newProductName,
             "capacity": parseInt(data.capacity),
             "unit": data.unit,
             "quantity": parseInt(data.quantity),
@@ -140,7 +141,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         error={!!error}
                                         helperText={error ? error.message : null}
                                         type= "text"
-                                        setSelectedNewCategory={setSelectedNewCategory}
                                         editCategory={false}/>
 
 
@@ -157,12 +157,12 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         sx={{width: "80%", marginLeft: "10%"}}
                                         //id="outlined-read-only-input"
                                         label="Nazwa kategorii"
-                                        value={value}
+                                        value={category.title}
                                         InputProps={{
                                             readOnly: true,
                                         }}
-                                        error={!!error}
-                                        helperText={error ? error.message : null}
+                                        // error={!!error}
+                                        // helperText={error ? error.message : null}
                                         type= "text"
                                         disabled={true}
                                      />
@@ -187,6 +187,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         helperText={error ? error.message : null}
                                         type= "text"
                                         setProduct={setProduct}
+                                        newProductName={newProductName}
                                         setNewProductName={setNewProductName}
                                         />
 

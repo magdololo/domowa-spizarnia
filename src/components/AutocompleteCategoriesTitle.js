@@ -17,9 +17,9 @@ export default function AutocompleteCategoriesTitle({labelForAddModal, value, on
             onChange={(_, data) => onChange(data)}
             filterOptions={(options, params) => {
                 const filtered = filter(options, params);
-                const {inputValue} = params;
+               // const {inputValue} = params;
                 // Suggest the creation of a new value
-                const isExisting = options.some((option) => inputValue === option.title);
+               // const isExisting = options.some((option) => inputValue === option.title);
                 return filtered;
             }}
             isOptionEqualToValue={(option, value) => {

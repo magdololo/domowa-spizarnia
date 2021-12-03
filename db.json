@@ -331,6 +331,18 @@
       "capacity": 100,
       "unit": "gr",
       "id": 90
+    },
+    {
+      "name": "makaron wstążki",
+      "capacity": 500,
+      "unit": "gr",
+      "id": 91
+    },
+    {
+      "name": "zgtrew",
+      "capacity": 1,
+      "unit": "kg",
+      "id": 92
     }
   ],
   "images": [
@@ -411,15 +423,15 @@
       "userId": 3
     },
     {
+      "id": 33,
       "name": "makaron nitki",
       "capacity": 100,
       "unit": "gr",
-      "id": 33,
+      "quantity": 6,
+      "expireDate": "2022-01-16T10:42:05.000Z",
+      "categoryId": 22,
       "productId": 75,
-      "userId": 3,
-      "quantity": 4,
-      "expireDate": "2021-12-31T10:42:05.000Z",
-      "categoryId": 26
+      "userId": 3
     },
     {
       "name": "makaron wstążki",
@@ -561,15 +573,15 @@
       "categoryId": 21
     },
     {
-      "userId": 3,
-      "productId": 62,
+      "id": 75,
       "name": "miodek myszki",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
       "expireDate": "2021-12-31T13:34:48.000Z",
-      "categoryId": 22,
-      "id": 75
+      "categoryId": 26,
+      "productId": 62,
+      "userId": 3
     },
     {
       "userId": 3,
@@ -713,6 +725,105 @@
       "categoryId": 26,
       "productId": 61,
       "userId": 3
+    },
+    {
+      "userId": 3,
+      "productId": 84,
+      "name": "kociolek",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 3,
+      "expireDate": "2021-12-25T08:12:59.000Z",
+      "categoryId": 26,
+      "id": 100
+    },
+    {
+      "userId": 3,
+      "productId": 73,
+      "name": "orzechy nerkowca",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T08:27:23.000Z",
+      "categoryId": 25,
+      "id": 101
+    },
+    {
+      "id": 102,
+      "name": "makaron wstążki",
+      "capacity": 500,
+      "unit": "gr",
+      "quantity": 5,
+      "expireDate": "2021-12-29T08:28:40.000Z",
+      "categoryId": 26,
+      "productId": 91,
+      "userId": 3
+    },
+    {
+      "userId": 3,
+      "productId": 67,
+      "name": "cukier biały",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-07T09:11:27.000Z",
+      "categoryId": 25,
+      "id": 103
+    },
+    {
+      "userId": 3,
+      "productId": 61,
+      "name": "slodycze myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 4,
+      "expireDate": "2021-12-30T09:37:41.000Z",
+      "categoryId": 25,
+      "id": 104
+    },
+    {
+      "id": 105,
+      "name": "mąka owsiana",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 2,
+      "expireDate": "2021-12-31T09:38:38.000Z",
+      "categoryId": 25,
+      "productId": 92,
+      "userId": 3
+    },
+    {
+      "userId": 3,
+      "productId": 62,
+      "name": "miodek myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-03T09:48:47.145Z",
+      "categoryId": 25,
+      "id": 106
+    },
+    {
+      "id": 107,
+      "name": "frytki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-03T09:51:21.237Z",
+      "categoryId": 25,
+      "productId": 93,
+      "userId": 3
+    },
+    {
+      "userId": 3,
+      "productId": 62,
+      "name": "miodek myszki",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-03T09:56:16.964Z",
+      "categoryId": 25,
+      "id": 108
     }
   ]
 }

@@ -103,7 +103,6 @@ const EditProductModal =()=>{
                     <Controller
                         name="newCategoryName"
                         control={control}
-
                         render={({field: {onChange, value}, fieldState: {error}}) => (
                         <AutocompleteCategoriesTitle
 
