@@ -336,13 +336,63 @@
       "name": "makaron wstążki",
       "capacity": 500,
       "unit": "gr",
-      "id": 91
+      "id": 91,
+      "userId" : 0
     },
     {
       "name": "zgtrew",
       "capacity": 1,
       "unit": "kg",
       "id": 92
+    },
+    {
+      "name": "nowy product1",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 3,
+      "id": 93
+    },
+    {
+      "name": "nowy product2",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 3,
+      "id": 94
+    },
+    {
+      "name": "nowy product3 kotek",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 1,
+      "id": 95
+    },
+    {
+      "name": "nowy product4 kotek",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 1,
+      "id": 96
+    },
+    {
+      "name": "slodycz pieska1",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 2,
+      "id": 97
+    },
+    {
+      "name": "słodycz pieska2",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 2,
+      "id": 98
+    },
+    {
+      "name": "cukier pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 2,
+      "id": 99
     }
   ],
   "images": [
@@ -824,6 +874,83 @@
       "expireDate": "2021-12-03T09:56:16.964Z",
       "categoryId": 25,
       "id": 108
+    },
+    {
+      "userId": 3,
+      "productId": 93,
+      "name": "nowy product1",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:50:37.000Z",
+      "categoryId": 22,
+      "id": 109
+    },
+    {
+      "userId": 3,
+      "productId": 94,
+      "name": "nowy product2",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-30T12:51:35.000Z",
+      "categoryId": 27,
+      "id": 110
+    },
+    {
+      "userId": 1,
+      "productId": 95,
+      "name": "nowy product3 kotek",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:52:40.000Z",
+      "categoryId": 10,
+      "id": 111
+    },
+    {
+      "userId": 1,
+      "productId": 96,
+      "name": "nowy product4 kotek",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-07T12:53:27.575Z",
+      "categoryId": 10,
+      "id": 112
+    },
+    {
+      "userId": 2,
+      "productId": 97,
+      "name": "slodycz pieska1",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-28T12:54:18.000Z",
+      "categoryId": 17,
+      "id": 113
+    },
+    {
+      "userId": 2,
+      "productId": 98,
+      "name": "słodycz pieska2",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:54:37.000Z",
+      "categoryId": 17,
+      "id": 114
+    },
+    {
+      "userId": 2,
+      "productId": 99,
+      "name": "cukier pieska",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:54:55.000Z",
+      "categoryId": 16,
+      "id": 115
     }
   ]
 }

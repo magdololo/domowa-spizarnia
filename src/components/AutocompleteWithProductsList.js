@@ -10,11 +10,12 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
 
     const getProductsFromProducts = useStore(state => state.fetchProducts);
     const products = useStore(state => state.products);
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.id;
     useEffect(() => {
-        getProductsFromProducts();
+        getProductsFromProducts(userId);
 
-    }, [getProductsFromProducts]);
+    }, [getProductsFromProducts, userId]);
     // console.log(value)
     // console.log(newProductName)
 

@@ -3,8 +3,8 @@ import ProductsService from "../services/ProductsService";
 
 const createProductsSlice = (set, get) => ({
     products: [],
-    fetchProducts: async () => {
-        const response = await ProductsService.getAllProducts();
+    fetchProducts: async (userId) => {
+        const response = await ProductsService.getAllProducts(userId);
         set((state) => ({
             products: response,
         }));

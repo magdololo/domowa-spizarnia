@@ -30,7 +30,7 @@ const CategoryDetail = ()=> {
             setCategory(category)
         });
         getUserProducts(userId);
-    },[categoryName, category.id, getCategoryByPath, getUserProducts, userId]);
+    },[categoryName, getCategoryByPath, getUserProducts, userId]);
 
     const productsOfCategory = productsList.filter((product=>product.categoryId === category.id));
 

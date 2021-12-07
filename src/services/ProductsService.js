@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const ProductsService = {
-    getAllProducts: async () => {
+    getAllProducts: async (userId) => {
         try {
-            let allProducts = await axios.get('http://192.168.1.134:4000/products');
+            let allProducts = await axios.get(`http://192.168.1.134:4000/products?userId=${userId}&userId=0`);
             return allProducts.data;
         } catch (error) {
             console.error(error)
@@ -32,7 +32,8 @@ const ProductsService = {
                 let productToBeAdded = {
                     "name": newProduct.name,
                     "capacity": newProduct.capacity !== productFromProducts.capacity ? newProduct.capacity : productFromProducts.capacity,
-                    "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit
+                    "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit,
+                    "userId": userId
                 }
                 let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
                 if (productExist.length === 0) {

@@ -82,12 +82,12 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     }, [categoryName, setCategory, getCategoryByPath]);
 
     const { handleSubmit, control, setValue} = useForm( {defaultValues: {
-            productName: "",
+            productName: null,
             capacity: "100",
             unit: "gr",
             quantity: "1",
             expireDate: date,
-            categoryName: categoryName ? categoryName : "",
+            categoryName: categoryName ? categoryName : null,
             categoryId: categoryName ? category.id : selectedNewCategory.id
         }
     });
@@ -106,7 +106,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             "unit": data.unit,
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
-            "categoryId": categoryName ? category.id : selectedNewCategory.id
+            "categoryId": categoryName ? category.id : selectedNewCategory.id,
+            "userId": userId
         },userId, product);
         close();
     };
