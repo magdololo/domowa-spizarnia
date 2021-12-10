@@ -14,6 +14,7 @@ import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
 import {useForm, Controller} from "react-hook-form";
 import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
 
+
 //import slugify from "slugify";
 
 
@@ -21,14 +22,14 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
-    const [selectedNewCategory] = useState('');
+    const [selectedNewCategory, setSelectedNewCategory] = useState("");
     const [product, setProduct] = useState({});
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
-    const [newProductName, setNewProductName] = useState("");
     const userId = loggedInUser.id;
-    const [date] = React.useState(new Date());;
+    const [newProductName, setNewProductName] = useState("");
+    const [date] = React.useState(new Date());
     const style = {
         position: 'absolute',
         top: '50%',
@@ -65,10 +66,10 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     ];
 
     let {categoryName} = useParams();
-
+    console.log(product)
     useEffect(() => {
         let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
-        const initialState = {loading: false, categoryName: "", category: null};
+        const initialState = {loading: false, categoryName: null, category: null};
         if (categoryName) {
             getCategoryByPath(categoryName).then(category => {
                 if (mounted) {
@@ -91,26 +92,30 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             categoryId: categoryName ? category.id : selectedNewCategory.id
         }
     });
+
     useEffect(()=>{
         if(product && typeof product !== "string") {
-            setValue('name', product.name);
+            //setValue('productName', product.name);
             setValue('capacity', product.capacity);
             setValue('unit', product.unit);
         }
     }, [product, setValue]);
-    const onSubmit = data => {
 
+    const onSubmit = data => {
+        console.log(product)
         addProduct({
-            "name":  product && Object.keys(product).length !== 0? product.name : newProductName,
+
+            "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,
             "capacity": parseInt(data.capacity),
             "unit": data.unit,
             "quantity": parseInt(data.quantity),
             "expireDate": data.expireDate,
-            "categoryId": categoryName ? category.id : selectedNewCategory.id,
+            "categoryId": categoryName  ? category.id : selectedNewCategory.id,
             "userId": userId
         },userId, product);
         close();
     };
+
     return (
         <>
             <Modal sx={{zIndex: '1200'}}
@@ -127,7 +132,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                     </Typography>
 
                     {isAddProductFromListCategory ?
-                        <Box sx={{mt: 2, mb: 3, width: "80%", marginLeft: "10%"}}>
+                        <Box sx={{mt: 2, mb: 3}}>
                             <Controller
                                 name="categoryName"
                                 control={control}
@@ -142,9 +147,10 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         error={!!error}
                                         helperText={error ? error.message : null}
                                         type= "text"
-                                        editCategory={false}/>
+                                        editCategory={false}
+                                        setSelectedNewCategory={setSelectedNewCategory}
 
-
+                                    />
                                 )} />
                         </Box>
                         :
@@ -175,7 +181,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="productName"
                                 control={control}
-                                defaultValue=""
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
 
                                     <AutocompleteWithProductsList
@@ -183,7 +188,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         label="Nazwa produktu"
                                         value={value}
                                         onChange={onChange}
-                                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                                        //onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                                         error={!!error}
                                         helperText={error ? error.message : null}
                                         type= "text"
@@ -192,14 +197,20 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         setNewProductName={setNewProductName}
                                         />
 
-
+                                    //  <AutocompleteProducts
+                                    //     labelForAddModal="Nazwa produktu"
+                                    //     label="Nazwa produktu"
+                                    //     value={value}
+                                    //     onChange={onChange}
+                                    //     setProduct={setProduct}
+                                    // />
                                 )} />
                         </Box>
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
                             <Controller
                                 name="capacity"
                                 control={control}
-                                defaultValue={product ? product.capacity : "100"}
+                                defaultValue= ""//{product ? product.capacity : "100"}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
                                      // id="standard-basic"
@@ -216,7 +227,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="unit"
                                 control={control}
-                                defaultValue={product ? product.unit : "gr"}
+                                defaultValue=""//{product ? product.unit : "gr"}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                 <TextField sx={{width: "35%", marginRight: "10%", marginLeft: "5%"}}
                                    //id="standard-select-currency"

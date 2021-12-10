@@ -18,8 +18,9 @@ const createProductsSlice = (set, get) => ({
     },
     addProduct: async (newProduct, userId, productFromProducts) => {
         // console.log("createSlice newProduct")
-        // console.log(newProduct);
-        let addedProduct= await ProductsService.addProduct(newProduct, userId, productFromProducts);
+        console.log(productFromProducts);
+        let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts);
+
         //console.log(addedProduct);
             set((state) => ({
                 products: [
@@ -44,11 +45,14 @@ const createProductsSlice = (set, get) => ({
         set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId}});
 
     },
-    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId)=>{
-            let editProduct = await ProductsService.updateProduct(id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId);
+    updateProduct: async (updatedProduct, userId, productFromProducts)=>{
+
+            let productAfterUpdate = await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
+            //console.log(productAfterUpdate);
+
             set((state)=> {
-                    let products = state.storage.filter(editProduct => editProduct.id !== id);
-                    products.push(editProduct)
+                    let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
+                    products.push(updatedProduct)
                     return {
                         storage: products
                     }

@@ -10,9 +10,11 @@ const ProductListItem = ({product}) => {
 
 
     let   [todayDate] = useState(new Date());
-    const expireDate = product.expireDate;
+    let expireDate = product.expireDate;
 
-
+    if(typeof expireDate === "object"){
+        expireDate = expireDate.toISOString();
+    }
 
     return (
         <>

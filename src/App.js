@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 
 import CategoryList from "./pages/CategoryList";
 import CategoryDetail from "./pages/CategoryDetail";
+import ProductsList from "./pages/ProductsList";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -21,6 +22,9 @@ export default function App() {
             <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
             {loggedInUser !== null?
                     <Switch>
+                        <Route path="/products">
+                            <ProductsList />
+                        </Route>
                         <Route path="/:categoryName/:productName">
                             <ProductDetail />
                         </Route>

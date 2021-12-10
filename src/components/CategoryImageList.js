@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import useStore from "../store/useStore";
 import AddCategoryModal from "./AddCategoryModal";
 import AppBarBottom from "./AppBarBottom";
+import ButtonBase from "@mui/material/ButtonBase";
 
 
 
@@ -68,7 +69,8 @@ import AppBarBottom from "./AppBarBottom";
                     <img src='/images/placeholder.png' alt="placeholder" />
                 <Typography sx={{border: '0', position: 'absolute', top: '50%', left: '50%',transform: 'translate(-50%, -50%)',textAlign: 'center'}} size="medium" color="secondary" aria-label="add" >
                     <AddCategoryModal open={open} close={handleClose}/>
-                    <AddIcon  color="secondary" cursor="pointer" sx={{ textAlign: 'center'}} onClick={handleOpen}/>
+                    <ButtonBase onClick={handleOpen}>
+                    <AddIcon  color="secondary" cursor="pointer" sx={{ textAlign: 'center'}} />
                     <Typography component="span"
                                 sx={{
                                     color: "gray",
@@ -83,6 +85,7 @@ import AppBarBottom from "./AppBarBottom";
                                 >
                         Dodaj kategorię
                     </Typography>
+                    </ButtonBase>
                 </Typography>
             </ImageListItem>
 

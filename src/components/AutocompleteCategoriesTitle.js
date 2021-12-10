@@ -2,13 +2,19 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete, {createFilterOptions} from '@mui/material/Autocomplete';
 import useStore from "../store/useStore";
+import {useEffect} from "react";
 const filter = createFilterOptions();
 
-export default function AutocompleteCategoriesTitle({labelForAddModal, value, onChange}) {
-
-
+export default function AutocompleteCategoriesTitle({labelForAddModal, value, onChange, setSelectedNewCategory}) {
      const categoryList = useStore(state => state.categories);
+     console.log(categoryList)
+    // console.log(value)
+    useEffect( ()=>{
 
+        if(value) {
+            setSelectedNewCategory(value)
+        }
+    }, [value, setSelectedNewCategory]);
 
     return (
         <Autocomplete
@@ -17,9 +23,6 @@ export default function AutocompleteCategoriesTitle({labelForAddModal, value, on
             onChange={(_, data) => onChange(data)}
             filterOptions={(options, params) => {
                 const filtered = filter(options, params);
-               // const {inputValue} = params;
-                // Suggest the creation of a new value
-               // const isExisting = options.some((option) => inputValue === option.title);
                 return filtered;
             }}
             isOptionEqualToValue={(option, value) => {

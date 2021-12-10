@@ -1,14 +1,12 @@
 import {AppBar, InputBase, useMediaQuery} from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
 import AddProductModal from "./AddProductModal";
 import * as React from "react";
-import {styled} from "@mui/material/styles";
+import { styled, alpha } from '@mui/material/styles';
 import Fab from "@mui/material/Fab";
-import {alpha} from "@material-ui/core";
-
-
+import Button from '@mui/material/Button';
+import BottomHamburgerMenu from "./BottomHamburgerMenu";
 const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
     const [open, setOpen] = React.useState(false);
@@ -17,20 +15,24 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     const minWidth900 = useMediaQuery('(min-width:900px)')
 
 
-    const StyledFab = styled(Fab)(({ theme }) => ({
+
+    const Button = styled(Fab)(({ theme }) => ({
         position: 'relative',
         zIndex: 1,
         top: -30,
         left: 0,
         right: -200,
         margin: '0 auto',
+        lineHeight: '1.15',
         [theme.breakpoints.up('sm')]: {
             right: -300,
             width: '90',
+            lineHeight: '1.25',
         },
         [theme.breakpoints.up('md')]: {
             right: -500,
             width: '90',
+            lineHeight: '1.75',
         },
 
     }));
@@ -61,7 +63,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
+            padding: theme.spacing(0, 1, 1, 6),
             // vertical padding + font size from searchIcon
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
@@ -79,6 +81,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
         <>
             <AppBar position="fixed"  sx={{ top: 'auto', bottom: 0 , backgroundColor: 'white'}}>
                 <Toolbar sx={{width: minWidth900 ? '800px' : '90%', margin: '0 auto', color: 'gray'}}>
+                    <BottomHamburgerMenu/>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -88,10 +91,10 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <StyledFab color="secondary" aria-label="add">
-                        <AddIcon onClick={handleOpen}/>
-                        <AddProductModal open={open} close={handleClose} isAddProductFromListCategory={isAddProductFromListCategory}/>
-                    </StyledFab>
+                    <Button color="secondary" aria-label="add" variant="extended" onClick={handleOpen} sx={{fontSize: "0.8rem", textTransform: 'none'}}>Add Product</Button>
+
+                        <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory}/>
+
                 </Toolbar>
             </AppBar>
         </>

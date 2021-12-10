@@ -23,12 +23,14 @@ const CategoryList = () => {
 
     return (
         <>
+            <div style={{maxWidth: '1300px', margin: '0 auto'}} >
                 <div style={{
                     display: 'flex',
                     flexWrap: 'nowrap',
                     width: '100%',
                     minHeight: '80px',
-                    alignItems: "space-between"
+                    alignItems: "center"
+
                 }}>
                <div style={{
                     flex: '1 1 auto',
@@ -52,7 +54,8 @@ const CategoryList = () => {
                     width:  minWidth450 ?'35%' : '40%',
                     textAlign: 'right',
                     fontSize: '1rem',
-                    color: 'rgba(0, 0, 0, 0.6'
+                    color: 'rgba(0, 0, 0, 0.6',
+                    whiteSpace: "nowrap"
                 }}>Edytuj kategorie
                 </div>
                 <div style={{
@@ -68,6 +71,7 @@ const CategoryList = () => {
                 <EditCategoryImageList/>
                 : <CategoryImageList/>
                 }
+            </div>
         </>
     )
 }

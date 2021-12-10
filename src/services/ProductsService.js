@@ -76,24 +76,51 @@ const ProductsService = {
             console.error(error);
         }
     },
-    updateProduct: async (id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId) => {
+    updateProduct: async (updatesValues, userId, productFromProducts) => {//updatesValues - product after update
         try {
-            let updatedProduct = await axios.put('http://192.168.1.134:4000/storage/' + id, {
-                id: id,
-                name: name,
-                capacity: parseInt(capacity),
-                unit: unit,
-                quantity: parseInt(quantity),
-                expireDate: expireDate,
-                categoryId: categoryId,
-                productId: productId,
-                userId: userId
-            });
-            return updatedProduct.data
+            let product = {}
+            if (productFromProducts && updatesValues.capacity === productFromProducts.capacity && updatesValues.unit === productFromProducts.unit && updatesValues.name === productFromProducts.name) {
+                product = {
+                    "id": productFromProducts.id,
+                    "name": productFromProducts.name,
+                    "capacity": productFromProducts.capacity,
+                    "unit": productFromProducts.unit,
+                }
+            }   else {
+                    let productToBeAdded = {
+                    "name": updatesValues.name !== productFromProducts.name ? updatesValues.name : productFromProducts.name,
+                    "capacity": updatesValues.capacity !== productFromProducts.capacity ? updatesValues.capacity : productFromProducts.capacity,
+                    "unit": updatesValues.unit !== productFromProducts.unit ? updatesValues.unit : productFromProducts.unit,
+                    "userId": userId
+                    }
+                    let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
+                    if (productExist.length === 0) {
+                    product = await ProductsService.addProductToProducts(productToBeAdded);
+
+                    } else {
+                    product = productExist[0];
+
+                    }
+            }
+
+            let updatedProduct = {
+                "id": updatesValues.id,
+                "userId": userId,
+                "productId": product.id,
+                "name": updatesValues.name,
+                "capacity": product.capacity,
+                "unit": product.unit,
+                "quantity":updatesValues.quantity,
+                "expireDate": updatesValues.expireDate,
+                "categoryId": updatesValues.categoryId
+            }
+            let result = await axios.put('http://192.168.1.134:4000/storage/' + updatedProduct.id, updatedProduct)
+             return  updatedProduct
         } catch (error) {
             console.error(error);
         }
     },
+
     deleteProduct: async (id) => {
         try {
             let deletedProduct = await axios.delete('http://192.168.1.134:4000/storage/' + id);

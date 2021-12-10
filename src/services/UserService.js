@@ -7,6 +7,7 @@ const UserService =  {
             let response = await axios.get(`http://192.168.1.134:4000/users?email=${email}`);
             if(response.data.length === 0){
                 let responsePost = await axios.post('http://192.168.1.134:4000/users', {email: email, password: password});
+                console.log(responsePost)//object with data: email, password, id
                 let defaultCategories =  await CategoriesService.getDefaultCategories();
                 defaultCategories.forEach(category=>{
                     category.id = null;

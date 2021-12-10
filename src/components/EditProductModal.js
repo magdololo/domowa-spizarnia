@@ -19,9 +19,10 @@ const EditProductModal =()=>{
     const updateProduct = useStore(state=>state.updateProduct);
     const [newEditProduct] = useState({});
     const getCategoryByPath = useStore(state=>state.getCategoryByPath);
-    const [editCategory, setEditCategory] = React.useState("");
+    const [editCategory, setEditCategory] = React.useState(null);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
+    const [selectedNewCategory, setSelectedNewCategory] = useState(null);
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
@@ -59,8 +60,8 @@ const EditProductModal =()=>{
         zIndex: 1200,
     }
     let { categoryName } = useParams();
-
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.id;
     useEffect(() => {
         getCategoryByPath(categoryName).then(category => {
             setEditCategory(category)
@@ -81,7 +82,17 @@ const EditProductModal =()=>{
 
 
     const onSubmit = async (data) => {
-        await updateProduct(editProduct.id, data.newProductName, data.newCapacity, data.newUnit, data.newQuantity, data.newExpireDate, data.newCategoryName.id, editProduct.productId, editProduct.userId );
+         updateProduct({
+            "id": editProduct.id,
+            "userId": editProduct.userId ,
+            "productId": editProduct.productId,
+            "name": data.newProductName,
+            "capacity": parseInt(data.newCapacity),
+            "unit":  data.newUnit,
+            "quantity": parseInt(data.newQuantity),
+            "expireDate":  data.newExpireDate,
+            "categoryId": selectedNewCategory.id
+        }, userId, editProduct)
         handleClose();
     };
 
@@ -105,9 +116,10 @@ const EditProductModal =()=>{
                         control={control}
                         render={({field: {onChange, value}, fieldState: {error}}) => (
                         <AutocompleteCategoriesTitle
-
                             onChange= {onChange}
                             value={value}
+                            setEditCategory={setEditCategory}
+                            setSelectedNewCategory={setSelectedNewCategory}
                             />
                             )}
                     />
@@ -123,7 +135,15 @@ const EditProductModal =()=>{
                             label="Nazwa produktu"
                             variant="outlined"
                             value={value}
-                            onChange={onChange} />
+                            onChange={onChange}
+                                   // InputProps={{
+                                   //     readOnly: true,
+                                   // }}                                   I
+                            // error={!!error}
+                            // helperText={error ? error.message : null}
+                                   type= "text"
+                                   //disabled={true}
+                        />
                         )}/>
                 </Box>
                 <Box id="modal-modal-description"  sx={{mt: 2, mb: 3, width: "100%"}}>
@@ -137,7 +157,9 @@ const EditProductModal =()=>{
                         label="Pojemność"
                         variant="standard"
                         value={value}
-                        onChange={onChange} />
+                        onChange={onChange}
+
+                    />
                         )}/>
                     <Controller
                     name="newUnit"
