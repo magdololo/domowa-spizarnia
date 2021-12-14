@@ -16,6 +16,12 @@ const createUsersSlice = (set, get) => ({
         }))
         return '';
     },
+    logOut: () => {
+        set(() => ({
+            loggedInUser: null,
+
+        }))
+    },
     addUser: async (newUser)=>{
         try{
             let createdUser = await UserService.createNewUser(newUser.email,newUser.password);

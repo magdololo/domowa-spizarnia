@@ -28,27 +28,15 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
         getProductsFromProducts(userId);
 
     }, [getProductsFromProducts, userId]);
-    // useEffect( ()=>{
-    //     if(value) {
-    //         setProduct(value)
-    //     }
-    // }, [value, setProduct]);
 
     console.log(value)
-    console.log()
+
     return (
 
             <>
             <Autocomplete
 
                 value={value}
-                // onChange={(event, newValue) => {
-                //     setNewProductName(newValue);
-                // }}
-                // inputValue={newProductName}
-                // onInputChange={(event, newInputValue) => {
-                //     setNewProductName(newInputValue);
-                // }}
                 onChange={(_, data) => {
                     console.log(data)
                     setNewProductName(data);

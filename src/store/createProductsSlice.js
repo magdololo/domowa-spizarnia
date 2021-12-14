@@ -35,6 +35,13 @@ const createProductsSlice = (set, get) => ({
 
 
     },
+    searchedProduct: null,
+    searchProduct: (value) => {
+        set(() => ({
+            searchedProduct: value,
+
+        }))
+    },
 
     editModalOpen: false,
     setEditProductModalOpen: (open) => {

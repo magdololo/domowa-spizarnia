@@ -21,6 +21,16 @@ const createCategorySlice = (set, get) => ({
         return category[0];
 
     },
+    getCategoryById: async (id) => {
+        let categories = get().categories;//pobiera kategorie ze stanu
+        if (categories.length === 0) {
+            const fetch = get().getUserCategories;
+            await fetch(get().loggedInUser.id);
+            categories = get().categories;
+        }
+        let category = categories.filter(categoryItem => categoryItem.id === id);
+        return category[0];
+    },
     addCategory: async (newCategory) => {
 
         await CategoriesService.addNewCategory(newCategory);

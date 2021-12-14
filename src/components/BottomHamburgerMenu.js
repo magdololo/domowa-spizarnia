@@ -36,6 +36,11 @@ const BottomHamburgerMenu = () => {
         setOpen(!open);
     };
     const user = useStore(state=>state.loggedInUser);
+    const logOut = useStore(state=>state.logOut);
+    const handleLogOutClick = (e)=>{
+        e.stopPropagation();
+        logOut();
+    }
   return (
       <React.Fragment key={"left"}>
           <IconButton
@@ -86,7 +91,7 @@ const BottomHamburgerMenu = () => {
                       </Collapse>
 
 
-                      <ListItemButton>
+                      <ListItemButton onClick={handleLogOutClick}>
                           <ListItemIcon>
                               <LogoutIcon />
                           </ListItemIcon>

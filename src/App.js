@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import SignUp from "./pages/SignUp";
 import "./App.css";
 import useStore from "./store/useStore";
+import SearchResults from "./pages/SearchResults";
 
 
 export default function App() {
@@ -22,6 +23,9 @@ export default function App() {
             <h2 style={{textAlign: 'center', margin: '15px auto', padding: '0', color: 'rgba(0, 0, 0, 0.6)'}}>Domowa spiżarnia</h2>
             {loggedInUser !== null?
                     <Switch>
+                        <Route path='/search'>
+                            <SearchResults/>
+                        </Route>
                         <Route path="/products">
                             <ProductsList />
                         </Route>

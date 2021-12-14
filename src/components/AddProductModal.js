@@ -66,7 +66,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     ];
 
     let {categoryName} = useParams();
-    console.log(product)
     useEffect(() => {
         let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
         const initialState = {loading: false, categoryName: null, category: null};
@@ -82,7 +81,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         return () => mounted = false;
     }, [categoryName, setCategory, getCategoryByPath]);
 
-    const { handleSubmit, control, setValue} = useForm( {defaultValues: {
+    const { handleSubmit, control, setValue} = useForm( {mode: 'onBlur'},{defaultValues: {
             productName: null,
             capacity: "100",
             unit: "gr",
