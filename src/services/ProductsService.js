@@ -114,7 +114,7 @@ const ProductsService = {
                 "expireDate": updatesValues.expireDate,
                 "categoryId": updatesValues.categoryId
             }
-            let result = await axios.put('http://192.168.1.134:4000/storage/' + updatedProduct.id, updatedProduct)
+             await axios.put('http://192.168.1.134:4000/storage/' + updatedProduct.id, updatedProduct)
              return  updatedProduct
         } catch (error) {
             console.error(error);

@@ -384,6 +384,13 @@
       "unit": "gr",
       "userId": 3,
       "id": 120
+    },
+    {
+      "name": "mąka pszenna",
+      "capacity": 1,
+      "unit": "kg",
+      "userId": 3,
+      "id": 121
     }
   ],
   "images": [
@@ -441,16 +448,6 @@
   ],
   "storage": [
     {
-      "name": "makaron wstążki",
-      "capacity": 100,
-      "unit": "gr",
-      "userId": 3,
-      "quantity": 2,
-      "expireDate": "2021-12-31T11:27:01.000Z",
-      "categoryId": 26,
-      "id": 35
-    },
-    {
       "id": 36,
       "name": "cukier biały",
       "capacity": 100,
@@ -458,16 +455,6 @@
       "quantity": 5,
       "expireDate": "2021-12-21T11:29:57.000Z",
       "categoryId": 28,
-      "userId": 3
-    },
-    {
-      "id": 38,
-      "name": "miodek myszki",
-      "capacity": 1,
-      "unit": "kg",
-      "quantity": 3,
-      "expireDate": "2021-12-31T11:45:00.000Z",
-      "categoryId": 25,
       "userId": 3
     },
     {
@@ -487,32 +474,21 @@
       "name": "makaron wstążki",
       "capacity": 100,
       "unit": "gr",
-      "quantity": 1,
+      "quantity": 5,
       "expireDate": "2021-12-31T10:04:59.000Z",
       "categoryId": 24,
       "id": 81
     },
     {
-      "id": 108,
+      "id": 116,
       "userId": 3,
-      "productId": 106,
-      "name": "miodek myszki",
-      "capacity": "1",
-      "unit": "kg",
-      "quantity": 1,
-      "expireDate": "2021-12-31T09:56:16.000Z",
-      "categoryId": 22
-    },
-    {
-      "userId": 3,
-      "productId": 100,
+      "productId": 121,
       "name": "mąka pszenna",
-      "capacity": 1000,
-      "unit": "ml",
-      "quantity": 1,
-      "expireDate": "2021-12-07T14:26:01.311Z",
-      "categoryId": 22,
-      "id": 116
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 2,
+      "expireDate": "2022-01-13T14:26:01.000Z",
+      "categoryId": 22
     },
     {
       "id": 127,
@@ -526,28 +502,6 @@
       "categoryId": 27
     },
     {
-      "id": 132,
-      "userId": 3,
-      "productId": 112,
-      "name": "mleczko myszki",
-      "capacity": 1,
-      "unit": "szt",
-      "quantity": 1,
-      "expireDate": "2021-12-31T11:02:44.000Z",
-      "categoryId": 27
-    },
-    {
-      "userId": 3,
-      "productId": 106,
-      "name": "miodek myszki",
-      "capacity": 1,
-      "unit": "kg",
-      "quantity": 1,
-      "expireDate": "2021-12-29T08:09:43.000Z",
-      "categoryId": 25,
-      "id": 134
-    },
-    {
       "userId": 1,
       "productId": 120,
       "name": "maka aaaabbbb",
@@ -557,6 +511,70 @@
       "expireDate": "2021-12-29T08:09:43.000Z",
       "categoryId": 10,
       "id": 135
+    },
+    {
+      "userId": 3,
+      "productId": 116,
+      "name": "slodycze myszki sante",
+      "capacity": 1,
+      "unit": "gr",
+      "quantity": 1,
+      "expireDate": "2021-12-31T12:36:57.000Z",
+      "id": 136
+    },
+    {
+      "userId": 3,
+      "productId": 120,
+      "name": "maka aaaabbbb",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 1,
+      "categoryId": 26,
+      "id": 137
+    },
+    {
+      "id": 138,
+      "userId": 3,
+      "productId": 138,
+      "name": "ryz pełnoziarnisty",
+      "capacity": 1,
+      "unit": "kg",
+      "quantity": 2,
+      "expireDate": "2021-12-31T13:12:46.000Z",
+      "categoryId": 26
+    },
+    {
+      "id": 139,
+      "userId": 3,
+      "productId": 139,
+      "name": "ryz pełnoziarnisty",
+      "capacity": 10,
+      "unit": "szt",
+      "quantity": 2,
+      "expireDate": "2021-12-31T13:12:39.000Z",
+      "categoryId": 28
+    },
+    {
+      "userId": 3,
+      "productId": 113,
+      "name": "ryz pełnoziarnisty",
+      "capacity": 100,
+      "unit": "gr",
+      "quantity": 2,
+      "expireDate": "2021-12-31T13:12:19.000Z",
+      "categoryId": 28,
+      "id": 140
+    },
+    {
+      "userId": 3,
+      "productId": 110,
+      "name": "ryz pełnoziarnisty",
+      "capacity": 1,
+      "unit": "l",
+      "quantity": 1,
+      "expireDate": "2021-12-31T13:12:19.000Z",
+      "categoryId": 28,
+      "id": 141
     }
   ]
 }

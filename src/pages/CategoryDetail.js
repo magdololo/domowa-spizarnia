@@ -1,6 +1,6 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import {Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import useStore from "../store/useStore";
 import {useEffect} from "react";
 import ProductListItem from "../components/ProductListItem";
@@ -56,7 +56,7 @@ const CategoryDetail = ()=> {
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
                        {productsOfCategory.map((product) => (
-                        <ProductListItem key={product.id} product={product} component={(props)=> <Link {...props} to={'/'+product.categoryPath+'/'+product.path} />}/>
+                        <ProductListItem key={product.id} product={product} />
                        ))}
 
                    </List>

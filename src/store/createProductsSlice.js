@@ -35,14 +35,26 @@ const createProductsSlice = (set, get) => ({
 
 
     },
-    searchedProduct: null,
-    searchProduct: (value) => {
-        set(() => ({
-            searchedProduct: value,
-
-        }))
+    searchedProduct : [],
+    setSearchedProduct : (id) =>{
+        set((state)=> {
+               let sp = [];
+               sp.push(id);
+                return {
+                    searchedProduct: sp
+                }
+            }
+        )
     },
+    searchedProducts : [],
+    setSearchedProducts : (searchedName)=>{
+        const productsFromStorageList = get().storage;
 
+        let productsWithName = productsFromStorageList.filter(product=> product.name.indexOf(searchedName) >= 0);
+        console.log(productsWithName)
+        set({searchedProducts: productsWithName});
+
+    },
     editModalOpen: false,
     setEditProductModalOpen: (open) => {
         set({editModalOpen: open})
@@ -56,7 +68,6 @@ const createProductsSlice = (set, get) => ({
 
             let productAfterUpdate = await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
             //console.log(productAfterUpdate);
-
             set((state)=> {
                     let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
                     products.push(updatedProduct)

@@ -18,13 +18,17 @@ const EditProductModal =()=>{
     const setEditProductModalOpen = useStore(state=>state.setEditProductModalOpen);
     const updateProduct = useStore(state=>state.updateProduct);
     const [newEditProduct] = useState({});
-    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const getCategoryById = useStore(state=>state.getCategoryById);
     const [editCategory, setEditCategory] = React.useState(null);
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
     const [selectedNewCategory, setSelectedNewCategory] = useState(null);
-    const searchedProduct = useStore(state=>state.searchedProduct);
+
+
+
+
+
+
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
@@ -66,14 +70,12 @@ const EditProductModal =()=>{
     const userId = loggedInUser.id;
     console.log(categoryName)
     useEffect(() => {
-        if(categoryName !== undefined){
-        getCategoryByPath(categoryName).then(category => {
-            setEditCategory(category)
-        })} else {
-            getCategoryById(searchedProduct.categoryId).then(category => {
+            getCategoryById(editProduct.categoryId).then(category => {
                 setEditCategory(category)
-            })};
-    },[categoryName, getCategoryByPath,]);
+            })
+    },[editProduct]);
+
+    console.log(editCategory)
 
     const { handleSubmit, control , setValue} = useForm( {mode: 'onBlur'});
     useEffect(()=>{

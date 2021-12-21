@@ -28,8 +28,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
-    const [newProductName, setNewProductName] = useState("");
-    const [date] = React.useState(new Date());
+    const [newProductName, setNewProductName] = useState(null);
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -86,7 +86,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             capacity: "100",
             unit: "gr",
             quantity: "1",
-            expireDate: date,
+            expireDate: null,
             categoryName: categoryName ? categoryName : null,
             categoryId: categoryName ? category.id : selectedNewCategory.id
         }
@@ -135,7 +135,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             <Controller
                                 name="categoryName"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={null}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
 
                                     <AutocompleteCategoriesTitle
@@ -196,13 +196,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         setNewProductName={setNewProductName}
                                         />
 
-                                    //  <AutocompleteProducts
-                                    //     labelForAddModal="Nazwa produktu"
-                                    //     label="Nazwa produktu"
-                                    //     value={value}
-                                    //     onChange={onChange}
-                                    //     setProduct={setProduct}
-                                    // />
                                 )} />
                         </Box>
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
@@ -253,7 +246,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                         <Controller
                             name="expireDate"
                             control={control}
-                            defaultValue=""
+
                             render={({field: {onChange, value}, fieldState: {error}}) => (
                              <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
                                 <MobileDatePicker
