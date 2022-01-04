@@ -391,6 +391,13 @@
       "unit": "kg",
       "userId": 3,
       "id": 121
+    },
+    {
+      "name": "maka gryczna",
+      "capacity": 100,
+      "unit": "gr",
+      "userId": 3,
+      "id": 122
     }
   ],
   "images": [
@@ -523,36 +530,14 @@
       "id": 136
     },
     {
+      "id": 137,
       "userId": 3,
-      "productId": 120,
-      "name": "maka aaaabbbb",
+      "productId": 122,
+      "name": "maka gryczna",
       "capacity": 100,
       "unit": "gr",
       "quantity": 1,
-      "categoryId": 26,
-      "id": 137
-    },
-    {
-      "id": 138,
-      "userId": 3,
-      "productId": 138,
-      "name": "ryz pełnoziarnisty",
-      "capacity": 1,
-      "unit": "kg",
-      "quantity": 2,
-      "expireDate": "2021-12-31T13:12:46.000Z",
       "categoryId": 26
-    },
-    {
-      "id": 139,
-      "userId": 3,
-      "productId": 139,
-      "name": "ryz pełnoziarnisty",
-      "capacity": 10,
-      "unit": "szt",
-      "quantity": 2,
-      "expireDate": "2021-12-31T13:12:39.000Z",
-      "categoryId": 28
     },
     {
       "userId": 3,

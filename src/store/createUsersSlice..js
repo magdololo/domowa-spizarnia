@@ -38,7 +38,7 @@ const createUsersSlice = (set, get) => ({
 
     },
     sendPassword: async (email,password) =>{
-        await axios.get(`http://192.168.1.134:4000/users?email=${email}&password=${password}`).then(
+        await axios.get(`http://192.168.1.28:4000/users?email=${email}&password=${password}`).then(
             function (response) {
                 // handle success
                 return window.location = '/';

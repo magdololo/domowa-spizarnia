@@ -71,11 +71,12 @@ const EditProductModal =()=>{
     console.log(categoryName)
     useEffect(() => {
             getCategoryById(editProduct.categoryId).then(category => {
+                console.log(category)
                 setEditCategory(category)
             })
-    },[editProduct]);
+    },[editProduct,editCategory]);
 
-    console.log(editCategory)
+    console.log(editProduct)
 
     const { handleSubmit, control , setValue} = useForm( {mode: 'onBlur'});
     useEffect(()=>{

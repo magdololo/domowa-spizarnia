@@ -3,7 +3,7 @@ import axios from "axios";
 const ProductsService = {
     getAllProducts: async (userId) => {
         try {
-            let allProducts = await axios.get(`http://192.168.1.134:4000/products?userId=${userId}&userId=0`);
+            let allProducts = await axios.get(`http://192.168.1.28:4000/products?userId=${userId}&userId=0`);
             return allProducts.data;
         } catch (error) {
             console.error(error)
@@ -11,7 +11,7 @@ const ProductsService = {
     },
     getUserProducts: async (userId) => {
         try {
-            let userProducts = await axios.get('http://192.168.1.134:4000/storage?userId=' + userId);
+            let userProducts = await axios.get('http://192.168.1.28:4000/storage?userId=' + userId);
             return userProducts.data;
         } catch (error) {
             console.error(error)
@@ -62,7 +62,7 @@ const ProductsService = {
     },
     addProductToProducts: async (newProduct) => {
         try {
-            let response = await axios.post('http://192.168.1.134:4000/products', newProduct);
+            let response = await axios.post('http://192.168.1.28:4000/products', newProduct);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -70,7 +70,7 @@ const ProductsService = {
     },
     addProductToStorage: async (productToStorageFromProducts) => {
         try {
-            let response = await axios.post('http://192.168.1.134:4000/storage', productToStorageFromProducts);
+            let response = await axios.post('http://192.168.1.28:4000/storage', productToStorageFromProducts);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -114,7 +114,7 @@ const ProductsService = {
                 "expireDate": updatesValues.expireDate,
                 "categoryId": updatesValues.categoryId
             }
-             await axios.put('http://192.168.1.134:4000/storage/' + updatedProduct.id, updatedProduct)
+             await axios.put('http://192.168.1.28:4000/storage/' + updatedProduct.id, updatedProduct)
              return  updatedProduct
         } catch (error) {
             console.error(error);
@@ -123,7 +123,7 @@ const ProductsService = {
 
     deleteProduct: async (id) => {
         try {
-            let deletedProduct = await axios.delete('http://192.168.1.134:4000/storage/' + id);
+            let deletedProduct = await axios.delete('http://192.168.1.28:4000/storage/' + id);
             return deletedProduct.data
         } catch (error) {
             console.error(error);
@@ -131,7 +131,7 @@ const ProductsService = {
     },
     incrementProduct: async (id, quantity) => {
         try {
-            let response = await axios.patch('http://192.168.1.134:4000/storage/' + id, {
+            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
                 quantity: quantity + 1
             });
             return response.data
@@ -141,7 +141,7 @@ const ProductsService = {
     },
     decrementProduct: async (id, quantity) => {
         try {
-            let response = await axios.patch('http://192.168.1.134:4000/storage/' + id, {
+            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
                 quantity: quantity - 1
             });
             return response.data
@@ -151,7 +151,7 @@ const ProductsService = {
     },
     getProduct: async (name, capacity, unit) => {
         try {
-            let existProduct = await axios.get(`http://192.168.1.134:4000/products?name=${name}&capacity=${capacity}&unit=${unit}`);
+            let existProduct = await axios.get(`http://192.168.1.28:4000/products?name=${name}&capacity=${capacity}&unit=${unit}`);
             return existProduct.data;
         } catch (error) {
             console.error(error)
