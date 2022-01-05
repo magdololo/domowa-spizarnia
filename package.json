@@ -19,6 +19,7 @@
     "axios": "^0.22.0",
     "date-fns": "^2.25.0",
     "dateformat": "^5.0.2",
+    "firebase": "^9.6.1",
     "json-server": "^0.16.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -1,5 +1,8 @@
 import axios from "axios";
 import CategoriesService from "./CategoriesService";
+import {auth} from "../firebase";
+import {signInWithEmailAndPassword} from "firebase/auth";
+
 
 const UserService =  {
     createNewUser: async (email, password) => {
@@ -22,22 +25,25 @@ const UserService =  {
         }
         throw new Error('User with given email already exists');
     },
-    logInUser: async (email,password) => {
-        let returnObject = {user: null, message:''};
+    logInUser: async (auth, email,password) => {
+        let returnObject = {user: null, message: ''};
+        let userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log(userCredential);
         try {
-            let response = await axios.get(`http://192.168.1.28:4000/users?email=${email}&password=${password}`);
-            if(response.data.length === 1){
-                returnObject.user = response.data[0];
-            }else {
+            if (userCredential.user) {
+                let user = {};
+                user.id = userCredential.user.uid
+                returnObject.user = user;
+
+            } else {
                 returnObject.message = 'User or password incorrect';
             }
-        }
-        catch (error){
-            console.log(error)
+        } catch (error) {
+            console.error(error)
             returnObject.message = error;
         }
-
-        return returnObject;
+         return returnObject;
+        // (zwraca obiekt który ma user i message które potem potrzebujemy w createUserSlice w funkcji logIn)
     }
 }
 

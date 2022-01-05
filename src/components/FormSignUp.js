@@ -8,7 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import useStore from "../store/useStore";
 import {useHistory} from "react-router-dom";
-
+import {auth}  from '../firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,8 +47,19 @@ const FormSignUp = () => {
     let history = useHistory();
     const [errorMessage,setErrorMessage] = useState('');
 
-    const onSubmit = async data => {
-
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
         let message = await addUser ({
             "email": data.email,
             "password": data.password
@@ -78,6 +90,13 @@ const FormSignUp = () => {
     };
 
 
+
+    // const handleSignUp = (e) => {
+    //     e.preventDefault();
+    //     auth
+    //         .createUserWithEmailAndPassword(email, password)
+    //         .catch((error) => alert(`Email is already in use, sign in or use other email, ${error}`));
+    // };
 
     return (
         <form className={classes.root} onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -193,7 +212,7 @@ const FormSignUp = () => {
             />
 
             <div>
-                <Button type="submit" variant="contained" color="primary" >
+                <Button type="submit" variant="contained" color="primary"  >
                     Załóż konto
                 </Button>
                 {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}

@@ -17,7 +17,14 @@ import useStore from "../store/useStore";
 import {makeStyles} from "@material-ui/core";
 import {useState} from "react";
 import TextField from "@material-ui/core/TextField";
+import {auth} from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
+
+// const loginWithGoogle =()=>{
+//     const provider = new GoogleAuthProvider();
+//     signInWithPopup(auth, provider)
+// }
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -66,14 +73,14 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: 'myszka@gmail.com',
-            password: 'myszka12345',
+            email: 'magdajarzyna@gmail.com',
+            password: '1982Magda',
             showPassword: false,
         }
     });
 
-    const onSubmitLogin = async data => {
-
+    const onSubmitLogin = async (data, e) => {
+        e.preventDefault();
         let message = await logIn(data.email, data.password);
         if (message !== '') setErrorMessage(message);
         reset({
@@ -82,6 +89,14 @@ const Login = () => {
         });
     };
 
+    // const handleSignIn = (e) => {
+    //     e.preventDefault();
+    //     auth
+    //         .signInWithEmailAndPassword(email, password)
+    //         .catch((error) =>
+    //             alert(`Your email or password is incorrect, please check your data, ${error}`),
+    //         );
+    // };
     return (
         <>
 
@@ -158,7 +173,7 @@ const Login = () => {
                         }}
                     />
 
-                    <Button type="submit" variant="contained" color="primary" >Zaloguj się</Button>
+                    <Button type="submit" variant="contained" color="primary">Zaloguj się</Button>
                     {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 </form>
             </Box>

@@ -206,6 +206,34 @@
       "title": "cukier i słodziki",
       "id": 38,
       "userId": 5
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "mąka_ryże_kasze",
+      "title": "mąka, ryże, kasze",
+      "id": 39,
+      "userId": 6
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "cukier_i_słodziki",
+      "title": "cukier i słodziki",
+      "id": 40,
+      "userId": 6
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "path": "przetwory_owocowe_i_miód",
+      "title": "przetwory owocowe i miód",
+      "id": 41,
+      "userId": 6
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1576712967455-c8d22580e9be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
+      "title": "słodycze",
+      "path": "slodycze",
+      "id": 42,
+      "userId": 6
     }
   ],
   "products": [
@@ -451,6 +479,11 @@
       "email": "lew@gmail.com",
       "password": "lew12345",
       "id": 5
+    },
+    {
+      "email": "magdajarzyna@gmail.com",
+      "password": "1982Magda",
+      "id": 6
     }
   ],
   "storage": [
@@ -504,7 +537,7 @@
       "name": "ryz pełnoziarnisty",
       "capacity": 1,
       "unit": "szt",
-      "quantity": 1,
+      "quantity": 2,
       "expireDate": "2021-12-31T10:52:43.000Z",
       "categoryId": 27
     },

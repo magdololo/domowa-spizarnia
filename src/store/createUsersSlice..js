@@ -1,12 +1,12 @@
 import axios from "axios";
 import UserService  from "../services/UserService";
-
+import {auth} from "../firebase";
 
 const createUsersSlice = (set, get) => ({
     users: [],
     loggedInUser: null,
     logIn: async (email, password)=>{
-        let loggingAction = await UserService.logInUser(email,password);
+        let loggingAction = await UserService.logInUser(auth, email,password);
         if (loggingAction.user === null){
             return loggingAction.message;
         }
