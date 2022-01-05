@@ -16,7 +16,19 @@ const createUsersSlice = (set, get) => ({
         }))
         return '';
     },
-    logOut: () => {
+    logWithGoogle: async ()=>{
+        let loggingAction = await UserService.logWithGoogle();
+        if (loggingAction.user === null){
+            return loggingAction.message;
+        }
+        set(() => ({
+            loggedInUser: loggingAction.user,
+
+        }))
+        return '';
+    },
+    logOut: async () => {
+        await UserService.logOut();
         set(() => ({
             loggedInUser: null,
 

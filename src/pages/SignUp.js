@@ -30,9 +30,9 @@ const SignUp = () => {
                 <Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>
                 <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>
                     <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center",  width: '25ch'}}>
-                        <FacebookLoginButton style={{ marginTop: 2}} onClick={() => alert("Hello")}>
-                            <span>Zarejestruj się przez FB</span>
-                        </FacebookLoginButton>
+                        {/*<FacebookLoginButton style={{ marginTop: 2}} onClick={() => alert("Hello")}>*/}
+                        {/*    <span>Zarejestruj się przez FB</span>*/}
+                        {/*</FacebookLoginButton>*/}
                         <GoogleLoginButton style={{ marginTop: 10 }} onClick={() => alert("Hello")}>
                             <span>Zarejestruj się przez Google</span>
                         </GoogleLoginButton>

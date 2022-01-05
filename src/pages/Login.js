@@ -17,14 +17,7 @@ import useStore from "../store/useStore";
 import {makeStyles} from "@material-ui/core";
 import {useState} from "react";
 import TextField from "@material-ui/core/TextField";
-import {auth} from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
-
-// const loginWithGoogle =()=>{
-//     const provider = new GoogleAuthProvider();
-//     signInWithPopup(auth, provider)
-// }
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -54,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
     const classes = useStyles();
     const logIn = useStore(state => state.logIn);
+    const logWithGoogle = useStore(state=>state.logWithGoogle);
     const [values, setValues] = React.useState({
         password: '',
         email: '',
@@ -89,14 +83,6 @@ const Login = () => {
         });
     };
 
-    // const handleSignIn = (e) => {
-    //     e.preventDefault();
-    //     auth
-    //         .signInWithEmailAndPassword(email, password)
-    //         .catch((error) =>
-    //             alert(`Your email or password is incorrect, please check your data, ${error}`),
-    //         );
-    // };
     return (
         <>
 
@@ -187,8 +173,8 @@ const Login = () => {
                 justifyContent: "center"
             }}>
                 <div style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
-                    <FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>
-                    <GoogleLoginButton style={{marginTop: 10}} onClick={() => alert("Hello")}/>
+                    {/*<FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>*/}
+                    <GoogleLoginButton style={{marginTop: 10}} onClick={logWithGoogle}/>
                 </div>
                 <div style={{
                     display: "flex",
