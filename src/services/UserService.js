@@ -1,8 +1,9 @@
 import axios from "axios";
 import CategoriesService from "./CategoriesService";
-import {auth, provider} from "../firebase";
+import {auth, provider, db} from "../firebase";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { signInWithPopup} from "firebase/auth";
+import {  doc, getDoc, setDoc } from "firebase/firestore";
 
 const UserService = {
     createNewUser: async (email, password) => {
@@ -53,13 +54,14 @@ const UserService = {
         try {
             let result = await signInWithPopup(auth, provider);
             if (result.user) {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                let user = {};
-                user.id = result.user.uid
-                returnObject.user = result.user;
-                // ...
-            } else {
-                returnObject.message = 'User or password incorrect';
+                const docRef = doc(db, "users", result.user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    console.log("user exists:");
+                } else {
+                    console.log("zarejestruj sie")
+                    returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
+                }
             }
         } catch (error) {
             returnObject.message = error;

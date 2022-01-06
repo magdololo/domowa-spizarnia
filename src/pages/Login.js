@@ -67,8 +67,10 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: 'magdajarzyna@gmail.com',
-            password: '1982Magda',
+            // email: 'magdajarzyna@gmail.com',
+            // password: '1982Magda',
+            email: '',
+            password: '',
             showPassword: false,
         }
     });
@@ -82,7 +84,10 @@ const Login = () => {
             password: "",
         });
     };
-
+    const loggingGoogle = async () => {
+        let message = await logWithGoogle();
+        if (message !== '') setErrorMessage(message);
+    }
     return (
         <>
 
@@ -174,7 +179,7 @@ const Login = () => {
             }}>
                 <div style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
                     {/*<FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>*/}
-                    <GoogleLoginButton style={{marginTop: 10}} onClick={logWithGoogle}/>
+                    <GoogleLoginButton style={{marginTop: 10}} onClick={loggingGoogle}/>
                 </div>
                 <div style={{
                     display: "flex",

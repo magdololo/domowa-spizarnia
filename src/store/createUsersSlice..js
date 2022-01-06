@@ -18,6 +18,7 @@ const createUsersSlice = (set, get) => ({
     },
     logWithGoogle: async ()=>{
         let loggingAction = await UserService.logWithGoogle();
+        console.log(loggingAction);
         if (loggingAction.user === null){
             return loggingAction.message;
         }
