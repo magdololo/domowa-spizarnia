@@ -35,12 +35,16 @@ const createUsersSlice = (set, get) => ({
 
         }))
     },
-    addUser: async (newUser)=>{
+    addUser: async (email, password)=>{
         try{
-            let createdUser = await UserService.createNewUser(newUser.email,newUser.password);
-            //console.log('createdUser')
+            console.log("addUser")
+            let createdAction = await UserService.createNewUser(email,password);
+            console.log(createdAction)
+            if(createdAction.user === null){
+                return createdAction.message;
+            }
             set(() => ({
-                loggedInUser: createdUser,
+                loggedInUser: createdAction.user,
             }))
             return ""
 

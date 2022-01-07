@@ -48,22 +48,10 @@ const FormSignUp = () => {
     const [errorMessage,setErrorMessage] = useState('');
 
     const onSubmit = async (data, e) => {
+        console.log(data);
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
-        let message = await addUser ({
-            "email": data.email,
-            "password": data.password
-        });
+        let message = await addUser(data.email, data.password);
+        console.log(message)
         if (message !== '') setErrorMessage(message)
         else {
             history.push("/");
@@ -73,7 +61,33 @@ const FormSignUp = () => {
             password: "",
             confirmPassword: ""
         });
+
     };
+        // createUserWithEmailAndPassword(auth, data.email, data.password)
+        //     .then((userCredential) => {
+        //         // Signed in
+        //         const user = userCredential.user;
+        //         // ...
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         // ..
+        //     });
+        // let message = await addUser ({
+        //     "email": data.email,
+        //     "password": data.password
+        // });
+        // if (message !== '') setErrorMessage(message)
+        // else {
+        //     history.push("/");
+        // }
+        // reset({
+        //     email: "",
+        //     password: "",
+        //     confirmPassword: ""
+        // });
+
 
     const [values, setValues] = React.useState({
         showPassword: false,

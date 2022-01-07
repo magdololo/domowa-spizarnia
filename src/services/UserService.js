@@ -1,37 +1,41 @@
 import axios from "axios";
 import CategoriesService from "./CategoriesService";
 import {auth, provider, db} from "../firebase";
-import {signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { signInWithPopup} from "firebase/auth";
 import {  doc, getDoc, setDoc } from "firebase/firestore";
 
 const UserService = {
+
     createNewUser: async (email, password) => {
+        let returnObject = {user: null, message: ''};
         try {
-            let response = await axios.get(`http://192.168.1.28:4000/users?email=${email}`);
-            if (response.data.length === 0) {
-                let responsePost = await axios.post('http://192.168.1.28:4000/users', {
-                    email: email,
-                    password: password
+            console.log("createUser")
+            let result = await createUserWithEmailAndPassword(auth, email,password);
+            if (result.user) {
+                console.log(result)
+                returnObject.user = result.user;
+                await setDoc(doc(db, "users", result.user.uid), {
+                    uid: result.user.uid,
+                    email: result.user.email,
+                    provider: result.user.providerId
                 });
-                console.log(responsePost)//object with data: email, password, id
-                let defaultCategories = await CategoriesService.getDefaultCategories();
-                defaultCategories.forEach(category => {
-                        category.id = null;
-                        category.userId = responsePost.data.id;
-                        CategoriesService.addNewCategory(category)
-                    }
-                )
-                return responsePost.data;
+                let defaultCategories =  await CategoriesService.getDefaultCategories();
+                defaultCategories.forEach(category=> {
+                    category.id = null;
+                    category.userId = result.user.uid;
+                    CategoriesService.addNewCategory(category)
+                })
             }
         } catch (error) {
-            console.error(error)
+            returnObject.message = error.message;
         }
-        throw new Error('User with given email already exists');
+        return returnObject;
     },
     logInUser: async (auth, email, password) => {
         let returnObject = {user: null, message: ''};
         try {
+            console.log("loggingUser")
             let userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log(userCredential);
             if (userCredential.user) {
@@ -43,8 +47,20 @@ const UserService = {
                 returnObject.message = 'User or password incorrect';
             }
         } catch (error) {
-            console.error(error)
-            returnObject.message = error;
+            console.log(error.code)
+            switch (error.code){
+                case "auth/user-not-found":
+                    returnObject.message = "Nie masz jeszcze konta. Zarejestuj się";
+                    break;
+                case "auth/user-disabled":
+                    returnObject.message = "Użytkownik zablokowany.";
+                    break;
+                case "auth/weak-password":
+                    returnObject.message = "Hasło nie spełnia reguł bezpieczeństwa.";
+                    break;
+                default:
+                    returnObject.message = "Nieznany błąd. Zgłoś się do administaratora.";
+            }
         }
         return returnObject;
         // (zwraca obiekt który ma user i message które potem potrzebujemy w createUserSlice w funkcji logIn)

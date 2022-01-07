@@ -78,6 +78,7 @@ const Login = () => {
     const onSubmitLogin = async (data, e) => {
         e.preventDefault();
         let message = await logIn(data.email, data.password);
+        console.log(message)
         if (message !== '') setErrorMessage(message);
         reset({
             email: "",
