@@ -39,18 +39,22 @@ const UserService = {
             let userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log(userCredential);
             if (userCredential.user) {
-                let user = {};
-                user.id = userCredential.user.uid
-                returnObject.user = user;
-
-            } else {
-                returnObject.message = 'User or password incorrect';
+                // let user = {};
+                // user.id = userCredential.user.uid
+                // returnObject.user = user;
+                const docRef = doc(db, "users", userCredential.user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    console.log("user exists:");
+                } else {
+                    returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
+                }
             }
-        } catch (error) {
+        }catch (error) {
             console.log(error.code)
             switch (error.code){
                 case "auth/user-not-found":
-                    returnObject.message = "Nie masz jeszcze konta. Zarejestuj się";
+                    returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                     break;
                 case "auth/user-disabled":
                     returnObject.message = "Użytkownik zablokowany.";
