@@ -6,6 +6,9 @@ import {Button} from "@mui/material";
 import {makeStyles} from '@material-ui/core';
 import {Controller, useForm} from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
+import useStore from "../store/useStore";
+import {useState} from "react";
+import {useHistory} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,13 +44,19 @@ const ForgotPassword = () => {
     };
     const classes = useStyles();
     const {handleSubmit, control, reset} = useForm();
-
-    const onSubmit = data => {
-        console.log(data);//zwraca object z wlasciwoscia email
-        // sendPassword(email, password);
-        // reset({
-        //     email: "",
-        // });
+    const forgotPassword = useStore(state=>state.forgotPasswordWithEmail);
+    const [errorMessage,setErrorMessage] = useState('');
+    const history = useHistory();
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
+        console.log(data);//zwraca email
+        let message = await forgotPassword(data.email);
+        console.log(message)
+        if (message !== '') setErrorMessage(message)
+        reset({
+            email: "",
+        });
+        history.push("/");
     };
     return(
         <>

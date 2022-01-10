@@ -6,8 +6,10 @@ const createUsersSlice = (set, get) => ({
     users: [],
     loggedInUser: null,
     logIn: async (email, password)=>{
-        let loggingAction = await UserService.logInUser(auth, email,password);
+        let loggingAction = await UserService.logInUser(email,password);
+        console.log(loggingAction.user);
         if (loggingAction.user === null){
+
             return loggingAction.message;
         }
         set(() => ({
@@ -54,13 +56,31 @@ const createUsersSlice = (set, get) => ({
         }
 
     },
-    sendPassword: async (email,password) =>{
-        await axios.get(`http://192.168.1.28:4000/users?email=${email}&password=${password}`).then(
-            function (response) {
-                // handle success
-                return window.location = '/';
+    signWithGoogle: async()=>{
+        try{
+            console.log("addUser")
+            let createdAction = await UserService.signUpWithGoogle();
+            console.log(createdAction)
+            if(createdAction.user === null){
+                return createdAction.message;
             }
-        )
+            set(() => ({
+                loggedInUser: createdAction.user,
+            }))
+            set(() => ({
+                loggedInUser: createdAction.user,
+            }))
+            return ""
+
+        } catch (error){
+            console.log(error)
+            return error
+         }
+
+    },
+    forgotPasswordWithEmail: async (email) =>{
+        let createdAction = await UserService.forgotPassword(email);
+        console.log(createdAction)
     }
 })
 

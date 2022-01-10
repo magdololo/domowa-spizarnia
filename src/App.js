@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp";
 import "./App.css";
 import useStore from "./store/useStore";
 import SearchResults from "./pages/SearchResults";
+import SignUpWithGoogle from "./pages/SignUpWithGoogle";
 
 
 export default function App() {
@@ -35,6 +36,9 @@ export default function App() {
                         <Route path="/forgotPassword">
                             <ForgotPassword/>
                         </Route>
+                        <Route path="/signUpWithGoogle">
+                            <SignUpWithGoogle/>
+                        </Route>
                         <Route path="/signUp">
                             <SignUp/>
                         </Route>
@@ -53,6 +57,9 @@ export default function App() {
                 <Switch>
                     <Route path="/forgotPassword">
                         <ForgotPassword/>
+                    </Route>
+                    <Route path="/signUpWithGoogle">
+                        <SignUpWithGoogle/>
                     </Route>
                     <Route path="/signUp">
                         <SignUp/>

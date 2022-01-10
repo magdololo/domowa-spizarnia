@@ -104,14 +104,6 @@ const FormSignUp = () => {
     };
 
 
-
-    // const handleSignUp = (e) => {
-    //     e.preventDefault();
-    //     auth
-    //         .createUserWithEmailAndPassword(email, password)
-    //         .catch((error) => alert(`Email is already in use, sign in or use other email, ${error}`));
-    // };
-
     return (
         <form className={classes.root} onSubmit={handleSubmit(onSubmit)} noValidate>
             <Controller

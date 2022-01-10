@@ -1,8 +1,7 @@
-import axios from "axios";
+
 import CategoriesService from "./CategoriesService";
 import {auth, provider, db} from "../firebase";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { signInWithPopup} from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup} from "firebase/auth";
 import {  doc, getDoc, setDoc } from "firebase/firestore";
 
 const UserService = {
@@ -32,13 +31,14 @@ const UserService = {
         }
         return returnObject;
     },
-    logInUser: async (auth, email, password) => {
+    logInUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
         try {
             console.log("loggingUser")
-            let userCredential = await signInWithEmailAndPassword(auth, email, password);
+            let userCredential = await signInWithEmailAndPassword(auth,email, password);
             console.log(userCredential);
             if (userCredential.user) {
+                returnObject.user = userCredential.user;
                 // let user = {};
                 // user.id = userCredential.user.uid
                 // returnObject.user = user;
@@ -53,6 +53,9 @@ const UserService = {
         }catch (error) {
             console.log(error.code)
             switch (error.code){
+                case "auth/wrong-password":
+                    returnObject.message = "Błedne hasło. Przypomnij hasło."
+                    break;
                 case "auth/user-not-found":
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                     break;
@@ -69,6 +72,38 @@ const UserService = {
         return returnObject;
         // (zwraca obiekt który ma user i message które potem potrzebujemy w createUserSlice w funkcji logIn)
     },
+    signUpWithGoogle: async()=>{
+        let returnObject = {user: null, message: ''};
+        try {
+            let result = await signInWithPopup(auth, provider);
+            if (result.user) {
+                returnObject.user = result.user;
+                const docRef = doc(db, "users", result.user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    console.log("user exists:");
+                } else {
+                    console.log(result.user.uid);
+                    console.log(auth.currentUser);
+                    await setDoc(doc(db, "users", auth.currentUser.uid), {
+                        uid: auth.currentUser.uid,
+                        email: auth.currentUser.email,
+                        provider: auth.currentUser.providerId
+                    });
+                    let defaultCategories =  await CategoriesService.getDefaultCategories();
+                    defaultCategories.forEach(category=> {
+                        category.id = null;
+                        category.userId = auth.currentUser.uid;
+                        CategoriesService.addNewCategory(category)
+                    })
+
+                }
+            }
+        } catch (error) {
+            returnObject.message = error;
+        }
+        return returnObject;
+    },
     logWithGoogle: async () => {
         let returnObject = {user: null, message: ''};
         try {
@@ -77,12 +112,35 @@ const UserService = {
                 const docRef = doc(db, "users", result.user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
+                    returnObject.user = result.user;
                     console.log("user exists:");
                 } else {
                     console.log("zarejestruj sie")
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
+
                 }
             }
+        } catch (error) {
+            returnObject.message = error;
+        }
+        return returnObject;
+    },
+    forgotPassword: async (email) =>{
+        let returnObject = {user: null, message: ''};
+        try {
+            let result = await sendPasswordResetEmail(auth, email);
+            if (result) {
+                console.log(result)
+                // const docRef = doc(db, "users", result.user.uid);
+                // const docSnap = await getDoc(docRef);
+                // if (docSnap.exists()) {
+                //     returnObject.user = result.user;
+                //     console.log("user exists:");
+                } else {
+                    console.log("zarejestruj sie")
+                    returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
+
+                }
         } catch (error) {
             returnObject.message = error;
         }

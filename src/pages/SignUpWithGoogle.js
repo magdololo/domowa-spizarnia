@@ -1,15 +1,16 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-//import {Divider,} from "@mui/material";
-//import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
-import FormSignUp from "../components/FormSignUp";
-
-
-
-const SignUp = () => {
-
+import * as React from "react";
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from "@mui/material/Button";
+import useStore from "../store/useStore";
+const SignUpWithGoogle = () => {
+        const handleChange = ()=>{
+            console.log("checkbox");
+        }
+        const signUpWithGoogle = useStore(state=>state.signWithGoogle);
     return(
         <>
             <CssBaseline />
@@ -19,13 +20,18 @@ const SignUp = () => {
                 </Box>
                 <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center", marginTop: "2em", color: "gray"}}>
                     <Typography variant="button" display="block" gutterBottom>
-                       Załóż konto
+                        Nie masz jeszcze konta. Zaznacz wymagane zgody i zarejestruj się.
                     </Typography>
                 </div>
                 <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'.5em auto'}}>
                     <Box style={{display: "flex",flexWrap: 'wrap', justifyContent: "center", margin: '0 auto'}}>
-                        <FormSignUp/>
+                        <FormControlLabel control={<Checkbox/>} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} label="Akceptuję regulamin serwisu." />
                     </Box>
+                </Box>
+                <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>
+                    <Button variant="outlined" style={{ marginTop: 10 }} onClick={signUpWithGoogle}>
+                        <span>Zarejestruj się</span>
+                    </Button>
                 </Box>
                 {/*<Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>*/}
                 {/*<Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>*/}
@@ -40,9 +46,9 @@ const SignUp = () => {
                 {/*</Box>*/}
 
             </Box>
-       </>
+        </>
     )
 
 };
 
-export default SignUp;
+export default SignUpWithGoogle;
