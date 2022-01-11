@@ -1,8 +1,8 @@
 
 import CategoriesService from "./CategoriesService";
 import {auth, provider, db} from "../firebase";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup} from "firebase/auth";
-import {  doc, getDoc, setDoc } from "firebase/firestore";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup, deleteUser} from "firebase/auth";
+import {  doc, getDoc, setDoc} from "firebase/firestore";
 
 const UserService = {
 
@@ -39,13 +39,10 @@ const UserService = {
             console.log(userCredential);
             if (userCredential.user) {
                 returnObject.user = userCredential.user;
-                // let user = {};
-                // user.id = userCredential.user.uid
-                // returnObject.user = user;
                 const docRef = doc(db, "users", userCredential.user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    console.log("user exists:");
+                        console.log("user exists:");
                 } else {
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                 }

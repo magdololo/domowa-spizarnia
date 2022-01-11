@@ -1,13 +1,13 @@
 import axios from "axios";
-
+import {auth, provider, db} from "../firebase";
+import {  doc, getDocs, setDoc, collection, addDoc, where, query } from "firebase/firestore";
 const CategoriesService= {
     getDefaultCategories: async ()=>{
         try {
-            let response = await axios.get(`http://192.168.1.28:4000/categories-default`);
-            return response.data;
-
-        }
-        catch (error) {
+            let q = await query(collection(db, "categories" ), where("user" , "==", ""));
+            const querySnapshot = await getDocs(q);
+           console.log("default categories", querySnapshot);
+        } catch (error) {
             console.error(error)
         }
     },
@@ -23,21 +23,23 @@ const CategoriesService= {
     },
     addNewCategory: async (newCategory) => {
         try {
-            let response = await axios.post('http://192.168.1.28:4000/categories-user', newCategory);
-            return response.data
-
-        } catch (error) {
-            console.error(error)
+            const docRef= await addDoc(collection(db, "categories"), {
+                url: (newCategory.url),
+                path: (newCategory.path),
+                title: (newCategory.title)
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
     },
     updateCategory: async (id, path, url, title) => {
         try {
-            let editCategory = await axios.put('http://192.168.1.28:4000/categories-user/' + id, {
-                url: url,
-                path: path,
-                title: title
+             await db.collection("categories").doc(doc.id).update({
+                url: (url),
+                path: (path),
+                title: (title)
             });
-            return editCategory.data
         } catch (error) {
             console.error(error)
         }
