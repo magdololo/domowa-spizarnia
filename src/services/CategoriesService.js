@@ -1,12 +1,12 @@
 import axios from "axios";
 import {auth, provider, db} from "../firebase";
-import {  doc, getDocs, setDoc, collection, addDoc, where, query } from "firebase/firestore";
+import {  doc, getDocs, collection, addDoc, where, query } from "firebase/firestore";
 const user = auth.currentUser;
 const CategoriesService= {
     getDefaultCategories: async ()=>{
              let defaultCategories=[];
         try {
-            let q = await query(collection(db, "categories" ), where("user" , "==", ""));
+            let q = await query(collection(db, "categories"));
             const querySnapshot = await getDocs(q);
             //defaultCategories.push(querySnapshot.docs);
             querySnapshot.forEach((doc) => {
@@ -30,7 +30,7 @@ const CategoriesService= {
         let categories = [];
         console.log(userId)
         try {
-            let q = await query(collection(db, "categories"), where("user", "==", userId));
+            let q = await query(collection(db, "users/" + userId + "/categories"));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 console.log(doc.id, " => ", doc.data());
@@ -44,7 +44,7 @@ const CategoriesService= {
     },
     addNewCategory: async (newCategory) => {
         try {
-            const docRef= await addDoc(collection(db, "categories"), {
+            const docRef= await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), {
                 url: (newCategory.url),
                 path: (newCategory.path),
                 title: (newCategory.title),
