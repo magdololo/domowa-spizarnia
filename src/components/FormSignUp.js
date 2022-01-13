@@ -40,7 +40,15 @@ const useStyles = makeStyles(theme => ({
 
 const FormSignUp = () => {
     const classes = useStyles();
-    const {handleSubmit, control, watch, reset} = useForm();
+    const {handleSubmit, control, watch, reset} = useForm({
+        defaultValues: {
+            // email: 'magdajarzyna@gmail.com',
+            // password: '1982Magda',
+            email: 'gabrielajarzyna@gmail.com',
+            password: 'gabi1234',
+            confirmPassword: 'gabi1234'
+        }
+    });
     const password = useRef({});
     password.current = watch("password", "");
     const addUser = useStore(state => state.addUser);
@@ -56,6 +64,7 @@ const FormSignUp = () => {
         else {
             history.push("/");
         }
+
         reset({
             email: "",
             password: "",

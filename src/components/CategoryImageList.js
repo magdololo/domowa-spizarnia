@@ -21,7 +21,7 @@ import ButtonBase from "@mui/material/ButtonBase";
     const handleClose = () => setOpen(false);
     const minWidth600 = useMediaQuery('(min-width:600px)');
 
-           if (categoryList.length >= 2) {
+           if (categoryList != null && categoryList.length >= 2) {
                categoryList.sort((a, b) => {
                    a = a.title.toLowerCase();
                    b = b.title.toLowerCase();

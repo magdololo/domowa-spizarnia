@@ -1,35 +1,35 @@
 
 import CategoriesService from "./CategoriesService";
 import {auth, provider, db} from "../firebase";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup, deleteUser} from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup} from "firebase/auth";
 import {  doc, getDoc, setDoc} from "firebase/firestore";
 
 const UserService = {
 
     createNewUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
+
         try {
             console.log("createUser")
             let result = await createUserWithEmailAndPassword(auth, email,password);
+
             if (result.user) {
                 console.log(result)
                 returnObject.user = result.user;
-                await setDoc(doc(db, "users", result.user.uid), {
+                setDoc(doc(db, "users", result.user.uid), {
                     uid: result.user.uid,
                     email: result.user.email,
                     provider: result.user.providerId
                 });
-                let defaultCategories =  await CategoriesService.getDefaultCategories();
-                defaultCategories.forEach(category=> {
-                    category.id = null;
-                    category.userId = result.user.uid;
-                    CategoriesService.addNewCategory(category)
-                })
+                await CategoriesService.addDefaultCategoriesToUser(result.user.uid);
             }
+
         } catch (error) {
             returnObject.message = error.message;
         }
-        return returnObject;
+        return returnObject
+
+
     },
     logInUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
@@ -43,6 +43,7 @@ const UserService = {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                         console.log("user exists:");
+                        await CategoriesService.getUserCategories();
                 } else {
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                 }
@@ -79,6 +80,7 @@ const UserService = {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     console.log("user exists:");
+                    await CategoriesService.getDefaultCategories();
                 } else {
                     console.log(result.user.uid);
                     console.log(auth.currentUser);
@@ -87,12 +89,12 @@ const UserService = {
                         email: auth.currentUser.email,
                         provider: auth.currentUser.providerId
                     });
-                    let defaultCategories =  await CategoriesService.getDefaultCategories();
-                    defaultCategories.forEach(category=> {
-                        category.id = null;
-                        category.userId = auth.currentUser.uid;
-                        CategoriesService.addNewCategory(category)
-                    })
+                     //await CategoriesService.getDefaultCategories();
+                    // defaultCategories.forEach(category=> {
+                    //     category.id = null;
+                    //     category.userId = auth.currentUser.uid;
+                    //     CategoriesService.addNewCategory(category)
+                    // })
 
                 }
             }
@@ -111,6 +113,7 @@ const UserService = {
                 if (docSnap.exists()) {
                     returnObject.user = result.user;
                     console.log("user exists:");
+                    await CategoriesService.getUserCategories();
                 } else {
                     console.log("zarejestruj sie")
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";

@@ -1,6 +1,7 @@
-import axios from "axios";
+
 import UserService  from "../services/UserService";
-import {auth} from "../firebase";
+import CategoriesService from "../services/CategoriesService";
+
 
 const createUsersSlice = (set, get) => ({
     users: [],
@@ -12,6 +13,7 @@ const createUsersSlice = (set, get) => ({
 
             return loggingAction.message;
         }
+            await CategoriesService.getUserCategories(loggingAction.user.uid);
         set(() => ({
             loggedInUser: loggingAction.user,
 
@@ -38,6 +40,7 @@ const createUsersSlice = (set, get) => ({
         }))
     },
     addUser: async (email, password)=>{
+        let userCategories = [];
         try{
             console.log("addUser")
             let createdAction = await UserService.createNewUser(email,password);
@@ -45,8 +48,12 @@ const createUsersSlice = (set, get) => ({
             if(createdAction.user === null){
                 return createdAction.message;
             }
+            userCategories = await CategoriesService.getUserCategories(createdAction.user.uid);
+
             set(() => ({
                 loggedInUser: createdAction.user,
+                categories: userCategories
+
             }))
             return ""
 

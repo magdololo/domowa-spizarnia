@@ -1,11 +1,31 @@
 import CategoriesService from "../services/CategoriesService";
-
-
+import {auth} from "../firebase";
+const user = auth.currentUser;
 const createCategorySlice = (set, get) => ({
 //set ustawianie stanu get pobieranie ze stanu
     categories: [],
+    getDefaultCategories: async () =>{
+        let defaultCategories=[];
+        console.log(user)
+        if(user){
+            defaultCategories= await CategoriesService.getDefaultCategories()
+        }
+        console.log(defaultCategories)
+        set((state) => ({
+            categories: defaultCategories,
+        }));
+    },
+    addDefaultCategoriesToUser: async (user)=>{
+        let defaultCategories = await CategoriesService.addDefaultCategoriesToUser(user.uid);
+        set((state) => ({
+            categories: defaultCategories
+        }));
+   },
    getUserCategories: async (userId) => {
-        let categories = await CategoriesService.getUserCategories(userId);
+        let categories=[];
+        categories = await CategoriesService.getUserCategories(userId);
+        console.log("getusercategories "+userId)
+        console.log(categories)
         set((state) => ({
             categories: categories,
         }));

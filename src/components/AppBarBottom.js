@@ -108,7 +108,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
     //const products = productsList.filter((product=>product.categoryId === category.id));
 
-    if (productsList.length >= 2 ) {
+    if (productsList != null && productsList.length >= 2 ) {
         productsList.sort((a, b) => {
             a = a.name.toLowerCase();
             b = b.name.toLowerCase();
@@ -129,7 +129,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
         }
     }, [searchedProduct, setValue]);
-    console.log(searchedProduct);
+    // console.log(searchedProduct);
     const onSubmit = data => {
           console.log(data)
         reset();

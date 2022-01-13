@@ -15,12 +15,12 @@ const CategoryList = () => {
     const fetchImages = useStore(state => state.getImages)
     const minWidth450 = useMediaQuery('(min-width:450px)');
     useEffect(() => {
-        fetchCategories(user.id);
+        fetchCategories(user.uid);
         fetchImages();
 
-    }, [fetchImages, fetchCategories, user.id]);
-
-
+    }, [ fetchImages, fetchCategories, user]);
+    //
+    // console.log(fetchDefaultCategories)
     return (
         <>
             <div style={{maxWidth: '1300px', margin: '0 auto'}} >

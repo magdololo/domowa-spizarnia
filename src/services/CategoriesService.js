@@ -1,23 +1,44 @@
 import axios from "axios";
 import {auth, provider, db} from "../firebase";
 import {  doc, getDocs, setDoc, collection, addDoc, where, query } from "firebase/firestore";
+const user = auth.currentUser;
 const CategoriesService= {
     getDefaultCategories: async ()=>{
+             let defaultCategories=[];
         try {
             let q = await query(collection(db, "categories" ), where("user" , "==", ""));
             const querySnapshot = await getDocs(q);
-           console.log("default categories", querySnapshot);
+            //defaultCategories.push(querySnapshot.docs);
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+                defaultCategories.push(doc.data());
+                console.log(defaultCategories);
+            })
+            return defaultCategories
         } catch (error) {
             console.error(error)
         }
     },
+    addDefaultCategoriesToUser: async(userId)=>{
+        let categories = await CategoriesService.getDefaultCategories();
+        categories.forEach(async (category)=>{
+            category.user = userId;
+            await CategoriesService.addNewCategory(category)
+        })
+    },
     getUserCategories: async (userId)=>{
+        let categories = [];
+        console.log(userId)
         try {
-            let response = await axios.get(`http://192.168.1.28:4000/categories-user?userId=${userId}`);
-            return response.data;
-
-        }
-        catch (error) {
+            let q = await query(collection(db, "categories"), where("user", "==", userId));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+                categories.push(doc.data());
+                console.log(categories)
+            })
+            return categories
+        }catch (error) {
             console.error(error)
         }
     },
@@ -26,7 +47,8 @@ const CategoriesService= {
             const docRef= await addDoc(collection(db, "categories"), {
                 url: (newCategory.url),
                 path: (newCategory.path),
-                title: (newCategory.title)
+                title: (newCategory.title),
+                user: (newCategory.user)
             });
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
