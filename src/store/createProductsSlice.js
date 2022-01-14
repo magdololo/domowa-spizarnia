@@ -17,11 +17,11 @@ const createProductsSlice = (set, get) => ({
         }));
     },
     addProduct: async (newProduct, userId, productFromProducts) => {
-        // console.log("createSlice newProduct")
-        console.log(productFromProducts);
+        // 
+        
         let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts);
 
-        //console.log(addedProduct);
+        //
             set((state) => ({
                 products: [
                     addedProduct,
@@ -51,7 +51,7 @@ const createProductsSlice = (set, get) => ({
         const productsFromStorageList = get().storage;
 
         let productsWithName = productsFromStorageList.filter(product=> product.name.indexOf(searchedName) >= 0);
-        console.log(productsWithName)
+        
         set({searchedProducts: productsWithName});
 
     },
@@ -67,7 +67,7 @@ const createProductsSlice = (set, get) => ({
     updateProduct: async (updatedProduct, userId, productFromProducts)=>{
 
             let productAfterUpdate = await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
-            //console.log(productAfterUpdate);
+            //
             set((state)=> {
                     let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
                     products.push(updatedProduct)

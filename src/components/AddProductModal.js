@@ -101,7 +101,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     }, [product, setValue]);
 
     const onSubmit = data => {
-        console.log(product)
+        
         addProduct({
 
             "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,

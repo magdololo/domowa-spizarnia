@@ -10,11 +10,11 @@ const UserService = {
         let returnObject = {user: null, message: ''};
 
         try {
-            console.log("createUser")
+            
             let result = await createUserWithEmailAndPassword(auth, email,password);
 
             if (result.user) {
-                console.log(result)
+                
                 returnObject.user = result.user;
                 setDoc(doc(db, "users", result.user.uid), {
                     uid: result.user.uid,
@@ -34,22 +34,22 @@ const UserService = {
     logInUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
         try {
-            console.log("loggingUser")
+            
             let userCredential = await signInWithEmailAndPassword(auth,email, password);
-            console.log(userCredential);
+            
             if (userCredential.user) {
                 returnObject.user = userCredential.user;
                 const docRef = doc(db, "users", userCredential.user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                        console.log("user exists:");
+                        
                         await CategoriesService.getUserCategories();
                 } else {
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                 }
             }
         }catch (error) {
-            console.log(error.code)
+            
             switch (error.code){
                 case "auth/wrong-password":
                     returnObject.message = "Błedne hasło. Przypomnij hasło."
@@ -79,11 +79,11 @@ const UserService = {
                 const docRef = doc(db, "users", result.user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    console.log("user exists:");
+                    
                     await CategoriesService.getDefaultCategories();
                 } else {
-                    console.log(result.user.uid);
-                    console.log(auth.currentUser);
+                    
+                    
                     await setDoc(doc(db, "users", auth.currentUser.uid), {
                         uid: auth.currentUser.uid,
                         email: auth.currentUser.email,
@@ -112,10 +112,10 @@ const UserService = {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     returnObject.user = result.user;
-                    console.log("user exists:");
+                    
                     await CategoriesService.getUserCategories();
                 } else {
-                    console.log("zarejestruj sie")
+                    
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
 
                 }
@@ -130,14 +130,14 @@ const UserService = {
         try {
             let result = await sendPasswordResetEmail(auth, email);
             if (result) {
-                console.log(result)
+                
                 // const docRef = doc(db, "users", result.user.uid);
                 // const docSnap = await getDoc(docRef);
                 // if (docSnap.exists()) {
                 //     returnObject.user = result.user;
-                //     console.log("user exists:");
+                //     
                 } else {
-                    console.log("zarejestruj sie")
+                    
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
 
                 }

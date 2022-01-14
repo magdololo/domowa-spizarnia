@@ -18,9 +18,8 @@ const CategoryList = () => {
         fetchCategories(user.uid);
         fetchImages();
 
-    }, [ fetchImages, fetchCategories, user]);
-    //
-    // console.log(fetchDefaultCategories)
+    }, [fetchImages, fetchCategories, user]);
+
     return (
         <>
             <div style={{maxWidth: '1300px', margin: '0 auto'}} >

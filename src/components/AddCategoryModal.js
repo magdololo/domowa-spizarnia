@@ -32,7 +32,7 @@ const AddCategoryModal=({open, close})=>{
 
 
         if (categories != null && categories.length >= 2) {
-            console.log(categories)
+            
             categories.sort((a, b) => {
                 a = a.title.toLowerCase();
                 b = b.title.toLowerCase();
@@ -79,7 +79,7 @@ const AddCategoryModal=({open, close})=>{
                        "url": pickedImage,
                        "title": newCategoryName,
                        "path": slugify(newCategoryName, "_"),
-                       "userId": user.id
+                       "user": user.uid
                    });
                    close();
                    setPickedImage('');

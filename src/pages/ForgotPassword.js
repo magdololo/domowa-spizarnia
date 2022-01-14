@@ -49,9 +49,9 @@ const ForgotPassword = () => {
     const history = useHistory();
     const onSubmit = async (data, e) => {
         e.preventDefault();
-        console.log(data);//zwraca email
+        
         let message = await forgotPassword(data.email);
-        console.log(message)
+        
         if (message !== '') setErrorMessage(message)
         reset({
             email: "",

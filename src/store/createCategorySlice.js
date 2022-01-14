@@ -6,11 +6,11 @@ const createCategorySlice = (set, get) => ({
     categories: [],
     getDefaultCategories: async () =>{
         let defaultCategories=[];
-        console.log(user)
+        
         if(user){
             defaultCategories= await CategoriesService.getDefaultCategories()
         }
-        console.log(defaultCategories)
+        
         set((state) => ({
             categories: defaultCategories,
         }));
@@ -24,8 +24,8 @@ const createCategorySlice = (set, get) => ({
    getUserCategories: async (userId) => {
         let categories=[];
         categories = await CategoriesService.getUserCategories(userId);
-        console.log("getusercategories "+userId)
-        console.log(categories)
+        
+        
         set((state) => ({
             categories: categories,
         }));
@@ -52,7 +52,8 @@ const createCategorySlice = (set, get) => ({
         return category[0];
     },
     addCategory: async (newCategory) => {
-
+        
+        
         await CategoriesService.addNewCategory(newCategory);
         set((state) => ({
             categories: [
@@ -66,15 +67,17 @@ const createCategorySlice = (set, get) => ({
         set({editModalOpen: open})
     },
     editCategory: {},
-    setEditCategory: (id, url, title, path) => {
-        set({editCategory: {url, title, path, id}})
+    setEditCategory: (userId, url, title, path, categoryId) => {
+        set({editCategory: {userId, url, title, path, categoryId}})
 
 
     },
-    updateCategory: async (id, path, url, title) => {
-        let updateCategory = await CategoriesService.updateCategory(id, path, url, title)
+    updateCategory: async (userId, path, url, title, categoryId) => {
+        
+        let updateCategory = await CategoriesService.updateCategory(userId, path, url, title, categoryId)
+        
         set((state) => {
-                let categories = state.categories.filter(editCategory => editCategory.id !== id);
+                let categories = state.categories.filter(editCategory => editCategory.id !== categoryId);
                 categories.push(updateCategory)
                 return {
                     categories: categories,

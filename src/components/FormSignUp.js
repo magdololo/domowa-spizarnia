@@ -56,10 +56,10 @@ const FormSignUp = () => {
     const [errorMessage,setErrorMessage] = useState('');
 
     const onSubmit = async (data, e) => {
-        console.log(data);
+        
         e.preventDefault();
         let message = await addUser(data.email, data.password);
-        console.log(message)
+        
         if (message !== '') setErrorMessage(message)
         else {
             history.push("/");

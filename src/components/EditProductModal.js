@@ -68,15 +68,15 @@ const EditProductModal =()=>{
     let { categoryName } = useParams();
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
-    console.log(categoryName)
+    
     useEffect(() => {
             getCategoryById(editProduct.categoryId).then(category => {
-                console.log(category)
+                
                 setEditCategory(category)
             })
     },[editProduct,editCategory]);
 
-    console.log(editProduct)
+    
 
     const { handleSubmit, control , setValue} = useForm( {mode: 'onBlur'});
     useEffect(()=>{

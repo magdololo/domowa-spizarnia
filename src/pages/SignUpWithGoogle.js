@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import useStore from "../store/useStore";
 const SignUpWithGoogle = () => {
         const handleChange = ()=>{
-            console.log("checkbox");
+            
         }
         const signUpWithGoogle = useStore(state=>state.signWithGoogle);
     return(

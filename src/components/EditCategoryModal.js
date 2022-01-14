@@ -12,6 +12,7 @@ import slugify from "slugify";
 
 
   const EditCategoryModal =()=>{
+      const user = useStore(state=>state.loggedInUser);
       const setEditModalOpen = useStore(state=>state.setEditCategoryModalOpen);
       const updateCategory = useStore(state=>state.updateCategory);
       const [newCategoryName,setNewCategoryName] = useState('');
@@ -49,6 +50,10 @@ import slugify from "slugify";
           p: 4,
           zIndex: 1200,
       }
+      
+      
+      
+      
 
       return(
         <Modal sx={{zIndex: '200'}}
@@ -80,7 +85,7 @@ import slugify from "slugify";
                 return this.charAt(0).toUpperCase() + this.slice(1);
             }
             let path= slugify(newCategoryName, "_");
-            updateCategory(editCategory.id, path, localImage, newCategoryName.capitalize());
+            updateCategory(editCategory.userId, path, localImage, newCategoryName.capitalize(), editCategory.categoryId);
             handleClose();
            }}>Edytuj kategorię</Button>
         </Box>

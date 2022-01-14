@@ -14,7 +14,6 @@ import ButtonBase from "@mui/material/ButtonBase";
 
    const CategoryImageList =()=>{
 
-
     const categoryList = useStore(state => state.categories);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -34,7 +33,7 @@ import ButtonBase from "@mui/material/ButtonBase";
            }
 
 
-
+          
            return (
                <>
                <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto', paddingBottom: 40}}>

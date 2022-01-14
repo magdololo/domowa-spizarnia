@@ -8,8 +8,8 @@ const filter = createFilterOptions();
 
 export default function AutocompleteCategoriesTitle({labelForAddModal, value, onChange, setSelectedNewCategory}) {
      const categoryList = useStore(state => state.categories);
-     console.log(categoryList)
-    // console.log(value)
+     
+    // 
     useEffect( ()=>{
 
         if(value) {

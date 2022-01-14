@@ -121,7 +121,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     }
     let history = useHistory();
 
-    //console.log(searchedProduct)
+    //
     useEffect(()=>{
         if(searchedProduct && typeof searchedProduct !== "string") {
             //setValue('productName', product.name);
@@ -129,9 +129,9 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
 
         }
     }, [searchedProduct, setValue]);
-    // console.log(searchedProduct);
+    // 
     const onSubmit = data => {
-          console.log(data)
+          
         reset();
     }
     return(
@@ -148,11 +148,11 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
                                      <Autocomplete
                                          value={value}
                                          onChange={(_, data) => {
-                                             console.log(data)
+                                             
                                              if(typeof data === "object" && data !== null){
                                                  setSearchedProduct(data.id);
                                              } else {
-                                                 console.log(data)
+                                                 
                                                  searchedAllProducts(data)
                                              }
                                              onChange(data);

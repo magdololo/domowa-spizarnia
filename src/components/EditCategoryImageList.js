@@ -28,6 +28,7 @@ const EditCategoryImageList =()=> {
         })
 
     }
+    
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
             <ImageList cols={minWidth600 ? 3 : 2} >
@@ -56,7 +57,7 @@ const EditCategoryImageList =()=> {
                         fontSize: "1.3em",
                         color: 'white'
                     }} onClick={() => {
-                        setEditCategory(item.id, item.url, item.title, item.path);
+                        setEditCategory(item.user, item.url, item.title, item.path, item.id);
                         setEditCategoryModalOpen(true);
                     }}/>
                 </IconButton>

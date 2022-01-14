@@ -23,8 +23,8 @@ const SearchResults =()=>{
     }
     const searchedProductList = productsList.filter(product=> product.id === searchedProduct[0]);
 
-console.log(searchedProductList)
-console.log(searchedAllProducts.length)
+
+
     return(
         <>
             <div style={{ margin: "0 auto", width: minWidth900 ? '800px' : '90%'}}>

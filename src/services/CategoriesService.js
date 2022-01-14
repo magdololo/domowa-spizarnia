@@ -1,6 +1,6 @@
 import axios from "axios";
 import {auth, provider, db} from "../firebase";
-import {  doc, getDocs, collection, addDoc, where, query } from "firebase/firestore";
+import {  doc, updateDoc, getDocs, collection, addDoc, where, query } from "firebase/firestore";
 const user = auth.currentUser;
 const CategoriesService= {
     getDefaultCategories: async ()=>{
@@ -10,9 +10,9 @@ const CategoriesService= {
             const querySnapshot = await getDocs(q);
             //defaultCategories.push(querySnapshot.docs);
             querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
+                
                 defaultCategories.push(doc.data());
-                console.log(defaultCategories);
+                
             })
             return defaultCategories
         } catch (error) {
@@ -28,14 +28,16 @@ const CategoriesService= {
     },
     getUserCategories: async (userId)=>{
         let categories = [];
-        console.log(userId)
+        
         try {
             let q = await query(collection(db, "users/" + userId + "/categories"));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-                categories.push(doc.data());
-                console.log(categories)
+                
+                let category = doc.data();
+                category.id = doc.id;
+                categories.push(category);
+                
             })
             return categories
         }catch (error) {
@@ -48,23 +50,44 @@ const CategoriesService= {
                 url: (newCategory.url),
                 path: (newCategory.path),
                 title: (newCategory.title),
-                user: (newCategory.user)
+                user: (newCategory.user),
+
             });
-            console.log("Document written with ID: ", docRef.id);
+            
         } catch (e) {
-            console.error("Error adding document: ", e);
+            
         }
     },
-    updateCategory: async (id, path, url, title) => {
+    updateCategory: async (userId, path, url, title,categoryId) => {
+        let category = {
+            url: (url),
+            path: (path),
+            title: (title),
+            user: (userId)
+        }
         try {
-             await db.collection("categories").doc(doc.id).update({
+
+            const categoryRef = doc(db, "users/" + userId + "/categories", categoryId);
+
+            // Set the "capital" field of the city 'DC'
+            await updateDoc(categoryRef, {
                 url: (url),
                 path: (path),
                 title: (title)
             });
+            //  const docRef = await db.collection("users/" + userId + "/categories" + categoryId).where( {
+            //     url: (url),
+            //     path: (path),
+            //     title: (title)
+            // });
+            
         } catch (error) {
             console.error(error)
         }
+        category.id = categoryId;
+        return category;
+
+
     },
     deleteCategory: async (id) => {
          try {
@@ -75,9 +98,17 @@ const CategoriesService= {
         }
     },
      fetchImages: async ()=> {
+        let images = [];
         try{
-            let response = await axios.get('http://192.168.1.28:4000/images');
-            return response.data
+            let q = await query(collection(db, "images"));
+            const querySnapshot = await getDocs(q);
+            
+            querySnapshot.forEach((doc) => {
+                
+                images.push(doc.data());
+                
+            })
+            return images
         }catch (error) {
             console.error(error);
         }

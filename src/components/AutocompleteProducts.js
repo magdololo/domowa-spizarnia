@@ -22,7 +22,7 @@ export default function AutocompleteProducts({ onChange, value, setProduct}) {
     //         setProduct(value)
     //     }
     // }, [value, setProduct]);
-  console.log(value)
+  
     return(
         <Autocomplete
             value={value}

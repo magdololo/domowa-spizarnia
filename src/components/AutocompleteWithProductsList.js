@@ -21,7 +21,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
         })
 
     }
-    console.log(products)
+    
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
 
     }, [getProductsFromProducts, userId]);
 
-    console.log(value)
+    
 
     return (
 
@@ -38,7 +38,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
 
                 value={value}
                 onChange={(_, data) => {
-                    console.log(data)
+                    
                     setNewProductName(data);
                     setProduct(data);
                     onChange(data)
@@ -46,10 +46,10 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
                 }
 
                 filterOptions={(options, params) => {
-                    console.log(options)
-                    console.log(params)
+                    
+                    
                     const filtered = filter(options, params);
-                    console.log(filtered)
+                    
                     return filtered;
                 }}
                 isOptionEqualToValue={(option, value) => {
