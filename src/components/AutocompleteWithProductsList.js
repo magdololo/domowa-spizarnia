@@ -6,10 +6,11 @@ import {useEffect} from "react";
 const filter = createFilterOptions();
 
 
-export default function AutocompleteWithProductsList({labelForAddModal, newProductName, setNewProductName, onChange, value, setProduct}) {
+export default function AutocompleteWithProductsList({labelForAddModal, newProductName, setNewProductName, onChange, value, setProduct, loggedInUser}) {
 
-    const getProductsFromProducts = useStore(state => state.fetchProducts);
+    const getAllProducts = useStore(state => state.fetchProducts);
     const products = useStore(state => state.products);
+
     if (products.length >= 2 ) {
         products.sort((a, b) => {
             a = a.name.toLowerCase();
@@ -21,13 +22,12 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
         })
 
     }
-    
-    const loggedInUser = useStore(state=> state.loggedInUser);
-    const userId = loggedInUser.id;
-    useEffect(() => {
-        getProductsFromProducts(userId);
 
-    }, [getProductsFromProducts, userId]);
+    const userId = loggedInUser.uid;
+    useEffect(() => {
+        getAllProducts(loggedInUser);
+
+    }, [getAllProducts, userId]);
 
     
 

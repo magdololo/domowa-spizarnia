@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import DatePicker from '@mui/lab/DatePicker';
 import plLocale from 'date-fns/locale/pl';
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -19,6 +19,7 @@ import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
 
 
 const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
+    const products = useStore(state => state.products);
 
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
@@ -27,7 +28,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
-    const userId = loggedInUser.id;
+    const userId = loggedInUser.uid;
     const [newProductName, setNewProductName] = useState(null);
 
     const style = {
@@ -81,16 +82,19 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         return () => mounted = false;
     }, [categoryName, setCategory, getCategoryByPath]);
 
-    const { handleSubmit, control, setValue} = useForm( {mode: 'onBlur'},{defaultValues: {
-            productName: null,
-            capacity: "100",
-            unit: "gr",
-            quantity: "1",
-            expireDate: null,
-            categoryName: categoryName ? categoryName : null,
-            categoryId: categoryName ? category.id : selectedNewCategory.id
-        }
-    });
+
+
+    const { handleSubmit, control, setValue, reset} = useForm();
+    // ( {mode: 'onBlur'},{defaultValues: {
+    //         productName: null,
+    //         capacity: "100",
+    //         unit: "gr",
+    //         quantity: "1",
+    //         expireDate: null,
+    //         categoryName: categoryName ? categoryName : null,
+    //         categoryId: categoryName ? category.id : selectedNewCategory.id
+    //     }
+    // });
 
     useEffect(()=>{
         if(product && typeof product !== "string") {
@@ -101,7 +105,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     }, [product, setValue]);
 
     const onSubmit = data => {
-        
+        console.log(data)
         addProduct({
 
             "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,
@@ -111,8 +115,9 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             "expireDate": data.expireDate,
             "categoryId": categoryName  ? category.id : selectedNewCategory.id,
             "userId": userId
-        },userId, product);
+        },userId, product, category.id);
         close();
+        reset();
     };
 
     return (
@@ -194,6 +199,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         setProduct={setProduct}
                                         newProductName={newProductName}
                                         setNewProductName={setNewProductName}
+                                        loggedInUser={loggedInUser}
                                         />
 
                                 )} />
@@ -246,19 +252,23 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                         <Controller
                             name="expireDate"
                             control={control}
-
+                            defaultValue={null}
                             render={({field: {onChange, value}, fieldState: {error}}) => (
-                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
-                                <MobileDatePicker
+                             <LocalizationProvider dateAdapter={AdapterDateFns}
+                                                   locale={plLocale}>
+
+                                <DatePicker
 
                                 mask={'__.__.____'}
                                 label="Data ważności"
                                 value={value}
                                 onChange={onChange}
-                                error={!!error}
-                                helperText={error ? error.message : null}
+
+                                //error={!!error}
+                               // helperText={error ? error.message : null}
                                 renderInput={(params) => <TextField {...params}
-                                                                    sx={{width: "80%", marginLeft: "10%"}}/>}
+                                                                    sx={{width: "80%", marginLeft: "10%"}} />}
+                                                                    //helperText={params?.inputProps?.placeholder} />}
                                  />
 
                              </LocalizationProvider>

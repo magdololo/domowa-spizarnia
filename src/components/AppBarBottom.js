@@ -3,7 +3,7 @@ import Toolbar from "@mui/material/Toolbar";
 //import SearchIcon from "@mui/icons-material/Search";
 import AddProductModal from "./AddProductModal";
 import * as React from "react";
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Fab from "@mui/material/Fab";
 import Button from '@mui/material/Button';
 import BottomHamburgerMenu from "./BottomHamburgerMenu";
@@ -13,9 +13,9 @@ import Autocomplete, {createFilterOptions} from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import {useForm, Controller} from "react-hook-form";
 import {useHistory} from "react-router-dom";
-import InputBase from  '@mui/material/InputBase';
+//import InputBase from  '@mui/material/InputBase';
 
-const AppBarBottom = ({isAddProductFromListCategory}) =>{
+const AppBarBottom = ({isAddProductFromListCategory, allProducts}) =>{
     const filter = createFilterOptions();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -68,33 +68,33 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
     //     alignItems: 'center',
     //     justifyContent: 'center',
     // }));
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'inherit',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(0, 2, 0, 6),
-            // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(1)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
-            [theme.breakpoints.up('md')]: {
-                width: '20ch',
-            },
-        },
-    }));
-    const StylesInput = styled(TextField)(({ theme }) =>({
-        underline: {
-            "&&&:before": {
-                borderBottom: "none"
-            },
-            "&&:after": {
-                borderBottom: "none"
-            }
-        }
-    }));
+    // const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    //     color: 'inherit',
+    //     '& .MuiInputBase-input': {
+    //         padding: theme.spacing(0, 2, 0, 6),
+    //         // vertical padding + font size from searchIcon
+    //         paddingLeft: `calc(1em + ${theme.spacing(1)})`,
+    //         transition: theme.transitions.create('width'),
+    //         width: '100%',
+    //         [theme.breakpoints.up('md')]: {
+    //             width: '20ch',
+    //         },
+    //     },
+    // }));
+    // const StylesInput = styled(TextField)(({ theme }) =>({
+    //     underline: {
+    //         "&&&:before": {
+    //             borderBottom: "none"
+    //         },
+    //         "&&:after": {
+    //             borderBottom: "none"
+    //         }
+    //     }
+    // }));
 
 
     const user = useStore(state=>state.loggedInUser);
-    const userId = user.id;
+    const userId = user.uid;
     const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
     const productsList = useStore(state => state.storage);
     const searchedProduct = useStore(state=>state.searchedProduct);
@@ -211,7 +211,7 @@ const AppBarBottom = ({isAddProductFromListCategory}) =>{
                     {/*</Fab>*/}
                     <Button color="secondary" aria-label="add" variant="extended" onClick={handleOpen} sx={{fontSize: "0.8rem", textTransform: 'none'}}>Dodaj Produkt</Button>
 
-                        <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory}/>
+                        <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory} defaultProducts={allProducts}/>
 
                 </Toolbar>
             </AppBar>

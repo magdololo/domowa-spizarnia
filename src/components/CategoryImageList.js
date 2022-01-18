@@ -19,7 +19,8 @@ import ButtonBase from "@mui/material/ButtonBase";
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const minWidth600 = useMediaQuery('(min-width:600px)');
-
+    const getAllProducts = useStore(state => state.fetchProducts);
+    const products = useStore(state => state.products);
            if (categoryList != null && categoryList.length >= 2) {
                categoryList.sort((a, b) => {
                    a = a.title.toLowerCase();
@@ -90,7 +91,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
                    </ImageList>
                </Box>
-             <AppBarBottom isAddProductFromListCategory={true} />
+             <AppBarBottom isAddProductFromListCategory={true} allProducts={products}/>
             </>
            );
 }

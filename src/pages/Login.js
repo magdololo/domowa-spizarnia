@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Link, useHistory} from "react-router-dom";
-import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
+import { GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
 import useStore from "../store/useStore";
 import {makeStyles} from "@material-ui/core";

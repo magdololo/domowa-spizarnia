@@ -1,7 +1,6 @@
-import axios from "axios";
-import {auth, provider, db} from "../firebase";
-import {  doc, updateDoc, getDocs, collection, addDoc, where, query } from "firebase/firestore";
-const user = auth.currentUser;
+//import axios from "axios";
+import { db} from "../firebase";
+import {  doc, updateDoc, getDocs, collection, addDoc, query, deleteDoc} from "firebase/firestore";
 const CategoriesService= {
     getDefaultCategories: async ()=>{
              let defaultCategories=[];
@@ -16,7 +15,7 @@ const CategoriesService= {
             })
             return defaultCategories
         } catch (error) {
-            console.error(error)
+            console.log(error)
         }
     },
     addDefaultCategoriesToUser: async(userId)=>{
@@ -28,7 +27,6 @@ const CategoriesService= {
     },
     getUserCategories: async (userId)=>{
         let categories = [];
-        
         try {
             let q = await query(collection(db, "users/" + userId + "/categories"));
             const querySnapshot = await getDocs(q);
@@ -41,12 +39,21 @@ const CategoriesService= {
             })
             return categories
         }catch (error) {
-            console.error(error)
+            console.log(error)
         }
     },
+    // getCategoryByPath: async (path, userId)=>{
+    //     let category = {};
+    //     try {
+    //         let q = await query(collection(db, "users/" + userId + "/categories") where (""));
+    //         const querySnapshot = await getDocs(q);
+    //     }catch (error) {
+    //         console.log(error)
+    //     }
+    // },
     addNewCategory: async (newCategory) => {
         try {
-            const docRef= await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), {
+            await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), {
                 url: (newCategory.url),
                 path: (newCategory.path),
                 title: (newCategory.title),
@@ -75,27 +82,27 @@ const CategoriesService= {
                 path: (path),
                 title: (title)
             });
-            //  const docRef = await db.collection("users/" + userId + "/categories" + categoryId).where( {
-            //     url: (url),
-            //     path: (path),
-            //     title: (title)
-            // });
             
         } catch (error) {
-            console.error(error)
+            console.log(error)
         }
         category.id = categoryId;
         return category;
 
 
     },
-    deleteCategory: async (id) => {
-         try {
-             let deletedCategory = await axios.delete('http://192.168.1.28:4000/categories-user/' + id);
-             return deletedCategory.data
+    deleteCategory: async (userId, categoryId) => {
+
+        try {
+            const res = await deleteDoc(doc(db, "users/" + userId + "/categories", categoryId))
+
+              return res
+
+
             } catch (error) {
-            console.error(error);
+            console.log(error);
         }
+
     },
      fetchImages: async ()=> {
         let images = [];
@@ -110,7 +117,7 @@ const CategoriesService= {
             })
             return images
         }catch (error) {
-            console.error(error);
+            console.log(error);
         }
      }
 }

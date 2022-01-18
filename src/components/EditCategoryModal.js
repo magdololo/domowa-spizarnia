@@ -12,7 +12,7 @@ import slugify from "slugify";
 
 
   const EditCategoryModal =()=>{
-      const user = useStore(state=>state.loggedInUser);
+
       const setEditModalOpen = useStore(state=>state.setEditCategoryModalOpen);
       const updateCategory = useStore(state=>state.updateCategory);
       const [newCategoryName,setNewCategoryName] = useState('');

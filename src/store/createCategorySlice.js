@@ -1,12 +1,10 @@
 import CategoriesService from "../services/CategoriesService";
-import {auth} from "../firebase";
-const user = auth.currentUser;
+
 const createCategorySlice = (set, get) => ({
 //set ustawianie stanu get pobieranie ze stanu
     categories: [],
-    getDefaultCategories: async () =>{
+    getDefaultCategories: async (user) =>{
         let defaultCategories=[];
-        
         if(user){
             defaultCategories= await CategoriesService.getDefaultCategories()
         }
@@ -39,7 +37,6 @@ const createCategorySlice = (set, get) => ({
         }
         let category = categories.filter(categoryItem => categoryItem.path === path);
         return category[0];
-
     },
     getCategoryById: async (id) => {
         let categories = get().categories;//pobiera kategorie ze stanu
@@ -86,11 +83,12 @@ const createCategorySlice = (set, get) => ({
             }
         )
     },
-    deleteCategory: async (id) => {
+    deleteCategory: async (categoryId) => {
+        const userId = get().loggedInUser.uid;
+        const response = await CategoriesService.deleteCategory(userId, categoryId);
 
-        await CategoriesService.deleteCategory(id);
         set((state) => ({
-            categories: state.categories.filter(deleteCategory => deleteCategory.id !== id),
+            categories: state.categories.filter(deleteCategory => deleteCategory.id !== categoryId),
         }));
     },
     images: [],

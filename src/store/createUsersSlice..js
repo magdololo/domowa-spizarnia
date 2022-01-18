@@ -86,13 +86,9 @@ const createUsersSlice = (set, get) => ({
 
     },
     forgotPasswordWithEmail: async (email) =>{
-        let createdAction = await UserService.forgotPassword(email);
+        await UserService.forgotPassword(email);
         
     },
-    // deleteUser: async () =>{
-    //     let createdAction = await UserService.deleteUserFromUsers();
-    //     
-    // },
 })
 
 export default createUsersSlice;

@@ -8,8 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import useStore from "../store/useStore";
 import {useHistory} from "react-router-dom";
-import {auth}  from '../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const useStyles = makeStyles(theme => ({
     root: {

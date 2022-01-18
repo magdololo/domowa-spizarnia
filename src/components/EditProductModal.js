@@ -9,7 +9,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
-import {useParams} from "react-router-dom";
+//import {useParams} from "react-router-dom";
 import {useForm, Controller} from "react-hook-form";
 
 const EditProductModal =()=>{
@@ -65,7 +65,7 @@ const EditProductModal =()=>{
         p: 4,
         zIndex: 1200,
     }
-    let { categoryName } = useParams();
+    //let { categoryName } = useParams();
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
     
@@ -74,7 +74,7 @@ const EditProductModal =()=>{
                 
                 setEditCategory(category)
             })
-    },[editProduct,editCategory]);
+    },[editProduct,editCategory, getCategoryById]);
 
     
 

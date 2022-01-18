@@ -80,7 +80,10 @@ const EditCategoryImageList =()=> {
                         textOverflow: "ellipsis",
                         overflow: "hidden",
                         whiteSpace: "nowrap",
-                        fontSize: "1.3em", color: 'red'}} onClick={() => deleteCategory(item.id)}/>
+                        fontSize: "1.3em", color: 'red'}} onClick={() => {
+
+                            deleteCategory(item.id)
+                    }}/>
                 </IconButton>
                 <ImageListItemBar
                     sx={{width: "100%", height: "100%", textAlign: "center", color: '#fff'}}

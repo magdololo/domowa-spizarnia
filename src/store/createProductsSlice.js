@@ -1,25 +1,41 @@
 
 import ProductsService from "../services/ProductsService";
+import CategoriesService from "../services/CategoriesService";
+
 
 const createProductsSlice = (set, get) => ({
     products: [],
-    fetchProducts: async (userId) => {
-        const response = await ProductsService.getAllProducts(userId);
+    fetchProducts: async (user) => {
+        /** @type {Array} */
+        let allProducts=[];
+
+        if(user){
+            allProducts= await ProductsService.getAllProducts()
+        }
+
         set((state) => ({
-            products: response,
+            products: allProducts,
         }));
     },
     storage: [],
+    addAllProductsToUserToUser: async (user)=>{
+        let defaultProducts = await ProductsService.addAllProductsToUser(user.uid);
+        set((state) => ({
+            categories: defaultProducts
+        }));
+    },
     getProductsOfUser: async (userId) => {
+
         const response = await ProductsService.getUserProducts(userId);
+        console.log(response);
         set((state) => ({
             storage: response,
         }));
     },
-    addProduct: async (newProduct, userId, productFromProducts) => {
+    addProduct: async (newProduct, userId, productFromProducts, categoryId) => {
         // 
         
-        let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts);
+        let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts, categoryId);
 
         //
             set((state) => ({
@@ -66,8 +82,8 @@ const createProductsSlice = (set, get) => ({
     },
     updateProduct: async (updatedProduct, userId, productFromProducts)=>{
 
-            let productAfterUpdate = await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
-            //
+            await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
+            //product after update
             set((state)=> {
                     let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
                     products.push(updatedProduct)
