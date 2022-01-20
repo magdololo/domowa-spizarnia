@@ -67,20 +67,28 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     let {categoryName} = useParams();
     useEffect(() => {
-        let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
-        const initialState = {loading: false, categoryName: null, category: null};
-        if (categoryName) {
-            getCategoryByPath(categoryName).then(category => {
-                if (mounted) {
-                    setCategory(category);
-                }
-            });
-        } else {
-            return initialState;
-        }
-        return () => mounted = false;
-    }, [categoryName, setCategory, getCategoryByPath]);
+        let category ={}
+        if(categoryName){
+            category = getCategoryByPath(categoryName)
 
+            setCategory(category)}
+    },[categoryName,setCategory, getCategoryByPath, category]);
+
+    // let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
+    //     const initialState = {loading: false, categoryName: null, category: null};
+    //     if (categoryName) {
+    //         console.log(categoryName)
+    //         getCategoryByPath(categoryName).then(category => {
+    //             if (mounted) {
+    //                 setCategory(category);
+    //             }
+    //         });
+    //     } else {
+    //         return initialState;
+    //     }
+    //     return () => mounted = false;
+    // }, [categoryName, setCategory, getCategoryByPath]);
+    //
 
 
     const { handleSubmit, control, setValue, reset} = useForm();

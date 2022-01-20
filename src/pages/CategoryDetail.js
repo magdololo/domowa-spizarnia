@@ -25,9 +25,9 @@ const CategoryDetail = ()=> {
 
 
     useEffect(() => {
-        getCategoryByPath(categoryName).then(category => {
-            setCategory(category)
-        });
+        if(categoryName){
+            setCategory(getCategoryByPath(categoryName))
+        }
         getUserProducts(userId);
     },[categoryName, getCategoryByPath, getUserProducts, userId]);
 
@@ -59,7 +59,7 @@ const CategoryDetail = ()=> {
                        ))}
 
                    </List>
-                   <EditProductModal/>
+                   <EditProductModal />
 
                    <AppBarBottom isAddProductFromListCategory={false}/>
                </div>

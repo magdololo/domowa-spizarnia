@@ -19,21 +19,25 @@ const ProductListItemActions = ({product}) => {
     const userId = loggedInUser.uid;
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
-    let {categoryName} = useParams();
+    const { categoryName } = useParams();
     useEffect(() => {
-        let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
-        const initialState = {loading: false, categoryName: null, category: null};
-        if (categoryName) {
-            getCategoryByPath(categoryName).then(category => {
-                if (mounted) {
-                    setCategory(category);
-                }
-            });
-        } else {
-            return initialState;
-        }
-        return () => mounted = false;
-    }, [categoryName, setCategory, getCategoryByPath]);
+        if(categoryName){
+            setCategory(getCategoryByPath(categoryName))}
+    },[categoryName,setCategory, getCategoryByPath]);
+    // useEffect(() => {
+    //     let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
+    //     const initialState = {loading: false, categoryName: null, category: null};
+    //     if (categoryName) {
+    //         getCategoryByPath(categoryName).then(category => {
+    //             if (mounted) {
+    //                 setCategory(category);
+    //             }
+    //         });
+    //     } else {
+    //         return initialState;
+    //     }
+    //     return () => mounted = false;
+    // }, [categoryName, setCategory, getCategoryByPath]);
     return (
         <>
          <Grid container item xs={10} sm={12}>

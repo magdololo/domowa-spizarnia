@@ -207,7 +207,7 @@ const ProductsService = {
     deleteProduct: async (userId, categoryId, productId) => {
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
-
+            console.log(res)
             return res
 
 

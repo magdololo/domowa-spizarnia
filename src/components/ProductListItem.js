@@ -15,8 +15,6 @@ const ProductListItem = ({product}) => {
 
         expireDate = expireDate.toISOString();
     }
-
-
     return (
         <>
             <Grid container spacing={0} >

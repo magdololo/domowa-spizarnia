@@ -23,11 +23,8 @@ const EditProductModal =()=>{
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
     const [selectedNewCategory, setSelectedNewCategory] = useState(null);
-
-
-
-
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.id;
 
     const handleClose = () => {
         setEditProductModalOpen(false);
@@ -65,15 +62,11 @@ const EditProductModal =()=>{
         p: 4,
         zIndex: 1200,
     }
-    //let { categoryName } = useParams();
-    const loggedInUser = useStore(state=> state.loggedInUser);
-    const userId = loggedInUser.id;
-    
+
+
     useEffect(() => {
-            getCategoryById(editProduct.categoryId).then(category => {
-                
-                setEditCategory(category)
-            })
+        if(editProduct.hasOwnProperty("categoryId")){
+            setEditCategory(getCategoryById(editProduct.categoryId))}
     },[editProduct,editCategory, getCategoryById]);
 
     
