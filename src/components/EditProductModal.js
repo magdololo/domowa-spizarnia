@@ -102,7 +102,7 @@ const EditProductModal =()=>{
             "quantity": parseInt(data.newQuantity),
             "expireDate":  data.newExpireDate,
             "categoryId": selectedNewCategory.id
-        }, userId, editProduct)
+        }, userId, editProduct, selectedNewCategory.id)
         handleClose();
     };
 

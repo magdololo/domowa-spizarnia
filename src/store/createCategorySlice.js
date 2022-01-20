@@ -28,23 +28,13 @@ const createCategorySlice = (set, get) => ({
             categories: categories,
         }));
     },
-    getCategoryByPath: async (path) => {
+    getCategoryByPath: (path) => {
         let categories = get().categories;//pobiera kategorie ze stanu
-        if (categories.length === 0) {
-            const fetch = get().getUserCategories;
-            await fetch(get().loggedInUser.id);
-            categories = get().categories;
-        }
         let category = categories.filter(categoryItem => categoryItem.path === path);
         return category[0];
     },
-    getCategoryById: async (id) => {
+    getCategoryById: (id) => {
         let categories = get().categories;//pobiera kategorie ze stanu
-        if (categories.length === 0) {
-            const fetch = get().getUserCategories;
-            await fetch(get().loggedInUser.id);
-            categories = get().categories;
-        }
         let category = categories.filter(categoryItem => categoryItem.id === id);
         return category[0];
     },
@@ -83,9 +73,12 @@ const createCategorySlice = (set, get) => ({
             }
         )
     },
+    /**
+     * @param {string} categoryId
+     * */
     deleteCategory: async (categoryId) => {
         const userId = get().loggedInUser.uid;
-        const response = await CategoriesService.deleteCategory(userId, categoryId);
+        await CategoriesService.deleteCategory(userId, categoryId);
 
         set((state) => ({
             categories: state.categories.filter(deleteCategory => deleteCategory.id !== categoryId),

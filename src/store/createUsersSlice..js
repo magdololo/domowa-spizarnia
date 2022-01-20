@@ -5,6 +5,9 @@ import CategoriesService from "../services/CategoriesService";
 
 const createUsersSlice = (set, get) => ({
     users: [],
+    /**
+     * @type {typeof import("@firebase/auth").User | null}
+     * */
     loggedInUser: null,
     logIn: async (email, password)=>{
         let loggingAction = await UserService.logInUser(email,password);

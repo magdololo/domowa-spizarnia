@@ -9,7 +9,7 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 const CategoryList = () => {
     const user = useStore(state=>state.loggedInUser);
-    //const categoryList = useStore(state => state.categories);
+    const categoryList = useStore(state => state.categories);
     const fetchCategories = useStore(state => state.getUserCategories);
     const [editMode, setEditMode] = useState(false);
     const fetchImages = useStore(state => state.getImages)
@@ -68,7 +68,7 @@ const CategoryList = () => {
                 </div>
                 {editMode ?
                 <EditCategoryImageList/>
-                : <CategoryImageList/>
+                : <CategoryImageList categoryList={categoryList}/>
                 }
             </div>
         </>

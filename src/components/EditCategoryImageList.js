@@ -16,7 +16,8 @@ const EditCategoryImageList =()=> {
     const minWidth600 = useMediaQuery('(min-width:600px)');
     const setEditCategory = useStore(state=>state.setEditCategory);
     const setEditCategoryModalOpen = useStore(state=>state.setEditCategoryModalOpen);
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.uid;
     if (categoryList.length >= 2) {
         categoryList.sort((a, b) => {
             a = a.title.toLowerCase();
@@ -82,7 +83,7 @@ const EditCategoryImageList =()=> {
                         whiteSpace: "nowrap",
                         fontSize: "1.3em", color: 'red'}} onClick={() => {
 
-                            deleteCategory(item.id)
+                            deleteCategory(userId, item.id);
                     }}/>
                 </IconButton>
                 <ImageListItemBar

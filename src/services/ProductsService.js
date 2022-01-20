@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import {
     collection,
     getDocs,
@@ -11,9 +11,21 @@ import {
     documentId,
     addDoc,
     where,
-    Timestamp
+    Timestamp, deleteDoc, updateDoc, getDoc, setDoc
 } from "firebase/firestore";
 import {db} from "../firebase";
+
+/**
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} name
+ * @property {number} capacity
+ * @property {string} categoryId
+ * @property {Date | null | string} [expireDate]
+ * @property {string} productId
+ * @property {string} unit
+ * @property {string} userId
+ * */
 
 const ProductsService = {
     getAllProducts: async () => {
@@ -32,8 +44,8 @@ const ProductsService = {
             console.log(error)
         }
     },
-    /** @param {string} userId  */
-    addAllProductsToUser: async(userId)=>{
+
+    addAllProductsToUser: async()=>{
         let dictionaryProducts = await ProductsService.getAllProducts();
 
         dictionaryProducts.forEach(async (product)=>{
@@ -41,6 +53,8 @@ const ProductsService = {
             await ProductsService.addProduct(product)
         })
     },
+    /** @param {string} userId
+     * @returns {Product[]} */
     getUserProducts: async (userId) => {
         let userProducts = [];
         try {
@@ -54,9 +68,7 @@ const ProductsService = {
                 let product = doc.data();
                 product.id = doc.id;
 
-
-                if(product.hasOwnProperty("expireDate") && product.expireDate != null){
-
+                if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== ""){
                     let expireDate = Timestamp.fromMillis(product.expireDate.seconds);
                     product.expireDate = expireDate.toDate();
                 }
@@ -71,8 +83,16 @@ const ProductsService = {
         }
     },
     productToStorage: {},
+    /**
+     * @param {string} userId
+     * @param {string} categoryId
+     * @param {Object} productFromProducts
+     * @param {Object} newProduct
+     * @return {Product}
+     * */
     addProduct: async (newProduct, userId, productFromProducts, categoryId) => {//from AddProductModal
-
+        console.log(newProduct)
+        console.log(productFromProducts)
         try {
             let product = {}
             if (productFromProducts && newProduct.capacity === productFromProducts.capacity && newProduct.unit === productFromProducts.unit) {
@@ -87,12 +107,13 @@ const ProductsService = {
                     "name": newProduct.name,
                     "capacity": newProduct.capacity !== productFromProducts.capacity ? newProduct.capacity : productFromProducts.capacity,
                     "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit,
-                    "userId": userId
                 }
                 let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
                 if (productExist.length === 0) {
-                    product = await addDoc(collection(db, "allProducts"),productToBeAdded);
-
+                    console.log(productToBeAdded);
+                    let resultRef = await addDoc(collection(db, "allProducts"),productToBeAdded);
+                    product = {...productToBeAdded, id: resultRef.id}
+                    console.log(product)
                 } else {
                     product = productExist[0];
 
@@ -110,7 +131,6 @@ const ProductsService = {
                 "categoryId": newProduct.categoryId
             }
 
-
             let result = await addDoc(collection(db, "users/" + userId + "/categories/" + categoryId +"/products" ), newStorageItem);
             return {...newStorageItem,id: result.id}
         } catch (error) {
@@ -118,22 +138,24 @@ const ProductsService = {
         }
     },
     addProductToProducts: async (newProduct) => {
+      console.log(newProduct)
         try {
-            let response = await axios.post('http://192.168.1.28:4000/products', newProduct);
-            return response.data;
+            let response = await addDoc(collection(db, "allProducts" ), newProduct);
+            return response;
         } catch (error) {
             console.log(error);
         }
     },
-    addProductToStorage: async (productToStorageFromProducts) => {
-        try {
-            let response = await axios.post('http://192.168.1.28:4000/storage', productToStorageFromProducts);
-            return response.data;
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    updateProduct: async (updatesValues, userId, productFromProducts) => {//updatesValues - product after update
+    // addProductToStorage: async (productToStorageFromProducts) => {
+    //     try {
+    //         let response = await axios.post('http://192.168.1.28:4000/storage', productToStorageFromProducts);
+    //         return response.data;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
+    updateProduct: async (updatesValues, userId, productFromProducts, categoryId) => {//updatesValues - product after update
+
         try {
             let product = {}
             if (productFromProducts && updatesValues.capacity === productFromProducts.capacity && updatesValues.unit === productFromProducts.unit && updatesValues.name === productFromProducts.name) {
@@ -171,40 +193,28 @@ const ProductsService = {
                 "expireDate": updatesValues.expireDate,
                 "categoryId": updatesValues.categoryId
             }
-             await axios.put('http://192.168.1.28:4000/storage/' + updatedProduct.id, updatedProduct)
-             return  updatedProduct
+            console.log(userId)
+            const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", updatedProduct.id);
+            console.log(productRef);
+            console.log(updatedProduct);
+            await updateDoc(productRef, updatedProduct);
+            return  updatedProduct
         } catch (error) {
             console.log(error);
         }
     },
 
-    deleteProduct: async (id) => {
+    deleteProduct: async (userId, categoryId, productId) => {
         try {
-            let deletedProduct = await axios.delete('http://192.168.1.28:4000/storage/' + id);
-            return deletedProduct.data
+            const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
+
+            return res
+
+
         } catch (error) {
             console.log(error);
         }
-    },
-    incrementProduct: async (id, quantity) => {
-        try {
-            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
-                quantity: quantity + 1
-            });
-            return response.data
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    decrementProduct: async (id, quantity) => {
-        try {
-            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
-                quantity: quantity - 1
-            });
-            return response.data
-        } catch (error) {
-            console.log(error);
-        }
+
     },
     getProduct: async (name, capacity, unit) => {
         let productFromAllProducts = [];
@@ -222,6 +232,27 @@ const ProductsService = {
 
             return productFromAllProducts
         }catch (error) {
+            console.log(error);
+        }
+    },
+    /**
+     *
+     * @param {string} productId
+     * @param {number} quantity
+     * @param {string} userId
+     * @param {string} categoryId
+     * @return {Promise<void>}
+     */
+    changeProductQuantity: async (productId, quantity, userId, categoryId)=> {
+        try {
+            const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", productId);
+            const productDoc = await getDoc(productRef);
+            const product = productDoc.data();
+            console.log()
+            product.quantity = quantity;
+            await setDoc(productRef, product);
+
+        } catch (error) {
             console.log(error);
         }
     }

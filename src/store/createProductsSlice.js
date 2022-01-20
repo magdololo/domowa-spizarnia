@@ -1,6 +1,5 @@
 
 import ProductsService from "../services/ProductsService";
-import CategoriesService from "../services/CategoriesService";
 
 
 const createProductsSlice = (set, get) => ({
@@ -27,7 +26,7 @@ const createProductsSlice = (set, get) => ({
     getProductsOfUser: async (userId) => {
 
         const response = await ProductsService.getUserProducts(userId);
-        console.log(response);
+
         set((state) => ({
             storage: response,
         }));
@@ -80,9 +79,9 @@ const createProductsSlice = (set, get) => ({
         set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId}});
 
     },
-    updateProduct: async (updatedProduct, userId, productFromProducts)=>{
-
-            await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
+    updateProduct: async (updatedProduct, userId, productFromProducts, categoryId)=>{
+            userId = get().loggedInUser.uid;
+            await ProductsService.updateProduct(updatedProduct, userId, productFromProducts, categoryId);
             //product after update
             set((state)=> {
                     let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
@@ -95,15 +94,18 @@ const createProductsSlice = (set, get) => ({
 
 
     },
-    deleteProduct: async (id) => {
-        await ProductsService.deleteProduct(id);
+    deleteProduct: async (userId, categoryId, productId) => {
+        console.log(userId);
+        console.log(categoryId);
+        console.log(productId);
+        await ProductsService.deleteProduct(userId, categoryId, productId);
         set((state) => ({
-            storage: state.storage.filter((product) => product.id !== id),
+            storage: state.storage.filter((product) => product.id !== productId),
         }))
     },
 
-    incrementProduct: async (id, quantity) => {
-        await ProductsService.incrementProduct(id, quantity);
+    incrementProduct: async (id, quantity, userId, categoryId) => {
+        await ProductsService.changeProductQuantity(id, quantity+1, userId, categoryId);
         set((state) => ({
             storage: state.storage.map((product) => product.id === id? {...product, quantity: product.quantity+1}:product)
             }
@@ -111,8 +113,8 @@ const createProductsSlice = (set, get) => ({
         ));
     },
 
-   decrementProduct: async (id, quantity) => {
-        await ProductsService.decrementProduct(id, quantity);
+   decrementProduct: async (id, quantity, userId, categoryId) => {
+       await ProductsService.changeProductQuantity(id, quantity-1, userId, categoryId);
         set((state) => ({
                 storage: state.storage.map((product) => product.id === id ? {...product, quantity: product.quantity-1} : product)
             }

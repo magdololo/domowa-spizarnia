@@ -25,14 +25,13 @@ const CategoryDetail = ()=> {
 
 
     useEffect(() => {
-
         getCategoryByPath(categoryName).then(category => {
             setCategory(category)
         });
         getUserProducts(userId);
     },[categoryName, getCategoryByPath, getUserProducts, userId]);
 
-    const productsOfCategory = productsList.filter((product=>product.categoryId === category.id));
+    const productsOfCategory = productsList.filter(product=>product.categoryId === category.id);
 
     if (productsOfCategory.length >= 2 ) {
         productsOfCategory.sort((a, b) => {
@@ -52,7 +51,7 @@ const CategoryDetail = ()=> {
                <div style={{ margin: "0 auto", width: minWidth900 ? '800px' : '90%'}}>
                    <ReturnToCategoryList/>
                    <Typography variant="h6" component="h6" sx={{textTransform: "capitalize", color: "#646670"}}>
-                       {category.title}
+                       {category.name}
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
                        {productsOfCategory.map((product) => (

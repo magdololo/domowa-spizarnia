@@ -19,7 +19,6 @@ import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
 
 
 const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
-    const products = useStore(state => state.products);
 
     const addProduct = useStore(state => state.addProduct);
     const maxWidth400 = useMediaQuery('(max-width:400px)');
@@ -105,7 +104,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     }, [product, setValue]);
 
     const onSubmit = data => {
-        console.log(data)
+
         addProduct({
 
             "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,

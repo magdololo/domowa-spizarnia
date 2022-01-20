@@ -11,16 +11,12 @@ const ProductListItem = ({product}) => {
 
     let   [todayDate] = useState(new Date());
     let expireDate = product.expireDate;
-
-    if(expireDate != null && typeof expireDate === "object"){
+    if(expireDate != null && typeof expireDate === "object" ){
 
         expireDate = expireDate.toISOString();
     }
-    if(product.expireDate === null){
-        product.expireDate = "";
-    }
 
-console.log(product)
+
     return (
         <>
             <Grid container spacing={0} >

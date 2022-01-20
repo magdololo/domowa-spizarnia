@@ -12,14 +12,12 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 
 
-   const CategoryImageList =()=>{
+   const CategoryImageList =({categoryList})=>{
 
-    const categoryList = useStore(state => state.categories);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const minWidth600 = useMediaQuery('(min-width:600px)');
-    const getAllProducts = useStore(state => state.fetchProducts);
     const products = useStore(state => state.products);
            if (categoryList != null && categoryList.length >= 2) {
                categoryList.sort((a, b) => {

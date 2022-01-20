@@ -1,7 +1,22 @@
-//import axios from "axios";
+
 import { db} from "../firebase";
 import {  doc, updateDoc, getDocs, collection, addDoc, query, deleteDoc} from "firebase/firestore";
+
+
+/**
+ * @typedef {Object} Category
+ * @property {string} path
+ * @property {string} title
+ * @property {string} url
+ * @property {string} user
+ * @property {string} [id]
+ * */
+
 const CategoriesService= {
+    /**
+     *
+     * @return {Promise.<Category[]>}
+     */
     getDefaultCategories: async ()=>{
              let defaultCategories=[];
         try {
@@ -18,6 +33,9 @@ const CategoriesService= {
             console.log(error)
         }
     },
+    /**
+     * @param {string} userId
+     * */
     addDefaultCategoriesToUser: async(userId)=>{
         let categories = await CategoriesService.getDefaultCategories();
         categories.forEach(async (category)=>{
@@ -25,6 +43,10 @@ const CategoriesService= {
             await CategoriesService.addNewCategory(category)
         })
     },
+    /**
+     * @param {string} userId
+     * @returns {Promise.<Category[]>}
+     * */
     getUserCategories: async (userId)=>{
         let categories = [];
         try {
@@ -51,6 +73,7 @@ const CategoriesService= {
     //         console.log(error)
     //     }
     // },
+    /** @param {Category} newCategory */
     addNewCategory: async (newCategory) => {
         try {
             await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), {
@@ -62,10 +85,11 @@ const CategoriesService= {
             });
             
         } catch (e) {
-            
+            console.log(e)
         }
     },
     updateCategory: async (userId, path, url, title,categoryId) => {
+        /** @type {Category} */
         let category = {
             url: (url),
             path: (path),
@@ -91,6 +115,10 @@ const CategoriesService= {
 
 
     },
+    /**
+     * @param {string} userId
+     * @param {string} categoryId
+     * */
     deleteCategory: async (userId, categoryId) => {
 
         try {

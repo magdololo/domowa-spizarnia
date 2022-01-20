@@ -27,7 +27,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
     useEffect(() => {
         getAllProducts(loggedInUser);
 
-    }, [getAllProducts, userId]);
+    }, [getAllProducts, userId,loggedInUser]);
 
     
 
