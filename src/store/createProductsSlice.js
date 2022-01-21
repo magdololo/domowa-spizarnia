@@ -33,7 +33,7 @@ const createProductsSlice = (set, get) => ({
     },
     addProduct: async (newProduct, userId, productFromProducts, categoryId) => {
         // 
-        
+        console.log(newProduct)
         let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts, categoryId);
 
         //
@@ -95,9 +95,6 @@ const createProductsSlice = (set, get) => ({
 
     },
     deleteProduct: async (userId, categoryId, productId) => {
-        console.log(userId);
-        console.log(categoryId);
-        console.log(productId);
         await ProductsService.deleteProduct(userId, categoryId, productId);
         set((state) => ({
             storage: state.storage.filter((product) => product.id !== productId),

@@ -31,7 +31,8 @@ const CategoryList = () => {
                     alignItems: "center"
 
                 }}>
-               <div style={{
+               <div id="categoryPageLabel"
+                   style={{
                     flex: '1 1 auto',
                     width:  '50%' ,
                     textAlign: 'left',

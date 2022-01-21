@@ -30,9 +30,9 @@ const CategoryDetail = ()=> {
         }
         getUserProducts(userId);
     },[categoryName, getCategoryByPath, getUserProducts, userId]);
-
+   console.log(productsList)
     const productsOfCategory = productsList.filter(product=>product.categoryId === category.id);
-
+ console.log(productsOfCategory )
     if (productsOfCategory.length >= 2 ) {
         productsOfCategory.sort((a, b) => {
             a = a.name.toLowerCase();

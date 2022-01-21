@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Divider, Grid} from "@mui/material";
 import dateFormat from "dateformat";
 import ProductListItemActions from "./ProductListItemActions";
@@ -8,19 +8,23 @@ import ProductListItemActions from "./ProductListItemActions";
 
 const ProductListItem = ({product}) => {
 
-
     let   [todayDate] = useState(new Date());
     let expireDate = product.expireDate;
-    if(expireDate != null && typeof expireDate === "object" ){
+    console.log(todayDate);
 
+    //console.log(product.expireDate.toISOString())// 31.01 potem 1970
+    if(expireDate !== null && typeof expireDate === "object" ) {
         expireDate = expireDate.toISOString();
     }
+    console.log(expireDate)// najpierw 31 potem 1970
+    console.log(todayDate.toISOString())//21.01.22 today
+
     return (
         <>
             <Grid container spacing={0} >
 
                 <Grid item xs={12}
-                      style={(expireDate > todayDate.toISOString())  ? {color: "#646670"} : {color: "red"}}
+                      style={(expireDate > todayDate)  ? {color: "#646670"} : {color: "red"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",
@@ -32,7 +36,7 @@ const ProductListItem = ({product}) => {
                       {product.name}
                 </Grid>
                 <Grid item xs={12}
-                      style={(expireDate  > todayDate.toISOString())  ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
+                      style={(expireDate  > todayDate)  ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",
@@ -40,9 +44,7 @@ const ProductListItem = ({product}) => {
                           fontSize: ".8em",
                           padding: "4px 8px"
                       }}>
-                    {(product.expireDate !== "") ?
-                      dateFormat(product.expireDate, 'isoDate') :
-                     product.expireDate}
+                    {product.expireDate ? product.expireDate.toISOString().substring(0,10) : ""}
                 </Grid>
 
                    {product.capacity !== 0 ?

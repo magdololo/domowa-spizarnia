@@ -59,7 +59,7 @@ const ProductsService = {
         let userProducts = [];
         try {
             const docRef = doc(db, "users", userId);
-            let q = await query(collectionGroup(db, "products"), orderBy(documentId()) ,startAt(docRef.path), endAt(docRef.path + "\uf8ff"));
+            let q = await query(collectionGroup(db, "products"), orderBy(documentId()) ,startAt(docRef.path), endAt(docRef.path + "\uf8ff"));//wszystkie produkty Usera
             //
             const querySnapshot = await getDocs(q);
             //
@@ -68,8 +68,9 @@ const ProductsService = {
                 let product = doc.data();
                 product.id = doc.id;
 
-                if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== ""){
-                    let expireDate = Timestamp.fromMillis(product.expireDate.seconds);
+                if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== "" && product.expireDate !== "object"){
+                    let expireDate = Timestamp.fromMillis(product.expireDate.seconds*1000);
+                    console.log(expireDate)
                     product.expireDate = expireDate.toDate();
                 }
 
@@ -91,8 +92,6 @@ const ProductsService = {
      * @return {Product}
      * */
     addProduct: async (newProduct, userId, productFromProducts, categoryId) => {//from AddProductModal
-        console.log(newProduct)
-        console.log(productFromProducts)
         try {
             let product = {}
             if (productFromProducts && newProduct.capacity === productFromProducts.capacity && newProduct.unit === productFromProducts.unit) {
@@ -110,10 +109,8 @@ const ProductsService = {
                 }
                 let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
                 if (productExist.length === 0) {
-                    console.log(productToBeAdded);
                     let resultRef = await addDoc(collection(db, "allProducts"),productToBeAdded);
                     product = {...productToBeAdded, id: resultRef.id}
-                    console.log(product)
                 } else {
                     product = productExist[0];
 
@@ -130,7 +127,7 @@ const ProductsService = {
                 "expireDate": newProduct.expireDate,
                 "categoryId": newProduct.categoryId
             }
-
+            console.log(newStorageItem.expireDate)
             let result = await addDoc(collection(db, "users/" + userId + "/categories/" + categoryId +"/products" ), newStorageItem);
             return {...newStorageItem,id: result.id}
         } catch (error) {
@@ -138,7 +135,6 @@ const ProductsService = {
         }
     },
     addProductToProducts: async (newProduct) => {
-      console.log(newProduct)
         try {
             let response = await addDoc(collection(db, "allProducts" ), newProduct);
             return response;
@@ -146,21 +142,20 @@ const ProductsService = {
             console.log(error);
         }
     },
-    // addProductToStorage: async (productToStorageFromProducts) => {
-    //     try {
-    //         let response = await axios.post('http://192.168.1.28:4000/storage', productToStorageFromProducts);
-    //         return response.data;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },
+    /**
+     *
+     * @param {Product} updatesValues
+     * @param {string} userId
+     * @param {Object} productFromProducts
+     * @param {string} categoryId
+     * @return {Promise<Product>}
+     */
     updateProduct: async (updatesValues, userId, productFromProducts, categoryId) => {//updatesValues - product after update
-
         try {
             let product = {}
             if (productFromProducts && updatesValues.capacity === productFromProducts.capacity && updatesValues.unit === productFromProducts.unit && updatesValues.name === productFromProducts.name) {
                 product = {
-                    "id": productFromProducts.id,
+                    "id": productFromProducts.productId,
                     "name": productFromProducts.name,
                     "capacity": productFromProducts.capacity,
                     "unit": productFromProducts.unit,
@@ -187,17 +182,22 @@ const ProductsService = {
                 "userId": userId,
                 "productId": product.id,
                 "name": updatesValues.name,
-                "capacity": product.capacity,
-                "unit": product.unit,
-                "quantity":updatesValues.quantity,
+                "capacity": updatesValues.capacity,
+                "unit": updatesValues.unit,
+                "quantity": updatesValues.quantity,
                 "expireDate": updatesValues.expireDate,
                 "categoryId": updatesValues.categoryId
             }
-            console.log(userId)
-            const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", updatedProduct.id);
-            console.log(productRef);
-            console.log(updatedProduct);
-            await updateDoc(productRef, updatedProduct);
+
+            if (categoryId !== updatedProduct.categoryId){
+
+                await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", updatedProduct.id))
+                await setDoc(doc(db, "users/" + userId + "/categories/" + updatedProduct.categoryId +"/products",updatedProduct.id ), updatedProduct);
+            }else{
+                const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", updatedProduct.id);
+                await updateDoc(productRef, updatedProduct);
+            }
+            console.log(updatedProduct)
             return  updatedProduct
         } catch (error) {
             console.log(error);
@@ -207,10 +207,7 @@ const ProductsService = {
     deleteProduct: async (userId, categoryId, productId) => {
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
-            console.log(res)
             return res
-
-
         } catch (error) {
             console.log(error);
         }
@@ -221,15 +218,12 @@ const ProductsService = {
         try{
             let q = await query(collection(db, "allProducts"),  where("name", "==", name), where("capacity", "==", capacity), where("unit", "==", unit));
             const querySnapshot = await getDocs(q);
-
             querySnapshot.forEach((doc) => {
-
                 let product = doc.data()
                 product.id = doc.id;
                 productFromAllProducts.push(product);
 
             })
-
             return productFromAllProducts
         }catch (error) {
             console.log(error);
@@ -248,7 +242,6 @@ const ProductsService = {
             const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", productId);
             const productDoc = await getDoc(productRef);
             const product = productDoc.data();
-            console.log()
             product.quantity = quantity;
             await setDoc(productRef, product);
 

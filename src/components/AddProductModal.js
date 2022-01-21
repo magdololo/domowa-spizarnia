@@ -112,9 +112,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     }, [product, setValue]);
 
     const onSubmit = data => {
-
+        console.log(data.expireDate)
         addProduct({
-
             "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,
             "capacity": parseInt(data.capacity),
             "unit": data.unit,
@@ -261,7 +260,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             control={control}
                             defaultValue={null}
                             render={({field: {onChange, value}, fieldState: {error}}) => (
-                             <LocalizationProvider dateAdapter={AdapterDateFns}
+                             <LocalizationProvider
+                                 dateAdapter={AdapterDateFns}
                                                    locale={plLocale}>
 
                                 <DatePicker
@@ -270,9 +270,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 label="Data ważności"
                                 value={value}
                                 onChange={onChange}
-
-                                //error={!!error}
-                               // helperText={error ? error.message : null}
                                 renderInput={(params) => <TextField {...params}
                                                                     sx={{width: "80%", marginLeft: "10%"}} />}
                                                                     //helperText={params?.inputProps?.placeholder} />}

@@ -19,12 +19,12 @@ const ProductsList = () => {
     const minWidth900 = useMediaQuery('(min-width:900px)');
 
     useEffect(() => {
+        getUserProducts(user.uid);
 
-        getUserProducts(userId);
-    },[getUserProducts, userId]);
+    }, [getUserProducts, user]);
 
     //const products = productsList.filter((product=>product.categoryId === category.id));
-    
+    console.log(productsList);
     if (productsList.length >= 2 ) {
         productsList.sort((a, b) => {
             a = a.name.toLowerCase();
