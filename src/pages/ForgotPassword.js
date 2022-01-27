@@ -38,21 +38,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ForgotPassword = () => {
-    ///const [values, setValues] = React.useState({email: '',});
-    // const handleChange = (prop) => (event) => {
-    //     setValues({ ...values, [prop]: event.target.value });
-    // };
+
     const classes = useStyles();
     const {handleSubmit, control, reset} = useForm();
     const forgotPassword = useStore(state=>state.forgotPasswordWithEmail);
-    const [setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const history = useHistory();
     const onSubmit = async (data, e) => {
         e.preventDefault();
         
         let message = await forgotPassword(data.email);
         
-        if (message !== '') setErrorMessage(message)
+        if (message !== '') setErrorMessage(message);
         reset({
             email: "",
         });

@@ -28,6 +28,8 @@ import {db} from "../firebase";
  * */
 
 const ProductsService = {
+    /**
+     * @returns {Product[]} */
     getAllProducts: async () => {
         let allProducts=[];
         try {
@@ -70,7 +72,7 @@ const ProductsService = {
 
                 if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== "" && product.expireDate !== "object"){
                     let expireDate = Timestamp.fromMillis(product.expireDate.seconds*1000);
-                    console.log(expireDate)
+                   // console.log(expireDate)
                     product.expireDate = expireDate.toDate();
                 }
 
@@ -134,6 +136,11 @@ const ProductsService = {
             console.log(error);
         }
     },
+    /**
+     *
+     * @param {Object} newProduct
+     * @return {Promise.<Product>}
+     */
     addProductToProducts: async (newProduct) => {
         try {
             let response = await addDoc(collection(db, "allProducts" ), newProduct);
@@ -203,16 +210,30 @@ const ProductsService = {
             console.log(error);
         }
     },
-
+    /**
+     *
+     * @param {string} userId
+     * @param {string} categoryId
+     * @param {string} productId
+     * @return {Promise<void>}
+     */
     deleteProduct: async (userId, categoryId, productId) => {
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
+            console.log(res)
             return res
         } catch (error) {
             console.log(error);
         }
 
     },
+    /**
+     *
+     * @param {string} name
+     * @param {number} capacity
+     * @param {string} unit
+     * @return {Promise}
+     */
     getProduct: async (name, capacity, unit) => {
         let productFromAllProducts = [];
         try{
@@ -224,6 +245,7 @@ const ProductsService = {
                 productFromAllProducts.push(product);
 
             })
+            console.log(productFromAllProducts)
             return productFromAllProducts
         }catch (error) {
             console.log(error);

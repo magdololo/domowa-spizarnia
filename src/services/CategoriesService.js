@@ -64,15 +64,6 @@ const CategoriesService= {
             console.log(error)
         }
     },
-    // getCategoryByPath: async (path, userId)=>{
-    //     let category = {};
-    //     try {
-    //         let q = await query(collection(db, "users/" + userId + "/categories") where (""));
-    //         const querySnapshot = await getDocs(q);
-    //     }catch (error) {
-    //         console.log(error)
-    //     }
-    // },
     /** @param {Category} newCategory */
     addNewCategory: async (newCategory) => {
         try {
@@ -83,11 +74,20 @@ const CategoriesService= {
                 user: (newCategory.user),
 
             });
-            
+
         } catch (e) {
             console.log(e)
         }
     },
+    /**
+     *
+     * @param {string} userId
+     * @param {string} path
+     * @param {string} url
+     * @param {string} title
+     * @param {string} categoryId
+     * @return {Promise<{user: string, url: string, path: string, title: string, id?: string}>}
+     */
     updateCategory: async (userId, path, url, title,categoryId) => {
         /** @type {Category} */
         let category = {
@@ -118,6 +118,7 @@ const CategoriesService= {
     /**
      * @param {string} userId
      * @param {string} categoryId
+     * @return {Promise<void>}
      * */
     deleteCategory: async (userId, categoryId) => {
 
@@ -132,6 +133,10 @@ const CategoriesService= {
         }
 
     },
+    /**
+     *
+     * @return {Promise<[]>}
+     */
      fetchImages: async ()=> {
         let images = [];
         try{

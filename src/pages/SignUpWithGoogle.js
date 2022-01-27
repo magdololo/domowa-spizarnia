@@ -3,14 +3,41 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from "@mui/material/Button";
 import useStore from "../store/useStore";
+import {useState} from "react";
+import {useHistory} from "react-router-dom";
+import {Alert} from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
 const SignUpWithGoogle = () => {
-        const handleChange = ()=>{
-            
+    const [checkboxState, setCheckboxState] =useState(false);
+        const handleChange = (event)=>{
+            if (event.target.value === 'on'){
+                setCheckboxState(true);
+            }
         }
+
         const signUpWithGoogle = useStore(state=>state.signWithGoogle);
+        let history = useHistory();
+        const [errorMessage,setErrorMessage] = useState('');
+        const registerAndLogWithGoogle = async ()=>{
+            console.log("button click")
+            console.log(checkboxState)
+            if(checkboxState === true) {
+                console.log(checkboxState)
+                let message = await signUpWithGoogle();
+                console.log(message);
+                if (message !== '') {
+                    setErrorMessage(message);
+                }
+                else {
+                    history.push("/");
+                }
+            } else if(checkboxState===false){
+                setErrorMessage("Zaznacz wymagane zgody!")
+            }
+
+        }
     return(
         <>
             <CssBaseline />
@@ -25,26 +52,17 @@ const SignUpWithGoogle = () => {
                 </div>
                 <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'.5em auto'}}>
                     <Box style={{display: "flex",flexWrap: 'wrap', justifyContent: "center", margin: '0 auto'}}>
-                        <FormControlLabel control={<Checkbox/>} onChange={handleChange} inputProps={{ 'aria-label': 'controlled' }} label="Akceptuję regulamin serwisu." />
+                            <FormControlLabel control={<Checkbox onChange={handleChange} checked={checkboxState} />}  inputProps={{ 'aria-label': 'controlled' }} label="Akceptuję regulamin serwisu." />
                     </Box>
                 </Box>
+                <Box style={{display: "flex",flexWrap: 'wrap', justifyContent: "center", margin: '0 auto'}}>
+                    {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
+                </Box>
                 <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>
-                    <Button variant="outlined" style={{ marginTop: 10 }} onClick={signUpWithGoogle}>
+                    <Button variant="outlined" style={{ marginTop: 10 }} onClick={registerAndLogWithGoogle}>
                         <span>Zarejestruj się</span>
                     </Button>
                 </Box>
-                {/*<Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>*/}
-                {/*<Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>*/}
-                {/*    <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center",  width: '25ch'}}>*/}
-                {/*        /!*<FacebookLoginButton style={{ marginTop: 2}} onClick={() => alert("Hello")}>*!/*/}
-                {/*        /!*    <span>Zarejestruj się przez FB</span>*!/*/}
-                {/*        /!*</FacebookLoginButton>*!/*/}
-                {/*        <GoogleLoginButton style={{ marginTop: 10 }} onClick={() => alert("Hello")}>*/}
-                {/*            <span>Zarejestruj się przez Google</span>*/}
-                {/*        </GoogleLoginButton>*/}
-                {/*    </div>*/}
-                {/*</Box>*/}
-
             </Box>
         </>
     )

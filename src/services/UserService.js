@@ -4,8 +4,18 @@ import {auth, provider, db} from "../firebase";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, signInWithPopup} from "firebase/auth";
 import {  doc, getDoc, setDoc} from "firebase/firestore";
 
+/**
+ * @typedef {Object} User
+ * @property {string} userId
+ * @property {string} email
+ * @property {string} password
+ * */
 const UserService = {
-
+    /**
+     * creates new user and adds default categories to it
+     * @param {string} email
+     * @param {string} password
+     * @returns {returnObject} */
     createNewUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
 
@@ -31,19 +41,21 @@ const UserService = {
 
 
     },
+    /**
+     * @param {string} email
+     * @param {string} password
+     * @returns {returnObject} */
     logInUser: async (email, password) => {
         let returnObject = {user: null, message: ''};
         try {
             
-            let userCredential = await signInWithEmailAndPassword(auth,email, password);
-            
+            let userCredential = await signInWithEmailAndPassword(auth, email, password);
             if (userCredential.user) {
                 returnObject.user = userCredential.user;
                 const docRef = doc(db, "users", userCredential.user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                        
-                        await CategoriesService.getUserCategories();
+                        await CategoriesService.getUserCategories(returnObject.user.uid);
                 } else {
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
                 }
@@ -70,7 +82,10 @@ const UserService = {
         return returnObject;
         // (zwraca obiekt który ma user i message które potem potrzebujemy w createUserSlice w funkcji logIn)
     },
+    /**
+     * @returns {returnObject} */
     signUpWithGoogle: async()=>{
+        console.log("signup with google")
         let returnObject = {user: null, message: ''};
         try {
             let result = await signInWithPopup(auth, provider);
@@ -78,23 +93,16 @@ const UserService = {
                 returnObject.user = result.user;
                 const docRef = doc(db, "users", result.user.uid);
                 const docSnap = await getDoc(docRef);
+                console.log(docSnap)
                 if (docSnap.exists()) {
-                    
-                    await CategoriesService.getDefaultCategories();
+                    returnObject.message = "User already exist"
                 } else {
-                    
-                    
                     await setDoc(doc(db, "users", auth.currentUser.uid), {
                         uid: auth.currentUser.uid,
                         email: auth.currentUser.email,
                         provider: auth.currentUser.providerId
                     });
-                     //await CategoriesService.getDefaultCategories();
-                    // defaultCategories.forEach(category=> {
-                    //     category.id = null;
-                    //     category.userId = auth.currentUser.uid;
-                    //     CategoriesService.addNewCategory(category)
-                    // })
+                    await CategoriesService.addDefaultCategoriesToUser(auth.currentUser.uid);
 
                 }
             }
@@ -103,6 +111,8 @@ const UserService = {
         }
         return returnObject;
     },
+    /**
+     * @returns {returnObject} */
     logWithGoogle: async () => {
         let returnObject = {user: null, message: ''};
         try {
@@ -113,11 +123,9 @@ const UserService = {
                 if (docSnap.exists()) {
                     returnObject.user = result.user;
                     
-                    await CategoriesService.getUserCategories();
+                    await CategoriesService.getUserCategories(result.user.uid);
                 } else {
-                    
                     returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
-
                 }
             }
         } catch (error) {
@@ -125,27 +133,23 @@ const UserService = {
         }
         return returnObject;
     },
+    /**
+     * send email to reset password to user which email exist
+     * @param {string} email
+     * @return {Promise<void>} */
     forgotPassword: async (email) =>{
         let returnObject = {user: null, message: ''};
         try {
-            let result = await sendPasswordResetEmail(auth, email);
-            if (result) {
-                
-                // const docRef = doc(db, "users", result.user.uid);
-                // const docSnap = await getDoc(docRef);
-                // if (docSnap.exists()) {
-                //     returnObject.user = result.user;
-                //     
-                } else {
-                    
-                    returnObject.message = "Nie masz jeszcze konta. Zarejestruj się";
-
-                }
+            await sendPasswordResetEmail(auth, email);
         } catch (error) {
             returnObject.message = error;
         }
         return returnObject;
     },
+    /**
+     * LogOut current user
+     * @return {Promise<void>}
+     */
     logOut: async ()=>{
         await signOut(auth);
     }

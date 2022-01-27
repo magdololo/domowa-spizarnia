@@ -4,6 +4,7 @@ const createCategorySlice = (set, get) => ({
 //set ustawianie stanu get pobieranie ze stanu
     categories: [],
     getDefaultCategories: async (user) =>{
+        /** @type {Array} */
         let defaultCategories=[];
         if(user){
             defaultCategories= await CategoriesService.getDefaultCategories()

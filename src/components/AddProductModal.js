@@ -15,8 +15,6 @@ import {useForm, Controller} from "react-hook-form";
 import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
 
 
-//import slugify from "slugify";
-
 
 const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
@@ -74,34 +72,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             setCategory(category)}
     },[categoryName,setCategory, getCategoryByPath, category]);
 
-    // let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
-    //     const initialState = {loading: false, categoryName: null, category: null};
-    //     if (categoryName) {
-    //         console.log(categoryName)
-    //         getCategoryByPath(categoryName).then(category => {
-    //             if (mounted) {
-    //                 setCategory(category);
-    //             }
-    //         });
-    //     } else {
-    //         return initialState;
-    //     }
-    //     return () => mounted = false;
-    // }, [categoryName, setCategory, getCategoryByPath]);
-    //
-
 
     const { handleSubmit, control, setValue, reset} = useForm();
-    // ( {mode: 'onBlur'},{defaultValues: {
-    //         productName: null,
-    //         capacity: "100",
-    //         unit: "gr",
-    //         quantity: "1",
-    //         expireDate: null,
-    //         categoryName: categoryName ? categoryName : null,
-    //         categoryId: categoryName ? category.id : selectedNewCategory.id
-    //     }
-    // });
 
     useEffect(()=>{
         if(product && typeof product !== "string") {

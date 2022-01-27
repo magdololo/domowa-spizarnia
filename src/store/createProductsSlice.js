@@ -1,14 +1,30 @@
 
 import ProductsService from "../services/ProductsService";
-
+/**
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} name
+ * @property {number} capacity
+ * @property {string} unit
+ * @property {number} quantity
+ * @property {Date | null | string} [expireDate]
+ * @property {string} productId
+ * @property {string} userId
+ * */
 
 const createProductsSlice = (set, get) => ({
     products: [],
-    fetchProducts: async (user) => {
+    /**
+     *
+     * @param {string} userId
+     * @return {Promise<void>}
+     */
+    fetchProducts: async (userId) => {
+        console.log(userId)
         /** @type {Array} */
         let allProducts=[];
 
-        if(user){
+        if(userId){
             allProducts= await ProductsService.getAllProducts()
         }
 
@@ -17,6 +33,11 @@ const createProductsSlice = (set, get) => ({
         }));
     },
     storage: [],
+    /**
+     *
+     * @param {string} user
+     * @return {Promise<void>}
+     */
     addAllProductsToUserToUser: async (user)=>{
         let defaultProducts = await ProductsService.addAllProductsToUser(user.uid);
         set((state) => ({

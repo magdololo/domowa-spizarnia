@@ -9,7 +9,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
-//import {useParams} from "react-router-dom";
 import {useForm, Controller} from "react-hook-form";
 
 const EditProductModal =()=>{

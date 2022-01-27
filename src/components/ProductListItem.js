@@ -1,7 +1,6 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Divider, Grid} from "@mui/material";
-import dateFormat from "dateformat";
 import ProductListItemActions from "./ProductListItemActions";
 
 
@@ -10,14 +9,12 @@ const ProductListItem = ({product}) => {
 
     let   [todayDate] = useState(new Date());
     let expireDate = product.expireDate;
-    console.log(todayDate);
 
-    //console.log(product.expireDate.toISOString())// 31.01 potem 1970
+
     if(expireDate !== null && typeof expireDate === "object" ) {
         expireDate = expireDate.toISOString();
     }
-    console.log(expireDate)// najpierw 31 potem 1970
-    console.log(todayDate.toISOString())//21.01.22 today
+
 
     return (
         <>
