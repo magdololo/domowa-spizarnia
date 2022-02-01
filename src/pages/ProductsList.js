@@ -13,7 +13,6 @@ import {useMediaQuery} from "@mui/material";
 
 const ProductsList = () => {
     const user = useStore(state=>state.loggedInUser);
-    const userId = user.id;
     const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
     const productsList = useStore(state => state.storage);
     const minWidth900 = useMediaQuery('(min-width:900px)');

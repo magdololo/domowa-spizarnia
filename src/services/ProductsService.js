@@ -56,7 +56,7 @@ const ProductsService = {
         })
     },
     /** @param {string} userId
-     * @returns {Product[]} */
+     * @returns {Promise<Product[]>} */
     getUserProducts: async (userId) => {
         let userProducts = [];
         try {
@@ -109,7 +109,8 @@ const ProductsService = {
                     "capacity": newProduct.capacity !== productFromProducts.capacity ? newProduct.capacity : productFromProducts.capacity,
                     "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit,
                 }
-                let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
+                let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit);
+                console.log(productExist)
                 if (productExist.length === 0) {
                     let resultRef = await addDoc(collection(db, "allProducts"),productToBeAdded);
                     product = {...productToBeAdded, id: resultRef.id}

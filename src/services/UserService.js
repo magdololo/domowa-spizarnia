@@ -5,11 +5,22 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sen
 import {  doc, getDoc, setDoc} from "firebase/firestore";
 
 /**
+ * @typedef {Object} returnObject
+ * @property {Object | null} user
+ * @property {string} message
+ */
+
+/**
  * @typedef {Object} User
  * @property {string} userId
  * @property {string} email
  * @property {string} password
  * */
+
+/**
+ *
+ * @type {{signUpWithGoogle: (function(): {message: string, user: null}), logWithGoogle: (function(): {message: string, user: null}), forgotPassword: (function(string): {message: string, user: null}), createNewUser: (function(string, string): returnObject), logOut: ((function(): Promise<void>)|*), logInUser: (function(string, string): {message: string, user: null})}}
+ */
 const UserService = {
     /**
      * creates new user and adds default categories to it
@@ -17,14 +28,12 @@ const UserService = {
      * @param {string} password
      * @returns {returnObject} */
     createNewUser: async (email, password) => {
+        /** @type {returnObject} */
         let returnObject = {user: null, message: ''};
-
         try {
-            
             let result = await createUserWithEmailAndPassword(auth, email,password);
 
             if (result.user) {
-                
                 returnObject.user = result.user;
                 setDoc(doc(db, "users", result.user.uid), {
                     uid: result.user.uid,
@@ -46,6 +55,7 @@ const UserService = {
      * @param {string} password
      * @returns {returnObject} */
     logInUser: async (email, password) => {
+        /** @type {returnObject} */
         let returnObject = {user: null, message: ''};
         try {
             
@@ -85,7 +95,7 @@ const UserService = {
     /**
      * @returns {returnObject} */
     signUpWithGoogle: async()=>{
-        console.log("signup with google")
+        /** @type {returnObject} */
         let returnObject = {user: null, message: ''};
         try {
             let result = await signInWithPopup(auth, provider);
@@ -114,6 +124,7 @@ const UserService = {
     /**
      * @returns {returnObject} */
     logWithGoogle: async () => {
+        /** @type {returnObject} */
         let returnObject = {user: null, message: ''};
         try {
             let result = await signInWithPopup(auth, provider);
@@ -138,6 +149,7 @@ const UserService = {
      * @param {string} email
      * @return {Promise<void>} */
     forgotPassword: async (email) =>{
+        /** @type {returnObject} */
         let returnObject = {user: null, message: ''};
         try {
             await sendPasswordResetEmail(auth, email);

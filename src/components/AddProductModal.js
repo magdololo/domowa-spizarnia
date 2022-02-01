@@ -93,7 +93,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             "expireDate": data.expireDate,
             "categoryId": categoryName  ? category.id : selectedNewCategory.id,
             "userId": userId
-        },userId, product, category.id);
+        },userId, product, categoryName  ? category.id : selectedNewCategory.id);
         close();
         reset();
     };

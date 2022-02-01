@@ -13,17 +13,14 @@ import useStore from "../store/useStore";
 const SearchResults =()=>{
     const history = useHistory();
     const minWidth900 = useMediaQuery('(min-width:900px)');
-
     const productsList = useStore(state => state.storage);
-    const searchedProduct = useStore(state=> state.searchedProduct);
-    const searchedAllProducts = useStore(state=>state.searchedProducts)
+    let searchedProduct = useStore(state=> state.searchedProduct);
+    let searchedAllProducts = useStore(state=>state.searchedProducts)
 
     if(searchedProduct.length === 0 && searchedAllProducts.length === 0){
         history.push("/")
     }
     const searchedProductList = productsList.filter(product=> product.id === searchedProduct[0]);
-
-
 
     return(
         <>

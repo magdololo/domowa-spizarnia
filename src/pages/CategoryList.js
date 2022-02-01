@@ -10,6 +10,8 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 const CategoryList = () => {
     const user = useStore(state=>state.loggedInUser);
     const categoryList = useStore(state => state.categories);
+    const productDictionary = useStore(state=>state.productDictionary)
+    const fetchProductDictionary = useStore(state => state.getProductDictionary);
     const fetchCategories = useStore(state => state.getUserCategories);
     const [editMode, setEditMode] = useState(false);
     const fetchImages = useStore(state => state.getImages)
@@ -17,9 +19,10 @@ const CategoryList = () => {
     useEffect(() => {
         fetchCategories(user.uid);
         fetchImages();
+        fetchProductDictionary(user.uid)
 
-    }, [fetchImages, fetchCategories, user]);
-
+    }, [fetchImages, fetchCategories,fetchProductDictionary, user]);
+    console.log(categoryList)
     return (
         <>
             <div style={{maxWidth: '1300px', margin: '0 auto'}} >
@@ -69,7 +72,7 @@ const CategoryList = () => {
                 </div>
                 {editMode ?
                 <EditCategoryImageList/>
-                : <CategoryImageList categoryList={categoryList}/>
+                : <CategoryImageList categoryList={categoryList} productDictionary={productDictionary}/>
                 }
             </div>
         </>

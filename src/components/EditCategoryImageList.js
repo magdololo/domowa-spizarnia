@@ -11,13 +11,16 @@ import Box from "@mui/material/Box";
 import EditCategoryModal from "./EditCategoryModal";
 
 const EditCategoryImageList =()=> {
-    const categoryList = useStore(state => state.categories);
+    let categoryList = useStore(state => state.categories);
     const deleteCategory  = useStore(state => state.deleteCategory);
     const minWidth600 = useMediaQuery('(min-width:600px)');
     const setEditCategory = useStore(state=>state.setEditCategory);
     const setEditCategoryModalOpen = useStore(state=>state.setEditCategoryModalOpen);
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.uid;
+    const requiredCategoryId = useStore(state=>state.requiredCategoryId)
+    categoryList = categoryList.filter(category => category.id !== requiredCategoryId);
+    console.log(categoryList);
     if (categoryList.length >= 2) {
         categoryList.sort((a, b) => {
             a = a.title.toLowerCase();
@@ -29,7 +32,7 @@ const EditCategoryImageList =()=> {
         })
 
     }
-    
+
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
             <ImageList cols={minWidth600 ? 3 : 2} >
@@ -70,8 +73,7 @@ const EditCategoryImageList =()=> {
                         top: "0.6em",
                         position: "absolute",
                         right: ".4em",
-                        // width: "40px",
-                        // height: "40px"
+
                     }}
                     aria-label={`info about ${item.title}`}
                 >

@@ -138,13 +138,7 @@ const EditProductModal =()=>{
                             variant="outlined"
                             value={value}
                             onChange={onChange}
-                                   // InputProps={{
-                                   //     readOnly: true,
-                                   // }}                                   I
-                            // error={!!error}
-                            // helperText={error ? error.message : null}
-                                   type= "text"
-                                   //disabled={true}
+                            type="text"
                         />
                         )}/>
                 </Box>
@@ -160,7 +154,6 @@ const EditProductModal =()=>{
                         variant="standard"
                         value={value}
                         onChange={onChange}
-
                     />
                         )}/>
                     <Controller

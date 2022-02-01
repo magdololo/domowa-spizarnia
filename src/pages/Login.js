@@ -173,7 +173,7 @@ const Login = () => {
                     {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 </form>
             </Box>
-            <div style={{
+            <Box style={{
                 display: "flex",
                 flexWrap: 'wrap',
                 margin: '20px auto 0 auto',
@@ -185,8 +185,8 @@ const Login = () => {
                     Nie masz jeszcze konta?
                     <Link to={'/signUp'} style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Zarejestruj się</Link>
                 </Typography>
-            </div>
-            <div style={{
+            </Box>
+            <Box style={{
                 display: "flex",
                 flexWrap: 'wrap',
                 margin: '10px auto 30px auto',
@@ -198,7 +198,7 @@ const Login = () => {
                     Nie pamiętasz hasła?
                     <Link to={'/forgotPassword'} style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Przypomnij hasło</Link>
                 </Typography>
-            </div>
+            </Box>
             <Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>
             <Box sx={{
                 width: '30ch',
@@ -208,10 +208,10 @@ const Login = () => {
                 margin: '30px auto',
                 justifyContent: "center"
             }}>
-                <div style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
+                <Box style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
                     {/*<FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>*/}
                     <GoogleLoginButton style={{marginTop: 10}} onClick={loggingGoogle}/>
-                </div>
+                </Box>
 
             </Box>
         </Box>

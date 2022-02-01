@@ -10,6 +10,7 @@ import {  doc, updateDoc, getDocs, collection, addDoc, query, deleteDoc} from "f
  * @property {string} url
  * @property {string} user
  * @property {string} [id]
+ * @property {string}[required]
  * */
 
 const CategoriesService= {
@@ -18,6 +19,7 @@ const CategoriesService= {
      * @return {Promise.<Category[]>}
      */
     getDefaultCategories: async ()=>{
+        /** @type {Array} */
              let defaultCategories=[];
         try {
             let q = await query(collection(db, "categories"));
@@ -28,6 +30,7 @@ const CategoriesService= {
                 defaultCategories.push(doc.data());
                 
             })
+            console.log(defaultCategories)
             return defaultCategories
         } catch (error) {
             console.log(error)
@@ -38,6 +41,7 @@ const CategoriesService= {
      * */
     addDefaultCategoriesToUser: async(userId)=>{
         let categories = await CategoriesService.getDefaultCategories();
+        console.log(categories)
         categories.forEach(async (category)=>{
             category.user = userId;
             await CategoriesService.addNewCategory(category)
@@ -66,14 +70,18 @@ const CategoriesService= {
     },
     /** @param {Category} newCategory */
     addNewCategory: async (newCategory) => {
+        console.log(newCategory)
+        let category={
+            url: (newCategory.url),
+            path: (newCategory.path),
+            title: (newCategory.title),
+            user: (newCategory.user),
+        }
+        if(newCategory.hasOwnProperty("required")){
+            category.required = newCategory.required;
+        }
         try {
-            await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), {
-                url: (newCategory.url),
-                path: (newCategory.path),
-                title: (newCategory.title),
-                user: (newCategory.user),
-
-            });
+            await addDoc(collection(db, "users/"+ newCategory.user +"/categories"), category);
 
         } catch (e) {
             console.log(e)
@@ -121,13 +129,9 @@ const CategoriesService= {
      * @return {Promise<void>}
      * */
     deleteCategory: async (userId, categoryId) => {
-
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories", categoryId))
-
               return res
-
-
             } catch (error) {
             console.log(error);
         }
@@ -138,6 +142,7 @@ const CategoriesService= {
      * @return {Promise<[]>}
      */
      fetchImages: async ()=> {
+        /** @type {Array} */
         let images = [];
         try{
             let q = await query(collection(db, "images"));

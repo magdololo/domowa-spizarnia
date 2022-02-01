@@ -15,13 +15,20 @@ import {useForm, Controller} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 //import InputBase from  '@mui/material/InputBase';
 
-const AppBarBottom = ({isAddProductFromListCategory, allProducts}) =>{
+const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
     const filter = createFilterOptions();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const minWidth900 = useMediaQuery('(min-width:900px)')
     const setSearchedProduct = useStore(state=>state.setSearchedProduct)
+    const user = useStore(state=>state.loggedInUser);
+    const userId = user.uid;
+    const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
+    const productsList = useStore(state => state.storage);
+    const searchedProduct = useStore(state=>state.searchedProduct);
+    const {handleSubmit, control, reset, setValue} = useForm( {mode: 'onBlur'});
+    const searchedAllProducts = useStore(state=>state.setSearchedProducts)
 
     const Button = styled(Fab)(({ theme }) => ({
         position: 'absolute',
@@ -44,63 +51,7 @@ const AppBarBottom = ({isAddProductFromListCategory, allProducts}) =>{
         },
 
     }));
-    // const Search = styled('div')(({ theme }) => ({
-    //     position: 'relative',
-    //     borderRadius: theme.shape.borderRadius,
-    //     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    //     '&:hover': {
-    //         backgroundColor: alpha(theme.palette.common.white, 0.25),
-    //     },
-    //     marginRight: theme.spacing(2),
-    //     marginLeft: 0,
-    //     width: '66%',
-    //     [theme.breakpoints.up('sm')]: {
-    //         marginLeft: theme.spacing(3),
-    //         width: '90',
-    //     },
-    // }));
-    // const SearchIconWrapper = styled('div')(({ theme }) => ({
-    //     padding: theme.spacing(0, 2),
-    //     height: '50%',
-    //     position: 'absolute',
-    //     pointerEvents: 'none',
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // }));
-    // const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    //     color: 'inherit',
-    //     '& .MuiInputBase-input': {
-    //         padding: theme.spacing(0, 2, 0, 6),
-    //         // vertical padding + font size from searchIcon
-    //         paddingLeft: `calc(1em + ${theme.spacing(1)})`,
-    //         transition: theme.transitions.create('width'),
-    //         width: '100%',
-    //         [theme.breakpoints.up('md')]: {
-    //             width: '20ch',
-    //         },
-    //     },
-    // }));
-    // const StylesInput = styled(TextField)(({ theme }) =>({
-    //     underline: {
-    //         "&&&:before": {
-    //             borderBottom: "none"
-    //         },
-    //         "&&:after": {
-    //             borderBottom: "none"
-    //         }
-    //     }
-    // }));
 
-
-    const user = useStore(state=>state.loggedInUser);
-    const userId = user.uid;
-    const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
-    const productsList = useStore(state => state.storage);
-    const searchedProduct = useStore(state=>state.searchedProduct);
-    const {handleSubmit, control, reset, setValue} = useForm( {mode: 'onBlur'});
-
-    const searchedAllProducts = useStore(state=>state.setSearchedProducts)
 
     useEffect(() => {
         getUserProducts(userId);
@@ -152,7 +103,6 @@ const AppBarBottom = ({isAddProductFromListCategory, allProducts}) =>{
                                              if(typeof data === "object" && data !== null){
                                                  setSearchedProduct(data.id);
                                              } else {
-                                                 
                                                  searchedAllProducts(data)
                                              }
                                              onChange(data);
@@ -211,7 +161,7 @@ const AppBarBottom = ({isAddProductFromListCategory, allProducts}) =>{
                     {/*</Fab>*/}
                     <Button color="secondary" aria-label="add" variant="extended" onClick={handleOpen} sx={{fontSize: "0.8rem", textTransform: 'none'}}>Dodaj Produkt</Button>
 
-                        <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory} defaultProducts={allProducts}/>
+                        <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory} defaultProducts={productDictionary}/>
 
                 </Toolbar>
             </AppBar>

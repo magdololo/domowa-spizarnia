@@ -79,7 +79,8 @@ const AddCategoryModal=({open, close})=>{
                        "url": pickedImage,
                        "title": newCategoryName,
                        "path": slugify(newCategoryName, "_"),
-                       "user": user.uid
+                       "user": user.uid,
+
                    });
                    close();
                    setPickedImage('');

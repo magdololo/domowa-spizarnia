@@ -12,7 +12,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 
 
-   const CategoryImageList =({categoryList})=>{
+   const CategoryImageList =({categoryList, productDictionary})=>{
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -89,7 +89,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
                    </ImageList>
                </Box>
-             <AppBarBottom isAddProductFromListCategory={true} allProducts={products}/>
+             <AppBarBottom isAddProductFromListCategory={true} allProducts={products} productDictionary={productDictionary}/>
             </>
            );
 }

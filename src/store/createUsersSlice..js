@@ -118,7 +118,7 @@ const createUsersSlice = (set, get) => ({
     },
     /**
      * return user which email is equal param email
-     * @param email
+     * @param {string} email
      * @return {Promise<void>}
      */
     forgotPasswordWithEmail: async (email) =>{
