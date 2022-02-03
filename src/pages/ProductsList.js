@@ -23,7 +23,7 @@ const ProductsList = () => {
     }, [getUserProducts, user]);
 
     //const products = productsList.filter((product=>product.categoryId === category.id));
-    console.log(productsList);
+
     if (productsList.length >= 2 ) {
         productsList.sort((a, b) => {
             a = a.name.toLowerCase();

@@ -19,6 +19,10 @@ import ButtonBase from "@mui/material/ButtonBase";
     const handleClose = () => setOpen(false);
     const minWidth600 = useMediaQuery('(min-width:600px)');
     const products = useStore(state => state.products);
+    const requiredCategoryId = useStore(state=>state.requiredCategoryId);
+    const requiredCategory = useStore(state=>state.requiredCategory);
+    categoryList = categoryList.filter(category => category.id !== requiredCategoryId);
+
            if (categoryList != null && categoryList.length >= 2) {
                categoryList.sort((a, b) => {
                    a = a.title.toLowerCase();
@@ -37,6 +41,29 @@ import ButtonBase from "@mui/material/ButtonBase";
                <>
                <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto', paddingBottom: 40}}>
                    <ImageList cols={ minWidth600 ? 3: 2 } >
+                       <ImageListItem key={requiredCategoryId} component={Link} to={"/" + requiredCategory.path}>
+                           <img className="categoryListItem" src={requiredCategory.url} srcSet={requiredCategory.url} alt={requiredCategory.title} loading="lazy" key={'img'+requiredCategoryId}/>
+                           <Typography component="span" key={'typography_'+requiredCategoryId}
+                                       sx={{
+                                           color: "white",
+                                           letterSpacing: minWidth600 ? '0.08' : '0.12em',
+                                           fontSize: minWidth600 ? '1rem' : '.9rem',
+                                           textAlign: 'center',
+                                           position: 'absolute',
+                                           bottom: 0,
+                                           right: 0,
+                                           left: 0,
+                                           minHeight: '40%',
+                                           display: 'inline-flex',
+                                           alignItems: 'center',
+                                           justifyContent: 'center',
+                                           p: '2px 0',
+                                           backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                           textTransform: "capitalize",
+                                       }}>
+                               {requiredCategory.title}
+                           </Typography>
+                       </ImageListItem>
                        {categoryList.map((item) => (
                            <ImageListItem key={item.id} component={Link} to={"/" + item.path}>
                                <img className="categoryListItem" src={item.url} srcSet={item.url} alt={item.title} loading="lazy" key={'img'+item.id}/>

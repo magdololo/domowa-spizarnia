@@ -38,13 +38,13 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
 
                 value={value}
                 onChange={(_, data) => {
-                    
+
                     setNewProductName(data);
                     setProduct(data);
-                    onChange(data)
-                }
-                }
+                    onChange(data);
 
+                }
+                }
                 filterOptions={(options, params) => {
                     
                     
@@ -56,26 +56,10 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
                     return option.name === value.name
                 }}
                 autoSelect//dołacza wpisany tekst w jedna z opcji select z ktorej popbierze wartość
-                 //selectOnFocus
-
-                //clearOnBlur
                 handleHomeEndKeys
                 id="free-solo-with-text-demo"
                 options={products}
                 getOptionLabel={option => option.name || option}
-               //getOptionLabel={(option) => {
-                    // // Value selected with enter, right from the input
-                    // if (typeof option === 'string') {
-                    //     return option;
-                    // }
-                    // // Add "xxx" option created dynamically
-                    // if (option.inputValue) {
-                    //     return option.inputValue;
-                    // }
-                    // // Regular option
-                    // return option.name;
-
-               // }}
                 renderOption={(props, option) => <li {...props}>{option.name} {option.capacity} {option.unit}</li>}
                 freeSolo
                 renderInput={(params) => (

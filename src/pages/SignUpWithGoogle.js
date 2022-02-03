@@ -21,12 +21,12 @@ const SignUpWithGoogle = () => {
         let history = useHistory();
         const [errorMessage,setErrorMessage] = useState('');
         const registerAndLogWithGoogle = async ()=>{
-            console.log("button click")
-            console.log(checkboxState)
+
+
             if(checkboxState === true) {
-                console.log(checkboxState)
+
                 let message = await signUpWithGoogle();
-                console.log(message);
+
                 if (message !== '') {
                     setErrorMessage(message);
                 }

@@ -35,6 +35,7 @@ const createCategorySlice = (set, get) => ({
         }));
    },
     requiredCategoryId:'',
+    requiredCategory: {},
     /**
      *
      * @param userId
@@ -45,10 +46,11 @@ const createCategorySlice = (set, get) => ({
         let categories=[];
         categories = await CategoriesService.getUserCategories(userId);
         let requiredCategory = categories.filter(category => category.required === "true");
-        console.log(requiredCategory);
-        let requiredCategoryId = requiredCategory[0].id;
+        requiredCategory = requiredCategory[0];
+        let requiredCategoryId = requiredCategory.id;
         set((state) => ({
             categories: categories,
+            requiredCategory: requiredCategory,
             requiredCategoryId: requiredCategoryId
         }));
     },

@@ -22,7 +22,7 @@ const CategoryList = () => {
         fetchProductDictionary(user.uid)
 
     }, [fetchImages, fetchCategories,fetchProductDictionary, user]);
-    console.log(categoryList)
+
     return (
         <>
             <div style={{maxWidth: '1300px', margin: '0 auto'}} >

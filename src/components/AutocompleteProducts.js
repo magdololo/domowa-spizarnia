@@ -17,12 +17,7 @@ export default function AutocompleteProducts({ onChange, value, setProduct}) {
         getProductsFromProducts(userId);
 
     }, [getProductsFromProducts, userId]);
-    // useEffect( ()=>{
-    //     if(value) {
-    //         setProduct(value)
-    //     }
-    // }, [value, setProduct]);
-  
+
     return(
         <Autocomplete
             value={value}

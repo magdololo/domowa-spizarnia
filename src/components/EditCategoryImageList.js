@@ -20,7 +20,7 @@ const EditCategoryImageList =()=> {
     const userId = loggedInUser.uid;
     const requiredCategoryId = useStore(state=>state.requiredCategoryId)
     categoryList = categoryList.filter(category => category.id !== requiredCategoryId);
-    console.log(categoryList);
+
     if (categoryList.length >= 2) {
         categoryList.sort((a, b) => {
             a = a.title.toLowerCase();
@@ -53,8 +53,7 @@ const EditCategoryImageList =()=> {
                         top: "0.5em",
                         position: "absolute",
                         left: ".4em",
-                        // width: "40px",
-                        // height: "40px"
+
                     }}
                     aria-label={`info about ${item.title}`}>
                     <EditIcon style={{
@@ -84,7 +83,6 @@ const EditCategoryImageList =()=> {
                         overflow: "hidden",
                         whiteSpace: "nowrap",
                         fontSize: "1.3em", color: 'red'}} onClick={() => {
-
                             deleteCategory(userId, item.id);
                     }}/>
                 </IconButton>

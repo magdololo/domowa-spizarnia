@@ -1,4 +1,4 @@
-import {Button, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImagePickerModal from "./ImagePickerModal";
@@ -27,7 +27,13 @@ const AddCategoryModal=({open, close})=>{
         p: 4,
         zIndex: 1200,
     }
+    const [errorMessage,setErrorMessage] = useState('');
 
+    const closeModal =()=>{
+        setErrorMessage('');
+        setPickedImage('');
+        close();
+    }
 
 
 
@@ -44,7 +50,6 @@ const AddCategoryModal=({open, close})=>{
 
         }
 
-
    return (
        <Modal sx={{zIndex: '200'}}
               open={open}
@@ -57,7 +62,7 @@ const AddCategoryModal=({open, close})=>{
                    Dodaj nową kategorię
                </Typography>
                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                   <TextField id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)} />
+                   <TextField  id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)}/>
                </Typography>
 
                <ImageListItem key={pickedImage.id} cols={1} sx={{rowHeight: 120, rowWidth: 200}}>
@@ -71,19 +76,21 @@ const AddCategoryModal=({open, close})=>{
 
                </ImageListItem>
                <ImagePickerModal/>
+               {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                <Button onClick={()=> {
-                   // String.prototype.capitalize = function() {
-                   //     return this.charAt(0).toUpperCase() + this.slice(1);
-                   // }
-                   addCategory({
-                       "url": pickedImage,
-                       "title": newCategoryName,
-                       "path": slugify(newCategoryName, "_"),
-                       "user": user.uid,
 
-                   });
-                   close();
-                   setPickedImage('');
+                   if(pickedImage !== "" && newCategoryName !== "") {
+                       addCategory({
+                           "url": pickedImage,
+                           "title": newCategoryName,
+                           "path": slugify(newCategoryName, "_"),
+                           "user": user.uid,
+                       });
+                       closeModal();
+
+                   } else {
+                       setErrorMessage("Nazwa i zdjecie wymagane.")
+                   }
                }}>Dodaj kategorię</Button>
            </Box>
 

@@ -13,7 +13,7 @@ import Autocomplete, {createFilterOptions} from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import {useForm, Controller} from "react-hook-form";
 import {useHistory} from "react-router-dom";
-//import InputBase from  '@mui/material/InputBase';
+
 
 const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
     const filter = createFilterOptions();
@@ -107,10 +107,8 @@ const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
                                              }
                                              onChange(data);
                                              reset();
-                                             //history.push('/');
                                              history.push('/search');
                                          }}
-                                         //filterOptions={filterOptions}
                                          filterOptions={(options, params) => {
                                              const filtered = filter(options, params);
                                              return filtered;
@@ -139,16 +137,7 @@ const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
                                          }}
                                          renderOption={(props, option) => <li {...props}>{option.name} {option.capacity} {option.unit}</li>}
                                          renderInput={(params) => (
-                                             // <StyledInputBase
-                                             //     ref={params.InputProps.ref}
-                                             //     inputProps={params.inputProps}
-                                             //     placeholder="Znajdź produkt…"
-                                             //     {...params}
-                                             // />
                                               <TextField {...params} label="Wyszukaj produkt" type="search" variant="standard" sx={{width: "300px"}} />
-
-                                             // <TextField {...params} label="Wyszukaj produkt"/>
-
                                          )}
 
                                      />
@@ -156,9 +145,6 @@ const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
                              />
 
                         </form>
-                    {/*<Fab color="primary" aria-label="add">*/}
-                    {/*    <Button color="secondary" aria-label="add" variant="extended" onClick={handleOpen} sx={{fontSize: "0.8rem", textTransform: 'none'}}>Dodaj Produkt</Button>*/}
-                    {/*</Fab>*/}
                     <Button color="secondary" aria-label="add" variant="extended" onClick={handleOpen} sx={{fontSize: "0.8rem", textTransform: 'none'}}>Dodaj Produkt</Button>
 
                         <AddProductModal open={open}  close={handleClose}  isAddProductFromListCategory={isAddProductFromListCategory} defaultProducts={productDictionary}/>

@@ -7,9 +7,11 @@ import {useEffect} from "react";
 const filter = createFilterOptions();
 
 export default function AutocompleteCategoriesTitle({labelForAddModal, value, onChange, setSelectedNewCategory}) {
-     const categoryList = useStore(state => state.categories);
-     
-    // 
+     let categoryList = useStore(state => state.categories);
+     const requiredCategory = useStore(state=>state.requiredCategory);
+     const requiredCategoryId = useStore(state=>state.requiredCategoryId);
+     categoryList = categoryList.filter(category => category.id !== requiredCategoryId);
+     categoryList = [requiredCategory,...categoryList];
     useEffect( ()=>{
 
         if(value) {
