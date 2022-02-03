@@ -16,15 +16,19 @@ import ReturnToCategoryList from "../components/ReturnToCategoryList";
 const CategoryDetail = ()=> {
     const user = useStore(state=>state.loggedInUser);
     const userId = user.uid;
+    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
     const productsList = useStore(state => state.storage);
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
-    const getCategoryByPath= useStore(state=> state.getCategoryByPath);
+    const categories =  useStore(state=> state.categories);
     const [category, setCategory] = React.useState("");
 
 
+
+
     useEffect(() => {
+
         if(categoryName){
             setCategory(getCategoryByPath(categoryName))
         }

@@ -1,6 +1,6 @@
 import useStore from "../store/useStore";
 import {useEffect, useState} from "react";
-import {Button, MenuItem, Modal, TextField} from "@mui/material";
+import {Alert, Button, MenuItem, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
@@ -24,7 +24,7 @@ const EditProductModal =()=>{
     const [selectedNewCategory, setSelectedNewCategory] = useState(null);
     const loggedInUser = useStore(state=> state.loggedInUser);
     const userId = loggedInUser.id;
-
+    const [errorMessage,setErrorMessage] = useState('');
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
@@ -84,6 +84,8 @@ const EditProductModal =()=>{
 
 
     const onSubmit = async (data) => {
+
+        if(data.newProductName !== "" && data.newCapacity !== "" && data.newUnit !== "" && data.newQuantity > 0 ){
          updateProduct({
             "id": editProduct.id,
             "userId": editProduct.userId ,
@@ -96,6 +98,19 @@ const EditProductModal =()=>{
             "categoryId": selectedNewCategory.id
         }, userId, editProduct, editCategory.id)
         handleClose();
+        }else{
+            if(data.newProductName === ""){
+                setErrorMessage("Nazwa wymagana");
+            } else if(data.newCapacity === ""){
+                setErrorMessage("Pojemność wymagane");
+            }else if(data.newUnit === ""){
+                setErrorMessage("Jednostka wymagana");
+            }else if(data.newQuantity <= 0){
+                setErrorMessage("Minimalna ilość 1")
+            }else{
+                setErrorMessage(errorMessage)
+            }
+        }
     };
 
     return(
@@ -211,6 +226,7 @@ const EditProductModal =()=>{
                         )}
                     />
                 </Box>
+                {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 <Button sx={{ marginLeft: "10%"}} type="submit" variant="contained" color="primary" >Edytuj produkt</Button>
             </Box>
             </form>

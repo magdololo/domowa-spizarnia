@@ -72,7 +72,7 @@ const ProductsService = {
 
                 if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== "" && product.expireDate !== "object"){
                     let expireDate = Timestamp.fromMillis(product.expireDate.seconds*1000);
-                   // console.log(expireDate)
+                   //
                     product.expireDate = expireDate.toDate();
                 }
 
@@ -108,6 +108,7 @@ const ProductsService = {
                     "name": newProduct.name,
                     "capacity": newProduct.capacity !== productFromProducts.capacity ? newProduct.capacity : productFromProducts.capacity,
                     "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit,
+                    "userId": userId
                 }
                 let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit);
 
@@ -132,6 +133,7 @@ const ProductsService = {
             }
 
             let result = await addDoc(collection(db, "users/" + userId + "/categories/" + categoryId +"/products" ), newStorageItem);
+
             return {...newStorageItem,id: result.id}
         } catch (error) {
             console.log(error);
@@ -221,7 +223,7 @@ const ProductsService = {
     deleteProduct: async (userId, categoryId, productId) => {
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
-            console.log(res)
+
             return res
         } catch (error) {
             console.log(error);
@@ -246,7 +248,6 @@ const ProductsService = {
                 productFromAllProducts.push(product);
 
             })
-            console.log(productFromAllProducts)
             return productFromAllProducts
         }catch (error) {
             console.log(error);

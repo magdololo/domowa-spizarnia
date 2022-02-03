@@ -4,24 +4,16 @@ import {Divider, Grid} from "@mui/material";
 import ProductListItemActions from "./ProductListItemActions";
 
 
-
 const ProductListItem = ({product}) => {
 
     let   [todayDate] = useState(new Date());
     let expireDate = product.expireDate;
 
-
-    if(expireDate !== null && typeof expireDate === "object" ) {
-        expireDate = expireDate.toISOString();
-    }
-
-
     return (
         <>
             <Grid container spacing={0} >
-
                 <Grid item xs={12}
-                      style={(expireDate > todayDate)  ? {color: "#646670"} : {color: "red"}}
+                      style={( expireDate  > todayDate) || expireDate === null  ? {color: "#646670"} : {color: "red"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",
@@ -33,7 +25,7 @@ const ProductListItem = ({product}) => {
                       {product.name}
                 </Grid>
                 <Grid item xs={12}
-                      style={(expireDate  > todayDate)  ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
+                      style={(expireDate === null || expireDate > todayDate ) ? {color: "#bdc1c7"} : {color: "red", fontWeight: "normal"}}
                       sx={{
                           lineHeight: "0.9em",
                           fontWeight: "bold",
@@ -43,7 +35,6 @@ const ProductListItem = ({product}) => {
                       }}>
                     {product.expireDate ? product.expireDate.toISOString().substring(0,10) : ""}
                 </Grid>
-
                    {product.capacity !== 0 ?
                     <Grid item xs={12} sm={4} md={6}
                           color="#bdc1c7"

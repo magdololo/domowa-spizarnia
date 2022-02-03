@@ -1,4 +1,4 @@
-import {Button, Modal, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -21,9 +21,14 @@ import slugify from "slugify";
       const editCategory = useStore(state=>state.editCategory);// undefined
       const [localImage, setLocalImage] = useState('');
       const maxWidth400 = useMediaQuery('(max-width:400px)');
-      const handleClose = () => {
+      const [errorMessage,setErrorMessage] = useState('');
+
+      const handleClose=()=>{
+          setErrorMessage('');
+          setLocalImage('');
           setEditModalOpen(false);
       }
+
       useEffect(()=>{
           setNewCategoryName(editCategory.title);
       }, [editCategory]);
@@ -79,14 +84,19 @@ import slugify from "slugify";
         </ImageListItem>
 
         <ImagePickerModal/>
+            {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
         <Button onClick={()=> {
             // eslint-disable-next-line no-extend-native
             String.prototype.capitalize = function() {
                 return this.charAt(0).toUpperCase() + this.slice(1);
             }
             let path= slugify(newCategoryName, "_");
-            updateCategory(editCategory.userId, path, localImage, newCategoryName.capitalize(), editCategory.categoryId);
-            handleClose();
+            if(pickedImage !== "" && newCategoryName !== "") {
+                updateCategory(editCategory.userId, path, localImage, newCategoryName.capitalize(), editCategory.categoryId);
+                handleClose();
+            } else {
+                setErrorMessage("Nazwa i zdjecie wymagane.")
+            }
            }}>Edytuj kategorię</Button>
         </Box>
       </Modal>

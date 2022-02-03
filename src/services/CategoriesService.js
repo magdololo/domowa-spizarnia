@@ -1,6 +1,6 @@
 
 import { db} from "../firebase";
-import {  doc, updateDoc, getDocs, collection, addDoc, query, deleteDoc} from "firebase/firestore";
+import {doc, updateDoc, getDocs, collection, addDoc, query, deleteDoc, where, getDoc} from "firebase/firestore";
 
 
 /**
@@ -81,11 +81,27 @@ const CategoriesService= {
                 category.required = newCategory.required;
             }
             try {
-                await addDoc(collection(db, "users/" + newCategory.user + "/categories"), category);
+                let result = await addDoc(collection(db, "users/" + newCategory.user + "/categories"), category);
 
+                return {...category,id: result.id}
             } catch (error) {
                 console.log(error)
             }
+    },
+    getCategoryByPath: async (path, userId) =>{
+
+        let category ={};
+        try {
+            let q = await query(collection(db, "users/" + userId + "/categories"),where("path", "==", path));
+            const querySnapshot = await getDoc(q);
+
+            category = querySnapshot.data();
+            category.id = querySnapshot.id
+            return category
+        } catch (error) {
+            console.log(error)
+            console.error(error)
+        }
     },
     /**
      *
@@ -129,8 +145,8 @@ const CategoriesService= {
      * @return {Promise<void>}
      * */
     deleteCategory: async (userId, categoryId) => {
-        console.log(userId)
-        console.log(categoryId)
+
+
         try {
             const res = await deleteDoc(doc(db, "users/" + userId + "/categories", categoryId))
               return res

@@ -29,7 +29,6 @@ const createProductsSlice = (set, get) => ({
      * @return {Promise<void>}
      */
     fetchProducts: async (userId) => {
-        console.log(userId)
         /** @type {Array} */
         let allProducts=[];
         if(userId){
@@ -71,8 +70,9 @@ const createProductsSlice = (set, get) => ({
      * @returns {Promise<Product>}
      */
     addProduct: async (newProduct, userId, productFromProducts, categoryId) => {
-        //console.log(newProduct)
+
         let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts, categoryId);
+
             set((state) => ({
                 products: [
                     addedProduct,

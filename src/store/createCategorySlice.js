@@ -29,7 +29,7 @@ const createCategorySlice = (set, get) => ({
      */
     addDefaultCategoriesToUser: async (user)=>{
         let defaultCategories = await CategoriesService.addDefaultCategoriesToUser(user.uid);
-        console.log(defaultCategories)
+
         set((state) => ({
             categories: defaultCategories
         }));
@@ -60,10 +60,15 @@ const createCategorySlice = (set, get) => ({
      * @return {Category}
      */
     getCategoryByPath: (path) => {
+        // let result = await CategoriesService.getCategoryByPath(path, userId)
+        //
         let categories = get().categories;//pobiera kategorie ze stanu
+
         /** @type {Object} */
         let category = categories.filter(categoryItem => categoryItem.path === path);
+
         return category[0];
+        // return result
     },
     /**
      *
@@ -82,11 +87,12 @@ const createCategorySlice = (set, get) => ({
      * @return {Promise<void>}
      */
     addCategory: async (newCategory) => {
-        console.log(newCategory)
-        await CategoriesService.addNewCategory(newCategory);
+
+        let result = await CategoriesService.addNewCategory(newCategory);
+
         set((state) => ({
             categories: [
-                newCategory,
+                result,
                 ...state.categories
             ]
         }));
@@ -145,7 +151,7 @@ const createCategorySlice = (set, get) => ({
     deleteCategory: async ( userId, categoryId) => {
 
         let category =  get().categories.filter(category => category.id === categoryId)
-        console.log(category)
+
         if(category[0].hasOwnProperty("required") === false || category[0].required === "false"){
             await CategoriesService.deleteCategory(userId, categoryId);
 

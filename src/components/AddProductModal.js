@@ -69,10 +69,11 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     useEffect(() => {
         let category ={}
         if(categoryName){
+
             category = getCategoryByPath(categoryName)
 
             setCategory(category)}
-    },[categoryName,setCategory, getCategoryByPath, category]);
+    },[categoryName,setCategory, getCategoryByPath]);
 
 
     const { handleSubmit, control, setValue, reset, formState: { errors}} = useForm();
@@ -90,8 +91,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         close();
     }
     const onSubmit = data => {
-        console.log(newProductName);
-        console.log(data);
         if(newProductName !== null && data.capacity !== "" && data.unit !== "" && data.quantity > 0 ){
             addProduct({
                 "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,

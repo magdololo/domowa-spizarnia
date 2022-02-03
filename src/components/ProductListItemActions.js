@@ -21,6 +21,7 @@ const ProductListItemActions = ({product}) => {
     const [category, setCategory] = React.useState("");
     const { categoryName } = useParams();
     useEffect(() => {
+
         if(categoryName){
             setCategory(getCategoryByPath(categoryName))}
     },[categoryName,setCategory, getCategoryByPath]);
