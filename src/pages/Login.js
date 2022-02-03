@@ -10,8 +10,8 @@ import {
     InputAdornment,
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Link} from "react-router-dom";
-import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
+import {Link, useHistory} from "react-router-dom";
+import { GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
 import useStore from "../store/useStore";
 import {makeStyles} from "@material-ui/core";
@@ -47,13 +47,14 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
     const classes = useStyles();
     const logIn = useStore(state => state.logIn);
+    const logWithGoogle = useStore(state=>state.logWithGoogle);
     const [values, setValues] = React.useState({
         password: '',
         email: '',
         showPassword: false,
     });
     const [errorMessage,setErrorMessage] = useState('');
-
+    let history = useHistory();
     const handleClickShowPassword = () => {
         setValues({
             ...values,
@@ -66,22 +67,32 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: 'myszka@gmail.com',
-            password: 'myszka12345',
+            email: 'gabrielajarzyna@gmail.com',
+            password: 'gabi1234',
+            // email: '',
+            // password: '',
             showPassword: false,
         }
     });
 
-    const onSubmitLogin = async data => {
-
+    const onSubmitLogin = async (data, e) => {
+        e.preventDefault();
+        
         let message = await logIn(data.email, data.password);
+        
         if (message !== '') setErrorMessage(message);
         reset({
             email: "",
             password: "",
         });
     };
+    const loggingGoogle = async () => {
+        let message = await logWithGoogle();
+        if (message !== '') {
+            history.push("/signUpWithGoogle")
+        }
 
+    }
     return (
         <>
 
@@ -158,9 +169,35 @@ const Login = () => {
                         }}
                     />
 
-                    <Button type="submit" variant="contained" color="primary" >Zaloguj się</Button>
+                    <Button type="submit" variant="contained" color="primary">Zaloguj się</Button>
                     {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 </form>
+            </Box>
+            <Box style={{
+                display: "flex",
+                flexWrap: 'wrap',
+                margin: '20px auto 0 auto',
+                justifyContent: "center",
+                width: '25ch',
+                marginTop: ".7em"
+            }}>
+                <Typography variant="caption" display="block" gutterBottom>
+                    Nie masz jeszcze konta?
+                    <Link to={'/signUp'} style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Zarejestruj się</Link>
+                </Typography>
+            </Box>
+            <Box style={{
+                display: "flex",
+                flexWrap: 'wrap',
+                margin: '10px auto 30px auto',
+                justifyContent: "center",
+                width: '25ch',
+                marginTop: ".5em"
+            }}>
+                <Typography variant="caption" display="block" gutterBottom>
+                    Nie pamiętasz hasła?
+                    <Link to={'/forgotPassword'} style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Przypomnij hasło</Link>
+                </Typography>
             </Box>
             <Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>
             <Box sx={{
@@ -171,24 +208,11 @@ const Login = () => {
                 margin: '30px auto',
                 justifyContent: "center"
             }}>
-                <div style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
-                    <FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>
-                    <GoogleLoginButton style={{marginTop: 10}} onClick={() => alert("Hello")}/>
-                </div>
-                <div style={{
-                    display: "flex",
-                    flexWrap: 'wrap',
-                    justifyContent: "center",
-                    width: '25ch',
-                    marginTop: "1em"
-                }}>
-                    <Typography variant="caption" display="block" gutterBottom>
-                        Nie masz jeszcze konta?
-                        <Link to={'/signUp'}
-                              style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Zarejestruj
-                            się</Link>
-                    </Typography>
-                </div>
+                <Box style={{display: "flex", flexWrap: 'wrap', justifyContent: "center", width: '25ch'}}>
+                    {/*<FacebookLoginButton style={{marginTop: 2}} onClick={() => alert("Hello")}/>*/}
+                    <GoogleLoginButton style={{marginTop: 10}} onClick={loggingGoogle}/>
+                </Box>
+
             </Box>
         </Box>
 

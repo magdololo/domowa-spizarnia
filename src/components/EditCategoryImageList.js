@@ -11,11 +11,15 @@ import Box from "@mui/material/Box";
 import EditCategoryModal from "./EditCategoryModal";
 
 const EditCategoryImageList =()=> {
-    const categoryList = useStore(state => state.categories);
+    let categoryList = useStore(state => state.categories);
     const deleteCategory  = useStore(state => state.deleteCategory);
     const minWidth600 = useMediaQuery('(min-width:600px)');
     const setEditCategory = useStore(state=>state.setEditCategory);
     const setEditCategoryModalOpen = useStore(state=>state.setEditCategoryModalOpen);
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.uid;
+    const requiredCategoryId = useStore(state=>state.requiredCategoryId)
+    categoryList = categoryList.filter(category => category.id !== requiredCategoryId);
 
     if (categoryList.length >= 2) {
         categoryList.sort((a, b) => {
@@ -28,6 +32,7 @@ const EditCategoryImageList =()=> {
         })
 
     }
+
     return(
         <Box sx={{display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '94%', margin: '0 auto'}}>
             <ImageList cols={minWidth600 ? 3 : 2} >
@@ -48,15 +53,14 @@ const EditCategoryImageList =()=> {
                         top: "0.5em",
                         position: "absolute",
                         left: ".4em",
-                        // width: "40px",
-                        // height: "40px"
+
                     }}
                     aria-label={`info about ${item.title}`}>
                     <EditIcon style={{
                         fontSize: "1.3em",
                         color: 'white'
                     }} onClick={() => {
-                        setEditCategory(item.id, item.url, item.title, item.path);
+                        setEditCategory(item.user, item.url, item.title, item.path, item.id);
                         setEditCategoryModalOpen(true);
                     }}/>
                 </IconButton>
@@ -68,8 +72,7 @@ const EditCategoryImageList =()=> {
                         top: "0.6em",
                         position: "absolute",
                         right: ".4em",
-                        // width: "40px",
-                        // height: "40px"
+
                     }}
                     aria-label={`info about ${item.title}`}
                 >
@@ -79,7 +82,9 @@ const EditCategoryImageList =()=> {
                         textOverflow: "ellipsis",
                         overflow: "hidden",
                         whiteSpace: "nowrap",
-                        fontSize: "1.3em", color: 'red'}} onClick={() => deleteCategory(item.id)}/>
+                        fontSize: "1.3em", color: 'red'}} onClick={() => {
+                            deleteCategory(userId, item.id);
+                    }}/>
                 </IconButton>
                 <ImageListItemBar
                     sx={{width: "100%", height: "100%", textAlign: "center", color: '#fff'}}

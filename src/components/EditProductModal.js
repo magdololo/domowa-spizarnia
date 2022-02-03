@@ -1,6 +1,6 @@
 import useStore from "../store/useStore";
 import {useEffect, useState} from "react";
-import {Button, MenuItem, Modal, TextField} from "@mui/material";
+import {Alert, Button, MenuItem, Modal, TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
@@ -9,7 +9,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import plLocale from "date-fns/locale/pl";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import AutocompleteCategoriesTitle from "./AutocompleteCategoriesTitle";
-import {useParams} from "react-router-dom";
 import {useForm, Controller} from "react-hook-form";
 
 const EditProductModal =()=>{
@@ -23,12 +22,9 @@ const EditProductModal =()=>{
     const  editModalOpen = useStore(state=>state.editModalOpen);
     const editProduct = useStore(state=>state.editProduct);
     const [selectedNewCategory, setSelectedNewCategory] = useState(null);
-
-
-
-
-
-
+    const loggedInUser = useStore(state=> state.loggedInUser);
+    const userId = loggedInUser.id;
+    const [errorMessage,setErrorMessage] = useState('');
     const handleClose = () => {
         setEditProductModalOpen(false);
     }
@@ -65,18 +61,14 @@ const EditProductModal =()=>{
         p: 4,
         zIndex: 1200,
     }
-    let { categoryName } = useParams();
-    const loggedInUser = useStore(state=> state.loggedInUser);
-    const userId = loggedInUser.id;
-    console.log(categoryName)
-    useEffect(() => {
-            getCategoryById(editProduct.categoryId).then(category => {
-                console.log(category)
-                setEditCategory(category)
-            })
-    },[editProduct,editCategory]);
 
-    console.log(editProduct)
+
+    useEffect(() => {
+        if(editProduct.hasOwnProperty("categoryId")){
+            setEditCategory(getCategoryById(editProduct.categoryId))}
+    },[editProduct,editCategory, getCategoryById]);
+
+    
 
     const { handleSubmit, control , setValue} = useForm( {mode: 'onBlur'});
     useEffect(()=>{
@@ -92,6 +84,8 @@ const EditProductModal =()=>{
 
 
     const onSubmit = async (data) => {
+
+        if(data.newProductName !== "" && data.newCapacity !== "" && data.newUnit !== "" && data.newQuantity > 0 ){
          updateProduct({
             "id": editProduct.id,
             "userId": editProduct.userId ,
@@ -102,8 +96,21 @@ const EditProductModal =()=>{
             "quantity": parseInt(data.newQuantity),
             "expireDate":  data.newExpireDate,
             "categoryId": selectedNewCategory.id
-        }, userId, editProduct)
+        }, userId, editProduct, editCategory.id)
         handleClose();
+        }else{
+            if(data.newProductName === ""){
+                setErrorMessage("Nazwa wymagana");
+            } else if(data.newCapacity === ""){
+                setErrorMessage("Pojemność wymagane");
+            }else if(data.newUnit === ""){
+                setErrorMessage("Jednostka wymagana");
+            }else if(data.newQuantity <= 0){
+                setErrorMessage("Minimalna ilość 1")
+            }else{
+                setErrorMessage(errorMessage)
+            }
+        }
     };
 
     return(
@@ -146,13 +153,7 @@ const EditProductModal =()=>{
                             variant="outlined"
                             value={value}
                             onChange={onChange}
-                                   // InputProps={{
-                                   //     readOnly: true,
-                                   // }}                                   I
-                            // error={!!error}
-                            // helperText={error ? error.message : null}
-                                   type= "text"
-                                   //disabled={true}
+                            type="text"
                         />
                         )}/>
                 </Box>
@@ -168,7 +169,6 @@ const EditProductModal =()=>{
                         variant="standard"
                         value={value}
                         onChange={onChange}
-
                     />
                         )}/>
                     <Controller
@@ -226,6 +226,7 @@ const EditProductModal =()=>{
                         )}
                     />
                 </Box>
+                {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                 <Button sx={{ marginLeft: "10%"}} type="submit" variant="contained" color="primary" >Edytuj produkt</Button>
             </Box>
             </form>

@@ -1,24 +1,99 @@
-import axios from "axios";
+
+import {
+    collection,
+    getDocs,
+    query,
+    collectionGroup,
+    doc,
+    startAt,
+    endAt,
+    orderBy,
+    documentId,
+    addDoc,
+    where,
+    Timestamp, deleteDoc, updateDoc, getDoc, setDoc
+} from "firebase/firestore";
+import {db} from "../firebase";
+
+/**
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} name
+ * @property {number} capacity
+ * @property {string} categoryId
+ * @property {Date | null | string} [expireDate]
+ * @property {string} productId
+ * @property {string} unit
+ * @property {string} userId
+ * */
 
 const ProductsService = {
-    getAllProducts: async (userId) => {
+    /**
+     * @returns {Product[]} */
+    getAllProducts: async () => {
+        let allProducts=[];
         try {
-            let allProducts = await axios.get(`http://192.168.1.28:4000/products?userId=${userId}&userId=0`);
-            return allProducts.data;
+            let q = await query(collection(db, "allProducts"));
+            const querySnapshot = await getDocs(q);
+            //defaultCategories.push(querySnapshot.docs);
+            querySnapshot.forEach((doc) => {
+
+                allProducts.push(doc.data());
+
+            })
+            return allProducts
         } catch (error) {
-            console.error(error)
+            console.log(error)
         }
     },
+
+    addAllProductsToUser: async()=>{
+        let dictionaryProducts = await ProductsService.getAllProducts();
+
+        dictionaryProducts.forEach(async (product)=>{
+            product.id = product.doc.id;
+            await ProductsService.addProduct(product)
+        })
+    },
+    /** @param {string} userId
+     * @returns {Promise<Product[]>} */
     getUserProducts: async (userId) => {
+        let userProducts = [];
         try {
-            let userProducts = await axios.get('http://192.168.1.28:4000/storage?userId=' + userId);
-            return userProducts.data;
-        } catch (error) {
-            console.error(error)
+            const docRef = doc(db, "users", userId);
+            let q = await query(collectionGroup(db, "products"), orderBy(documentId()) ,startAt(docRef.path), endAt(docRef.path + "\uf8ff"));//wszystkie produkty Usera
+            //
+            const querySnapshot = await getDocs(q);
+            //
+            querySnapshot.forEach((doc) => {
+
+                let product = doc.data();
+                product.id = doc.id;
+
+                if(product.hasOwnProperty("expireDate") && product.expireDate !== null && product.expireDate !== "" && product.expireDate !== "object"){
+                    let expireDate = Timestamp.fromMillis(product.expireDate.seconds*1000);
+                   //
+                    product.expireDate = expireDate.toDate();
+                }
+
+
+                userProducts.push(product);
+
+            })
+            return userProducts
+        }catch (error) {
+            console.log(error)
         }
     },
     productToStorage: {},
-    addProduct: async (newProduct, userId, productFromProducts) => {//from AddProductModal
+    /**
+     * @param {string} userId
+     * @param {string} categoryId
+     * @param {Object} productFromProducts
+     * @param {Object} newProduct
+     * @return {Product}
+     * */
+    addProduct: async (newProduct, userId, productFromProducts, categoryId) => {//from AddProductModal
         try {
             let product = {}
             if (productFromProducts && newProduct.capacity === productFromProducts.capacity && newProduct.unit === productFromProducts.unit) {
@@ -35,10 +110,11 @@ const ProductsService = {
                     "unit": newProduct.unit !== productFromProducts.unit ? newProduct.unit : productFromProducts.unit,
                     "userId": userId
                 }
-                let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
-                if (productExist.length === 0) {
-                    product = await ProductsService.addProductToProducts(productToBeAdded);
+                let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit);
 
+                if (productExist.length === 0) {
+                    let resultRef = await addDoc(collection(db, "allProducts"),productToBeAdded);
+                    product = {...productToBeAdded, id: resultRef.id}
                 } else {
                     product = productExist[0];
 
@@ -55,33 +131,41 @@ const ProductsService = {
                 "expireDate": newProduct.expireDate,
                 "categoryId": newProduct.categoryId
             }
-            return await ProductsService.addProductToStorage(newStorageItem);
+
+            let result = await addDoc(collection(db, "users/" + userId + "/categories/" + categoryId +"/products" ), newStorageItem);
+
+            return {...newStorageItem,id: result.id}
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     },
+    /**
+     *
+     * @param {Object} newProduct
+     * @return {Promise.<Product>}
+     */
     addProductToProducts: async (newProduct) => {
         try {
-            let response = await axios.post('http://192.168.1.28:4000/products', newProduct);
-            return response.data;
+            let response = await addDoc(collection(db, "allProducts" ), newProduct);
+            return response;
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     },
-    addProductToStorage: async (productToStorageFromProducts) => {
-        try {
-            let response = await axios.post('http://192.168.1.28:4000/storage', productToStorageFromProducts);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-    updateProduct: async (updatesValues, userId, productFromProducts) => {//updatesValues - product after update
+    /**
+     *
+     * @param {Product} updatesValues
+     * @param {string} userId
+     * @param {Object} productFromProducts
+     * @param {string} categoryId
+     * @return {Promise<Product>}
+     */
+    updateProduct: async (updatesValues, userId, productFromProducts, categoryId) => {//updatesValues - product after update
         try {
             let product = {}
             if (productFromProducts && updatesValues.capacity === productFromProducts.capacity && updatesValues.unit === productFromProducts.unit && updatesValues.name === productFromProducts.name) {
                 product = {
-                    "id": productFromProducts.id,
+                    "id": productFromProducts.productId,
                     "name": productFromProducts.name,
                     "capacity": productFromProducts.capacity,
                     "unit": productFromProducts.unit,
@@ -95,7 +179,7 @@ const ProductsService = {
                     }
                     let productExist = await ProductsService.getProduct(productToBeAdded.name, productToBeAdded.capacity, productToBeAdded.unit)
                     if (productExist.length === 0) {
-                    product = await ProductsService.addProductToProducts(productToBeAdded);
+                        product = await ProductsService.addProductToProducts(productToBeAdded);
 
                     } else {
                     product = productExist[0];
@@ -108,53 +192,85 @@ const ProductsService = {
                 "userId": userId,
                 "productId": product.id,
                 "name": updatesValues.name,
-                "capacity": product.capacity,
-                "unit": product.unit,
-                "quantity":updatesValues.quantity,
+                "capacity": updatesValues.capacity,
+                "unit": updatesValues.unit,
+                "quantity": updatesValues.quantity,
                 "expireDate": updatesValues.expireDate,
                 "categoryId": updatesValues.categoryId
             }
-             await axios.put('http://192.168.1.28:4000/storage/' + updatedProduct.id, updatedProduct)
-             return  updatedProduct
-        } catch (error) {
-            console.error(error);
-        }
-    },
 
-    deleteProduct: async (id) => {
-        try {
-            let deletedProduct = await axios.delete('http://192.168.1.28:4000/storage/' + id);
-            return deletedProduct.data
+            if (categoryId !== updatedProduct.categoryId){
+
+                await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", updatedProduct.id))
+                await setDoc(doc(db, "users/" + userId + "/categories/" + updatedProduct.categoryId +"/products",updatedProduct.id ), updatedProduct);
+            }else{
+                const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", updatedProduct.id);
+                await updateDoc(productRef, updatedProduct);
+            }
+
+            return  updatedProduct
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     },
-    incrementProduct: async (id, quantity) => {
+    /**
+     *
+     * @param {string} userId
+     * @param {string} categoryId
+     * @param {string} productId
+     * @return {Promise<void>}
+     */
+    deleteProduct: async (userId, categoryId, productId) => {
         try {
-            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
-                quantity: quantity + 1
-            });
-            return response.data
+            const res = await deleteDoc(doc(db, "users/" + userId + "/categories/" + categoryId  + "/products", productId))
+
+            return res
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
+
     },
-    decrementProduct: async (id, quantity) => {
-        try {
-            let response = await axios.patch('http://192.168.1.28:4000/storage/' + id, {
-                quantity: quantity - 1
-            });
-            return response.data
-        } catch (error) {
-            console.error(error);
-        }
-    },
+    /**
+     *
+     * @param {string} name
+     * @param {number} capacity
+     * @param {string} unit
+     * @return {Promise}
+     */
     getProduct: async (name, capacity, unit) => {
+        let productFromAllProducts = [];
+        try{
+            let q = await query(collection(db, "allProducts"),  where("name", "==", name), where("capacity", "==", capacity), where("unit", "==", unit));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                let product = doc.data()
+                product.id = doc.id;
+                productFromAllProducts.push(product);
+
+            })
+            return productFromAllProducts
+        }catch (error) {
+            console.log(error);
+        }
+    },
+    /**
+     *
+     * @param {string} productId
+     * @param {number} quantity
+     * @param {string} userId
+     * @param {string} categoryId
+     * @return {Promise<void>}
+     */
+    changeProductQuantity: async (productId, quantity, userId, categoryId)=> {
         try {
-            let existProduct = await axios.get(`http://192.168.1.28:4000/products?name=${name}&capacity=${capacity}&unit=${unit}`);
-            return existProduct.data;
+            const productRef = doc(db, "users/" + userId + "/categories/" + categoryId + "/products/", productId);
+            const productDoc = await getDoc(productRef);
+            const product = productDoc.data();
+            product.quantity = quantity;
+            await setDoc(productRef, product);
+
         } catch (error) {
-            console.error(error)
+            console.log(error);
         }
     }
 }

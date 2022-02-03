@@ -1,9 +1,9 @@
-import {Button, Modal, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import DatePicker from '@mui/lab/DatePicker';
 import plLocale from 'date-fns/locale/pl';
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -15,8 +15,6 @@ import {useForm, Controller} from "react-hook-form";
 import AutocompleteWithProductsList from "./AutocompleteWithProductsList";
 
 
-//import slugify from "slugify";
-
 
 const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
@@ -27,9 +25,10 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const getCategoryByPath = useStore(state => state.getCategoryByPath);
     const [category, setCategory] = React.useState("");
     const loggedInUser = useStore(state=> state.loggedInUser);
-    const userId = loggedInUser.id;
+    const userId = loggedInUser.uid;
     const [newProductName, setNewProductName] = useState(null);
-
+    const requiredCategoryId = useStore(state=>state.requiredCategoryId);
+    const [errorMessage,setErrorMessage] = useState('');
     const style = {
         position: 'absolute',
         top: '50%',
@@ -42,7 +41,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
         p: '10px 4px',
         zIndex: 1200,
     };
-
     const units = [
         {
             value: 'gr',
@@ -65,32 +63,20 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
 
     ];
 
+
+
     let {categoryName} = useParams();
     useEffect(() => {
-        let mounted = true; //bo próba zmaiany stanu na odmontowanym komponencie
-        const initialState = {loading: false, categoryName: null, category: null};
-        if (categoryName) {
-            getCategoryByPath(categoryName).then(category => {
-                if (mounted) {
-                    setCategory(category);
-                }
-            });
-        } else {
-            return initialState;
-        }
-        return () => mounted = false;
-    }, [categoryName, setCategory, getCategoryByPath]);
+        let category ={}
+        if(categoryName){
 
-    const { handleSubmit, control, setValue} = useForm( {mode: 'onBlur'},{defaultValues: {
-            productName: null,
-            capacity: "100",
-            unit: "gr",
-            quantity: "1",
-            expireDate: null,
-            categoryName: categoryName ? categoryName : null,
-            categoryId: categoryName ? category.id : selectedNewCategory.id
-        }
-    });
+            category = getCategoryByPath(categoryName)
+
+            setCategory(category)}
+    },[categoryName,setCategory, getCategoryByPath]);
+
+
+    const { handleSubmit, control, setValue, reset, formState: { errors}} = useForm();
 
     useEffect(()=>{
         if(product && typeof product !== "string") {
@@ -99,20 +85,37 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
             setValue('unit', product.unit);
         }
     }, [product, setValue]);
-
-    const onSubmit = data => {
-        console.log(product)
-        addProduct({
-
-            "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,
-            "capacity": parseInt(data.capacity),
-            "unit": data.unit,
-            "quantity": parseInt(data.quantity),
-            "expireDate": data.expireDate,
-            "categoryId": categoryName  ? category.id : selectedNewCategory.id,
-            "userId": userId
-        },userId, product);
+    const closeModal =()=>{
+        setErrorMessage('');
+        reset();
         close();
+    }
+    const onSubmit = data => {
+        if(newProductName !== null && data.capacity !== "" && data.unit !== "" && data.quantity > 0 ){
+            addProduct({
+                "name":  typeof product ==="object" ? product.name : product,//product && Object.keys(product).length !== 0? product.name : newProductName,
+                "capacity": parseInt(data.capacity),
+                "unit": data.unit,
+                "quantity": parseInt(data.quantity),
+                "expireDate": data.expireDate,
+                "categoryId": categoryName  ? category.id : selectedNewCategory.hasOwnProperty("id") ? selectedNewCategory.id : requiredCategoryId,
+                "userId": userId
+            },userId, product, categoryName  ? category.id : selectedNewCategory.hasOwnProperty("id") ? selectedNewCategory.id : requiredCategoryId);
+            closeModal();
+        }else{
+            if(newProductName === null){
+                setErrorMessage("Nazwa wymagana");
+            } else if(data.capacity === ""){
+                setErrorMessage("Pojemność wymagane");
+            }else if(data.unit === ""){
+                setErrorMessage("Jednostka wymagana");
+            }else if(data.quantity <= 0){
+                setErrorMessage("Minimalna ilość 1")
+            }else{
+                setErrorMessage(errorMessage)
+            }
+        }
+
     };
 
     return (
@@ -137,7 +140,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 control={control}
                                 defaultValue={null}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
-
                                     <AutocompleteCategoriesTitle
                                         labelForAddModal="true"
                                         label="Nazwa kategorii"
@@ -172,7 +174,9 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         type= "text"
                                         disabled={true}
                                      />
-                             )} />
+                             )}
+
+                            />
                         </Box>}
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3,width: "80%", marginLeft: "10%"}}>
 
@@ -188,15 +192,18 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         value={value}
                                         onChange={onChange}
                                         //onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                                        error={!!error}
-                                        helperText={error ? error.message : null}
+                                        // error={value === null ? error: !!error}
+                                        // helperText={error ? error.message : null}
                                         type= "text"
                                         setProduct={setProduct}
                                         newProductName={newProductName}
                                         setNewProductName={setNewProductName}
+                                        loggedInUser={loggedInUser}
+
                                         />
 
-                                )} />
+                                )}
+                               />
                         </Box>
                         <Box id="modal-modal-description" sx={{mt: 2, mb: 3, width: "100%"}}>
                             <Controller
@@ -246,21 +253,16 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                         <Controller
                             name="expireDate"
                             control={control}
-
+                            defaultValue={null}
                             render={({field: {onChange, value}, fieldState: {error}}) => (
-                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={plLocale}>
-                                <MobileDatePicker
-
+                             <LocalizationProvider
+                                 dateAdapter={AdapterDateFns} locale={plLocale}>
+                                <DatePicker
                                 mask={'__.__.____'}
                                 label="Data ważności"
                                 value={value}
                                 onChange={onChange}
-                                error={!!error}
-                                helperText={error ? error.message : null}
-                                renderInput={(params) => <TextField {...params}
-                                                                    sx={{width: "80%", marginLeft: "10%"}}/>}
-                                 />
-
+                                renderInput={(params) => <TextField {...params} sx={{width: "80%", marginLeft: "10%"}} />}/>
                              </LocalizationProvider>
                             )}
                         />
@@ -286,8 +288,8 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                             )}
                         />
                     </Box>
+                    {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                     <Button sx={{marginLeft: "10%"}} type="submit" variant="contained" color="primary"  >Dodaj produkt</Button>
-
                 </Box>
                 </form>
             </Modal>

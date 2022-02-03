@@ -1,27 +1,78 @@
 
 import ProductsService from "../services/ProductsService";
+import ProductsList from "../pages/ProductsList";
+/**
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} name
+ * @property {number} capacity
+ * @property {string} unit
+ * @property {number} quantity
+ * @property {Date | null | string} [expireDate]
+ * @property {string} productId
+ * @property {string} userId
+ * */
 
 const createProductsSlice = (set, get) => ({
-    products: [],
-    fetchProducts: async (userId) => {
-        const response = await ProductsService.getAllProducts(userId);
+    productDictionary: [],
+    getProductDictionary: async (userId)=>{
+        let allProducts = await ProductsService.getAllProducts();
+        let userProducts = await ProductsService.getUserProducts(userId);
         set((state) => ({
-            products: response,
+            productDictionary: allProducts, userProducts
+        }));
+    },
+    products: [],
+    /**
+     *
+     * @param {string} userId
+     * @return {Promise<void>}
+     */
+    fetchProducts: async (userId) => {
+        /** @type {Array} */
+        let allProducts=[];
+        if(userId){
+            allProducts= await ProductsService.getAllProducts();
+        }
+        set((state) => ({
+            products: allProducts,
         }));
     },
     storage: [],
+    /**
+     *
+     * @param {string} userId
+     * @return {Promise<void>}
+     */
+    addAllProductsToUserToUser: async (userId)=>{
+        let defaultProducts = await ProductsService.addAllProductsToUser(userId);
+        set((state) => ({
+            categories: defaultProducts
+        }));
+    },
+    /**
+     *
+     * @param {string} userId
+     * @returns {Promise<void>}
+     */
     getProductsOfUser: async (userId) => {
         const response = await ProductsService.getUserProducts(userId);
         set((state) => ({
             storage: response,
         }));
     },
-    addProduct: async (newProduct, userId, productFromProducts) => {
-        // console.log("createSlice newProduct")
-        console.log(productFromProducts);
-        let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts);
+    /**
+     *
+     * @param {object} newProduct
+     * @param {string} userId
+     * @param {object} productFromProducts
+     * @param {string} categoryId
+     * @returns {Promise<Product>}
+     */
+    addProduct: async (newProduct, userId, productFromProducts, categoryId) => {
 
-        //console.log(addedProduct);
+        let addedProduct = await ProductsService.addProduct(newProduct, userId, productFromProducts, categoryId);
+
             set((state) => ({
                 products: [
                     addedProduct,
@@ -36,38 +87,68 @@ const createProductsSlice = (set, get) => ({
 
     },
     searchedProduct : [],
+    /**
+     * @param {string} id
+     * @return { {searchedProduct: String[]} }
+     */
     setSearchedProduct : (id) =>{
         set((state)=> {
+            /** @type {Array} */
                let sp = [];
                sp.push(id);
                 return {
-                    searchedProduct: sp
+                    searchedProduct: sp,
+                    searchedProducts: []
                 }
             }
         )
     },
     searchedProducts : [],
+    /**
+     * @param {string} searchedName
+     */
     setSearchedProducts : (searchedName)=>{
         const productsFromStorageList = get().storage;
 
         let productsWithName = productsFromStorageList.filter(product=> product.name.indexOf(searchedName) >= 0);
-        console.log(productsWithName)
-        set({searchedProducts: productsWithName});
+        
+        set({searchedProducts: productsWithName, searchedProduct: []});
 
     },
     editModalOpen: false,
+    /**
+     * @param {boolean} open
+     */
     setEditProductModalOpen: (open) => {
         set({editModalOpen: open})
     },
     editProduct: {},
+    /**
+     * @param {string} id
+     * @param {string} name
+     * @param {number} capacity
+     * @param {string} unit
+     * @param {number} quantity
+     * @param {Date | null | string} [expireDate]
+     * @param {string} categoryId
+     * @param {string} productId
+     * @param {string} userId
+     */
     setEditProduct: (id, name, capacity, unit,quantity, expireDate, categoryId, productId, userId) => {
         set({editProduct: {id, name, capacity, unit, quantity, expireDate, categoryId, productId, userId}});
 
     },
-    updateProduct: async (updatedProduct, userId, productFromProducts)=>{
-
-            let productAfterUpdate = await ProductsService.updateProduct(updatedProduct, userId, productFromProducts);
-            //console.log(productAfterUpdate);
+    /**
+     * @param {object}  updatedProduct
+     * @param {string}  userId
+     * @param {object} productFromProducts
+     * @param {string}  categoryId
+     * @returns {Promise<void>}
+     */
+    updateProduct: async (updatedProduct, userId, productFromProducts, categoryId)=>{
+            userId = get().loggedInUser.uid;
+            await ProductsService.updateProduct(updatedProduct, userId, productFromProducts, categoryId);
+            //product after update
             set((state)=> {
                     let products = state.storage.filter(productAfterUpdate => productAfterUpdate.id !== updatedProduct.id);
                     products.push(updatedProduct)
@@ -76,31 +157,47 @@ const createProductsSlice = (set, get) => ({
                     }
                 }
             )
-
-
     },
-    deleteProduct: async (id) => {
-        await ProductsService.deleteProduct(id);
+    /**
+     * @param {string} userId
+     * @param {string} categoryId
+     * @param {string} productId
+     * @returns {Promise<void>}
+     */
+    deleteProduct: async (userId, categoryId, productId) => {
+        await ProductsService.deleteProduct(userId, categoryId, productId);
         set((state) => ({
-            storage: state.storage.filter((product) => product.id !== id),
+            storage: state.storage.filter((product) => product.id !== productId),
         }))
     },
-
-    incrementProduct: async (id, quantity) => {
-        await ProductsService.incrementProduct(id, quantity);
+    /**
+     * @param {string} id
+     * @param {number} quantity
+     * @param {string} userId
+     * @param {string} categoryId
+     * @returns {Promise<void>}
+     */
+    incrementProduct: async (id, quantity, userId, categoryId) => {
+        await ProductsService.changeProductQuantity(id, quantity+1, userId, categoryId);
         set((state) => ({
             storage: state.storage.map((product) => product.id === id? {...product, quantity: product.quantity+1}:product)
             }
 
         ));
     },
-
-   decrementProduct: async (id, quantity) => {
-        await ProductsService.decrementProduct(id, quantity);
+    /**
+     *
+     * @param {string} id
+     * @param {number} quantity
+     * @param {string} userId
+     * @param {string} categoryId
+     * @returns {Promise<void>}
+     */
+   decrementProduct: async (id, quantity, userId, categoryId) => {
+       await ProductsService.changeProductQuantity(id, quantity-1, userId, categoryId);
         set((state) => ({
                 storage: state.storage.map((product) => product.id === id ? {...product, quantity: product.quantity-1} : product)
             }
-
         ));
     },
 });

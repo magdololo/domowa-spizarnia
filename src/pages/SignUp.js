@@ -1,10 +1,11 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from "@mui/material/Box";
-import {Divider,} from "@mui/material";
-import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
+//import {Divider,} from "@mui/material";
+//import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
 import FormSignUp from "../components/FormSignUp";
+import {Link} from "react-router-dom";
 
 
 
@@ -27,20 +28,21 @@ const SignUp = () => {
                         <FormSignUp/>
                     </Box>
                 </Box>
-                <Divider sx={{margin: '0 15vw', color: 'gray'}}>lub</Divider>
-                <Box sx={{ width:'90vw', height: 'auto', display: 'flex', flexWrap: 'wrap', margin:'30px auto', justifyContent: "center"}}>
-                    <div style={{display: "flex",flexWrap: 'wrap', justifyContent: "center",  width: '25ch'}}>
-                        <FacebookLoginButton style={{ marginTop: 2}} onClick={() => alert("Hello")}>
-                            <span>Zarejestruj się przez FB</span>
-                        </FacebookLoginButton>
-                        <GoogleLoginButton style={{ marginTop: 10 }} onClick={() => alert("Hello")}>
-                            <span>Zarejestruj się przez Google</span>
-                        </GoogleLoginButton>
-                    </div>
+                <Box style={{
+                    display: "flex",
+                    flexWrap: 'wrap',
+                    margin: '10px auto 30px auto',
+                    justifyContent: "center",
+                    width: '25ch',
+                    marginTop: ".5em"
+                }}>
+                    <Typography variant="caption" display="block" gutterBottom>
+                        Wróć do strony logowania
+                        <Link to={'/'} style={{color: "gray", marginTop: 4, fontSize: "small", marginLeft: "1em"}}>Zaloguj się</Link>
+                    </Typography>
                 </Box>
-
             </Box>
-        </>
+       </>
     )
 
 };

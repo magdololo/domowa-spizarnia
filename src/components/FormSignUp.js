@@ -39,19 +39,24 @@ const useStyles = makeStyles(theme => ({
 
 const FormSignUp = () => {
     const classes = useStyles();
-    const {handleSubmit, control, watch, reset} = useForm();
+    const {handleSubmit, control, watch, reset} = useForm({
+        defaultValues: {
+            // email: 'magdajarzyna@gmail.com',
+            // password: '1982Magda',
+            email: 'gabrielajarzyna@gmail.com',
+            password: 'gabi1234',
+            confirmPassword: 'gabi1234'
+        }
+    });
     const password = useRef({});
     password.current = watch("password", "");
     const addUser = useStore(state => state.addUser);
     let history = useHistory();
     const [errorMessage,setErrorMessage] = useState('');
 
-    const onSubmit = async data => {
-
-        let message = await addUser ({
-            "email": data.email,
-            "password": data.password
-        });
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
+        let message = await addUser(data.email, data.password);
         if (message !== '') setErrorMessage(message)
         else {
             history.push("/");
@@ -62,7 +67,6 @@ const FormSignUp = () => {
             confirmPassword: ""
         });
     };
-
     const [values, setValues] = React.useState({
         showPassword: false,
     });
@@ -76,7 +80,6 @@ const FormSignUp = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
 
 
     return (
@@ -94,7 +97,6 @@ const FormSignUp = () => {
                         error={!!error}
                         helperText={error ? error.message : null}
                         type="email"
-
                     />
                 )}
                 rules={{
@@ -193,7 +195,7 @@ const FormSignUp = () => {
             />
 
             <div>
-                <Button type="submit" variant="contained" color="primary" >
+                <Button type="submit" variant="contained" color="primary"  >
                     Załóż konto
                 </Button>
                 {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}

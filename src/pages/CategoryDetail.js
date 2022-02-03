@@ -15,24 +15,27 @@ import ReturnToCategoryList from "../components/ReturnToCategoryList";
 
 const CategoryDetail = ()=> {
     const user = useStore(state=>state.loggedInUser);
-    const userId = user.id;
+    const userId = user.uid;
+    const getCategoryByPath = useStore(state=>state.getCategoryByPath);
     const getUserProducts = useStore(state => state.getProductsOfUser);//tu do storage wrzucaja sie produkty danego uzytkownika
     const productsList = useStore(state => state.storage);
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
-    const getCategoryByPath= useStore(state=> state.getCategoryByPath);
+    const categories =  useStore(state=> state.categories);
     const [category, setCategory] = React.useState("");
+
+
 
 
     useEffect(() => {
 
-        getCategoryByPath(categoryName).then(category => {
-            setCategory(category)
-        });
+        if(categoryName){
+            setCategory(getCategoryByPath(categoryName))
+        }
         getUserProducts(userId);
     },[categoryName, getCategoryByPath, getUserProducts, userId]);
 
-    const productsOfCategory = productsList.filter((product=>product.categoryId === category.id));
+    const productsOfCategory = productsList.filter(product=>product.categoryId === category.id);
 
     if (productsOfCategory.length >= 2 ) {
         productsOfCategory.sort((a, b) => {
@@ -52,7 +55,7 @@ const CategoryDetail = ()=> {
                <div style={{ margin: "0 auto", width: minWidth900 ? '800px' : '90%'}}>
                    <ReturnToCategoryList/>
                    <Typography variant="h6" component="h6" sx={{textTransform: "capitalize", color: "#646670"}}>
-                       {category.title}
+                       {category.name}
                    </Typography>
                    <List sx ={{paddingBottom: '90px'}}>
                        {productsOfCategory.map((product) => (
@@ -60,7 +63,7 @@ const CategoryDetail = ()=> {
                        ))}
 
                    </List>
-                   <EditProductModal/>
+                   <EditProductModal />
 
                    <AppBarBottom isAddProductFromListCategory={false}/>
                </div>
