@@ -103,7 +103,7 @@ const UserService = {
                 returnObject.user = result.user;
                 const docRef = doc(db, "users", result.user.uid);
                 const docSnap = await getDoc(docRef);
-                console.log(docSnap)
+
                 if (docSnap.exists()) {
                     returnObject.message = "User already exist"
                 } else {
