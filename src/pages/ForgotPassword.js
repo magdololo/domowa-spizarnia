@@ -47,8 +47,8 @@ const ForgotPassword = () => {
     const onSubmit = async (data, e) => {
         e.preventDefault();
         
-        let message = await forgotPassword(data.email);
-        
+        // let message = await forgotPassword(data.email);
+        await forgotPassword(data.email);
         // if (message !== '') setErrorMessage(message);
         reset({
             email: "",
