@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import useStore from "../store/useStore";
 import {Switch, useMediaQuery} from "@mui/material";
 import "react-image-picker/dist/index.css";

@@ -7,7 +7,7 @@ import {makeStyles} from '@material-ui/core';
 import {Controller, useForm} from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import useStore from "../store/useStore";
-import {useState} from "react";
+// import {useState} from "react";
 import {useHistory} from "react-router-dom";
 
 
@@ -42,14 +42,14 @@ const ForgotPassword = () => {
     const classes = useStyles();
     const {handleSubmit, control, reset} = useForm();
     const forgotPassword = useStore(state=>state.forgotPasswordWithEmail);
-    const [errorMessage, setErrorMessage] = useState('');
+    // const [errorMessage, setErrorMessage] = useState('');
     const history = useHistory();
     const onSubmit = async (data, e) => {
         e.preventDefault();
         
         let message = await forgotPassword(data.email);
         
-        if (message !== '') setErrorMessage(message);
+        // if (message !== '') setErrorMessage(message);
         reset({
             email: "",
         });

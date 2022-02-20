@@ -1,11 +1,10 @@
 import {AppBar, useMediaQuery} from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-//import SearchIcon from "@mui/icons-material/Search";
+
 import AddProductModal from "./AddProductModal";
 import * as React from "react";
 import { styled } from '@mui/material/styles';
 import Fab from "@mui/material/Fab";
-import Button from '@mui/material/Button';
 import BottomHamburgerMenu from "./BottomHamburgerMenu";
 import useStore from "../store/useStore";
 import {useEffect} from "react";
@@ -139,7 +138,6 @@ const AppBarBottom = ({isAddProductFromListCategory, productDictionary}) =>{
                                          renderInput={(params) => (
                                               <TextField {...params} label="Wyszukaj produkt" type="search" variant="standard" sx={{width: "300px"}} />
                                          )}
-
                                      />
                                  )}
                              />

@@ -1,6 +1,6 @@
 
 import ProductsService from "../services/ProductsService";
-import ProductsList from "../pages/ProductsList";
+
 /**
  * @typedef {Object} Product
  * @property {string} id

@@ -77,7 +77,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     },[categoryName,setCategory, getCategoryByPath]);
 
 
-    const { handleSubmit, control, setValue, reset, formState: { errors}} = useForm();
+    const { handleSubmit, control, setValue, reset} = useForm();
 
     useEffect(()=>{
         if(product && typeof product !== "string") {
@@ -192,9 +192,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                         label="Nazwa produktu"
                                         value={value}
                                         onChange={onChange}
-                                        //onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                                        // error={value === null ? error: !!error}
-                                        // helperText={error ? error.message : null}
                                         type= "text"
                                         setProduct={setProduct}
                                         newProductName={newProductName}
@@ -213,7 +210,6 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
                                 defaultValue= ""//{product ? product.capacity : "100"}
                                 render={({field: {onChange, value}, fieldState: {error}}) => (
                                  <TextField  sx={{width: "35%", marginLeft: "10%"}}
-                                     // id="standard-basic"
                                             label="Pojemność"
                                              variant="standard"
                                              value={ value}

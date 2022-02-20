@@ -21,7 +21,6 @@ const CategoryDetail = ()=> {
     const productsList = useStore(state => state.storage);
     let { categoryName } = useParams();
     const minWidth900 = useMediaQuery('(min-width:900px)');
-    const categories =  useStore(state=> state.categories);
     const [category, setCategory] = React.useState("");
 
 
