@@ -28,7 +28,6 @@ const CategoryDetail = ()=> {
 
 
     useEffect(() => {
-
         if(categoryName){
             setCategory(getCategoryByPath(categoryName))
         }

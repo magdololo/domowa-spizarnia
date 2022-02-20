@@ -1,6 +1,7 @@
 
 import UserService  from "../services/UserService";
 import CategoriesService from "../services/CategoriesService";
+import ProductsService from "../services/ProductsService";
 
 /**
  * @typedef {Object} LoginResult
@@ -25,9 +26,16 @@ const createUsersSlice = (set, get) => ({
 
             return loggingAction.message;
         }
-            await CategoriesService.getUserCategories(loggingAction.user.uid);
+        const categories =    await CategoriesService.getUserCategories(loggingAction.user.uid);
+        const images = await CategoriesService.fetchImages();
+        let allProducts = await ProductsService.getAllProducts();
+        let userProducts = await ProductsService.getUserProducts(loggingAction.user.uid);
+
         set(() => ({
             loggedInUser: loggingAction.user,
+            categories: categories,
+            images: images,
+            productDictionary: allProducts, userProducts
 
         }))
         return '';

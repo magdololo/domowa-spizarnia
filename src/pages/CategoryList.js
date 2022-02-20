@@ -11,17 +11,9 @@ const CategoryList = () => {
     const user = useStore(state=>state.loggedInUser);
     const categoryList = useStore(state => state.categories);
     const productDictionary = useStore(state=>state.productDictionary)
-    const fetchProductDictionary = useStore(state => state.getProductDictionary);
-    const fetchCategories = useStore(state => state.getUserCategories);
     const [editMode, setEditMode] = useState(false);
-    const fetchImages = useStore(state => state.getImages);
     const minWidth450 = useMediaQuery('(min-width:450px)');
-    useEffect(() => {
-        fetchCategories(user.uid);
-        fetchImages();
-        fetchProductDictionary(user.uid)
 
-    }, [fetchImages, fetchCategories,fetchProductDictionary, user]);
 
     return (
         <>
