@@ -67,10 +67,8 @@ const Login = () => {
     };
     const {handleSubmit,control, reset} = useForm({
         defaultValues: {
-            email: 'gabrielajarzyna@gmail.com',
-            password: 'gabi1234',
-            // email: '',
-            // password: '',
+            email: '',
+            password: '',
             showPassword: false,
         }
     });

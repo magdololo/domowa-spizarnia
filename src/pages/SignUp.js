@@ -1,8 +1,6 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from "@mui/material/Box";
-//import {Divider,} from "@mui/material";
-//import {FacebookLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import Typography from "@mui/material/Typography";
 import FormSignUp from "../components/FormSignUp";
 import {Link} from "react-router-dom";

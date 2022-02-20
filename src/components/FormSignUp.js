@@ -41,11 +41,11 @@ const FormSignUp = () => {
     const classes = useStyles();
     const {handleSubmit, control, watch, reset} = useForm({
         defaultValues: {
-            // email: 'magdajarzyna@gmail.com',
-            // password: '1982Magda',
-            email: 'gabrielajarzyna@gmail.com',
-            password: 'gabi1234',
-            confirmPassword: 'gabi1234'
+            email: '',
+            password: '',
+            // email: 'gabrielajarzyna@gmail.com',
+            // password: 'gabi1234',
+            confirmPassword: ''
         }
     });
     const password = useRef({});
