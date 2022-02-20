@@ -28,6 +28,7 @@ const AddProductModal = ({open, close, isAddProductFromListCategory}) => {
     const userId = loggedInUser.uid;
     const [newProductName, setNewProductName] = useState(null);
     const requiredCategoryId = useStore(state=>state.requiredCategoryId);
+    console.log(requiredCategoryId)
     const [errorMessage,setErrorMessage] = useState('');
     const style = {
         position: 'absolute',

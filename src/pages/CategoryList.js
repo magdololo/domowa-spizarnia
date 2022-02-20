@@ -8,12 +8,11 @@ import EditCategoryImageList from "../components/EditCategoryImageList";
 
 
 const CategoryList = () => {
-    const user = useStore(state=>state.loggedInUser);
     const categoryList = useStore(state => state.categories);
     const productDictionary = useStore(state=>state.productDictionary)
     const [editMode, setEditMode] = useState(false);
     const minWidth450 = useMediaQuery('(min-width:450px)');
-
+    console.log(categoryList);
 
     return (
         <>

@@ -26,19 +26,24 @@ const createUsersSlice = (set, get) => ({
 
             return loggingAction.message;
         }
-        const categories =    await CategoriesService.getUserCategories(loggingAction.user.uid);
-        const images = await CategoriesService.fetchImages();
-        let allProducts = await ProductsService.getAllProducts();
-        let userProducts = await ProductsService.getUserProducts(loggingAction.user.uid);
-
+        await get().setInitialStoreState(loggingAction.user.uid);
         set(() => ({
             loggedInUser: loggingAction.user,
-            categories: categories,
+
+        }))
+
+        return '';
+    },
+    setInitialStoreState: async (userId)=>{
+        const images = await CategoriesService.fetchImages();
+        let allProducts = await ProductsService.getAllProducts();
+        let userProducts = await ProductsService.getUserProducts(userId);
+        await get().getUserCategories(userId);
+        set(() => ({
             images: images,
             productDictionary: allProducts, userProducts
 
         }))
-        return '';
     },
     /**
      * Returns error message or empty string if everything is ok
@@ -50,10 +55,12 @@ const createUsersSlice = (set, get) => ({
         if (loggingAction.user === null){
             return loggingAction.message;
         }
+        await get().setInitialStoreState(loggingAction.user.uid);
         set(() => ({
             loggedInUser: loggingAction.user,
 
         }))
+
         return '';
     },
     /**
@@ -85,7 +92,7 @@ const createUsersSlice = (set, get) => ({
                 return createdAction.message;
             }
             //userCategories = await CategoriesService.getUserCategories(createdAction.user.uid);
-
+            await get().setInitialStoreState(createdAction.user.uid);
             set(() => ({
                 loggedInUser: createdAction.user,
                 //categories: userCategories  // w UserService when this function return new user we add to him default categories
@@ -113,6 +120,7 @@ const createUsersSlice = (set, get) => ({
             if(createdAction.user === null){
                 return createdAction.message;
             }
+            await get().setInitialStoreState(createdAction.user.uid);
             set(() => ({
                 loggedInUser: createdAction.user,
             }))

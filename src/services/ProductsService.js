@@ -29,7 +29,7 @@ import {db} from "../firebase";
 
 const ProductsService = {
     /**
-     * @returns {Product[]} */
+     * @returns {Promise<Product[]>} */
     getAllProducts: async () => {
         let allProducts=[];
         try {
