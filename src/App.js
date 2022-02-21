@@ -13,10 +13,24 @@ import useStore from "./store/useStore";
 import SearchResults from "./pages/SearchResults";
 import SignUpWithGoogle from "./pages/SignUpWithGoogle";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+
+
 
 export default function App() {
 
     const loggedInUser = useStore(state=> state.loggedInUser);
+    const setLogInUser = useStore(state=>state.setLogInUser)
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setLogInUser(user);
+        } else {
+            setLogInUser(null)
+        }
+    });
 
     return (
         <>

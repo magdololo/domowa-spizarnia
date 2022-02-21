@@ -34,6 +34,15 @@ const createUsersSlice = (set, get) => ({
 
         return '';
     },
+    setLogInUser: (user)=>{
+        if(user !== null){
+            get().setInitialStoreState(user.uid)
+        }
+        set(() => ({
+            loggedInUser: user,
+        }))
+
+    },
     setInitialStoreState: async (userId)=>{
         const images = await CategoriesService.fetchImages();
         let allProducts = await ProductsService.getAllProducts();
