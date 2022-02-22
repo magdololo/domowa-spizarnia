@@ -62,7 +62,7 @@ const AddCategoryModal=({open, close})=>{
                    Dodaj nową kategorię
                </Typography>
                <Typography id="modal-modal-description" sx={{mt: 2, mb: 3}}>
-                   <TextField  id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)}/>
+                   <TextField  id="standard-basic" label="Nazwa kategorii" variant="standard" autoComplete='off' onChange={ e => setNewCategoryName(e.target.value)}/>
                </Typography>
 
                <ImageListItem key={pickedImage.id} cols={1} sx={{rowHeight: 100 ,rowWidth: 200}}>
