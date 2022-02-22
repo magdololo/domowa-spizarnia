@@ -12,7 +12,6 @@ const CategoryList = () => {
     const productDictionary = useStore(state=>state.productDictionary)
     const [editMode, setEditMode] = useState(false);
     const minWidth450 = useMediaQuery('(min-width:450px)');
-    console.log(categoryList);
 
     return (
         <>
