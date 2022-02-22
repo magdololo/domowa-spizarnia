@@ -51,7 +51,7 @@ const AddCategoryModal=({open, close})=>{
         }
 
    return (
-       <Modal sx={{zIndex: '200', width: '90vw', margin: '0 auto'}}
+       <Modal sx={{zIndex: '200', width: '90vw', margin: '0 auto', padding: 4}}
               open={open}
               onClose={close}
               aria-labelledby="modal-modal-title"
