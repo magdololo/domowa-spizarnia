@@ -1,4 +1,4 @@
-import {Alert, Button, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, ImageList, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImagePickerModal from "./ImagePickerModal";
@@ -20,10 +20,10 @@ const AddCategoryModal=({open, close})=>{
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: maxWidth400 ? 340 : 400,
+        width: maxWidth400 ? 380 : 380,
         backgroundColor: '#fff',
         border: '2px solid #000',
-        boxShadow: 24,
+        boxShadow: 4,
         p: 4,
         zIndex: 1200,
     }
@@ -51,7 +51,7 @@ const AddCategoryModal=({open, close})=>{
         }
 
    return (
-       <Modal sx={{zIndex: '200'}}
+       <Modal sx={{zIndex: '200', width: '90vw', margin: '0 auto'}}
               open={open}
               onClose={close}
               aria-labelledby="modal-modal-title"
@@ -65,7 +65,7 @@ const AddCategoryModal=({open, close})=>{
                    <TextField  id="standard-basic" label="Nazwa kategorii" variant="standard" onChange={ e => setNewCategoryName(e.target.value)}/>
                </Typography>
 
-               <ImageListItem key={pickedImage.id} cols={1} sx={{rowHeight: 120, rowWidth: 200}}>
+               <ImageListItem key={pickedImage.id} cols={1} sx={{rowHeight: 100 ,rowWidth: 200}}>
                    {pickedImage !== ''?
                    <img
                        src= {pickedImage}
@@ -75,6 +75,7 @@ const AddCategoryModal=({open, close})=>{
                    /> : null}
 
                </ImageListItem>
+
                <ImagePickerModal/>
                {errorMessage !== ''? <Alert severity="error">{errorMessage}</Alert>:null}
                <Button onClick={()=> {

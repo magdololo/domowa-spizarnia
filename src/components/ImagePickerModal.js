@@ -6,18 +6,8 @@ import useStore from "../store/useStore";
 import * as PropTypes from "prop-types";
 import {styled} from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'white',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-};
+import {useMediaQuery} from "@mui/material";
+
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
@@ -59,7 +49,7 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
     top: 2,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.6,
+    opacity: 0.2,
     transition: theme.transitions.create('opacity'),
 }));
 
@@ -74,6 +64,23 @@ function ImagePickerModal() {
     const imagesList = useStore(state => state.images);
     const  setPickedImage = useStore(state=>state.setPickedImage);
     const [open, setOpen] = React.useState(false);
+    const maxWidth400 = useMediaQuery('(max-width:400px)');
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'white',
+        border: '2px solid #000',
+        boxShadow: 24,
+        width: maxWidth400 ? 380 : 390,
+        pt: 2,
+        px: 4,
+        pb: 3,
+        height: '100vh',
+        overflow: "scroll"
+
+    };
     const handleOpen = () => {
         setOpen(true);
     };
@@ -91,7 +98,7 @@ function ImagePickerModal() {
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
             >
-                <Box sx={{ ...style, width: 400 }}>
+                <Box sx={style}>
                     <h4 id="child-modal-title">Kliknij wybrane</h4>
 
                     {imagesList.map((image) => (
