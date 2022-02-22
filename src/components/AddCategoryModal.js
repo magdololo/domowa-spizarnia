@@ -1,4 +1,4 @@
-import {Alert, Button, ImageList, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, ImageListItem, Modal, TextField, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ImagePickerModal from "./ImagePickerModal";
