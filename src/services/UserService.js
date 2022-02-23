@@ -51,6 +51,16 @@ const UserService = {
 
     },
     /**
+     * 
+     * @param {string} userId 
+     * @returns {boolean}
+     */
+    checkIfUserExists: async (userId)=>{
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        return docSnap.exists()
+    },
+    /**
      * @param {string} email
      * @param {string} password
      * @returns {returnObject} */

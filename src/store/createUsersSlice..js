@@ -34,7 +34,13 @@ const createUsersSlice = (set, get) => ({
 
         return '';
     },
-    setLogInUser: (user)=>{
+    /**
+     * 
+     * @param  {typeof import("@firebase/auth").User | null} user 
+     */
+    setLogInUser: async (user)=>{
+        const userExists = await UserService.checkIfUserExists(user.uid);
+        user = userExists ? user : null;
         if(user !== null){
             get().setInitialStoreState(user.uid)
         }
