@@ -49,7 +49,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
                     
                     
                     const filtered = filter(options, params);
-                    
+
                     return filtered;
                 }}
                 isOptionEqualToValue={(option, value) => {
@@ -63,7 +63,7 @@ export default function AutocompleteWithProductsList({labelForAddModal, newProdu
                 renderOption={(props, option) => <li {...props}>{option.name} {option.capacity} {option.unit}</li>}
                 freeSolo
                 renderInput={(params) => (
-                    <TextField {...params} label={labelForAddModal} />
+                    <TextField {...params} label={labelForAddModal}/>
                 )}
 
             />
